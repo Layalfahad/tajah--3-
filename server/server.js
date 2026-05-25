@@ -12,9 +12,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ── Serve static files (entire project root) ────────────────────────────────
-// This serves index.html, pages/, css/, js/, assets/, Communities/, etc.
-app.use(express.static(path.join(__dirname, '..')));
+// ── Serve static files (entire project root for Vercel & Local) ──────────────
+// تم تعديل المسار ليقرأ المجلد الحالي بنجاح أونلاين ومحلياً
+app.use(express.static(path.join(__dirname, '.')));
 
 // ── API Routes ──────────────────────────────────────────────────────────────
 const authRoutes = require('./routes/auth');
@@ -106,6 +106,12 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+// ── Home Route for Vercel ───────────────────────────────────────────────────
+// هذا الجزء المضاف للتأكد من فتح صفحة البداية مباشرة عند دخول الرابط بدون مشاكل 404
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // ── Error handling middleware ────────────────────────────────────────────────
 app.use((err, req, res, next) => {
     console.error('Server error:', err);
@@ -115,9 +121,8 @@ app.use((err, req, res, next) => {
 // ── Start server ────────────────────────────────────────────────────────────
 app.listen(port, () => {
     console.log(`\n🟢 Tajah server running at http://localhost:${port}`);
-    console.log(`📂 Serving static files from: ${path.join(__dirname, '..')}`);
+    console.log(`📂 Serving static files from: ${path.join(__dirname, '.')}`);
     console.log(`🔗 API available at: http://localhost:${port}/api/health\n`);
 });
-
 
 module.exports = app;
