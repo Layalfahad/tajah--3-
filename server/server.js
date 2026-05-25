@@ -118,3 +118,6 @@ app.listen(port, () => {
     console.log(`📂 Serving static files from: ${path.join(__dirname, '..')}`);
     console.log(`🔗 API available at: http://localhost:${port}/api/health\n`);
 });
+
+
+module.exports = app;
