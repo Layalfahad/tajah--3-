@@ -1,13 +1,16 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-const dbPath = path.resolve(__dirname, 'tajah.db');
+// ── التعديل الهيدسي ليتوافق مع Vercel ─────────────────────────────────────────
+// أونلاين نستخدم الذاكرة المؤقتة لمنع خطأ منع الكتابة، ومحلياً نستخدم الملف الطبيعي
+const isVercel = process.env.VERCEL || process.env.NOW_BUILDING;
+const dbPath = isVercel ? ':memory:' : path.resolve(__dirname, 'tajah.db');
 
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
         console.error('Error opening database', err.message);
     } else {
-        console.log('Connected to the SQLite database.');
+        console.log(isVercel ? 'Connected to In-Memory SQLite for Vercel.' : 'Connected to the SQLite database file.');
     }
 });
 
@@ -183,23 +186,15 @@ async function initSchema() {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
 
+    // تصحيح تكرار إنشاء الجدول المتواجد في الملف الأصلي لتفادي الأخطاء أونلاين
     await dbRun(`CREATE TABLE IF NOT EXISTS user_skills (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    skill_name TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(user_id, skill_name),
-    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )`);
-
-    await dbRun(`CREATE TABLE IF NOT EXISTS user_skills (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    skill_name TEXT NOT NULL,
-    skill_type TEXT DEFAULT 'custom',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(user_id, skill_name),
-    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        skill_name TEXT NOT NULL,
+        skill_type TEXT DEFAULT 'custom',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(user_id, skill_name),
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
     )`);
 
     await dbRun(`CREATE TABLE IF NOT EXISTS user_achievements (
@@ -286,9 +281,8 @@ async function seedDatabase() {
 
 // ── Seed diverse opportunities ──────────────────────────────────────────────
 async function seedDiverseOpportunities() {
-    // Check if we already have additional opportunities
     const oppCount = await dbGet('SELECT COUNT(*) as count FROM opportunities');
-    if (oppCount && oppCount.count >= 10) return; // already have enough
+    if (oppCount && oppCount.count >= 10) return;
 
     console.log('Seeding diverse opportunities...');
 
@@ -339,10 +333,8 @@ async function seedDiverseOpportunities() {
         'دعم أكاديمي، إشراف طبي متخصص، فرصة الاحتراف الخارجي'
     ];
 
-    // Seed one opportunity for each sport, rotating through cities, clubs, positions, titles
     const opps = [];
     
-    // 1. Seed at least one for each of the 35 sports to guarantee coverage
     sports.forEach((sport, index) => {
         const city = allCities[index % allCities.length];
         const clubId = [7, 8, 9, 10][index % 4];
@@ -367,11 +359,8 @@ async function seedDiverseOpportunities() {
         });
     });
 
-    // 2. Seed some duplicate opportunities for popular sports (Football, Basketball, Tennis, Swimming, Padel, Judo, Golf)
-    // to have multiple choices in different regions/cities
     const popular = ['كرة قدم', 'كرة سلة', 'سباحة', 'تنس', 'بادل', 'جودو', 'غولف'];
     popular.forEach((sport, index) => {
-        // use a different offset for variety
         const cityIndex = (index + 12) % allCities.length;
         const city = allCities[cityIndex];
         const clubId = [7, 8, 9, 10][(index + 2) % 4];
@@ -410,7 +399,6 @@ async function initialize() {
     try {
         await initSchema();
 
-        // Seed 22 sports communities if communities table is empty or missing communities
         const commCount = await dbGet('SELECT COUNT(*) as count FROM communities');
         if (!commCount || commCount.count < 22) {
             console.log('Seeding 22 sports communities...');
@@ -434,7 +422,7 @@ async function initialize() {
                 { slug: "yoga", name: "مجتمع اليوغا", description: "مجتمع للتوازن الجسدي والنفسي عبر ممارسة اليوغا الأصيلة.", members: 623 },
                 { slug: "karate", name: "مجتمع الكاراتيه", description: "تطوير الانضباط والقوة من خلال فنون الكاراتيه الأصيلة.", members: 430 },
                 { slug: "handball", name: "مجتمع كرة اليد", description: "مجتمع لتطوير مهارات كرة اليد والعمل الجماعي داخل الملعب.", members: 510 },
-                { slug: "tabletennis", name: "مجتمع تنس الطاولة", description: "مساحة لتطوير ردود الفعل والتحكم الدقيق في تنس الطاولة.", members: 388 },
+                { slug: "tabletennis", name: "مجتمع تنس الطاولة", description: "مساحة لتطوير ردود الفعل والتحكم الدقيق in تنس الطاولة.", members: 388 },
                 { slug: "skating", name: "مجتمع التزلج", description: "مجتمع لعاشقات التزلج وتطوير مهارات التوازن والحركة.", members: 295 },
                 { slug: "climbing", name: "مجتمع تسلق الجبال", description: "مجتمع المغامرات الجبلية وبناء القوة والتحمل في الهواء الطلق.", members: 344 },
                 { slug: "golf", name: "مجتمع الغولف", description: "مجتمع راقٍ لتطوير دقة الضربة والاستمتاع بملاعب الغولف.", members: 267 },
@@ -445,7 +433,6 @@ async function initialize() {
                 await dbRun('INSERT INTO communities (name, sport, description, member_count) VALUES (?, ?, ?, ?)',
                     [sp.name, sp.slug, sp.description, sp.members]);
             }
-            // Seed a few initial forum posts and replies for basketball (id: 2)
             await dbRun(`INSERT INTO forum_posts (community_id, user_id, content, is_anonymous) VALUES (?, ?, ?, ?)`,
                 [2, 1, 'مرحباً! هل هناك أحد يتدرب على كرة السلة في جدة؟', 0]);
             await dbRun(`INSERT INTO forum_posts (community_id, user_id, content, is_anonymous) VALUES (?, ?, ?, ?)`,
@@ -459,7 +446,6 @@ async function initialize() {
 
         await seedDatabase();
 
-        // Seed achievements if empty
         try {
             const existingAchievements = await dbGet('SELECT COUNT(*) as count FROM user_achievements');
             if (!existingAchievements || existingAchievements.count === 0) {
