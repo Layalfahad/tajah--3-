@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تاجة - الشروط والأحكام</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="../js/mockData.js"></script>
+<script src="../js/store.js"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary':         '#b670ff',
+            'tj-primary-hover':   '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text':    '#250140',
+            'tj-surface-base':    '#fdfcfb',
+            'tj-surface-card':    '#ffffff',
+            'tj-surface-muted':   '#f7f5f2',
+            'tj-text':            '#0f0f10',
+            'tj-text-secondary':  '#5e5e59',
+            'tj-text-tertiary':   '#8c8c85',
+            'tj-text-disabled':   '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border':          '#ece9e3',
+            'tj-border-active':   '#8c8c85',
+            'tj-success':         '#00a637',
+            'tj-success-bg':      '#e3f5e1',
+            'tj-error':           '#eb3333',
+            'tj-error-bg':        '#fff0f0',
+            'tj-info':            '#0094e3',
+            'tj-info-bg':         '#e3f1ff',
+            'tj-accent-yellow':   '#caa913',
+            'tj-accent-yellow-bg':'#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn':  '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card':   '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta':    '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft':   '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float':  '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee':       { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev':   { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow':    { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring':    { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up':       { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee':     'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow':  'float-slow 8s ease-in-out infinite',
+            'pulse-ring':  'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up':     'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    * { font-family: 'IBM Plex Sans Arabic', sans-serif; }
+    body { background: #F7F7F1; min-height: 100vh; }
+
+    /* ── Scroll progress bar ─────────────────────────────────────────────── */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, #AE52FF, #c97dff);
+      z-index: 9999;
+      transition: width 0.1s linear;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ── Stepper ─────────────────────────────────────────────────────────── */
+    .step-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    .step-dot.done   { background: #AE52FF; color: white; }
+    .step-dot.active { background: #AE52FF; color: white; box-shadow: 0 0 0 4px rgba(174,82,255,0.25); }
+    .step-dot.todo   { background: #e6e6dc; color: #9ca3af; }
+    .step-line { height: 2px; flex: 1; background: #e6e6dc; }
+    .step-line.done  { background: #AE52FF; }
+
+    /* ── Offer summary card ──────────────────────────────────────────────── */
+    .offer-card {
+      background: white;
+      border: 1.5px solid #e6e6dc;
+      border-radius: 20px;
+      padding: 20px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 5px; height: 100%;
+      background: linear-gradient(180deg, #AE52FF, #c97dff);
+    }
+
+    /* ── Terms scroll container ──────────────────────────────────────────── */
+    #terms-body {
+      max-height: 340px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    #terms-body::-webkit-scrollbar { width: 6px; }
+    #terms-body::-webkit-scrollbar-track { background: #f0f0ea; border-radius: 3px; }
+    #terms-body::-webkit-scrollbar-thumb { background: #c4b5fd; border-radius: 3px; }
+    #terms-body::-webkit-scrollbar-thumb:hover { background: #AE52FF; }
+
+    /* ── Local scroll progress (inside terms box) ────────────────────────── */
+    #terms-local-progress {
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #AE52FF, #c97dff);
+      border-radius: 3px;
+      transition: width 0.1s linear;
+    }
+
+    /* ── Accordion ───────────────────────────────────────────────────────── */
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      cursor: pointer;
+      border-bottom: 1px solid #e6e6dc;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .accordion-header:hover { color: #AE52FF; }
+    .accordion-chevron {
+      width: 20px; height: 20px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      color: #AE52FF;
+      flex-shrink: 0;
+    }
+    .accordion-chevron.open { transform: rotate(180deg); }
+    .accordion-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.25s ease;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .accordion-body.open {
+      max-height: 500px;
+      opacity: 1;
+      padding-top: 12px;
+      padding-bottom: 16px;
+    }
+
+    /* ── Accept button states ────────────────────────────────────────────── */
+    #btn-accept {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    #btn-accept.locked {
+      background: #e6e6dc;
+      color: #9ca3af;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    #btn-accept.unlocked {
+      background: #AE52FF;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(174,82,255,0.4);
+    }
+    #btn-accept.unlocked:hover {
+      background: #9d3ef0;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(174,82,255,0.5);
+    }
+    #btn-accept.unlocked:active {
+      transform: translateY(0) scale(0.97);
+      box-shadow: 0 2px 12px rgba(174,82,255,0.3);
+    }
+    @keyframes btnBounce {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.07); }
+      60%  { transform: scale(0.97); }
+      80%  { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    .btn-bounce { animation: btnBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+    /* ── Reject button ───────────────────────────────────────────────────── */
+    #btn-reject {
+      transition: all 0.2s ease;
+      background: transparent;
+      border: 1.5px solid #e6e6dc;
+      color: #1E1E1D;
+    }
+    #btn-reject:hover {
+      background: #fff1f2;
+      border-color: #f87171;
+      color: #dc2626;
+    }
+    #btn-reject:active {
+      transform: scale(0.96);
+    }
+
+    /* ── Checkbox ────────────────────────────────────────────────────────── */
+    .custom-checkbox {
+      width: 22px; height: 22px;
+      border: 2px solid #e6e6dc;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      background: white;
+    }
+    .custom-checkbox.checked {
+      background: #AE52FF;
+      border-color: #AE52FF;
+      box-shadow: 0 0 0 4px rgba(174,82,255,0.18);
+    }
+    @keyframes drawTick {
+      0%   { stroke-dashoffset: 24; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .tick-path {
+      stroke-dasharray: 24;
+      stroke-dashoffset: 24;
+    }
+    .custom-checkbox.checked .tick-path {
+      animation: drawTick 0.3s ease forwards 0.05s;
+    }
+
+    /* ── Lock icon ───────────────────────────────────────────────────────── */
+    #lock-icon { transition: all 0.3s ease; }
+
+    /* ── Ripple effect ───────────────────────────────────────────────────── */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: scale(0);
+      animation: rippleAnim 0.5s linear;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* ── Toast ───────────────────────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1E1E1D;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 14px; font-weight: 500;
+      z-index: 9999;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Loading overlay ─────────────────────────────────────────────────── */
+    #loading-overlay {
+      position: fixed; inset: 0;
+      background: rgba(247,247,241,0.85);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10000;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #loading-overlay.show { opacity: 1; pointer-events: all; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { animation: spin 0.8s linear infinite; }
+
+    /* ── Scroll hint pulse ───────────────────────────────────────────────── */
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      50%       { opacity: 0.5; transform: translateY(4px); }
+    }
+    #scroll-hint { animation: scrollPulse 1.5s ease infinite; }
+    #scroll-hint.hidden { display: none; }
+  
+    /* Navbar styles */
+    .nav-link { transition: color 0.15s, background 0.15s; }
+    .nav-link-active::after {
+      content: ''; position: absolute; bottom: -1px; right: 12px; left: 12px;
+      height: 2px; background: #b670ff; border-radius: 2px 2px 0 0;
+    }
+    .hover-purple:hover { color: #b670ff !important; background: #f6ebff !important; }
+    .dropdown { transform-origin: top right; }
+    .dropdown.open { animation: dropIn 0.18s ease both; }
+    @keyframes dropIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .drawer { transform: translateX(100%); transition: transform 0.3s ease; }
+    .drawer.open { transform: translateX(0); }
+    
+    /* Hide duplicate layout placeholders */
+    .navbar-placeholder, .footer-placeholder { display: none !important; }
+
+    /* ════════════════════════════════════════════════════════
+       GLOBAL DARK MODE OVERRIDES
+       ════════════════════════════════════════════════════════ */
+    [data-theme="dark"],
+    [data-theme="dark"] body,
+    [data-theme="dark"] .bg-tj-surface-base {
+      background-color: #111118 !important;
+      color: #f0f0f5 !important;
+    }
+    [data-theme="dark"] .bg-tj-surface-card,
+    [data-theme="dark"] .bg-white,
+    [data-theme="dark"] header,
+    [data-theme="dark"] footer,
+    [data-theme="dark"] #drawer,
+    [data-theme="dark"] #mobile-drawer {
+      background-color: #1e1e2a !important;
+      border-color: #2e2e3e !important;
+    }
+    [data-theme="dark"] .bg-tj-surface-muted,
+    [data-theme="dark"] .bg-gray-50,
+    [data-theme="dark"] .bg-gray-100 {
+      background-color: #1a1a26 !important;
+    }
+    [data-theme="dark"] .text-tj-text,
+    [data-theme="dark"] .text-black,
+    [data-theme="dark"] .text-gray-900,
+    [data-theme="dark"] .text-gray-800,
+    [data-theme="dark"] .text-gray-700 {
+      color: #f0f0f5 !important;
+    }
+    [data-theme="dark"] .text-tj-text-secondary,
+    [data-theme="dark"] .text-gray-600,
+    [data-theme="dark"] .text-gray-500 {
+      color: #a8a8be !important;
+    }
+    [data-theme="dark"] .text-tj-text-tertiary,
+    [data-theme="dark"] .text-gray-400 {
+      color: #6e6e88 !important;
+    }
+    [data-theme="dark"] .border-tj-border,
+    [data-theme="dark"] .border-gray-100,
+    [data-theme="dark"] .border-gray-200 {
+      border-color: #2e2e3e !important;
+    }
+    [data-theme="dark"] input,
+    [data-theme="dark"] textarea,
+    [data-theme="dark"] select {
+      background-color: #181822 !important;
+      color: #f0f0f5 !important;
+      border-color: #2e2e3e !important;
+    }
+    /* Active states & navigation hovers */
+    [data-theme="dark"] .hover-purple:hover,
+    [data-theme="dark"] .nav-link:hover {
+      color: #b670ff !important;
+      background-color: #2a1b40 !important;
+    }
+    [data-theme="dark"] .nav-link-active {
+      color: #b670ff !important;
+      background-color: #2a1b40 !important;
+    }
+    [data-theme="dark"] .shadow-tj-card, 
+    [data-theme="dark"] .shadow-sm {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+    }
+</style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+<!-- Global scroll progress bar -->
+<div id="scroll-progress"></div>
+<!-- Loading overlay -->
+<div id="loading-overlay">
+<div class="text-center">
+<svg class="spinner mx-auto mb-4" fill="none" height="48" viewbox="0 0 48 48" width="48">
+<circle cx="24" cy="24" r="20" stroke="#e6e6dc" stroke-width="4"></circle>
+<path d="M44 24 A20 20 0 0 0 24 4" stroke="#AE52FF" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<p class="text-tajah-dark font-semibold text-lg">جارٍ التحقق من الهوية…</p>
+</div>
+</div>
+<!-- Toast -->
+<div id="toast"></div>
+<!-- ── HEADER ──────────────────────────────────────────────────────────── -->
+<header class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+<div class="flex items-center h-16">
+<!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+<div class="flex flex-1 items-center justify-start gap-2">
+<!-- Profile Dropdown Trigger (desktop) -->
+<div class="relative hidden lg:block">
+<button class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group" id="profileBtn" onclick="toggleDropdown()">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">م</div>
+<div class="text-right">
+<p class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">مرحباً، مرام!</p>
+</div>
+<svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Dropdown Menu -->
+<div class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50" id="dropdown">
+<div class="px-4 py-3 border-b border-tj-border">
+<p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+<p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="stats.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              الملف الشخصي
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="settings.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              الإعدادات
+            </a>
+<div class="border-t border-tj-border mt-1 pt-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group" href="../index.html">
+<svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                تسجيل الخروج
+              </a>
+</div>
+</div>
+</div>
+<!-- Notification Bell -->
+<button aria-label="الإشعارات" class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group" onclick="window.location.href='notifications.html'">
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+<svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Hamburger (mobile) -->
+<button class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors" id="hamBtn" onclick="toggleDrawer()">
+<svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+<nav class="hidden lg:flex items-center gap-1">
+<a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap" href="PlayerHomepage.html">الرئيسية</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="../Communities/index.html">المجتمعات</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="Tajah-search.html">البحث</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="opportunities.html">الفرص</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="applications.html">طلباتي</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="contact.html">تواصل معنا</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="about.html">عن تاجة</a>
+</nav>
+<!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+<div class="flex flex-1 items-center justify-end">
+<a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+<div class="w-9 h-9 flex items-center justify-center">
+<svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+<stop offset="0%" stop-color="#f2de00"></stop>
+<stop offset="50%" stop-color="#cca6ff"></stop>
+<stop offset="100%" stop-color="#b670ff"></stop>
+</lineargradient>
+</defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+</div>
+<span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- ── MAIN ───────────────────────────────────────────────────────────── -->
+<main class="max-w-2xl mx-auto px-4 py-6 space-y-5">
+<!-- Page title -->
+<div>
+<h1 class="text-2xl font-bold text-tajah-dark">الشروط والأحكام</h1>
+<p class="text-sm mt-1" style="color:#6b7280;">يرجى قراءة الشروط بعناية قبل قبول العرض</p>
+</div>
+<!-- ── Offer summary card ──────────────────────────────────────────── -->
+<div class="offer-card">
+<div class="flex items-start justify-between gap-4 flex-wrap">
+<div>
+<p class="text-xs font-medium mb-1" style="color:#9ca3af;">ملخص العرض</p>
+<p class="font-bold text-tajah-dark text-lg" id="card-athlete">سارة سعد</p>
+<p class="text-sm mt-0.5" id="card-club" style="color:#6b7280;">نادي الأهلي</p>
+</div>
+<div class="text-left">
+<p class="text-xs font-medium mb-1" style="color:#9ca3af;">الراتب الشهري</p>
+<p class="font-bold text-2xl" id="card-salary" style="color:#AE52FF;">—</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-dashed" style="border-color:#e6e6dc;">
+<div class="flex flex-wrap gap-4">
+<div>
+<p class="text-xs" style="color:#9ca3af;">تاريخ البدء</p>
+<p class="text-sm font-semibold text-tajah-dark mt-0.5" id="card-start">—</p>
+</div>
+<div>
+<p class="text-xs" style="color:#9ca3af;">مدة العقد</p>
+<p class="text-sm font-semibold text-tajah-dark mt-0.5" id="card-duration">—</p>
+</div>
+<div>
+<p class="text-xs" style="color:#9ca3af;">الرياضة</p>
+<p class="text-sm font-semibold text-tajah-dark mt-0.5" id="card-sport">كرة السلة</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ── Terms scroll container ────────────────────────────────────────── -->
+<div style="background:white; border:1.5px solid #e6e6dc; border-radius:20px; overflow:hidden;">
+<!-- Local progress bar -->
+<div style="background:#f5f5ef; padding: 10px 20px 0;">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-medium" style="color:#6b7280;">تقدم القراءة</span>
+<span class="text-xs font-bold" id="read-percent" style="color:#AE52FF;">0%</span>
+</div>
+<div style="background:#e6e6dc; border-radius:4px; height:6px; overflow:hidden;">
+<div id="terms-local-progress"></div>
+</div>
+</div>
+<!-- Scroll hint -->
+<div class="flex items-center justify-center gap-2 py-2" id="scroll-hint" style="border-bottom:1px solid #f0f0ea;">
+<svg fill="none" height="16" stroke="#AE52FF" stroke-width="2.5" viewbox="0 0 24 24" width="16">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+<span class="text-xs" style="color:#AE52FF;">مرر للأسفل لقراءة الشروط كاملةً</span>
+</div>
+<!-- Scrollable body -->
+<div class="px-6 py-4" id="terms-body">
+<!-- Accordion 1 -->
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:#f5f0ff; border-radius:10px;">
+<svg fill="none" height="16" stroke="#AE52FF" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M9 11l3 3L22 4"></path>
+<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+</svg>
+</div>
+<span class="font-semibold text-tajah-dark text-sm">شروط التعاقد والالتزامات العامة</span>
+</div>
+<svg class="accordion-chevron" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+<div class="accordion-body">
+<div class="space-y-3 text-sm leading-relaxed" style="color:#374151;">
+<p>بموجب هذا العقد، تلتزم اللاعبة بالانضمام إلى النادي المحدد والمشاركة في جميع التدريبات والمباريات الرسمية التي يحددها الجهاز الفني خلال مدة العقد المتفق عليها.</p>
+<p>يحق للنادي إعارة اللاعبة لأندية أخرى بموافقة خطية مسبقة من الطرفين، مع الحفاظ على جميع مستحقات اللاعبة المالية المنصوص عليها في هذا العقد.</p>
+<p>تلتزم اللاعبة بالحفاظ على مستوى لياقتها البدنية وفق المعايير التي يحددها الطاقم الطبي للنادي، وإبلاغ النادي فوراً عند وقوع أي إصابة أو مشكلة صحية.</p>
+<ul class="list-disc list-inside space-y-1.5 mt-2 text-xs" style="color:#6b7280;">
+<li>الحضور إلى التدريبات في المواعيد المحددة</li>
+<li>الامتثال لتعليمات المدرب الفني</li>
+<li>الحفاظ على الروح الرياضية داخل وخارج الملعب</li>
+<li>إبلاغ الإدارة بأي سفر خارج المدينة قبل 48 ساعة</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Accordion 2 -->
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 flex items-center justify-content-center flex-shrink-0 flex" style="background:#f0fdf4; border-radius:10px;">
+<svg class="mx-auto" fill="none" height="16" stroke="#16a34a" stroke-width="2" viewbox="0 0 24 24" width="16">
+<rect height="14" rx="2" width="20" x="2" y="5"></rect>
+<line x1="2" x2="22" y1="10" y2="10"></line>
+</svg>
+</div>
+<span class="font-semibold text-tajah-dark text-sm">الرواتب والمكافآت المالية</span>
+</div>
+<svg class="accordion-chevron" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+<div class="accordion-body">
+<div class="space-y-3 text-sm leading-relaxed" style="color:#374151;">
+<p>يلتزم النادي بصرف الراتب الشهري المتفق عليه في اليوم الخامس من كل شهر ميلادي. يشمل الراتب جميع بدلات التدريب والمشاركة في المسابقات الرسمية.</p>
+<p>تُصرف مكافآت الفوز في المسابقات وفق الجدول التالي: كأس البطولة المحلية ×٢، المباريات الودية التحضيرية ×٠.٥، المسابقات الخليجية ×٣ من قيمة الراتب الشهري.</p>
+<p>في حال تعذر أداء اللاعبة لمهامها بسبب إصابة رياضية موثقة، يضمن لها النادي صرف ٧٥٪ من راتبها الشهري طوال فترة التعافي.</p>
+<div class="p-3 mt-2" style="background:#f0fdf4; border-radius:12px; border:1px solid #bbf7d0;">
+<p class="text-xs font-semibold" style="color:#16a34a;">💡 ملاحظة مهمة</p>
+<p class="text-xs mt-1" style="color:#15803d;">يتم تحديث قيمة الراتب سنوياً بما لا يقل عن ٥٪ بناءً على تقييم الأداء.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion 3 -->
+<div class="accordion-item">
+<div class="accordion-header" onclick="toggleAccordion(this)" style="border-bottom:none;">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 flex items-center justify-content-center flex-shrink-0 flex" style="background:#fff7ed; border-radius:10px;">
+<svg class="mx-auto" fill="none" height="16" stroke="#ea580c" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path>
+<line x1="12" x2="12" y1="9" y2="13"></line>
+<line x1="12" x2="12.01" y1="17" y2="17"></line>
+</svg>
+</div>
+<span class="font-semibold text-tajah-dark text-sm">إنهاء العقد والغرامات</span>
+</div>
+<svg class="accordion-chevron" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+<div class="accordion-body">
+<div class="space-y-3 text-sm leading-relaxed" style="color:#374151;">
+<p>يحق لأي من الطرفين إنهاء العقد بإشعار كتابي مسبق مدته ٦٠ يوماً. في حال الإنهاء المبكر دون سبب مشروع، يلتزم الطرف المنهي للعقد بسداد غرامة تعادل ثلاثة أشهر من قيمة الراتب.</p>
+<p>تُعدّ الأسباب التالية مسوّغاً مشروعاً لإنهاء العقد فوراً: الإخلال الجسيم بشروط العقد، ثبوت استخدام المنشطات، السلوك المخالف للأنظمة الرياضية السعودية.</p>
+<div class="p-3 mt-2" style="background:#fff7ed; border-radius:12px; border:1px solid #fed7aa;">
+<p class="text-xs font-semibold" style="color:#ea580c;">⚠️ تنبيه</p>
+<p class="text-xs mt-1" style="color:#c2410c;">يجب الرجوع إلى المحكمة الرياضية السعودية في حالة النزاعات.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom padding so user clearly reaches end -->
+<div class="h-6"></div>
+</div>
+</div>
+<!-- ── Checkbox ──────────────────────────────────────────────────────── -->
+<div class="flex items-center gap-3 cursor-pointer select-none" id="checkbox-row" onclick="toggleCheckbox()" onmouseout="checkboxHoverOut()" onmouseover="this.style.borderColor='#AE52FF'; this.style.background='#faf5ff'" style="padding:12px; border-radius:14px; background:white; border:1.5px solid #e6e6dc; transition:border-color 0.2s, background 0.2s;">
+<div class="custom-checkbox" id="checkbox">
+<svg fill="none" height="13" viewbox="0 0 13 13" width="13">
+<path class="tick-path" d="M2 6.5L5 9.5L11 3" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</div>
+<span class="text-sm font-medium text-tajah-dark">أوافق على جميع الشروط والأحكام المذكورة أعلاه</span>
+</div>
+<!-- ── Action buttons ────────────────────────────────────────────────── -->
+<div class="space-y-3 pb-8">
+<!-- Accept -->
+<button class="locked w-full py-4 rounded-2xl text-base font-bold flex items-center justify-center gap-3" disabled="" id="btn-accept" onclick="handleAccept(event)">
+<span id="lock-icon">
+<!-- Lock icon -->
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18">
+<rect height="11" rx="2" ry="2" width="18" x="3" y="11"></rect>
+<path d="M7 11V7a5 5 0 0110 0v4"></path>
+</svg>
+</span>
+<span id="btn-accept-text">اقرأ الشروط كاملاً للمتابعة</span>
+</button>
+<!-- Reject -->
+<button class="w-full py-4 rounded-2xl text-base font-semibold border border-[#e6e6dc] bg-white text-[#5e5e59] hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-all duration-200 active:scale-97" id="btn-reject" onclick="handleReject()">
+        رفض العرض والعودة
+      </button>
+</div>
+<!-- ==================== REJECT CONFIRMATION MODAL ==================== -->
+<div class="modal-overlay hidden" id="reject-modal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 10000;">
+<div class="modal-box fade-in max-w-sm p-6 text-center bg-white rounded-3xl shadow-tj-card border border-tj-border">
+<div class="w-16 h-16 bg-[#fff1f2] rounded-full flex items-center justify-center mx-auto mb-4">
+<svg class="text-[#ef4444] w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h3 class="text-lg font-bold text-[#1e1e2a] mb-2">هل تريدين رفض العرض نهائياً؟</h3>
+<p class="text-sm text-[#5e5e59] mb-6 leading-relaxed">رفض العرض يعني إلغاء هذه الفرصة نهائياً ولن تتمكني من قبولها أو مراجعتها مجدداً.</p>
+<div class="flex gap-3">
+<button class="flex-1 h-11 rounded-xl bg-[#dc2626] hover:bg-red-700 text-white font-bold text-[14px] transition active:scale-97" onclick="confirmRejectOffer()">
+        نعم، ارفض
+      </button>
+<button class="flex-1 h-11 rounded-xl bg-gray-100 hover:bg-gray-200 text-[#5e5e59] font-bold text-[14px] transition active:scale-97" onclick="closeRejectModal()">
+        تراجع
+      </button>
+</div>
+</div>
+</div>
+</main>
+<!-- ── SCRIPTS ────────────────────────────────────────────────────────── -->
+<script>
+    /* ── Init store & populate offer card ───────────────────────────────── */
+    TajahStore.init();
+
+    function populateOfferCard() {
+      const offer    = TajahStore.get('currentOffer') || {};
+      const ssOffer  = JSON.parse(sessionStorage.getItem('offerData') || '{}');
+      const src      = (offer && Object.keys(offer).length > 2) ? offer : ssOffer;
+
+      const athleteName = src.athleteName || TajahStore.get('athlete')?.name || 'سارة سعد';
+      const clubName    = src.clubName    || src.fromClub || 'نادي الأهلي';
+      const salary      = src.salary      || src.monthlySalary || '٨٫٠٠٠ ر.س';
+      const startDate   = src.startDate   || '١ سبتمبر ٢٠٢٥';
+      const duration    = src.duration    || src.contractDuration || 'سنة واحدة';
+
+      document.getElementById('card-athlete').textContent  = athleteName;
+      document.getElementById('card-club').textContent     = clubName;
+      document.getElementById('card-salary').textContent   = salary;
+      document.getElementById('card-start').textContent    = startDate;
+      document.getElementById('card-duration').textContent = duration;
+    }
+
+    populateOfferCard();
+
+    /* ── Global page scroll progress ─────────────────────────────────────── */
+    window.addEventListener('scroll', () => {
+      const scrolled  = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const pct       = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
+      document.getElementById('scroll-progress').style.width = pct + '%';
+    });
+
+    /* ── Terms body local scroll ─────────────────────────────────────────── */
+    let termsFullyRead = false;
+    let checkboxChecked = false;
+
+    const termsBody = document.getElementById('terms-body');
+
+    termsBody.addEventListener('scroll', () => {
+      const scrolled  = termsBody.scrollTop;
+      const maxScroll = termsBody.scrollHeight - termsBody.clientHeight;
+      const pct       = maxScroll > 0 ? Math.round((scrolled / maxScroll) * 100) : 0;
+
+      // Update local progress bar
+      document.getElementById('terms-local-progress').style.width = pct + '%';
+      document.getElementById('read-percent').textContent = pct + '%';
+
+      // Hide scroll hint once user starts scrolling
+      if (scrolled > 20) {
+        document.getElementById('scroll-hint').classList.add('hidden');
+      }
+
+      // Unlock accept button when fully read (>= 95% to be forgiving)
+      if (pct >= 95 && !termsFullyRead) {
+        termsFullyRead = true;
+        unlockAcceptButton();
+      }
+    });
+
+    /* ── Unlock accept button ────────────────────────────────────────────── */
+    function unlockAcceptButton() {
+      const btn = document.getElementById('btn-accept');
+      btn.disabled = false;
+      btn.classList.remove('locked');
+      btn.classList.add('unlocked', 'btn-bounce');
+
+      // Swap lock icon → checkmark
+      document.getElementById('lock-icon').innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>`;
+
+      document.getElementById('btn-accept-text').textContent = 'قبول الشروط والمتابعة';
+
+      setTimeout(() => btn.classList.remove('btn-bounce'), 500);
+      showToast('✅ تم قراءة الشروط — يمكنك الآن المتابعة');
+    }
+
+    /* ── Accordion toggle ────────────────────────────────────────────────── */
+    function toggleAccordion(header) {
+      const body    = header.nextElementSibling;
+      const chevron = header.querySelector('.accordion-chevron');
+      const isOpen  = body.classList.contains('open');
+
+      // Close all first
+      document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.accordion-chevron').forEach(c => c.classList.remove('open'));
+
+      // Open clicked if it was closed
+      if (!isOpen) {
+        body.classList.add('open');
+        chevron.classList.add('open');
+      }
+    }
+
+    /* ── Checkbox toggle ─────────────────────────────────────────────────── */
+    function toggleCheckbox() {
+      checkboxChecked = !checkboxChecked;
+      const cb = document.getElementById('checkbox');
+      if (checkboxChecked) {
+        cb.classList.add('checked');
+      } else {
+        cb.classList.remove('checked');
+      }
+    }
+
+    function checkboxHoverOut() {
+      const row = document.getElementById('checkbox-row');
+      row.style.borderColor = checkboxChecked ? '#AE52FF' : '#e6e6dc';
+      row.style.background  = checkboxChecked ? '#faf5ff' : 'white';
+    }
+
+    /* ── Accept handler ──────────────────────────────────────────────────── */
+    function handleAccept(event) {
+      if (!termsFullyRead) return;
+
+      if (!checkboxChecked) {
+        showToast('يرجى تحديد خانة الموافقة أولاً');
+        // Pulse the checkbox row
+        const row = document.getElementById('checkbox-row');
+        row.style.borderColor = '#f87171';
+        row.style.background  = '#fff1f2';
+        setTimeout(() => {
+          row.style.borderColor = '#e6e6dc';
+          row.style.background  = 'white';
+        }, 1200);
+        return;
+      }
+
+      // Ripple effect
+      const btn  = event.currentTarget;
+      const rect = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+      ripple.style.left  = (event.clientX - rect.left  - rect.width  / 2) + 'px';
+      ripple.style.top   = (event.clientY - rect.top   - rect.height / 2) + 'px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+
+      // Disable to prevent double-tap
+      btn.disabled = true;
+      btn.innerHTML = `
+        <svg class="spinner" width="20" height="20" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="20" stroke="rgba(255,255,255,0.3)" stroke-width="4"/>
+          <path d="M44 24A20 20 0 0 0 24 4" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span>جارٍ الحفظ…</span>`;
+
+      // Save to store
+      TajahStore.set('acceptanceStep', 'verification');
+      TajahStore.set('termsAccepted', true);
+      TajahStore.set('termsAcceptedAt', new Date().toISOString());
+
+      // Show loading overlay then navigate
+      setTimeout(() => {
+        document.getElementById('loading-overlay').classList.add('show');
+      }, 600);
+      setTimeout(() => {
+        window.location.href = 'verification.html';
+      }, 1800);
+    }
+
+    /* ── Reject handler ──────────────────────────────────────────────────── */
+    function handleReject() {
+      document.getElementById('reject-modal').classList.remove('hidden');
+    }
+
+    function closeRejectModal() {
+      document.getElementById('reject-modal').classList.add('hidden');
+    }
+
+    function confirmRejectOffer() {
+      closeRejectModal();
+      const btn = document.getElementById('btn-reject');
+      btn.innerHTML = `
+        <svg class="spinner inline-block ml-2" width="16" height="16" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="20" stroke="#e6e6dc" stroke-width="4"/>
+          <path d="M44 24A20 20 0 0 0 24 4" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        جارٍ إلغاء العرض…`;
+      btn.disabled = true;
+
+      // Update store
+      TajahStore.updateApplicationStatus(1, 'rejected', { hasOffer: false });
+      TajahStore.update('currentOffer', o => ({ ...o, status: 'rejected' }));
+
+      setTimeout(() => {
+        showToast('❌ تم رفض العرض');
+      }, 400);
+      setTimeout(() => {
+        window.location.href = 'athlete-requests.html';
+      }, 1600);
+    }
+
+    /* ── Toast ───────────────────────────────────────────────────────────── */
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+  </script>
+<footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+<!-- Top: Logo text + Tagline -->
+<div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+<div>
+<div class="flex items-center gap-3">
+<svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+<defs><lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100"><stop offset="0%" stop-color="#f2de00"></stop><stop offset="50%" stop-color="#cca6ff"></stop><stop offset="100%" stop-color="#b670ff"></stop></lineargradient></defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+<p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+</div>
+<p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+</div>
+<p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+</div>
+<!-- 3 Columns Grid — equal width -->
+<div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+<!-- Column 1: Quick Links -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            روابط مهمة
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="about.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                عن تاجة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="index.html#faq">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                الأسئلة الشائعة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="contact.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                المساعدة والدعم
+              </a>
+</li>
+</ul>
+</div>
+<!-- Column 2: Contact Info (email + phone only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<!-- Phone icon — flipped to face left -->
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            تواصل معنا
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="mailto:Tajah2026@gmail.com">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">Tajah2026@gmail.com</p>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="tel:+966501234567">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<!-- Phone icon in icon box — flipped left -->
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr" style="unicode-bidi: embed;">+966 50 123 4567</p>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            النشرة البريدية
+          </h3>
+<p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+<!-- Newsletter form -->
+<form class="space-y-2" id="newsletter-form">
+<div class="relative">
+<input class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface" id="newsletter-email" placeholder="layal@gmail.com" required="" type="email"/>
+<span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+</div>
+<button class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed" type="submit">
+<span>اشتراك</span>
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</form>
+<!-- Success message -->
+<div class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success" id="newsletter-success">
+<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>تم الاشتراك بنجاح! 🎉</span>
+</div>
+<!-- Social Icons: WhatsApp, X, TikTok only -->
+<div class="mt-6">
+<p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+<div class="flex items-center gap-2">
+<!-- WhatsApp -->
+<a aria-label="واتساب" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path></svg>
+</a>
+<!-- Twitter / X -->
+<a aria-label="تويتر" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- TikTok -->
+<a aria-label="تيك توك" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom: Copyright + Legal -->
+<div class="mt-12 pt-8 border-t border-tj-border">
+<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+<p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق محفوظة.
+          </p>
+<ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+<li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer><script src="../js/auth.js?v=1.0.3"></script>
+</body>
+</html>

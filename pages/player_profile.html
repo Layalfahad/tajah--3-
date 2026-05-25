@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Tajah | الملف الشخصي</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/styles.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary': '#b670ff',
+            'tj-primary-hover': '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text': '#250140',
+            'tj-surface-base': '#fdfcfb',
+            'tj-surface-card': '#ffffff',
+            'tj-surface-muted': '#f7f5f2',
+            'tj-text': '#0f0f10',
+            'tj-text-secondary': '#5e5e59',
+            'tj-text-tertiary': '#8c8c85',
+            'tj-text-disabled': '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border': '#ece9e3',
+            'tj-border-active': '#8c8c85',
+            'tj-success': '#00a637',
+            'tj-success-bg': '#e3f5e1',
+            'tj-error': '#eb3333',
+            'tj-error-bg': '#fff0f0',
+            'tj-info': '#0094e3',
+            'tj-info-bg': '#e3f1ff',
+            'tj-accent-yellow': '#caa913',
+            'tj-accent-yellow-bg': '#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn': '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card': '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta': '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft': '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float': '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee': { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev': { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow': { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring': { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up': { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee': 'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow': 'float-slow 8s ease-in-out infinite',
+            'pulse-ring': 'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up': 'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* Navbar styles */
+    .nav-link {
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: 12px;
+      left: 12px;
+      height: 2px;
+      background: #b670ff;
+      border-radius: 2px 2px 0 0;
+    }
+
+    .hover-purple:hover {
+      color: #b670ff !important;
+      background: #f6ebff !important;
+    }
+
+    .dropdown {
+      transform-origin: top right;
+    }
+
+    .dropdown.open {
+      animation: dropIn 0.18s ease both;
+    }
+
+    @keyframes dropIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .drawer {
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    /* Hide duplicate layout placeholders */
+    .navbar-placeholder,
+    .footer-placeholder {
+      display: none !important;
+    }
+  </style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+
+<body>
+  <!-- ░░ NAVBAR PLACEHOLDER — content to be added later ░░ -->
+  <div class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden lg:hidden" id="overlay" onclick="closeAll()"></div>
+  <header
+    class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+      <div class="flex items-center h-16">
+        <!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+        <div class="flex flex-1 items-center justify-start gap-2">
+          <!-- Profile Dropdown Trigger (desktop) -->
+          <div class="relative hidden lg:block">
+            <button
+              class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group"
+              id="profileBtn" onclick="toggleDropdown()">
+              <div
+                class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">
+                م</div>
+              <div class="text-right">
+                <p
+                  class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">
+                  مرحباً، مرام!</p>
+              </div>
+              <svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron"
+                stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <!-- Dropdown Menu -->
+            <div
+              class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50"
+              id="dropdown">
+              <div class="px-4 py-3 border-b border-tj-border">
+                <p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+                <p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+              </div>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="stats.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                الملف الشخصي
+              </a>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="settings.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewbox="0 0 24 24">
+                  <path
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                الإعدادات
+              </a>
+              <div class="border-t border-tj-border mt-1 pt-1">
+                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group"
+                  href="../index.html">
+                  <svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewbox="0 0 24 24">
+                    <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  تسجيل الخروج
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Notification Bell -->
+          <button aria-label="الإشعارات"
+            class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group"
+            onclick="window.location.href='notifications.html'">
+            <span
+              class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+            <svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors"
+              fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <!-- Hamburger (mobile) -->
+          <button
+            class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors"
+            id="hamBtn" onclick="toggleDrawer()">
+            <svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+        <!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap"
+            href="PlayerHomepage.html">الرئيسية</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="../Communities/index.html">المجتمعات</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="Tajah-search.html">البحث</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="opportunities.html">الفرص</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="applications.html">طلباتي</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="contact.html">تواصل معنا</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="about.html">عن تاجة</a>
+        </nav>
+        <!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+        <div class="flex flex-1 items-center justify-end">
+          <a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+            <div class="w-9 h-9 flex items-center justify-center">
+              <svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+                    <stop offset="0%" stop-color="#f2de00"></stop>
+                    <stop offset="50%" stop-color="#cca6ff"></stop>
+                    <stop offset="100%" stop-color="#b670ff"></stop>
+                  </lineargradient>
+                </defs>
+                <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+                <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+                <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              </svg>
+            </div>
+            <span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <aside
+    class="drawer fixed inset-y-0 right-0 z-50 w-[min(100%,22rem)] bg-tj-surface-card shadow-tj-card lg:hidden flex flex-col"
+    id="drawer">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-tj-border">
+      <div class="flex items-center gap-2">
+        <div
+          class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm">
+          م</div>
+        <div>
+          <p class="text-sm font-semibold text-tj-text">مرحباً، مرام!</p>
+        </div>
+      </div>
+      <button
+        class="w-8 h-8 rounded-tj-btn bg-tj-primary-surface flex items-center justify-center hover:bg-tj-primary-surface/70 transition-colors"
+        onclick="closeAll()">
+        <svg class="w-5 h-5 text-tj-text-secondary" fill="none" stroke="currentColor" stroke-width="1.5"
+          viewbox="0 0 24 24">
+          <path d="M19 5L5 19M5 5l14 14" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="px-4 pt-3 pb-1">
+      <a class="flex items-center gap-3 rounded-tj-btn bg-tj-primary-surface px-3 py-2.5" href="stats.html">
+        <svg class="w-4 h-4 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <span class="text-sm font-semibold text-tj-primary">الملف الشخصي</span>
+      </a>
+    </div>
+    <nav class="flex-1 px-4 pt-2 flex flex-col gap-1 overflow-y-auto">
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 bg-tj-primary-surface text-tj-primary font-semibold text-sm"
+        href="PlayerHomepage.html">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        الرئيسية
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="../Communities/index.html">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M12 8.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM2 19c0-2.76 2.91-5 6.5-5s6.5 2.24 6.5 5M19 8.5A3.5 3.5 0 0 0 15.5 5M22 19c0-2.76-2.91-5-6.5-5"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        المجتمعات
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="Tajah-search.html">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        البحث
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="opportunities.html">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        الفرص
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="applications.html">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        طلباتي
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="contact.html">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        تواصل معنا
+      </a>
+    </nav>
+    <div class="px-4 py-4 border-t border-tj-border flex flex-col gap-1">
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-2.5 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="settings.html">
+        <svg class="w-5 h-5 text-tj-text-tertiary" fill="none" stroke="currentColor" stroke-width="1.5"
+          viewbox="0 0 24 24">
+          <path
+            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        الإعدادات
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-2.5 text-tj-error font-medium text-sm hover:bg-tj-error-bg transition-colors"
+        href="../index.html">
+        <svg class="w-5 h-5 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        تسجيل الخروج
+      </a>
+    </div>
+    <div class="px-4 pb-5 flex justify-center">
+      <svg fill="none" height="44" viewbox="0 0 120 100" width="44">
+        <defs>
+          <lineargradient gradientunits="userSpaceOnUse" id="lgBottom" x1="0" x2="120" y1="0" y2="100">
+            <stop offset="0%" stop-color="#f2de00"></stop>
+            <stop offset="50%" stop-color="#cca6ff"></stop>
+            <stop offset="100%" stop-color="#b670ff"></stop>
+          </lineargradient>
+        </defs>
+        <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+          stroke="url(#lgBottom)" stroke-linecap="round" stroke-width="4.5"></path>
+        <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+          stroke="url(#lgBottom)" stroke-linecap="round" stroke-width="4.5"></path>
+        <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none"
+          stroke="url(#lgBottom)" stroke-linecap="round" stroke-width="4.5"></path>
+        <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+        <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+        <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+      </svg>
+    </div>
+  </aside>
+  <main class="layout">
+    <!-- ══ PROFILE CARD — Final Reference Layout ══ -->
+    <section aria-label="بطاقة الملف الشخصي للاعب" class="card bio-card">
+      <!-- ① Cover Photo -->
+      <div class="bio-cover-wrap">
+        <img alt="ملعب كرة قدم حديث" class="bio-cover"
+          src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&amp;fit=crop&amp;w=2200&amp;q=80" />
+      </div>
+      <!-- ② Profile Body -->
+      <div class="bio-body" dir="rtl">
+        <!-- ── Right column: Avatar (overlaps cover) + top-bar actions ── -->
+        <div class="bio-top-row">
+          <!-- Settings / Notifications (float to left in RTL = visual right) -->
+          <div class="bio-top-actions">
+            <a aria-label="الإشعارات" class="icon-btn" href="notifications.html"
+              style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">
+              <i aria-hidden="true" class="fa-regular fa-bell"></i>
+            </a>
+            <a aria-label="الإعدادات" class="icon-btn" href="settings.html"
+              style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">
+              <i aria-hidden="true" class="fa-solid fa-gear"></i>
+            </a>
+            <a aria-label="تعديل الملف" class="icon-btn"
+              onclick="document.getElementById('edit-profile-modal').hidden = false" href="#">
+              <i aria-hidden="true" class="fa-solid fa-pen"></i>
+            </a>
+
+          </div>
+          <!-- Stats strip (طول / وزن / سنوات خبرة) aligned right of avatar -->
+          <!-- Avatar — overlaps cover -->
+          <div class="bio-avatar-wrap">
+            <img alt="صورة اللاعبة سارة أحمد" class="avatar"
+              src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&amp;fit=crop&amp;w=400&amp;q=80" />
+          </div>
+        </div>
+        <!-- ── Identity block ── -->
+        <div class="bio-identity-block">
+          <!-- Name + active badge -->
+          <div class="bio-name-row flex justify-between items-center w-full">
+            <div class="flex items-center gap-3">
+              <h2 class="bio-name">سارة أحمد</h2>
+              <span class="bio-active-badge">نشطة</span>
+            </div>
+          </div>
+          <!-- Sport / Location meta tags (small, flat) -->
+          <div class="bio-meta-row">
+            <span class="bio-meta-chip">
+              <i aria-hidden="true" class="fa-solid fa-calendar"></i>
+              العمر: <strong>22</strong>
+            </span>
+            <span class="bio-meta-chip">
+              <i aria-hidden="true" class="fa-solid fa-futbol"></i>
+              الرياضة: <strong>كرة قدم</strong>
+            </span>
+            <span class="bio-meta-chip">
+              <i aria-hidden="true" class="fa-solid fa-location-dot"></i>
+              الموقع: <strong>الرياض</strong>
+            </span>
+
+          </div>
+          <!-- Bio text -->
+          <p class="bio-description">
+            لاعبة كرة قدم شغوفة بعمر 22 سنة، تسعى لتطوير مهاراتها والانضمام لنادي احترافي.
+          </p>
+        </div>
+        <!-- ── Interactive Info Tags row ── -->
+        <div aria-label="بيانات اللاعبة التفصيلية" class="bio-tags-row">
+          <div aria-label="إحصائيات سريعة" class="bio-quick-stats">
+            <div class="bqs-item">
+              <span class="bqs-value">3</span>
+              <span class="bqs-label">سنوات الخبرة</span>
+            </div>
+            <div class="bqs-item">
+              <span class="bqs-value">65</span>
+              <span class="bqs-label">الوزن</span>
+            </div>
+            <div class="bqs-item">
+              <span class="bqs-value">172</span>
+              <span class="bqs-label">الطول</span>
+            </div>
+          </div>
+          <!-- المستوى — INTERACTIVE TAG -->
+          <button aria-expanded="false" aria-label="عرض تفاصيل المستوى"
+            class="bio-tag bio-tag--interactive bio-tag--level" data-level-tag="" type="button">
+            <i aria-hidden="true" class="fa-solid fa-layer-group"></i>
+            <span class="bio-tag__label">المستوى</span>
+            <span class="bio-tag__value">متوسط</span>
+            <i aria-hidden="true" class="fa-solid fa-chevron-down bio-tag__chevron"></i>
+          </button>
+          <!-- الحالة الصحية -->
+          <span class="bio-tag bio-tag--health">
+            <i aria-hidden="true" class="fa-solid fa-heart-pulse"></i>
+            <span class="bio-tag__value">تم التحقق من الحالة الصحية</span>
+          </span>
+        </div>
+        <!-- Level Stepper Card (slides open under tags) -->
+        <div aria-hidden="true" class="level-stepper-card" data-level-card="" hidden="">
+          <div class="level-stepper-top">
+            <div class="level-stepper-info">
+              <span class="level-stepper-current">
+                <i aria-hidden="true" class="fa-solid fa-trophy"></i>
+                المستوى الحالي: متوسط
+              </span>
+              <span class="level-stepper-pct">50%</span>
+            </div>
+            <p class="level-stepper-hint">باقي 250 نقطة للوصول لمستوى أعلى</p>
+          </div>
+          <div aria-label="مسار التقدم في المستويات" class="level-stepper-track" role="img">
+            <div class="level-stepper-line">
+              <div class="level-stepper-line-fill" style="width: 25%"></div>
+            </div>
+            <ol class="level-stepper-stations" dir="rtl">
+              <li class="level-station level-station--done level-station--active">
+                <div class="level-station__bubble">1</div>
+                <span class="level-station__label">مبتدئة</span>
+              </li>
+              <li class="level-station level-station--current">
+                <div class="level-station__bubble">2</div>
+                <span class="level-station__label">متوسط</span>
+              </li>
+              <li class="level-station">
+                <div class="level-station__bubble">3</div>
+                <span class="level-station__label">متقدمة</span>
+              </li>
+              <li class="level-station">
+                <div class="level-station__bubble">4</div>
+                <span class="level-station__label">محترفة</span>
+              </li>
+              <li class="level-station level-station--final">
+                <div class="level-station__bubble">5</div>
+                <span class="level-station__label">مستوى تاجة</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <!-- ── Completion Expander ── -->
+        <div class="completion-expander" data-completion-expander="">
+          <button aria-controls="completion-panel" aria-expanded="false" class="completion-trigger"
+            data-completion-trigger="" type="button">
+            <span class="completion-trigger__icon-wrap">
+              <i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+            </span>
+            <span class="completion-trigger__text">أكملي ملفك!</span>
+            <!-- Mini progress bar inside trigger -->
+            <span aria-hidden="true" class="completion-trigger__mini-track">
+              <span class="completion-trigger__mini-fill" style="width:50%"></span>
+            </span>
+            <span class="completion-trigger__badge">50%</span>
+            <i aria-hidden="true" class="fa-solid fa-chevron-down completion-trigger__chevron"></i>
+          </button>
+          <div aria-hidden="true" class="completion-panel" data-completion-panel="" id="completion-panel">
+            <div class="completion-panel-inner">
+              <!-- Tip -->
+              <div class="taja-level-card" id="taja-level-section" dir="rtl">
+                <ul class="taja-level-list">
+                  <li class="taja-level-item">إكملي ملفك الشخصي واحصدي <span class="taja-step-highlight">+100</span>
+                    نقطة تزيد فرصك!</li>
+                </ul>
+              </div>
+              <!-- Checklist -->
+              <ul aria-label="قائمة خطوات إكمال الملف" class="completion-list">
+                <li class="completion-item completion-item--done">
+                  <span class="completion-item__check"><i class="fa-solid fa-check"></i></span>
+                  <span>الصورة الشخصية</span>
+                </li>
+                <li class="completion-item completion-item--done">
+                  <span class="completion-item__check"><i class="fa-solid fa-check"></i></span>
+                  <span>المعلومات الأساسية</span>
+                </li>
+                <li class="completion-item completion-item--done">
+                  <span class="completion-item__check"><i class="fa-solid fa-check"></i></span>
+                  <span>رفع فيديو واحد على الأقل</span>
+                </li>
+                <li class="completion-item completion-item--pending">
+                  <span class="completion-item__check"><i class="fa-regular fa-circle"></i></span>
+                  <span>إضافة 3 مهارات</span>
+                </li>
+                <li class="completion-item completion-item--pending">
+                  <span class="completion-item__check"><i class="fa-regular fa-circle"></i></span>
+                  <span>رفع التقرير الصحي</span>
+                </li>
+                <li class="completion-item completion-item--pending">
+                  <span class="completion-item__check"><i class="fa-regular fa-circle"></i></span>
+                  <span>إكمال التقييم الذكي</span>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+        <!-- ── Action Buttons ── -->
+        <div class="taja-level-card" id="taja-level-section" dir="rtl">
+          <ul class="taja-level-list">
+            <li class="taja-level-item">تفاعلك اليومي يكسبك <span class="taja-step-highlight">+10</span> نقاط تقرّبك من
+              أهدافك!</li>
+          </ul>
+        </div>
+        <div aria-label="إجراءات الملف الشخصي" class="bio-action-row">
+          <a href="upload.html" class="profile-action-btn profile-action-btn--primary">
+            <i aria-hidden="true" class="fa-solid fa-video"></i>
+            <span>رفع فيديو جديد</span>
+            </button>
+          </a>
+          <a aria-label="الإحصائيات" class="profile-action-btn profile-action-btn--outline" href="stats.html">
+            <i aria-hidden="true" class="fa-solid fa-chart-simple"></i>
+            <span>الإحصائيات</span>
+          </a>
+        </div>
+      </div><!-- /bio-body -->
+      <!-- ── Tab Navigation ── -->
+      <nav aria-label="تبويبات الملف الشخصي" class="profile-tabs-nav" dir="rtl">
+        <button aria-controls="panel-skills" aria-selected="true" class="profile-tab active" data-profile-tab="skills"
+          role="tab" type="button">
+          <i aria-hidden="true" class="fa-solid fa-star"></i>
+          <span>المهارات</span>
+        </button>
+        <button aria-controls="panel-videos" aria-selected="false" class="profile-tab" data-profile-tab="videos"
+          role="tab" type="button">
+          <i aria-hidden="true" class="fa-solid fa-film"></i>
+          <span>الفيديوهات</span>
+        </button>
+        <button aria-controls="panel-achievements" aria-selected="false" class="profile-tab"
+          data-profile-tab="achievements" role="tab" type="button">
+          <i aria-hidden="true" class="fa-solid fa-trophy"></i>
+          <span>الإنجازات والشهادات</span>
+        </button>
+      </nav>
+    </section>
+    <section aria-label="محتوى اللاعب التفصيلي" class="content-column">
+      <section class="card section-card tabs-card" id="skills">
+
+        <div class="player-section" dir="rtl">
+          <div aria-labelledby="tab-skills" class="tab-panel active" id="panel-skills" role="tabpanel">
+            <article aria-label="اقتراح تطوير المهارات" class="skills-suggestion-box">
+              <i aria-hidden="true" class="fa-solid fa-rocket"></i>
+              <p>
+                لإبراز جاهزيتك الكاملة كلاعبة محترفة، ندعوك لإضافة مهارة أساسية في
+                الجانب الدفاعي، مثل الضغط واسترجاع الكرة
+              </p>
+            </article>
+            <!-- Skills chips row with inline add button -->
+            <div class="skills-composer">
+              <div class="skills-panel-row">
+                <div aria-label="قائمة مهارات اللاعب" class="skills-tags" id="skillsTags">
+                  <span class="skill-chip" data-skill="المراوغة">المراوغة</span>
+                  <span class="skill-chip" data-skill="التمويه">التمويه</span>
+                  <span class="skill-chip" data-skill="التسديد">التسديد</span>
+                  <span class="skill-chip" data-skill="إنهاء الهجمة">إنهاء الهجمة</span>
+                </div>
+
+                <button aria-label="إظهار خيارات إضافة المهارة" aria-expanded="false" aria-controls="skillsExpandPanel"
+                  class="skill-add-inline" id="toggleSkillsExpand" type="button">
+                  <i aria-hidden="true" class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+
+              <div class="skills-expand-panel" id="skillsExpandPanel" hidden>
+                <div class="skills-expand-inner">
+                  <div class="skills-expand-group">
+                    <p class="skills-expand-title">اختاري مهارة جاهزة:</p>
+                    <div class="skills-suggested-list">
+                      <button class="skill-option-chip" data-skill-option="القيادة" type="button">القيادة</button>
+                      <button class="skill-option-chip" data-skill-option="السرعة" type="button">السرعة</button>
+                      <button class="skill-option-chip" data-skill-option="الدفاع" type="button">الدفاع</button>
+                      <button class="skill-option-chip" data-skill-option="التمرير" type="button">التمرير</button>
+                      <button class="skill-option-chip" data-skill-option="ضربات الرأس" type="button">ضربات
+                        الرأس</button>
+                      <button class="skill-option-chip" data-skill-option="التحكم بالكرة" type="button">التحكم
+                        بالكرة</button>
+                    </div>
+                  </div>
+
+                  <div class="skills-expand-group">
+                    <p class="skills-expand-title">أو أضيفي مهارة مخصصة:</p>
+                    <div class="skills-custom-row">
+                      <input id="customSkillInput" class="skills-custom-input" type="text"
+                        placeholder="اتقني مهارات منها..." autocomplete="off" />
+                      <button class="skills-save-btn" id="saveSkillsBtn" type="button">حفظ</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div aria-labelledby="tab-videos" class="tab-panel" hidden="" id="panel-videos" role="tabpanel">
+
+          <div aria-label="معرض فيديوهات اللاعب" class="video-gallery">
+
+            <article class="video-card">
+              <div class="video-thumb-wrap">
+                <img alt="صورة مصغرة لفيديو تدريبات اللياقة" class="video-thumb"
+                  src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" />
+                <button aria-label="تشغيل الفيديو" class="video-play-btn" type="button">
+                  <i aria-hidden="true" class="fa-solid fa-play"></i>
+                </button>
+              </div>
+              <div class="video-card-body">
+                <div class="video-meta">
+                  <h4>تدريبات اللياقة</h4>
+                  <p>
+                    <span>32 مشاهدة</span>
+                    <i aria-hidden="true" class="fa-regular fa-eye"></i>
+                  </p>
+                </div>
+                <div class="video-card-footer">
+                  <div class="video-tags">
+                    <span>#تدريب</span>
+                    <span>#لياقة</span>
+                  </div>
+                  <button aria-label="تعديل الفيديو" class="video-edit-btn" type="button">
+                    تعديل
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="video-card">
+              <div class="video-thumb-wrap">
+                <img alt="صورة مصغرة لفيديو تدريبات اللياقة" class="video-thumb"
+                  src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" />
+                <button aria-label="تشغيل الفيديو" class="video-play-btn" type="button">
+                  <i aria-hidden="true" class="fa-solid fa-play"></i>
+                </button>
+              </div>
+              <div class="video-card-body">
+                <div class="video-meta">
+                  <h4>تدريبات اللياقة</h4>
+                  <p>
+                    <span>32 مشاهدة</span>
+                    <i aria-hidden="true" class="fa-regular fa-eye"></i>
+                  </p>
+                </div>
+                <div class="video-card-footer">
+                  <div class="video-tags">
+                    <span>#تدريب</span>
+                    <span>#لياقة</span>
+                  </div>
+                  <button aria-label="تعديل الفيديو" class="video-edit-btn" type="button">
+                    تعديل
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div aria-labelledby="tab-achievements" class="tab-panel" hidden="" id="panel-achievements" role="tabpanel">
+          <div class="taja-level-card" id="taja-level-section" dir="rtl">
+            <ul class="taja-level-list">
+              <li class="taja-level-item">أضيفي إنجاز جديد وارفعي مستوى ملفك بـ <span
+                  class="taja-step-highlight">+30</span> نقطة!</li>
+            </ul>
+          </div>
+          <div class="achievements-list">
+            <!-- كارد -->
+            <div class="achievement-card">
+              <button aria-label="تعديل" class="edit-btn"
+                onclick="document.getElementById('edit-achievement-modal').hidden = false">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <div class="achievement-content">
+                <h4>بطلة المملكة للناشئات 2025</h4>
+                <p>كرة القدم - 18 سنة</p>
+                <span class="flex items-center gap-1.5"><img
+                    src="https://upload.wikimedia.org/wikipedia/ar/5/5b/%D8%B4%D8%B9%D8%A7%D8%B1_%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A_%D9%84%D9%83%D8%B1%D8%A9_%D8%A7%D9%84%D9%82%D8%AF%D9%85.svg"
+                    class="w-4 h-4 object-contain inline-block">الاتحاد السعودي لكرة القدم - 2025</span>
+              </div>
+              <div class="achievement-icon">
+                <i class="fa-solid fa-medal"></i>
+              </div>
+            </div>
+            <!-- كارد ثاني -->
+            <div class="achievement-card">
+              <button class="edit-btn" onclick="document.getElementById('edit-achievement-modal').hidden = false">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <div class="achievement-content">
+                <h4>شهادة تدريب متقدم</h4>
+                <p>برنامج تطوير المهارات الرياضية</p>
+                <span class="flex items-center gap-1.5"><img
+                    src="https://upload.wikimedia.org/wikipedia/ar/5/5b/%D8%B4%D8%B9%D8%A7%D8%B1_%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A_%D9%84%D9%83%D8%B1%D8%A9_%D8%A7%D9%84%D9%82%D8%AF%D9%85.svg"
+                    class="w-4 h-4 object-contain inline-block">الاتحاد السعودي للرياضة - 2024</span>
+              </div>
+              <div class="achievement-icon">
+                <i class="fa-solid fa-certificate"></i>
+              </div>
+            </div>
+          </div>
+          <!-- رفع ملفات -->
+          <div class="upload-section">
+            <button class="upload-btn" onclick="document.getElementById('add-achievement-modal').hidden = false">
+              <i aria-hidden="true" class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+  <div class="health-upload-modal" data-health-modal="" hidden="">
+    <div class="health-upload-backdrop" data-health-modal-close=""></div>
+    <section aria-labelledby="health-upload-title" aria-modal="true" class="health-upload-dialog" role="dialog">
+      <button aria-label="إغلاق نافذة رفع التقرير الصحي" class="health-upload-close" data-health-modal-close=""
+        type="button">
+        <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 id="health-upload-title">ارفع التقرير الصحي</h3>
+      <div aria-label="منطقة رفع الملف" class="health-upload-dropzone">
+        <i aria-hidden="true" class="fa-solid fa-file-arrow-up"></i>
+        <p class="health-upload-primary">اسحب و أفلت الملفات هنا للرفع</p>
+        <p class="health-upload-secondary">
+          الحد الأقصى لحجم الملف المسموح به هو 2 ميجابايت، وتشمل الصيغة المدعومة pdf.
+        </p>
+        <input accept=".pdf,application/pdf" class="health-upload-input" id="health-upload-input" type="file" />
+        <button class="health-upload-browse" data-health-browse="" type="button">
+          تصفح الملفات
+        </button>
+      </div>
+      <div class="health-upload-file" data-health-file-row="" hidden="">
+        <button aria-label="حذف الملف المرفوع" class="health-upload-remove" data-health-remove="" type="button">
+          <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+        </button>
+        <p data-health-file-name="">اسم الملف.pdf</p>
+        <i aria-hidden="true" class="fa-solid fa-circle-check"></i>
+      </div>
+      <p class="health-upload-note">
+        <i aria-hidden="true" class="fa-regular fa-file-lines"></i>
+        <span>يتم التحقق من التقارير الصحية تلقائياً لتأكد من صحتها</span>
+      </p>
+    </section>
+  </div>
+  <div class="skill-modal" data-skill-modal="" hidden="">
+    <div class="skill-modal-backdrop" data-skill-modal-close=""></div>
+    <section aria-labelledby="skill-modal-title" aria-modal="true" class="skill-modal-dialog" role="dialog">
+      <button aria-label="إغلاق نافذة إضافة مهارة" class="skill-modal-close" data-skill-modal-close="" type="button">
+        <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 id="skill-modal-title">إضافة مهارة جديدة</h3>
+      <form class="skill-modal-form" data-skill-form="">
+        <label for="skill-input">المهارة <span aria-hidden="true">*</span></label>
+        <input autocomplete="off" data-skill-input="" id="skill-input" placeholder="مثل: المرونة ، التمرير.. إلخ"
+          required="" type="text" />
+        <button class="skill-modal-save" type="submit">حفظ</button>
+      </form>
+    </section>
+  </div>
+  <footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <!-- Top: Logo text + Tagline -->
+      <div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100">
+                  <stop offset="0%" stop-color="#f2de00"></stop>
+                  <stop offset="50%" stop-color="#cca6ff"></stop>
+                  <stop offset="100%" stop-color="#b670ff"></stop>
+                </lineargradient>
+              </defs>
+              <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="4.5"></path>
+              <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+              <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+            </svg>
+            <p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+          </div>
+          <p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+        </div>
+        <p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+      </div>
+      <!-- 3 Columns Grid — equal width -->
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <!-- Column 1: Quick Links -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            روابط مهمة
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="about.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                عن تاجة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="index.html#faq">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                الأسئلة الشائعة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="contact.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                المساعدة والدعم
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 2: Contact Info (email + phone only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <!-- Phone icon — flipped to face left -->
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              style="transform: scaleX(-1)" viewbox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            تواصل معنا
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="mailto:Tajah2026@gmail.com">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                    <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">
+                    Tajah2026@gmail.com</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="tel:+966501234567">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <!-- Phone icon in icon box — flipped left -->
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    style="transform: scaleX(-1)" viewbox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr"
+                    style="unicode-bidi: embed;">+966 50 123 4567</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            النشرة البريدية
+          </h3>
+          <p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+          <!-- Newsletter form -->
+          <form class="space-y-2" id="newsletter-form">
+            <div class="relative">
+              <input
+                class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface"
+                id="newsletter-email" placeholder="layal@gmail.com" required="" type="email" />
+              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </div>
+            <button
+              class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed"
+              type="submit">
+              <span>اشتراك</span>
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </form>
+          <!-- Success message -->
+          <div
+            class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success"
+            id="newsletter-success">
+            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>تم الاشتراك بنجاح! 🎉</span>
+          </div>
+          <!-- Social Icons: WhatsApp, X, TikTok only -->
+          <div class="mt-6">
+            <p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+            <div class="flex items-center gap-2">
+              <!-- WhatsApp -->
+              <a aria-label="واتساب"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z">
+                  </path>
+                </svg>
+              </a>
+              <!-- Twitter / X -->
+              <a aria-label="تويتر"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                  </path>
+                </svg>
+              </a>
+              <!-- TikTok -->
+              <a aria-label="تيك توك"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z">
+                  </path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom: Copyright + Legal -->
+      <div class="mt-12 pt-8 border-t border-tj-border">
+        <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق
+            محفوظة.
+          </p>
+          <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+            <li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ░░ FOOTER PLACEHOLDER — content to be added later ░░ -->
+  <div aria-label="التذييل الرئيسي" class="footer-placeholder" role="contentinfo"></div>
+  <!-- ══ UPLOAD VIDEO MODAL ══ -->
+  <div aria-labelledby="upload-modal-title" aria-modal="true" class="upload-modal" data-upload-modal="" hidden=""
+    role="dialog">
+    <div class="upload-modal-backdrop" data-upload-modal-close=""></div>
+    <section class="upload-modal-dialog" dir="rtl">
+      <!-- Header -->
+      <div class="upload-modal-head">
+        <h3 id="upload-modal-title">رفع فيديو جديد</h3>
+        <button aria-label="إغلاق" class="upload-modal-close" data-upload-modal-close="" type="button">
+          <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <!-- Tabs: Upload file / Link -->
+      <div aria-label="طريقة رفع الفيديو" class="upload-modal-tabs" role="tablist">
+        <button aria-selected="true" class="upload-modal-tab active" data-upload-tab="file" role="tab" type="button">
+          <i aria-hidden="true" class="fa-solid fa-arrow-up-from-bracket"></i>
+          رفع ملف
+        </button>
+        <button aria-selected="false" class="upload-modal-tab" data-upload-tab="link" role="tab" type="button">
+          <i aria-hidden="true" class="fa-solid fa-link"></i>
+          رابط خارجي
+        </button>
+      </div>
+      <!-- Panel: File upload -->
+      <div class="upload-modal-panel" data-upload-panel="file">
+        <div class="upload-dropzone" data-upload-dropzone="">
+          <input accept="video/*" class="upload-file-input" data-video-file-input="" id="video-file-input"
+            type="file" />
+          <div class="upload-dropzone-inner" data-dropzone-inner="">
+            <div class="upload-dropzone-icon">
+              <i aria-hidden="true" class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <p class="upload-dropzone-main">اسحبي وأفلتي الفيديو هنا</p>
+            <p class="upload-dropzone-sub">أو <strong>تصفح الملفات</strong></p>
+            <p class="upload-dropzone-hint">MP4، MOV، AVI — حجم أقصى 500 ميجابايت</p>
+          </div>
+          <!-- File chosen state -->
+          <div class="upload-file-chosen" data-file-chosen="" hidden="">
+            <i aria-hidden="true" class="fa-solid fa-circle-check"></i>
+            <span data-chosen-name="">اسم الفيديو.mp4</span>
+            <button aria-label="إزالة الملف" class="upload-file-remove" data-remove-file="" type="button">
+              <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Title field -->
+        <div class="upload-field-group">
+          <label class="upload-field-label" for="video-title">عنوان الفيديو <span aria-hidden="true">*</span></label>
+          <input class="upload-field-input" id="video-title" placeholder="مثل: تدريبات المراوغة – أبريل 2026"
+            type="text" />
+        </div>
+        <!-- Tags field -->
+        <div class="upload-field-group">
+          <label class="upload-field-label" for="video-tags">الوسوم</label>
+          <input class="upload-field-input" id="video-tags" placeholder="#تدريب  #كرة_قدم" type="text" />
+        </div>
+      </div>
+      <!-- Panel: External link -->
+      <div class="upload-modal-panel" data-upload-panel="link" hidden="">
+        <div class="upload-field-group">
+          <label class="upload-field-label" for="video-link">رابط الفيديو <span aria-hidden="true">*</span></label>
+          <input class="upload-field-input" dir="ltr" id="video-link" placeholder="https://youtube.com/watch?v=..."
+            type="url" />
+          <p class="upload-field-hint">يدعم: يوتيوب، فيميو، وأي رابط مباشر لملف فيديو</p>
+        </div>
+        <div class="upload-field-group">
+          <label class="upload-field-label" for="video-link-title">عنوان الفيديو <span
+              aria-hidden="true">*</span></label>
+          <input class="upload-field-input" id="video-link-title" placeholder="مثل: مباراة نهائي الكأس" type="text" />
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="upload-modal-footer">
+        <button class="upload-cancel-btn" data-upload-modal-close="" type="button">إلغاء</button>
+        <button class="upload-submit-btn" data-upload-submit="" type="button">
+          <i aria-hidden="true" class="fa-solid fa-cloud-arrow-up"></i>
+          رفع الفيديو
+        </button>
+      </div>
+    </section>
+  </div>
+  <script src="../js/auth.js?v=1.0.3"></script>
+  <script src="../js/mockData.js"></script>
+  <script src="../js/store.js"></script>
+  <script src="../js/script.js"></script>
+  <!-- ══ NOMINATE MODAL ══ -->
+  <div aria-labelledby="nominate-modal-title" aria-modal="true" class="upload-modal" hidden="" id="nominate-modal"
+    role="dialog">
+    <div class="upload-modal-backdrop" onclick="closeNominateModal()"></div>
+    <section class="upload-modal-dialog" dir="rtl"
+      style="max-width: 480px !important; margin: 50px auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 10000; position: relative;">
+      <!-- Header -->
+      <div class="upload-modal-head"
+        style="padding: 16px 20px; border-bottom: 1px solid #ece9e3; display: flex; justify-content: space-between; align-items: center;">
+        <h3 id="nominate-modal-title" style="margin: 0; font-size: 16px; font-weight: 700; color: #0f0f10;">ترشيح
+          اللاعبة لفرصة رياضية</h3>
+        <button aria-label="إغلاق" class="upload-modal-close" onclick="closeNominateModal()"
+          style="background: none; border: none; font-size: 18px; cursor: pointer; color: #8c8c85;" type="button">
+          <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <!-- Body -->
+      <div class="upload-modal-panel" style="padding: 20px !important;">
+        <p class="text-xs text-tj-text-secondary mb-4 leading-relaxed"
+          style="font-size: 13px; color: #5e5e59; margin-bottom: 12px; line-height: 1.5; text-align: right;">
+          اختر إحدى الفرص النشطة التي قمت بنشرها لترشيح هذه اللاعبة إليها. سيصلها تنبيه فوري لتفقد العقد وبدء التوقيع.
+        </p>
+        <div class="space-y-3" id="nominate-opportunities-container"
+          style="max-height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+          <!-- Dynamically populated or loading state -->
+          <div class="py-6 text-center text-tj-text-tertiary">
+            <i class="fa-solid fa-spinner fa-spin text-2xl mb-2 text-tj-primary"></i>
+            <p class="text-xs">جاري تحميل الفرص الخاصة بناديك...</p>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="upload-modal-footer"
+        style="padding: 15px 20px !important; background: #faf9f6 !important; border-top: 1px solid #ece9e3 !important; display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="upload-cancel-btn" onclick="closeNominateModal()"
+          style="background: #e6e6dc; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer;"
+          type="button">إلغاء</button>
+        <button class="upload-submit-btn" disabled="" id="btn-submit-nominate" onclick="submitNomination()"
+          style="background:#b670ff !important; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; color: white; cursor: pointer;"
+          type="button">
+          <i aria-hidden="true" class="fa-solid fa-paper-plane"></i>
+          تأكيد الترشيح
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ══ EDIT PROFILE MODAL ══ -->
+  <div aria-labelledby="edit-profile-modal-title" aria-modal="true" class="upload-modal" hidden=""
+    id="edit-profile-modal" role="dialog">
+    <div class="upload-modal-backdrop" onclick="document.getElementById('edit-profile-modal').hidden = true"></div>
+    <section class="upload-modal-dialog" dir="rtl"
+      style="max-width: 500px !important; margin: 50px auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 10000; position: relative;">
+      <div class="upload-modal-head"
+        style="padding: 16px 20px; border-bottom: 1px solid #ece9e3; display: flex; justify-content: space-between; align-items: center;">
+        <h3 id="edit-profile-modal-title" style="margin: 0; font-size: 16px; font-weight: 700; color: #0f0f10;">تعديل
+          الملف الشخصي</h3>
+        <button aria-label="إغلاق" class="upload-modal-close"
+          onclick="document.getElementById('edit-profile-modal').hidden = true"
+          style="background: none; border: none; font-size: 18px; cursor: pointer; color: #8c8c85;" type="button">
+          <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="upload-modal-panel" style="padding: 20px !important; max-height: 60vh; overflow-y: auto;">
+        <div class="space-y-4">
+          <div class="upload-field-group">
+            <label class="upload-field-label" for="edit-profile-name"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">الاسم
+              الكامل</label>
+            <input id="edit-profile-name" class="upload-field-input" type="text" value="سارة أحمد"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+          </div>
+          <div class="upload-field-group">
+            <label class="upload-field-label" for="edit-profile-sport"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">الرياضة</label>
+            <input id="edit-profile-sport" class="upload-field-input" type="text" value="كرة قدم"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+          </div>
+          <div class="upload-field-group">
+            <label class="upload-field-label" for="edit-profile-city"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">المدينة</label>
+            <input id="edit-profile-city" class="upload-field-input" type="text" value="الرياض"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+          </div>
+          <div class="flex gap-4">
+            <div class="upload-field-group flex-1">
+              <label class="upload-field-label" for="edit-profile-weight"
+                style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">الوزن
+                (كجم)</label>
+              <input id="edit-profile-weight" class="upload-field-input" type="number" value="65"
+                style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+            </div>
+            <div class="upload-field-group flex-1">
+              <label class="upload-field-label" for="edit-profile-height"
+                style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">الطول
+                (سم)</label>
+              <input id="edit-profile-height" class="upload-field-input" type="number" value="172"
+                style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+            </div>
+          </div>
+          <div class="upload-field-group">
+            <label class="upload-field-label" for="edit-profile-bio"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">النبذة</label>
+            <textarea id="edit-profile-bio" class="upload-field-input"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none; resize: vertical; min-height: 80px;">لاعبة كرة قدم شغوفة بعمر 22 سنة، تسعى لتطوير مهاراتها والانضمام لنادي احترافي.</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="upload-modal-footer"
+        style="padding: 15px 20px !important; background: #faf9f6 !important; border-top: 1px solid #ece9e3 !important; display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="upload-cancel-btn" onclick="document.getElementById('edit-profile-modal').hidden = true"
+          style="background: #e6e6dc; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer;"
+          type="button">إلغاء</button>
+        <button id="edit-profile-save-btn" class="upload-submit-btn" onclick="saveProfileEdits()"
+          style="background:#b670ff !important; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; color: white; cursor: pointer;"
+          type="button">حفظ التغييرات</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ══ EDIT ACHIEVEMENT MODAL ══ -->
+  <div aria-labelledby="edit-achievement-modal-title" aria-modal="true" class="upload-modal" hidden=""
+    id="edit-achievement-modal" role="dialog">
+    <div class="upload-modal-backdrop" onclick="document.getElementById('edit-achievement-modal').hidden = true"></div>
+    <section class="upload-modal-dialog" dir="rtl"
+      style="max-width: 480px !important; margin: 50px auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 10000; position: relative;">
+      <div class="upload-modal-head"
+        style="padding: 16px 20px; border-bottom: 1px solid #ece9e3; display: flex; justify-content: space-between; align-items: center;">
+        <h3 id="edit-achievement-modal-title" style="margin: 0; font-size: 16px; font-weight: 700; color: #0f0f10;">
+          تعديل الإنجاز</h3>
+        <button aria-label="إغلاق" class="upload-modal-close"
+          onclick="document.getElementById('edit-achievement-modal').hidden = true"
+          style="background: none; border: none; font-size: 18px; cursor: pointer; color: #8c8c85;" type="button">
+          <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="upload-modal-panel" style="padding: 20px !important;">
+        <div class="space-y-4">
+          <div class="upload-field-group">
+            <label class="upload-field-label"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">عنوان
+              الإنجاز</label>
+            <input class="upload-field-input" type="text" value="بطلة المملكة للناشئات 2025"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+          </div>
+          <div class="upload-field-group">
+            <label class="upload-field-label"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">التفاصيل</label>
+            <input class="upload-field-input" type="text" value="كرة القدم - 18 سنة"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+          </div>
+          <div class="upload-field-group">
+            <label class="upload-field-label"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">الجهة
+              المانحة - السنة</label>
+            <input class="upload-field-input" type="text" value="الاتحاد السعودي لكرة القدم - 2025"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+          </div>
+        </div>
+      </div>
+      <div class="upload-modal-footer"
+        style="padding: 15px 20px !important; background: #faf9f6 !important; border-top: 1px solid #ece9e3 !important; display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="upload-cancel-btn" onclick="document.getElementById('edit-achievement-modal').hidden = true"
+          style="background: #e6e6dc; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer;"
+          type="button">إلغاء</button>
+        <button class="upload-submit-btn" onclick="document.getElementById('edit-achievement-modal').hidden = true"
+          style="background:#b670ff !important; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; color: white; cursor: pointer;"
+          type="button">تحديث</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ══ ADD ACHIEVEMENT MODAL ══ -->
+  <div aria-labelledby="add-achievement-modal-title" aria-modal="true" class="upload-modal" hidden=""
+    id="add-achievement-modal" role="dialog">
+    <div class="upload-modal-backdrop" onclick="document.getElementById('add-achievement-modal').hidden = true"></div>
+    <section class="upload-modal-dialog" dir="rtl"
+      style="max-width: 480px !important; margin: 50px auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15); z-index: 10000; position: relative;">
+      <div class="upload-modal-head"
+        style="padding: 16px 20px; border-bottom: 1px solid #ece9e3; display: flex; justify-content: space-between; align-items: center;">
+        <h3 id="add-achievement-modal-title" style="margin: 0; font-size: 16px; font-weight: 700; color: #0f0f10;">
+          إضافة إنجاز جديد</h3>
+        <button aria-label="إغلاق" class="upload-modal-close"
+          onclick="document.getElementById('add-achievement-modal').hidden = true"
+          style="background: none; border: none; font-size: 18px; cursor: pointer; color: #8c8c85;" type="button">
+          <i aria-hidden="true" class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="upload-modal-panel" style="padding: 20px !important;">
+        <div class="space-y-4">
+          <!-- عنوان الإنجاز -->
+          <div class="upload-field-group">
+            <label class="upload-field-label"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">اسم الإنجاز
+              / الشهادة <span class="text-tj-error">*</span></label>
+            <input id="add-achievement-title" class="upload-field-input" type="text"
+              placeholder="مثال: بطلة المملكة للناشئات"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;"
+              required>
+          </div>
+
+          <!-- أيقونة الإنجاز -->
+          <div class="upload-field-group">
+            <label class="upload-field-label"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">نوع وأيقونة
+              الإنجاز</label>
+            <select id="add-achievement-icon" class="upload-field-input"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none; background: white;">
+              <option value="fa-medal">🏅 وسام / ميدالية (Medal)</option>
+              <option value="fa-trophy">🏆 كأس (Trophy)</option>
+              <option value="fa-certificate">📜 شهادة (Certificate)</option>
+              <option value="fa-star">⭐ نجمة تميز (Star)</option>
+            </select>
+          </div>
+
+          <!-- الجهة المانحة والسنة -->
+          <div class="flex gap-4">
+            <div class="upload-field-group flex-1">
+              <label class="upload-field-label"
+                style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">الجهة
+                المانحة</label>
+              <input id="add-achievement-grantor" class="upload-field-input" type="text"
+                placeholder="مثال: الاتحاد السعودي لكرة القدم"
+                style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+            </div>
+            <div class="upload-field-group w-32">
+              <label class="upload-field-label"
+                style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">السنة</label>
+              <input id="add-achievement-year" class="upload-field-input" type="text" placeholder="مثال: 2025"
+                style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+            </div>
+          </div>
+
+          <!-- التفاصيل / الوصف -->
+          <div class="upload-field-group">
+            <label class="upload-field-label"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">التفاصيل /
+              الوصف</label>
+            <input id="add-achievement-desc" class="upload-field-input" type="text"
+              placeholder="مثال: كرة القدم - فئة 18 سنة"
+              style="width: 100%; border: 1px solid #ece9e3; padding: 10px; border-radius: 8px; outline: none;">
+          </div>
+
+          <!-- رفع ملف شهادة الإنجاز -->
+          <div class="upload-field-group">
+            <label class="upload-field-label"
+              style="font-weight: 600; color: #5e5e59; font-size: 13px; margin-bottom: 6px; display: block;">تحميل شهادة
+              أو ملف الإنجاز</label>
+            <div id="add-achievement-dropzone"
+              class="border-2 border-dashed border-tj-border rounded-xl p-4 text-center cursor-pointer hover:border-tj-primary hover:bg-tj-primary-surface/30 transition-all flex flex-col items-center justify-center gap-2">
+              <i class="fa-solid fa-cloud-arrow-up text-2xl text-tj-text-tertiary"></i>
+              <p class="text-xs font-semibold text-tj-text">اسحبي الملف هنا أو اضغطي للتصفح</p>
+              <p class="text-[10px] text-tj-text-tertiary">الصيغ المدعومة: PDF, PNG, JPG (حجم أقصى 5 ميجابايت)</p>
+              <input type="file" id="add-achievement-file-input" accept="application/pdf,image/*"
+                style="display: none;" />
+              <div id="add-achievement-file-info"
+                class="hidden text-xs font-semibold text-tj-success flex items-center justify-between gap-1.5 mt-1 bg-tj-success-bg px-2.5 py-1 rounded-tj-pill w-full">
+                <div class="flex items-center gap-1.5 truncate">
+                  <i class="fa-solid fa-circle-check shrink-0"></i>
+                  <span id="add-chosen-file-text" class="truncate text-right">اسم الملف.pdf</span>
+                </div>
+                <button type="button" id="btn-remove-achievement-file"
+                  class="text-tj-error hover:text-red-700 p-1 shrink-0">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="upload-modal-footer"
+        style="padding: 15px 20px !important; background: #faf9f6 !important; border-top: 1px solid #ece9e3 !important; display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="upload-cancel-btn" onclick="document.getElementById('add-achievement-modal').hidden = true"
+          style="background: #e6e6dc; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer;"
+          type="button">إلغاء</button>
+        <button id="btn-save-achievement" class="upload-submit-btn" onclick="saveNewAchievement()"
+          style="background:#b670ff !important; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; color: white; cursor: pointer;"
+          type="button">
+          <i aria-hidden="true" class="fa-solid fa-plus ml-1"></i>حفظ وإضافة</button>
+      </div>
+    </section>
+  </div>
+  <!-- Tajah Dynamic Hydration & Actions Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Initialize TajahStore
+      if (typeof TajahStore !== "undefined") {
+        TajahStore.init();
+      }
+
+      const loggedUser = JSON.parse(sessionStorage.getItem("tajah_user") || "{}");
+      const isClub = loggedUser.role === "club" || loggedUser.type === "club";
+
+      // Parse ID from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      let playerId = urlParams.get("id") || urlParams.get("player_id");
+
+      // Default to sara saad (id: 1) if not provided
+      if (!playerId && !isClub) {
+        playerId = loggedUser.id || 1;
+      }
+
+      // If user is a club, apply specialized layout modifications
+      if (isClub) {
+        // Hide checklist completion expander
+        const completionPanel = document.querySelector(".completion-expander");
+        if (completionPanel) {
+          completionPanel.style.display = "none";
+        }
+
+        // Hide .bio-top-actions (notification & settings icons — player-only)
+        const bioTopActions = document.querySelector(".bio-top-actions");
+        if (bioTopActions) bioTopActions.style.display = "none";
+
+        // Hide health section
+        const healthSec = document.getElementById("health");
+        if (healthSec) healthSec.style.display = "none";
+
+        // Hide upload section in achievements tab
+        const uploadSec = document.querySelector(".upload-section");
+        if (uploadSec) uploadSec.style.display = "none";
+
+        // Hide skill suggestion box (defensive skill prompt)
+        const suggBox = document.querySelector(".skills-suggestion-box");
+        if (suggBox) suggBox.style.display = "none";
+
+        // Hide edit skill tags + add skill tags inline buttons
+        document.querySelectorAll(".skill-add-inline, .player-add-skill-btn, .video-edit-btn, .edit-btn").forEach(btn => {
+          btn.style.display = "none";
+        });
+
+        // Replace profile action buttons with "ترشيح" (Nominate) and "إضافة للمقارنة" (Add to Compare)
+        const actionRow = document.querySelector(".bio-action-row");
+        if (actionRow) {
+          actionRow.innerHTML = `
+            <button aria-label="ترشيح" class="profile-action-btn profile-action-btn--primary" onclick="openNominateModal()" type="button" style="background:#b670ff !important; color:#fff !important; border:none !important; border-radius:10px !important; padding:10px 20px !important; font-weight:600 !important; cursor:pointer !important; transition:all 0.2s !important; display: inline-flex; align-items: center; gap: 8px; justify-content: center; height: 44px; min-width: 140px;">
+              <i aria-hidden="true" class="fa-solid fa-trophy"></i>
+              <span>ترشيح</span>
+            </button>
+            <button aria-label="إضافة للمقارنة" class="profile-action-btn profile-action-btn--outline" onclick="addToCompare()" type="button" style="background:transparent !important; color:#b670ff !important; border:2px solid #b670ff !important; border-radius:10px !important; padding:10px 20px !important; font-weight:600 !important; cursor:pointer !important; transition:all 0.2s !important; display: inline-flex; align-items: center; gap: 8px; justify-content: center; height: 44px; min-width: 140px;">
+              <i aria-hidden="true" class="fa-solid fa-scale-balanced"></i>
+              <span>إضافة للمقارنة</span>
+            </button>
+          `;
+        }
+      }
+
+      // Fetch Player Details dynamically
+      if (playerId) {
+        try {
+          // Normalize if ID starts with mock prefix 'p'
+          let dbId = playerId;
+          if (typeof playerId === 'string' && playerId.startsWith('p')) {
+            dbId = playerId.substring(1); // p1 -> 1
+          }
+
+          const res = await fetch(`/api/users/${dbId}`);
+          if (res.ok) {
+            const user = await res.json();
+
+            // Hydrate name
+            const nameEl = document.querySelector(".bio-name");
+            if (nameEl && user.name) nameEl.textContent = user.name;
+
+            // Hydrate sport
+            const ageEl = document.querySelector(".bio-meta-chip:nth-child(1) strong");
+            if (ageEl && user.age) ageEl.textContent = user.age;
+            const sportEl = document.querySelector(".bio-meta-chip:nth-child(2) strong");
+            if (sportEl && user.sport) sportEl.textContent = user.sport;
+
+            // Hydrate city
+            const cityEl = document.querySelector(".bio-meta-chip:nth-child(3) strong");
+            if (cityEl && user.city) cityEl.textContent = user.city;
+
+            // Hydrate bio
+            const bioEl = document.querySelector(".bio-description");
+            if (bioEl && user.bio) bioEl.textContent = user.bio;
+
+            // Hydrate stats
+            const heightEl = document.querySelector(".bqs-item:nth-child(3) .bqs-value");
+            if (heightEl && user.height) heightEl.textContent = user.height;
+
+            const levelEl = document.querySelector(".bio-tag--level .bio-tag__value");
+            if (levelEl && user.level) levelEl.textContent = user.level;
+
+            // Update level stepper text too
+            const currentLevelText = document.querySelector(".level-stepper-current");
+            if (currentLevelText && user.level) {
+              currentLevelText.innerHTML = `<i aria-hidden="true" class="fa-solid fa-trophy"></i> المستوى الحالي: ${user.level}`;
+            }
+
+            // Hydrate stats tab if available
+            const skillsTags = document.querySelector(".skills-tags");
+            if (skillsTags && user.position) {
+              // Add position chip
+              const posChip = document.createElement("span");
+              posChip.className = "skill-chip";
+              posChip.style.background = "#f6ebff";
+              posChip.style.color = "#b670ff";
+              posChip.style.fontWeight = "bold";
+              posChip.textContent = `المركز: ${user.position}`;
+              skillsTags.appendChild(posChip);
+            }
+          }
+        } catch (err) {
+          console.error("Hydration fetch failed, using default page values.", err);
+        }
+      }
+    });
+
+    // Add to Compare action
+    window.addToCompare = function () {
+      if (typeof TajahStore !== "undefined") {
+        TajahStore.init();
+        const candidates = TajahStore.get("candidates") || [];
+        const player_name = document.querySelector(".bio-name").textContent.trim();
+        const urlParams = new URLSearchParams(window.location.search);
+        let playerId = urlParams.get("id") || urlParams.get("player_id") || "2";
+
+        let match = candidates.find(c => c.name === player_name || String(c.id) === String(playerId));
+        if (!match) {
+          const newCandidateId = candidates.length + 1;
+          match = {
+            id: newCandidateId,
+            name: player_name,
+            age: 21,
+            position: document.querySelector(".bio-meta-chip:nth-child(2) strong")?.textContent.trim() || "مهاجمة",
+            level: "متقدمة",
+            university: "جامعة أم القرى",
+            city: document.querySelector(".bio-meta-chip:nth-child(3) strong")?.textContent.trim() || "مكة المكرمة",
+            reviewed: false,
+            hasPhoto: true,
+            stats: {
+              pointsPerGame: 18.4,
+              assistsPerGame: 5.1,
+              reboundsPerGame: 4.7,
+              speed: 9.2,
+              height: 168,
+              overallRating: 91,
+            }
+          };
+          candidates.push(match);
+          TajahStore.set("candidates", candidates);
+        }
+
+        TajahStore.addToShortlist(match.id);
+        showToast("تمت إضافة اللاعبة بنجاح إلى قائمة المقارنة!");
+      } else {
+        showToast("تمت إضافة اللاعبة للمقارنة!");
+      }
+    }
+
+    // Modal Nominate open/close
+    window.openNominateModal = async function () {
+      const modal = document.getElementById('nominate-modal');
+      if (modal) modal.hidden = false;
+
+      const club = JSON.parse(sessionStorage.getItem('tajah_user') || '{}');
+      const container = document.getElementById('nominate-opportunities-container');
+      if (!club.id) {
+        container.innerHTML = `
+          <div class="py-4 text-center text-tj-error text-xs" style="color: #eb3333; font-size: 13px;">
+            <i class="fa-solid fa-circle-exclamation text-lg mb-1" style="font-size: 18px;"></i>
+            <p>يرجى تسجيل الدخول كفريق أولاً.</p>
+          </div>`;
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/opportunities?club_id=${club.id}`);
+        if (res.ok) {
+          const opps = await res.json();
+          if (opps.length === 0) {
+            container.innerHTML = `
+              <div class="py-4 text-center text-tj-text-secondary text-xs" style="color: #5e5e59; font-size: 13px;">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-lg mb-1" style="color: #caa913; font-size: 18px;"></i>
+                <p>لم تقم بنشر أي فرص نشطة بعد!</p>
+                <p class="text-tj-text-tertiary mt-1" style="color: #8c8c85; font-size: 11px;">أنشئ فرصة أولاً من ملف النادي.</p>
+              </div>`;
+            return;
+          }
+
+          container.innerHTML = opps.map(opp => `
+            <label class="flex items-center gap-3 p-3 border border-tj-border rounded-xl cursor-pointer hover:border-tj-primary hover:bg-tj-primary-surface/30 transition-all text-right" style="display:flex; align-items:center; border:1px solid #ece9e3; border-radius:12px; padding:12px; cursor:pointer; gap: 12px; width: 100%;">
+              <input type="radio" name="nominate_opp_id" value="${opp.id}" data-title="${opp.title}" data-sport="${opp.sport}" data-position="${opp.position || 'مهاجمة'}" class="accent-tj-primary" style="margin-left: 10px;" onchange="document.getElementById('btn-submit-nominate').disabled = false;">
+              <div class="flex-grow">
+                <span class="block text-sm font-bold text-tj-text" style="font-weight: 700; color: #0f0f10; font-size: 14px;">${opp.title}</span>
+                <span class="block text-xs text-tj-text-secondary" style="font-size:11px; color:#5e5e59;">${opp.sport} · ${opp.city}</span>
+              </div>
+            </label>
+          `).join('');
+        }
+      } catch (err) {
+        console.error('Failed to fetch opportunities:', err);
+        container.innerHTML = `<div class="py-4 text-center text-tj-error text-xs"><p>حدث خطأ في تحميل الفرص.</p></div>`;
+      }
+    }
+
+    window.closeNominateModal = function () {
+      const modal = document.getElementById('nominate-modal');
+      if (modal) modal.hidden = true;
+    }
+
+    // Submit nomination invitation to database
+    window.submitNomination = async function () {
+      const selectedRadio = document.querySelector('input[name="nominate_opp_id"]:checked');
+      if (!selectedRadio) return;
+
+      const oppId = selectedRadio.value;
+      const oppTitle = selectedRadio.getAttribute('data-title');
+      const oppSport = selectedRadio.getAttribute('data-sport');
+      const oppPosition = selectedRadio.getAttribute('data-position');
+
+      const club = JSON.parse(sessionStorage.getItem('tajah_user') || '{}');
+      const urlParams = new URLSearchParams(window.location.search);
+      let playerId = urlParams.get("id") || urlParams.get("player_id") || "2";
+
+      let dbId = playerId;
+      if (typeof playerId === 'string' && playerId.startsWith('p')) {
+        dbId = playerId.substring(1);
+      }
+
+      const btn = document.getElementById('btn-submit-nominate');
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...`;
+
+      try {
+        const appRes = await fetch('/api/applications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            opportunity_id: oppId,
+            player_id: dbId,
+            club_name: club.name || 'نادي الهلال الرياضي',
+            club_city: club.city || 'الرياض',
+            sport: oppSport,
+            position: oppPosition,
+            status: 'pending',
+            has_offer: 1,
+            offer_position: oppPosition,
+            offer_salary: '7,000 ريال سعودي / شهرياً',
+            offer_benefits: 'تأمين طبي فئة أ، مكافآت فوز، وتوفير سكن ومواصلات.'
+          })
+        });
+
+        if (appRes.ok) {
+          await fetch('/api/notifications', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              user_id: dbId,
+              title: 'دعوة ترشيح وعقد جديد! 🏆',
+              message: `قام ${club.name || 'نادي الهلال الرياضي'} بترشيحك لفرصة: "${oppTitle}". تفضلي بزيارة صفحة طلباتي لمراجعة بنود العقد والتوقيع!`,
+              type: 'nomination'
+            })
+          });
+
+          closeNominateModal();
+          showToast("🚀 تم ترشيح اللاعبة وإرسال الإشعار بنجاح!");
+        } else {
+          showToast("فشل ترشيح اللاعبة. يرجى المحاولة لاحقاً.");
+          btn.disabled = false;
+          btn.innerHTML = `<i aria-hidden="true" class="fa-solid fa-paper-plane"></i> تأكيد الترشيح`;
+        }
+      } catch (err) {
+        console.error('Submit nomination error:', err);
+        showToast("حدث خطأ أثناء إرسال الترشيح.");
+        btn.disabled = false;
+        btn.innerHTML = `<i aria-hidden="true" class="fa-solid fa-paper-plane"></i> تأكيد الترشيح`;
+      }
+    }
+
+    // Custom Toast Notification helper
+    function showToast(msg) {
+      let toast = document.getElementById("profile-toast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "profile-toast";
+        toast.style.cssText = "position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px); background: #1E1E1D; color: white; padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; z-index: 9999; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); white-space: nowrap;";
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.style.transform = "translateX(-50%) translateY(0)";
+      setTimeout(() => {
+        toast.style.transform = "translateX(-50%) translateY(80px)";
+      }, 3000);
+    }
+
+    // ── Dynamic Achievements System ──
+    document.addEventListener("DOMContentLoaded", () => {
+      const dropzone = document.getElementById("add-achievement-dropzone");
+      const fileInput = document.getElementById("add-achievement-file-input");
+      const fileInfo = document.getElementById("add-achievement-file-info");
+      const chosenFileText = document.getElementById("add-chosen-file-text");
+      const removeFileBtn = document.getElementById("btn-remove-achievement-file");
+
+      if (dropzone && fileInput) {
+        // Trigger file dialog on click
+        dropzone.addEventListener("click", (e) => {
+          if (e.target.closest("#add-achievement-file-info")) return; // skip if clicked remove file
+          fileInput.click();
+        });
+
+        // File selection change
+        fileInput.addEventListener("change", () => {
+          const file = fileInput.files[0];
+          if (file) {
+            chosenFileText.textContent = file.name;
+            fileInfo.classList.remove("hidden");
+            dropzone.classList.add("border-tj-primary", "bg-tj-primary-surface/20");
+          }
+        });
+
+        // Drag & Drop events
+        dropzone.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          dropzone.classList.add("border-tj-primary", "bg-tj-primary-surface/30");
+        });
+
+        dropzone.addEventListener("dragleave", () => {
+          dropzone.classList.remove("border-tj-primary", "bg-tj-primary-surface/30");
+        });
+
+        dropzone.addEventListener("drop", (e) => {
+          e.preventDefault();
+          dropzone.classList.remove("border-tj-primary", "bg-tj-primary-surface/30");
+          const file = e.dataTransfer.files[0];
+          if (file) {
+            // Assign to file input manually
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+
+            chosenFileText.textContent = file.name;
+            fileInfo.classList.remove("hidden");
+            dropzone.classList.add("border-tj-primary", "bg-tj-primary-surface/20");
+          }
+        });
+      }
+
+      if (removeFileBtn && fileInput && fileInfo && dropzone) {
+        removeFileBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          fileInput.value = "";
+          fileInfo.classList.add("hidden");
+          dropzone.classList.remove("border-tj-primary", "bg-tj-primary-surface/20");
+        });
+      }
+
+      // Initial fetch
+      fetchAndRenderAchievements();
+    });
+
+    async function fetchAndRenderAchievements() {
+      const loggedUser = JSON.parse(sessionStorage.getItem("tajah_user") || "{}");
+      const isClub = loggedUser.role === "club" || loggedUser.type === "club";
+
+      const urlParams = new URLSearchParams(window.location.search);
+      let playerId = urlParams.get("id") || urlParams.get("player_id");
+      if (!playerId && !isClub) {
+        playerId = loggedUser.id || 1;
+      }
+      if (!playerId) playerId = 1; // default fallback
+
+      let dbId = playerId;
+      if (typeof playerId === 'string' && playerId.startsWith('p')) {
+        dbId = playerId.substring(1);
+      }
+
+      const listContainer = document.querySelector(".achievements-list");
+      if (!listContainer) return;
+
+      try {
+        const res = await fetch(`/api/users/${dbId}/achievements`);
+        if (res.ok) {
+          const achievements = await res.json();
+
+          if (achievements.length > 0) {
+            listContainer.innerHTML = achievements.map(ach => {
+              const hasSFFLogo = ach.grantor && ach.grantor.includes("كرة القدم");
+              const grantorLogoHtml = hasSFFLogo
+                ? `<img src="https://upload.wikimedia.org/wikipedia/ar/5/5b/%D8%B4%D8%B9%D8%A7%D8%B1_%D8%A7%D9%84%D8%A7%D8%AA%D8%AD%D8%A7%D8%AF_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A_%D9%84%D9%83%D8%B1%D8%A9_%D8%A7%D9%84%D9%82%D8%AF%D9%85.svg" class="w-4 h-4 object-contain inline-block">`
+                : `<i class="fa-solid fa-building-columns text-tj-text-tertiary"></i>`;
+
+              const fileLinkHtml = ach.file_path
+                ? `<a href="${ach.file_path}" target="_blank" class="text-xs text-tj-primary hover:underline flex items-center gap-1.5 mt-2 font-semibold" style="display:inline-flex; align-items:center;">
+                     <i class="fa-solid fa-file-invoice"></i>
+                     عرض المستند المرفق
+                   </a>`
+                : '';
+
+              return `
+                <div class="achievement-card">
+                  ${isClub ? '' : `
+                  <button aria-label="تعديل" class="edit-btn" onclick="document.getElementById('edit-achievement-modal').hidden = false">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  `}
+                  <div class="achievement-content">
+                    <h4>${ach.title}</h4>
+                    <p>${ach.description || ''}</p>
+                    <span class="flex items-center gap-1.5" style="display:flex; align-items:center; gap: 6px;">
+                      ${grantorLogoHtml}
+                      ${ach.grantor || ''} ${ach.year ? ` - ${ach.year}` : ''}
+                    </span>
+                    ${fileLinkHtml}
+                  </div>
+                  <div class="achievement-icon">
+                    <i class="fa-solid ${ach.icon || 'fa-medal'}"></i>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          } else {
+            // Keep hardcoded/default fallback achievements if empty
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch and render dynamic achievements:", err);
+      }
+    }
+
+    async function saveNewAchievement() {
+      const title = document.getElementById("add-achievement-title").value.trim();
+      const icon = document.getElementById("add-achievement-icon").value;
+      const grantor = document.getElementById("add-achievement-grantor").value.trim();
+      const year = document.getElementById("add-achievement-year").value.trim();
+      const desc = document.getElementById("add-achievement-desc").value.trim();
+      const fileInput = document.getElementById("add-achievement-file-input");
+
+      if (!title) {
+        alert("يرجى إدخال اسم الإنجاز.");
+        return;
+      }
+
+      const saveBtn = document.getElementById("btn-save-achievement");
+      const origText = saveBtn.innerHTML;
+      saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin ml-1"></i> جاري الحفظ...';
+      saveBtn.disabled = true;
+
+      try {
+        const loggedUser = JSON.parse(sessionStorage.getItem("tajah_user") || "{}");
+        const urlParams = new URLSearchParams(window.location.search);
+        let playerId = urlParams.get("id") || urlParams.get("player_id");
+        if (!playerId) {
+          playerId = loggedUser.id || 1;
+        }
+
+        let dbId = playerId;
+        if (typeof playerId === 'string' && playerId.startsWith('p')) {
+          dbId = playerId.substring(1);
+        }
+
+        let fileData = null;
+        let fileName = null;
+        const file = fileInput.files[0];
+        if (file) {
+          fileData = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve(e.target.result);
+            reader.readAsDataURL(file);
+          });
+          fileName = file.name;
+        }
+
+        const res = await fetch(`/api/users/${dbId}/achievements`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title,
+            description: desc,
+            icon,
+            grantor,
+            year,
+            file_data: fileData,
+            file_name: fileName
+          })
+        });
+
+        if (res.ok) {
+          // Reset form fields
+          document.getElementById("add-achievement-title").value = "";
+          document.getElementById("add-achievement-grantor").value = "";
+          document.getElementById("add-achievement-year").value = "";
+          document.getElementById("add-achievement-desc").value = "";
+          fileInput.value = "";
+          document.getElementById("add-achievement-file-info").classList.add("hidden");
+          document.getElementById("add-achievement-dropzone").classList.remove("border-tj-primary", "bg-tj-primary-surface/20");
+
+          // Close modal
+          document.getElementById("add-achievement-modal").hidden = true;
+
+          // Toast success
+          showToast("🏆 تم إضافة إنجازك الجديد بنجاح!");
+
+          // Reload list
+          await fetchAndRenderAchievements();
+        } else {
+          const errData = await res.json();
+          alert(errData.error || "فشل حفظ الإنجاز");
+        }
+      } catch (err) {
+        console.error("Save achievement error:", err);
+        alert("حدث خطأ أثناء الاتصال بالخادم.");
+      } finally {
+        saveBtn.innerHTML = origText;
+        saveBtn.disabled = false;
+      }
+    }
+  </script>
+  <script>
+    // ══ EDIT PROFILE MODAL — populate fields when opening ══
+    document.addEventListener('DOMContentLoaded', () => {
+      const editBtn = document.querySelector('[onclick="document.getElementById(\'edit-profile-modal\').hidden = false"]');
+      const modal = document.getElementById('edit-profile-modal');
+
+      function populateEditModal() {
+        const card = document.querySelector('.bio-card');
+        if (!card) return;
+        const nameEl = card.querySelector('.bio-name');
+        const metaChips = card.querySelectorAll('.bio-meta-row .bio-meta-chip strong');
+        const sportEl = metaChips[1];
+        const cityEl = metaChips[2];
+        const bqsItems = card.querySelectorAll('.bio-quick-stats .bqs-value');
+        const weightEl = bqsItems[1];
+        const heightEl = bqsItems[2];
+        const bioEl = card.querySelector('.bio-description');
+
+        if (nameEl) document.getElementById('edit-profile-name').value = nameEl.textContent.trim();
+        if (sportEl) document.getElementById('edit-profile-sport').value = sportEl.textContent.trim();
+        if (cityEl) document.getElementById('edit-profile-city').value = cityEl.textContent.trim();
+        if (weightEl) document.getElementById('edit-profile-weight').value = weightEl.textContent.trim();
+        if (heightEl) document.getElementById('edit-profile-height').value = heightEl.textContent.trim();
+        if (bioEl) document.getElementById('edit-profile-bio').value = bioEl.textContent.trim();
+      }
+
+      // Re-populate every time the modal is opened
+      const editPenBtn = document.querySelector('a[aria-label="تعديل الملف"]');
+      if (editPenBtn) {
+        editPenBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          populateEditModal();
+          modal.hidden = false;
+        });
+      }
+    });
+
+    // ══ Save edits back to the DOM (and optionally to the server) ══
+    window.saveProfileEdits = async function () {
+      const name = document.getElementById('edit-profile-name').value.trim();
+      const sport = document.getElementById('edit-profile-sport').value.trim();
+      const city = document.getElementById('edit-profile-city').value.trim();
+      const weight = document.getElementById('edit-profile-weight').value.trim();
+      const height = document.getElementById('edit-profile-height').value.trim();
+      const bio = document.getElementById('edit-profile-bio').value.trim();
+
+      if (!name) { alert('الاسم مطلوب'); return; }
+
+      // ── Update DOM immediately ──
+      const card = document.querySelector('.bio-card');
+      if (!card) return;
+      const nameEl = card.querySelector('.bio-name');
+      const metaChips = card.querySelectorAll('.bio-meta-row .bio-meta-chip strong');
+      const sportEl = metaChips[1];
+      const cityEl = metaChips[2];
+      const bqsItems = card.querySelectorAll('.bio-quick-stats .bqs-value');
+      const weightEl = bqsItems[1];
+      const heightEl = bqsItems[2];
+      const bioEl = card.querySelector('.bio-description');
+
+      if (nameEl) nameEl.textContent = name;
+      if (sportEl) sportEl.textContent = sport;
+      if (cityEl) cityEl.textContent = city;
+      if (weightEl && weight) weightEl.textContent = weight;
+      if (heightEl && height) heightEl.textContent = height;
+      if (bioEl) bioEl.textContent = bio;
+
+      // ── Close modal ──
+      document.getElementById('edit-profile-modal').hidden = true;
+
+      // ── Persist to server if user is logged in ──
+      try {
+        const user = JSON.parse(sessionStorage.getItem('tajah_user') || 'null');
+        if (user && user.id) {
+          const saveBtn = document.getElementById('edit-profile-save-btn');
+          const origText = saveBtn.innerHTML;
+          saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+          saveBtn.disabled = true;
+
+          const res = await fetch(`/api/users/${user.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, sport, city, weight: Number(weight) || undefined, height: Number(height) || undefined, bio })
+          });
+
+          saveBtn.innerHTML = origText;
+          saveBtn.disabled = false;
+
+          if (res.ok) {
+            // Update session storage
+            user.name = name;
+            user.sport = sport;
+            user.city = city;
+            if (weight) user.weight = Number(weight);
+            if (height) user.height = Number(height);
+            user.bio = bio;
+            sessionStorage.setItem('tajah_user', JSON.stringify(user));
+            showToast('✅ تم حفظ التغييرات بنجاح!');
+          } else {
+            showToast('تم تحديث الصفحة. قد لا تُحفظ التغييرات على الخادم.');
+          }
+        } else {
+          showToast('✅ تم تحديث الملف الشخصي!');
+        }
+      } catch (err) {
+        console.warn('Could not persist profile edits:', err);
+        showToast('✅ تم تحديث الملف الشخصي!');
+      }
+    };
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('toggleSkillsExpand');
+      const panel = document.getElementById('skillsExpandPanel');
+      const tags = document.getElementById('skillsTags');
+      const input = document.getElementById('customSkillInput');
+      const saveBtn = document.getElementById('saveSkillsBtn');
+      const optionBtns = document.querySelectorAll('[data-skill-option]');
+
+      function togglePanel(forceOpen = null) {
+        const willOpen = forceOpen !== null ? forceOpen : panel.hidden;
+        panel.hidden = !willOpen;
+        toggleBtn.setAttribute('aria-expanded', String(willOpen));
+        toggleBtn.classList.toggle('is-open', willOpen);
+        if (willOpen) setTimeout(() => input.focus(), 50);
+      }
+
+      function hasSkill(skill) {
+        return [...tags.querySelectorAll('.skill-chip')]
+          .some(el => el.dataset.skill === skill);
+      }
+
+      function createChip(skill) {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'skill-chip';
+        chip.dataset.skill = skill;
+        chip.innerHTML = `<span>${skill}</span><i class="fa-solid fa-xmark" aria-hidden="true"></i>`;
+        chip.addEventListener('click', () => chip.remove());
+        return chip;
+      }
+
+      function addSkill(skill) {
+        const value = (skill || '').trim();
+        if (!value || hasSkill(value)) return;
+        tags.appendChild(createChip(value));
+      }
+
+      toggleBtn.addEventListener('click', () => togglePanel());
+
+      optionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          addSkill(btn.dataset.skillOption);
+        });
+      });
+
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          addSkill(input.value);
+          input.value = '';
+        }
+      });
+
+      saveBtn.addEventListener('click', async () => {
+        const user = JSON.parse(sessionStorage.getItem('tajah_user') || 'null');
+        if (!user?.id) {
+          showToast('يجب تسجيل الدخول أولاً');
+          return;
+        }
+
+        if (input.value.trim()) {
+          addSkill(input.value);
+          input.value = '';
+        }
+
+        const skills = [...tags.querySelectorAll('.skill-chip')]
+          .map(chip => chip.dataset.skill)
+          .filter(Boolean);
+
+        try {
+          const res = await fetch(`/api/users/${user.id}/skills`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ skills })
+          });
+
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'فشل حفظ المهارات');
+
+          togglePanel(false);
+          showToast('تم حفظ المهارات بنجاح');
+        } catch (err) {
+          console.error(err);
+          showToast(err.message || 'حدث خطأ أثناء الحفظ');
+        }
+      });
+
+      document.addEventListener('click', e => {
+        const inside = panel.contains(e.target) || toggleBtn.contains(e.target);
+        if (!inside && !panel.hidden) togglePanel(false);
+      });
+    });
+
+    // ══ FETCH USER PROFILE ON LOAD ══
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetId = urlParams.get('id');
+        const userStr = sessionStorage.getItem('tajah_user');
+        const sessionUser = userStr ? JSON.parse(userStr) : null;
+        
+        const fetchId = targetId || sessionUser?.id;
+        if (!fetchId) return;
+
+        const isOwnProfile = sessionUser && String(sessionUser.id) === String(fetchId);
+
+        const res = await fetch(`/api/users/${fetchId}`);
+        if (!res.ok) return;
+        const user = await res.json();
+
+        // Update DOM elements
+        const card = document.querySelector('.bio-card');
+        if (!card) return;
+        const nameEl = card.querySelector('.bio-name');
+        const metaChips = card.querySelectorAll('.bio-meta-row .bio-meta-chip strong');
+        const ageEl = metaChips[0];
+        const sportEl = metaChips[1];
+        const cityEl = metaChips[2];
+        const bioEl = card.querySelector('.bio-description');
+        const bqsItems = card.querySelectorAll('.bio-quick-stats .bqs-value');
+        const expEl = bqsItems[0];
+        const weightEl = bqsItems[1];
+        const heightEl = bqsItems[2];
+
+        if (nameEl && user.name) nameEl.textContent = user.name;
+        if (ageEl && user.age) ageEl.textContent = user.age;
+        if (sportEl && user.sport) sportEl.textContent = user.sport;
+        if (cityEl && user.city) cityEl.textContent = user.city;
+        if (bioEl && user.bio) bioEl.textContent = user.bio;
+
+        if (expEl && user.seasons !== undefined && user.seasons !== null) expEl.textContent = user.seasons;
+        if (weightEl && user.weight !== undefined && user.weight !== null) weightEl.textContent = user.weight;
+        if (heightEl && user.height !== undefined && user.height !== null) heightEl.textContent = user.height;
+
+        // Update Skills
+        if (user.skills && Array.isArray(user.skills)) {
+          const skillsTags = document.getElementById('skillsTags');
+          if (skillsTags) {
+            skillsTags.innerHTML = '';
+            user.skills.forEach(skill => {
+              if (isOwnProfile) {
+                const chip = document.createElement('button');
+                chip.type = 'button';
+                chip.className = 'skill-chip';
+                chip.dataset.skill = skill;
+                chip.innerHTML = `<span>${skill}</span><i class="fa-solid fa-xmark" aria-hidden="true"></i>`;
+                chip.addEventListener('click', () => chip.remove());
+                skillsTags.appendChild(chip);
+              } else {
+                const chip = document.createElement('span');
+                chip.className = 'skill-chip';
+                chip.dataset.skill = skill;
+                chip.textContent = skill;
+                skillsTags.appendChild(chip);
+              }
+            });
+          }
+        }
+
+        if (!isOwnProfile) {
+          const addBtn = document.getElementById('toggleSkillsExpand');
+          if (addBtn) addBtn.style.display = 'none';
+          const suggestionBox = document.querySelector('.skills-suggestion-box');
+          if (suggestionBox) suggestionBox.style.display = 'none';
+          
+          // hide save profile edits button
+          const saveBtn = document.getElementById('saveProfileEditsBtn');
+          if (saveBtn) saveBtn.style.display = 'none';
+          
+          // disable all inputs
+          document.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
+        } else if (sessionUser) {
+          // Update session storage to match DB
+          Object.assign(sessionUser, user);
+          sessionStorage.setItem('tajah_user', JSON.stringify(sessionUser));
+        }
+      } catch (e) {
+        console.error('Failed to load user profile:', e);
+      }
+    });
+  </script>
+</body>
+
+</html>

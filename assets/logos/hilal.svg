@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Al Hilal logo">
+  <rect width="120" height="120" rx="18" fill="#fff"/>
+  <path d="M42 18v84h13V69h10v33h13V18H65v33H55V18z" fill="#1558ff"/>
+  <path d="M83 39c10 7 15 17 15 30 0 16-8 28-22 35 6-10 8-20 8-34 0-13 0-22-1-31z" fill="#1558ff"/>
+  <text x="60" y="104" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#1558ff">ALHILAL</text>
+</svg>

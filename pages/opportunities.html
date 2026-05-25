@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>تجاه — الفرص</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link href="../css/op.css" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary': '#b670ff',
+            'tj-primary-hover': '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text': '#250140',
+            'tj-surface-base': '#fdfcfb',
+            'tj-surface-card': '#ffffff',
+            'tj-surface-muted': '#f7f5f2',
+            'tj-text': '#0f0f10',
+            'tj-text-secondary': '#5e5e59',
+            'tj-text-tertiary': '#8c8c85',
+            'tj-text-disabled': '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border': '#ece9e3',
+            'tj-border-active': '#8c8c85',
+            'tj-success': '#00a637',
+            'tj-success-bg': '#e3f5e1',
+            'tj-error': '#eb3333',
+            'tj-error-bg': '#fff0f0',
+            'tj-info': '#0094e3',
+            'tj-info-bg': '#e3f1ff',
+            'tj-accent-yellow': '#caa913',
+            'tj-accent-yellow-bg': '#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn': '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card': '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta': '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft': '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float': '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee': { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev': { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow': { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring': { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up': { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee': 'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow': 'float-slow 8s ease-in-out infinite',
+            'pulse-ring': 'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up': 'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @keyframes ping {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      75%,
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float-slow {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-8px) rotate(2deg);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.92) translateY(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+
+<body>
+  <header
+    class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center h-16">
+        <!-- القسم الأيمن: منطقة المستخدم -->
+        <div class="flex flex-1 items-center justify-start gap-2">
+          <!-- Profile Dropdown Trigger (desktop) -->
+          <div class="relative hidden lg:block">
+            <button
+              class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group"
+              id="profileBtn" type="button">
+              <div
+                class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">
+                م</div>
+              <div class="text-right">
+                <p
+                  class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">
+                  مرحباً، مرام!</p>
+              </div>
+              <svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron"
+                stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <!-- Dropdown Menu -->
+            <div
+              class="hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50"
+              id="dropdown">
+              <div class="px-4 py-3 border-b border-tj-border">
+                <p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+                <p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+              </div>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="stats.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                الملف الشخصي
+              </a>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="settings.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewbox="0 0 24 24">
+                  <path
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                الإعدادات
+              </a>
+              <div class="border-t border-tj-border mt-1 pt-1">
+                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group"
+                  href="../index.html">
+                  <svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewbox="0 0 24 24">
+                    <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  تسجيل الخروج
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Notification Bell -->
+          <button aria-label="الإشعارات"
+            class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group"
+            onclick="window.location.href='notifications.html'">
+            <span
+              class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+            <svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors"
+              fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <!-- Hamburger (mobile) -->
+          <button
+            class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors"
+            id="hamBtn" onclick="toggleDrawer()">
+            <svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+        <!-- القسم الأوسط: الروابط -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap"
+            href="PlayerHomepage.html">الرئيسية</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="../Communities/index.html">المجتمعات</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="Tajah-search.html">البحث</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="opportunities.html">الفرص</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="applications.html">طلباتي</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="contact.html">تواصل معنا</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="about.html">عن تاجة</a>
+        </nav>
+        <!-- القسم الأيسر: اللوجو -->
+        <div class="flex flex-1 items-center justify-end">
+          <a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+            <div class="w-9 h-9 flex items-center justify-center">
+              <svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+                    <stop offset="0%" stop-color="#f2de00"></stop>
+                    <stop offset="50%" stop-color="#cca6ff"></stop>
+                    <stop offset="100%" stop-color="#b670ff"></stop>
+                  </lineargradient>
+                </defs>
+                <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+                <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+                <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              </svg>
+            </div>
+            <span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <script>
+    // ── Header dropdown fix ──
+    (function () {
+      var btn = document.getElementById('profileBtn');
+      var dd = document.getElementById('dropdown');
+      var ch = document.getElementById('chevron');
+      if (btn && dd) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var isHidden = dd.classList.contains('hidden');
+          if (isHidden) {
+            dd.classList.remove('hidden');
+            dd.style.display = 'block';
+            dd.style.animation = 'dropIn 0.18s ease both';
+            if (ch) ch.style.transform = 'rotate(180deg)';
+          } else {
+            dd.classList.add('hidden');
+            dd.style.display = '';
+            if (ch) ch.style.transform = 'rotate(0deg)';
+          }
+        });
+        document.addEventListener('click', function (e) {
+          if (!btn.contains(e.target) && !dd.contains(e.target)) {
+            dd.classList.add('hidden');
+            dd.style.display = '';
+            if (ch) ch.style.transform = 'rotate(0deg)';
+          }
+        });
+      }
+      window.toggleDropdown = function () {
+        if (btn) btn.click();
+      };
+    })();
+  </script>
+  <!-- ═══════════ LIST PAGE ═══════════ -->
+  <div id="listPage">
+    <div id="listRoot"></div>
+  </div>
+  <!-- ═══════════ DETAIL PAGE ═══════════ -->
+  <div id="detailPage">
+    <div class="top-bar">
+      <div style="display:flex;align-items:center;gap:.6rem;">
+        <button aria-label="رجوع" class="icon-btn" onclick="goBack()">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+            viewbox="0 0 24 24">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="top-actions">
+        <button aria-label="مشاركة" class="icon-btn" onclick="handleShare()">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            viewbox="0 0 24 24">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+            <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+          </svg>
+        </button>
+        <button aria-label="حفظ" class="icon-btn" id="likeBtn" onclick="toggleLike()">
+          <svg fill="none" id="heartIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" viewbox="0 0 24 24">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+            </path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="detail-wrap">
+      <div class="d-title" id="d-maintitle">تفاصيل الفرصة</div>
+      <div class="hero-wrap"><img alt="صورة الفرصة" id="d-img" src="" /></div>
+      <div class="detail-body">
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <div class="sec-card">
+            <div class="club-row">
+              <div class="club-info">
+                <div class="club-name" id="d-clubname"></div>
+                <div class="club-desc" id="d-clubdesc"></div>
+              </div>
+              <div class="kashafa">
+                <svg fill="none" height="14" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="14">
+                  <circle cx="12" cy="8" r="4"></circle>
+                  <line x1="12" x2="12" y1="12" y2="19"></line>
+                  <line x1="9" x2="15" y1="16" y2="16"></line>
+                </svg>
+                فريق الكشافة
+              </div>
+            </div>
+            <div class="tags-row" id="d-tags"></div>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <div class="stat-lbl"><svg fill="none" height="13" stroke="currentColor" stroke-width="1.75"
+                    viewbox="0 0 24 24" width="13">
+                    <path d="M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
+                    <path d="M12 22s7-4.2 7-11a7 7 0 1 0-14 0c0 6.8 7 11 7 11Z" stroke-linejoin="round"></path>
+                  </svg>الموقع</div>
+                <div class="stat-val" id="d-loc"></div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-lbl"><svg fill="none" height="13" stroke="currentColor" stroke-width="1.75"
+                    viewbox="0 0 24 24" width="13">
+                    <path d="M16 11a3 3 0 1 0-3-3m-7 0a3 3 0 1 0 3-3M3 20a6 6 0 0 1 12 0" stroke-linecap="round"></path>
+                  </svg>المقدم</div>
+                <div class="stat-val" id="d-users"></div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-lbl"><svg fill="none" height="13" stroke="currentColor" stroke-width="1.75"
+                    viewbox="0 0 24 24" width="13">
+                    <rect height="16" rx="2" width="18" x="3" y="5"></rect>
+                    <path d="M3 9h18M8 3v3M16 3v3" stroke-linecap="round"></path>
+                  </svg>تاريخ النشر</div>
+                <div class="stat-val" id="d-created">—</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-lbl"><svg fill="none" height="13" stroke="currentColor" stroke-width="1.75"
+                    viewbox="0 0 24 24" width="13">
+                    <rect height="16" rx="2" width="18" x="3" y="5"></rect>
+                    <path d="M3 9h18M8 3v3M16 3v3" stroke-linecap="round"></path>
+                  </svg>مدة العقد</div>
+                <div class="stat-val" id="d-duration">—</div>
+              </div>
+            </div>
+            <div class="prog-wrap">
+              <div class="prog-lbl"><span>نسبة الامتلاء</span><span id="d-prog-pct"></span></div>
+              <div class="prog-bar">
+                <div class="prog-fill" id="d-prog-bar"></div>
+              </div>
+            </div>
+          </div>
+          <div class="sec-card">
+            <div class="sec-h">المتطلبات</div>
+            <ul class="req-list" id="d-req-list"></ul>
+          </div>
+          <div class="sec-card">
+            <div class="sec-h">معلومات التواصل</div>
+            <div class="contact-row">
+              <a class="contact-link" href="#" id="d-email">—</a>
+              <div class="r-ico"><svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"
+                  width="13">
+                  <rect height="16" rx="2" width="20" x="2" y="4"></rect>
+                  <path d="m2 7 10 7 10-7"></path>
+                </svg></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <div class="sec-card">
+            <div class="sec-h">وصف الفرصة</div>
+            <p class="desc-text" id="d-fulldesc"></p>
+          </div>
+          <div class="sec-card" id="d-benefits-card">
+            <div class="sec-h">المزايا والراتب</div>
+            <ul class="ben-list" id="d-ben-list"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="sim-section">
+        <div class="sim-title">فرص مطابقة</div>
+        <div class="sim-scroll" id="simScroll"></div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <button class="btn-primary" id="applyBtn" onclick="openPopup()">قدم الآن</button>
+      <button class="btn-secondary" onclick="openCompatibility()">أكتشف التوافق</button>
+    </div>
+    <!-- COMPATIBILITY POPUP -->
+    <div id="compatPopup" onclick="if(event.target===this)closeCompatibility()"
+      style="display:none;position:fixed;inset:0;z-index:60;background:rgba(15,10,30,.65);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+      <div
+        style="width:calc(100% - 2rem);max-width:490px;background:#fff;border-radius:2rem;padding:0;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.28);animation:popIn .28s cubic-bezier(0.34, 1.56, 0.64, 1);margin:auto;display:flex;flex-direction:column;max-height:calc(100vh - 2rem);border: 1px solid rgba(182, 112, 255, 0.22);">
+        <div
+          style="background:linear-gradient(135deg,#35214d 0%,#5b3d8a 50%,#b670ff 100%);padding:1.6rem 1.8rem 1.4rem;position:relative;flex-shrink:0;">
+          <button onclick="closeCompatibility()"
+            style="position:absolute;top:1rem;left:1rem;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.18);border:none;cursor:pointer;color:#fff;font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:10;"
+            onmouseover="this.style.background='rgba(255,255,255,.3)'"
+            onmouseout="this.style.background='rgba(255,255,255,.18)'">×</button>
+          <div style="text-align:center;">
+            <div id="compat-icon"
+              style="font-size:2.5rem;margin-bottom:.4rem;animation:float-slow 6s ease-in-out infinite;">🔍</div>
+            <div id="compat-title" style="color:#fff;font-weight:700;font-size:1.2rem;letter-spacing:-0.01em;">جارٍ
+              تحليل التوافق الرياضي...</div>
+            <div id="compat-subtitle"
+              style="color:rgba(255,255,255,.8);font-size:.82rem;margin-top:.3rem;line-height:1.4;">نقارن ملفك الرياضي
+              الحالي مع متطلبات النادي والمتقدمين للفرصة</div>
+          </div>
+        </div>
+        <div dir="rtl" style="padding:1.5rem;overflow-y:auto;flex:1;background:#fafaf7;">
+          <!-- Competitiveness Timeline Dashboard -->
+          <div dir="rtl" id="compat-applicants"
+            style="background:#ffffff;border-radius:1.5rem;border:1px solid rgba(182,112,255,.2);padding:1.1rem;margin-bottom:1.1rem;box-shadow:0 4px 20px rgba(99,42,156,0.04);display:none;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;">
+              <div style="font-size:.88rem;font-weight:700;color:#35214d;display:flex;align-items:center;gap:.35rem;">
+                <span style="font-size:1.1rem;">📊</span> مقياس القبول والمنافسة
+              </div>
+              <div id="rank-badge" style="font-size:.72rem;font-weight:700;padding:.25rem .75rem;border-radius:999px;">—
+              </div>
+            </div>
+
+            <!-- Visual Timeline -->
+            <div style="position:relative;height:44px;margin-bottom:.7rem;margin-top:.5rem;">
+              <div
+                style="position:absolute;top:50%;left:0;right:0;height:6px;background:#f0edf5;border-radius:999px;transform:translateY(-50%);">
+              </div>
+              <div id="rank-fill"
+                style="position:absolute;top:50%;left:0;height:6px;border-radius:999px;background:linear-gradient(90deg,#a055f5,#b670ff);transform:translateY(-50%);transition:width .8s cubic-bezier(0.22, 1, 0.36, 1);width:0%;">
+              </div>
+              <!-- Competitors Avatars Container -->
+              <div id="rank-dots" style="position:absolute;inset:0;pointer-events:none;"></div>
+
+              <!-- Glowing Marker for "You" -->
+              <div id="rank-abrar"
+                style="position:absolute;top:50%;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:#b670ff;border:3px solid #fff;box-shadow:0 0 12px rgba(182,112,255,.8);transition:left .8s cubic-bezier(0.22, 1, 0.36, 1);left:0%;display:flex;align-items:center;justify-content:center;z-index:5;">
+                <div
+                  style="width:7px;height:7px;border-radius:50%;background:#fff;animation:ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;position:absolute;inset:0;margin:auto;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Legend and Info -->
+            <div
+              style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px dashed #ece9e3;padding-bottom:.85rem;margin-bottom:.85rem;">
+              <div id="rank-sub" style="font-size:.72rem;color:#5e5e59;font-weight:500;">—</div>
+              <div style="display:flex;align-items:center;gap:.5rem;">
+                <div style="display:flex;align-items:center;gap:.25rem;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#d1d5db;border:1px solid #fff;"></div>
+                  <div style="font-size:.7rem;color:#8c8c85;">منافسات</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:.25rem;">
+                  <div
+                    style="width:10px;height:10px;border-radius:50%;background:#b670ff;border:1px solid #fff;box-shadow:0 0 4px rgba(182,112,255,.4);">
+                  </div>
+                  <div style="font-size:.7rem;color:#35214d;font-weight:700;">أنتِ</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats Matchup Dashboard -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;font-size:.72rem;text-align:center;">
+              <div style="background:#fafafa;padding:.4rem;border-radius:.6rem;">
+                <div style="color:#8c8c85;margin-bottom:.2rem;">متوسط المنافسات</div>
+                <div style="font-weight:700;color:#44403c;font-size:.85rem;" id="comp-avg-rating">75%</div>
+              </div>
+              <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
+                <div style="font-weight:700;color:#5b3d8a;">التقييم الفني</div>
+                <div style="color:#b670ff;font-size:.65rem;font-weight:600;margin-top:.1rem;">المهارة والجاهزية</div>
+              </div>
+              <div
+                style="background:#f6ebff;padding:.4rem;border-radius:.6rem;border:1.5px solid rgba(182,112,255,.15);">
+                <div style="color:#5b3d8a;margin-bottom:.2rem;font-weight:600;">تقييمكِ الحالي</div>
+                <div style="font-weight:800;color:#067647;font-size:.9rem;" id="player-rating">91%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Criteria list -->
+          <div id="compat-rows" style="display:flex;flex-direction:column;gap:.6rem;min-height:140px;"></div>
+
+          <!-- Compatibility outcome message card -->
+          <div id="compat-result"
+            style="display:none;margin-top:1.1rem;border-radius:1.5rem;padding:1.1rem;text-align:right;box-shadow:0 4px 15px rgba(0,0,0,0.03);animation:fade-up .4s both;">
+          </div>
+
+          <canvas id="confettiCanvas"
+            style="position:fixed;inset:0;pointer-events:none;z-index:70;display:none;"></canvas>
+
+          <!-- Actions -->
+          <div id="compat-actions" style="display:none;margin-top:1.25rem;gap:.75rem;flex-direction:row;">
+            <button id="compat-apply-btn" onclick="closeCompatibility();openPopup();"
+              style="flex:1;min-height:50px;border-radius:1rem;border:none;font-weight:700;font-size:.92rem;font-family:inherit;color:#fff;background:var(--primary);cursor:pointer;box-shadow:0 6px 20px rgba(182,112,255,.35);transition:background .2s, transform .1s;"
+              onmouseover="this.style.background='var(--primary-h)'" onmouseout="this.style.background='var(--primary)'"
+              onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform='scale(1)'">قدمي
+              الآن</button>
+            <button onclick="closeCompatibility()"
+              style="flex:1;min-height:50px;border-radius:1rem;border:2px solid #ece9e3;font-weight:700;font-size:.92rem;font-family:inherit;color:#5e5e59;background:#fff;cursor:pointer;transition:background .2s, border-color .2s;"
+              onmouseover="this.style.background='#f5f5f2';this.style.borderColor='#8c8c85';"
+              onmouseout="this.style.background='#fff';this.style.borderColor='#ece9e3';">الرجوع للفرصة</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- APPLY POPUP -->
+    <div class="pop-overlay" id="popup" onclick="if(event.target===this)closePopup()" style="display:none">
+      <div class="pop-sheet">
+        <div class="pop-icon"><svg fill="none" height="28" stroke="#067647" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="28">
+            <path d="M20 6L9 17l-5-5"></path>
+          </svg></div>
+        <div class="pop-title">جاهزة للتقديم؟ 🎯</div>
+        <div class="pop-body">قبل ما تكملي، تأكدي إنك تستوفين المتطلبات وجاهزة للمرحلة القادمة. التقديم سيُرسَل مباشرة
+          للنادي.</div>
+        <ul class="pop-steps">
+          <li class="pop-step"><span>مراجعة سيتم ارسل ملفك تلقائيا للنادي</span>
+            <div class="step-n"> </div>
+          </li>
+        </ul>
+        <button class="pop-btn" onclick="confirmApply()">تأكيد التقديم</button>
+        <span class="pop-close" onclick="closePopup()">إلغاء</span>
+      </div>
+    </div>
+    <!-- CANCEL POPUP -->
+    <div class="cancel-overlay" id="cancelPopup" onclick="if(event.target===this)closeCancelPopup()"
+      style="display:none">
+      <div class="cancel-sheet">
+        <div class="cancel-icon"><svg fill="none" height="26" stroke="#ef4444" stroke-linecap="round" stroke-width="2.2"
+            viewbox="0 0 24 24" width="26">
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg></div>
+        <div class="cancel-title">إلغاء التقديم</div>
+        <div class="cancel-body">هل أنتِ متأكدة من إلغاء تقديمك على هذه الفرصة؟ لن يتم إعلام النادي.</div>
+        <div class="cancel-actions">
+          <button class="btn-cancel-confirm" onclick="doCancelApply()">نعم، إلغاء التقديم</button>
+          <button class="btn-cancel-back" onclick="closeCancelPopup()">الرجوع</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- /detailPage -->
+  <script crossorigin="" src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin="" src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const { useState, useMemo, useEffect } = React
+
+    // ══════════════════════════════════════════════════
+    // ✦ البيانات — يتم جلبها من الخادم
+    // ══════════════════════════════════════════════════
+    const HERO_IMGS = [
+      'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=900&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1521412644181-c49fa5e7d567?w=900&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1576678927134-899ea544faca?w=900&h=400&fit=crop',
+    ]
+    const CARD_IMGS = [
+      'https://images.unsplash.com/photo-1521412644181-c49fa5e7d567?w=120&h=120&fit=crop',
+      'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=120&h=120&fit=crop',
+      'https://images.unsplash.com/photo-1576678927134-899ea544faca?w=120&h=120&fit=crop',
+    ]
+
+    function getSinceText(id) {
+      let h = 0; const s = String(id)
+      for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) & 0xffff
+      const days = 1 + (h % 29)
+      if (days === 1) return 'منذ يوم'
+      if (days === 2) return 'منذ يومين'
+      if (days <= 10) return `منذ ${days} أيام`
+      return `منذ ${days} يومًا`
+    }
+
+    // Static filter option lists
+    const OPP_TYPE_OPTIONS = ['تجارب أداء', 'معسكرات', 'بطولات رسمية', 'تصفيات']
+    const CLUB_TYPE_OPTIONS = ['رياضي', 'كشفي', 'اجتماعي', 'ثقافي', 'تطوعي']
+    const DATE_RANGE_OPTIONS = ['هذا الأسبوع', 'هذا الشهر', 'الأشهر الثلاثة القادمة', 'هذا العام']
+
+    const ALL_SPORTS = [
+      'كرة قدم', 'كرة سلة', 'سباحة', 'ألعاب قوى', 'تنس', 'الريشة الطائرة', 'كرة طائرة', 'كرة اليد',
+      'كرة قدم صالات', 'غطس', 'كرة ماء', 'تنس طاولة', 'إسكواش', 'جري', 'رمي', 'قفز', 'جمباز',
+      'كاراتيه', 'جودو', 'تايكواندو', 'مصارعة', 'ملاكمة', 'فنون قتالية مختلطة', 'فروسية',
+      'ركوب الدراجات', 'سباقات', 'تجديف', 'كانو', 'رفع أثقال', 'كروس فيت', 'بادل', 'غولف',
+      'بولينج', 'رماية', 'شطرنج'
+    ];
+
+    const SAUDI_REGIONS = {
+      'المنطقة الوسطى (الرياض)': ['الرياض', 'الخرج', 'الدرعية', 'المجمعة', 'الدوادمي', 'وادي الدواسر'],
+      'المنطقة الغربية (الحجاز)': ['جدة', 'مكة المكرمة', 'المدينة المنورة', 'الطائف', 'ينبع', 'رابغ'],
+      'المنطقة الشرقية': ['الدمام', 'الخبر', 'الظهران', 'الجبيل', 'الأحساء', 'القطيف', 'حفر الباطن'],
+      'المنطقة الجنوبية': ['أبها', 'خميس مشيط', 'بيشة', 'نجران', 'جيزان', 'الباحة'],
+      'المنطقة الشمالية': ['تبوك', 'حائل', 'عرعر', 'سكاكا', 'القريات']
+    };
+
+    // Transform DB rows into card objects
+    function transformOpp(row, idx) {
+      // Deterministically assign opportunityType & clubType from static lists when not in DB
+      const oppTypes = OPP_TYPE_OPTIONS
+      const clubTypes = CLUB_TYPE_OPTIONS
+      return {
+        id: 'db-' + row.id,
+        dbId: row.id,
+        cardType: 'opportunity',
+        title: row.title,
+        description: row.description || '',
+        image: CARD_IMGS[idx % 3],
+        heroImg: HERO_IMGS[idx % 3],
+        sport: row.sport || '',
+        city: row.city || '',
+        organizer: row.club_name || 'غير محدد',
+        clubInitial: row.club_initial || '',
+        position: row.position || '',
+        salary: row.salary || '',
+        duration: row.duration || '',
+        benefits: row.benefits || '',
+        status: row.status || 'open',
+        appliedCount: row.applied_count || 0,
+        capacity: 20 + (idx * 7) % 40,
+        progress: Math.min(1, (row.applied_count || 0) / (20 + (idx * 7) % 40)),
+        distanceKm: +(1.1 + (idx % 12) / 2).toFixed(1),
+        createdAt: row.created_at,
+        opportunityType: row.opportunity_type || oppTypes[idx % oppTypes.length],
+        clubType: row.club_type || clubTypes[idx % clubTypes.length],
+      }
+    }
+
+    const initialFilters = { sports: [], cities: [], opportunityTypes: [], clubTypes: [], dateRange: '' }
+
+    // ══════════════════════════════════════════════════
+    // ✦ مكونات UI (كروت الفرص من السيرش)
+    // ══════════════════════════════════════════════════
+
+    function ClockIcon() {
+      return <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" aria-hidden><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+    }
+
+    function OppTypeIcon({ type, size = 11 }) {
+      const s = { width: size, height: size, flexShrink: 0 }
+      switch (type) {
+        case 'تجارب أداء': return <svg style={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+        case 'معسكرات': return <svg style={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M3.5 21L12 4l8.5 17H3.5z" /><path d="M12 4v17" /></svg>
+        case 'بطولات رسمية': return <svg style={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M6 2h12v6a6 6 0 0 1-12 0V2z" /><path d="M6 4H4a2 2 0 0 0 0 4h2" /><path d="M18 4h2a2 2 0 0 1 0 4h-2" /><path d="M12 14v4" /><path d="M8 22h8" /></svg>
+        case 'تصفيات': return <svg style={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M13 2L4.09 12.26A1 1 0 0 0 5 14h7l-1 8 8.91-10.26A1 1 0 0 0 19 10h-7l1-8z" /></svg>
+        default: return null
+      }
+    }
+
+    function StatIcon({ name }) {
+      const cls = 'h-4 w-4 shrink-0 text-[#5E5E59]'
+      switch (name) {
+        case 'org': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className={cls} aria-hidden><path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M9 21v-4a3 3 0 0 1 6 0v4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        case 'pin': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className={cls} aria-hidden><path d="M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" /><path d="M12 22s7-4.2 7-11a7 7 0 1 0-14 0c0 6.8 7 11 7 11Z" strokeLinejoin="round" /></svg>
+        default: return null
+      }
+    }
+
+    function BookmarkIcon({ saved }) {
+      return (
+        <svg viewBox="0 0 24 24" className="h-6 w-6" fill={saved ? '#b670ff' : 'none'} stroke={saved ? '#b670ff' : '#1F2A37'} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M5 3h14a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z" />
+        </svg>
+      )
+    }
+
+    // ── كارد الفرص (نفس شكل السيرش) ──
+    function OpportunityCard({ item, favorite, onToggleFav, onDetail }) {
+      const p = item.progress ?? 0
+      const pct = Math.round(p * 100)
+      const sinceText = getSinceText(item.id)
+      return (
+        <article className="rounded-2xl min-w-[320px] min-h-[200px] bg-white p-5 pt-4 shadow-sm ring-1 ring-zinc-100/80 transition duration-200 ease-out hover:-translate-y-1 hover:shadow-lg flex flex-col">
+          {/* Header */}
+          <div className="flex items-start gap-3 mb-3">
+            <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full ring-1 ring-zinc-200">
+              <img src={item.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div className="flex-1 min-w-0 pt-1">
+              <h2 className="font-bold text-[#1F2A37] text-base leading-snug text-right">{item.title}</h2>
+            </div>
+            <div className="shrink-0 pt-1">
+              <span className="tajah-time-badge"><ClockIcon />{sinceText}</span>
+            </div>
+          </div>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {item.opportunityType && (
+              <span className="tajah-opp-type-tag"><OppTypeIcon type={item.opportunityType} />{item.opportunityType}</span>
+            )}
+            {item.sport && (
+              <span className="tajah-sport-tag">{item.sport}</span>
+            )}
+          </div>
+          {/* Description */}
+          <p className="text-sm text-[#5E5E59] mb-4 line-clamp-2 leading-relaxed text-right" style={{ minHeight: '2.8em' }}>{item.description}</p>
+
+          {/* Match Rate Stars */}
+
+          {/* Stats */}
+          <div className="flex flex-col gap-2 mb-4 text-sm text-[#5E5E59]">
+            {item.organizer && (
+              <div className="flex items-center gap-2"><StatIcon name="org" /><span>{item.organizer}</span></div>
+            )}
+            <div className="flex items-center gap-2"><StatIcon name="pin" /><span>{item.city} · {item.distanceKm} كم</span></div>
+          </div>
+          {/* Progress */}
+          <div className="mb-4">
+            <div className="mb-1.5 flex items-center justify-between gap-2">
+              <span style={{ fontSize: '.72rem', fontWeight: 700, color: '#067647' }}>{pct}%</span>
+              <span style={{ fontSize: '.72rem', color: '#5e5e59' }}>نسبة الامتلاء</span>
+            </div>
+            <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-200">
+              <div className="h-full rounded-full bg-[#067647] transition-all" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+          <div className="flex-grow"></div>
+          {/* Actions */}
+          <div className="flex items-center gap-2 mt-auto pt-1">
+            <button type="button" className="btn-secondary flex-1" onClick={() => onDetail(item)}>عرض التفاصيل</button>
+            <button type="button" className="btn-primary flex-1" onClick={() => { window._quickApplyItem = item; window._openQuickApply && window._openQuickApply() }}>قدم الآن</button>
+            <button type="button" onClick={onToggleFav} className="w-11 h-11 flex items-center justify-center rounded-xl text-[#1F2A37] hover:bg-gray-100 transition-colors shrink-0" aria-label="حفظ" aria-pressed={favorite}>
+              <BookmarkIcon saved={favorite} />
+            </button>
+          </div>
+        </article>
+      )
+    }
+
+    function Chip({ on, onClick, label }) {
+      return <button type="button" onClick={onClick} className={`min-h-10 rounded-xl px-2 text-xs transition-all font-[inherit] ${on ? 'chip-on' : 'chip-off'}`}>{label}</button>
+    }
+
+    function FilterGroup({ title, icon, children }) {
+      return (
+        <section className="filter-card p-3.5">
+          <h3 className="mb-2.5 flex items-center gap-2 text-sm font-bold" style={{ color: '#35214d' }}>
+            <span className="shrink-0 text-[#5b3d8a]">{icon}</span>{title}
+          </h3>
+          {children}
+        </section>
+      )
+    }
+
+    function SearchableDropdown({ label, values, options, onToggle, isGrouped }) {
+      const [isOpen, setIsOpen] = useState(false)
+      const [search, setSearch] = useState('')
+
+      // Flatten options for filtering if grouped
+      const allOptions = useMemo(() => {
+        if (!options) return []
+        if (Array.isArray(options)) return options
+        // If object, flatten values
+        return Object.values(options).flat()
+      }, [options])
+
+      const handleToggle = (val) => {
+        onToggle(val)
+      }
+
+      return (
+        <div className="relative" style={{ zIndex: isOpen ? 50 : 1 }}>
+          <button type="button" onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-sm text-[#1F2A37] shadow-sm">
+            <span>{values.length ? `تم تحديد (${values.length})` : label}</span>
+            <svg className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          {isOpen && (
+            <div className="absolute z-50 mt-1 w-full rounded-xl border border-zinc-200 bg-white shadow-lg overflow-hidden">
+              <div className="p-2 border-b border-zinc-100">
+                <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="بحث..." className="w-full rounded-lg bg-zinc-50 px-3 py-1.5 text-sm outline-none focus:ring-1 focus:ring-[#b670ff]" />
+              </div>
+              <div className="max-h-60 overflow-y-auto p-1 text-right">
+                {isGrouped && !search ? (
+                  Object.keys(options).map(region => {
+                    const regionOn = values.includes(region)
+                    const cities = options[region]
+                    return (
+                      <div key={region} className="mb-2">
+                        {/* Region Header as Selectable Option */}
+                        <div className="flex items-center justify-between bg-zinc-50/80 px-2 py-1.5 rounded-lg mb-1">
+                          <button type="button" onClick={() => handleToggle(region)} className="flex items-center gap-2 text-xs font-bold text-[#5b3d8a] hover:text-[#b670ff] w-full text-right">
+                            <div className={`h-4 w-4 rounded flex items-center justify-center border shrink-0 ${regionOn ? 'bg-[#b670ff] border-[#b670ff]' : 'border-zinc-300 bg-white'}`}>
+                              {regionOn && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M20 6L9 17l-5-5" /></svg>}
+                            </div>
+                            <span>{region}</span>
+                          </button>
+                        </div>
+                        {/* Cities in Region */}
+                        <div className="pr-3 flex flex-col gap-0.5">
+                          {cities.map(city => {
+                            const on = values.includes(city)
+                            return (
+                              <button key={city} type="button" onClick={() => handleToggle(city)} className="w-full flex items-center gap-2 rounded-lg px-2 py-1 text-xs text-right hover:bg-zinc-50">
+                                <div className={`h-3.5 w-3.5 rounded flex items-center justify-center border shrink-0 ${on ? 'bg-[#b670ff] border-[#b670ff]' : 'border-zinc-300 bg-white'}`}>
+                                  {on && <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M20 6L9 17l-5-5" /></svg>}
+                                </div>
+                                <span className={on ? 'text-[#35214d] font-semibold' : 'text-[#5E5E59]'}>{city}</span>
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })
+                ) : (
+                  // Search fallback or non-grouped array
+                  allOptions.filter(o => o.includes(search)).map(o => {
+                    const on = values.includes(o)
+                    return (
+                      <button key={o} type="button" onClick={() => handleToggle(o)} className="w-full flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-right hover:bg-zinc-50">
+                        <div className={`h-4 w-4 rounded flex items-center justify-center border shrink-0 ${on ? 'bg-[#b670ff] border-[#b670ff]' : 'border-zinc-300'}`}>
+                          {on && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M20 6L9 17l-5-5" /></svg>}
+                        </div>
+                        <span className={on ? 'text-[#35214d] font-semibold' : 'text-[#5E5E59]'}>{o}</span>
+                      </button>
+                    )
+                  })
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    const IcoOpp = () => <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path d="M12 3v5" strokeLinecap="round" /><circle cx="12" cy="12" r="4" /><path d="M9 15v5l3-2 3 2v-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+    const IcoSport = () => <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><circle cx="12" cy="12" r="8" /><path d="M12 5v14M5 12h14" strokeLinecap="round" /></svg>
+    const IcoLoc = () => <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path d="M12 21s6-4.1 6-10a6 6 0 1 0-12 0c0 5.9 6 10 6 10Z" strokeLinejoin="round" /><circle cx="12" cy="11" r="2" /></svg>
+    const IcoClub = () => <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><path d="M12 3 5 6v5c0 5 3.4 8.5 7 10 3.6-1.5 7-5 7-10V6l-7-3Z" strokeLinejoin="round" /></svg>
+    const IcoDate = () => <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 9h18M8 3v4M16 3v4" strokeLinecap="round" /></svg>
+
+    // Quick Apply Popup
+    function QuickApplyPopup({ item, onClose }) {
+      function confirm() {
+        onClose()
+        window.goToDetail(item)
+        setTimeout(() => window.confirmApply(), 60)
+      }
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ background: 'rgba(0,0,0,.5)', animation: 'fadeIn .18s ease' }} onClick={e => { if (e.target === e.currentTarget) onClose() }}>
+          <div className="bg-white rounded-2xl p-7 w-full max-w-md shadow-2xl" style={{ animation: 'popIn .22s ease' }}>
+            <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3" style={{ background: '#f0fdf4', border: '2px solid #bbf7d0' }}>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#067647" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+            </div>
+            <div className="text-center font-bold text-lg text-[#1f2a37] mb-1">جاهزة للتقديم؟ 🎯</div>
+            <div className="text-center text-sm text-[#5e5e59] leading-7 mb-4">تقدمين على فرصة <span className="font-bold text-[#1f2a37]">{item.title}</span>. التقديم سيُرسَل مباشرة للنادي.</div>
+            <ul className="list-none flex flex-col gap-2 mb-5" dir="rtl">
+              {[[' ', 'سيتم ارسل ملفك تلقائيا للنادي']].map(([n, t]) => (
+                <li key={n} className="flex items-center gap-2.5 text-sm text-[#1f2a37]">
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0" style={{ background: 'var(--primary)' }}>{n}</div>
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+            <button onClick={confirm} className="w-full min-h-12 rounded-2xl text-white font-bold text-base mb-2" style={{ background: 'var(--primary)', border: 'none', cursor: 'pointer', boxShadow: '0 4px 16px rgba(182,112,255,.35)' }}>تأكيد التقديم</button>
+            <button onClick={onClose} className="w-full min-h-10 text-sm text-[#5e5e59] bg-transparent border-none cursor-pointer font-[inherit]">إلغاء</button>
+          </div>
+        </div>
+      )
+    }
+
+    // Main App
+    function App() {
+      const [drawer, setDrawer] = useState(false)
+      const [applied, setApplied] = useState({ ...initialFilters })
+      const [draft, setDraft] = useState({ ...initialFilters })
+      const [favs, setFavs] = useState(() => new Set())
+      const [filtered, setFiltered] = useState(false)
+      const [searchQuery, setSearchQuery] = useState('')
+      const [quickApplyItem, setQuickApplyItem] = useState(null)
+      const [aiMessageVisible, setAiMessageVisible] = useState(true)
+      const [allCards, setAllCards] = useState([])
+      const [loading, setLoading] = useState(true)
+
+      // Fetch opportunities from API on mount
+      useEffect(() => {
+        fetch('/api/opportunities')
+          .then(r => r.json())
+          .then(rows => {
+            const cards = rows.map((r, i) => transformOpp(r, i))
+            setAllCards(cards)
+            window.__allCards = cards
+            setLoading(false)
+          })
+          .catch(() => setLoading(false))
+      }, [])
+
+      useEffect(() => { if (drawer) setDraft({ ...applied }) }, [drawer])
+      useEffect(() => {
+        window._openQuickApply = () => {
+          if (window._quickApplyItem) setQuickApplyItem(window._quickApplyItem)
+        }
+      }, [])
+
+      // Derive filter options from data
+      const sportOptions = useMemo(() => [...new Set(allCards.map(c => c.sport).filter(Boolean))], [allCards])
+      const cityOptions = useMemo(() => [...new Set(allCards.map(c => c.city).filter(Boolean))], [allCards])
+
+      const allSportOptions = useMemo(() => {
+        const base = [...ALL_SPORTS]
+        sportOptions.forEach(s => {
+          if (!base.includes(s)) base.push(s)
+        })
+        return base
+      }, [sportOptions])
+
+      const allCityOptions = useMemo(() => {
+        const grouped = { ...SAUDI_REGIONS }
+        const knownCities = Object.values(SAUDI_REGIONS).flat()
+        const otherCities = cityOptions.filter(c => !knownCities.includes(c))
+        if (otherCities.length > 0) {
+          grouped['مدن أخرى'] = otherCities
+        }
+        return grouped
+      }, [cityOptions])
+
+      // Helper: check if a createdAt string falls within a named range
+      function inDateRange(createdAt, range) {
+        if (!range || !createdAt) return true
+        const now = new Date()
+        const date = new Date(createdAt)
+        const diff = (now - date) / (1000 * 60 * 60 * 24) // days ago
+        if (range === 'هذا الأسبوع') return diff <= 7
+        if (range === 'هذا الشهر') return diff <= 30
+        if (range === 'الأشهر الثلاثة القادمة') return diff <= 90
+        if (range === 'هذا العام') return date.getFullYear() === now.getFullYear()
+        return true
+      }
+
+      const list = useMemo(() => allCards.filter(item => {
+        if (applied.sports.length && !applied.sports.includes(item.sport)) return false
+        if (applied.cities.length) {
+          const hasMatch = applied.cities.some(cityOrRegion => {
+            if (SAUDI_REGIONS[cityOrRegion]) {
+              return SAUDI_REGIONS[cityOrRegion].includes(item.city)
+            }
+            return item.city === cityOrRegion
+          })
+          if (!hasMatch) return false
+        }
+        if (applied.opportunityTypes.length && !applied.opportunityTypes.includes(item.opportunityType)) return false
+        if (applied.clubTypes.length && !applied.clubTypes.includes(item.clubType)) return false
+        if (applied.dateRange && !inDateRange(item.createdAt, applied.dateRange)) return false
+        if (searchQuery.trim()) {
+          const q = searchQuery.trim().toLowerCase()
+          const haystack = [item.title, item.description, item.sport, item.city, item.organizer, item.opportunityType, item.clubType].join(' ').toLowerCase()
+          if (haystack.indexOf(q) === -1) return false
+        }
+        return true
+      }), [applied, searchQuery, allCards])
+
+      function tog(key, val) {
+        setDraft(p => {
+          const a = [...p[key]], i = a.indexOf(val)
+          i === -1 ? a.push(val) : a.splice(i, 1)
+          return { ...p, [key]: a }
+        })
+      }
+      // Single-select toggle for dateRange
+      function togDate(val) {
+        setDraft(p => ({ ...p, dateRange: p.dateRange === val ? '' : val }))
+      }
+      function applyFilters() { setApplied({ ...draft }); setFiltered(true); setDrawer(false) }
+      function clearAll() { const e = { ...initialFilters }; setDraft(e); setApplied(e); setFiltered(false) }
+      function togFav(id) { setFavs(p => { const s = new Set(p); s.has(id) ? s.delete(id) : s.add(id); return s }) }
+
+      const showBanner = filtered && list.length > 0
+
+      if (loading) {
+        return (
+          <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FCFCF6' }}>
+            <div className="text-center">
+              <div className="w-12 h-12 border-4 border-[#b670ff] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="text-[#5e5e59] font-medium">جاري تحميل الفرص...</p>
+            </div>
+          </div>
+        )
+      }
+
+      return (
+        <div className="min-h-screen" style={{ backgroundColor: '#FCFCF6', color: '#1F2A37' }}>
+          {quickApplyItem && <QuickApplyPopup item={quickApplyItem} onClose={() => setQuickApplyItem(null)} />}
+
+          <div className="list-wrap text-right" dir="rtl" lang="ar">
+
+            <header className="mb-8 flex items-center justify-between gap-4">
+              <div className="text-right">
+                <h1 className="mt-1 text-3xl font-bold tracking-tight text-[#1F2A37] lg:text-4xl">الفرص</h1>
+              </div>
+            </header>
+
+            <div className="mb-6 flex flex-col md:flex-row items-center gap-3">
+              <div className="relative min-w-0 flex-1 w-full">
+                <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#5E5E59]">
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.2-3.2" strokeLinecap="round" /></svg>
+                </div>
+                <input
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  className="h-14 w-full rounded-2xl border border-zinc-200 bg-white pr-12 pl-4 text-right text-base text-[#1F2A37] shadow-sm placeholder:text-zinc-400 focus:border-[#B670FF] focus:outline-none focus:ring-2 focus:ring-[#B670FF]/30"
+                  placeholder="ابحثي عن فرص، رياضات، أندية..."
+                />
+              </div>
+              <button type="button" onClick={() => setDrawer(true)} className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-[#1F2A37] shadow-sm transition hover:bg-zinc-50" aria-label="تخصيص وفرز">
+                <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden><path d="M4 4h16l-6.4 7.2V20l-3.2-2.4V11.2L4 4Z" strokeLinejoin="round" /></svg>
+              </button>
+            </div>
+
+            {aiMessageVisible && (
+              <div className="mb-6 rounded-2xl border border-[#e9d5ff] bg-[#faf5ff] p-4 shadow-sm relative overflow-hidden">
+                <button type="button" onClick={() => setAiMessageVisible(false)} className="absolute top-3 left-3 text-[#b670ff] hover:text-[#a312ff] transition-colors z-20" aria-label="إغلاق">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+                </button>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-[#b670ff] opacity-5 rounded-bl-full pointer-events-none"></div>
+                <div className="flex items-start gap-3 relative z-10" dir="rtl">
+                  <span className="shrink-0 mt-0.5 text-[#b670ff]">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                  </span>
+                  <div className="flex-1">
+                    <p className="text-sm font-bold text-[#35214d] mb-1">الذكاء الاصطناعي من تاجة ✨</p>
+                    <p className="text-sm leading-relaxed text-[#5b3d8a]">يتم ترتيب الفرص وفقاً لموقعكِ الحالي ومهاراتك، لضمان عرض أفضل الفرص المناسبة لكِ في أعلى القائمة.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {showBanner && (
+              <div className="mb-6 flex items-start justify-end gap-3 rounded-2xl border-2 p-4 text-right text-base font-semibold"
+                style={{ borderColor: '#067647', color: '#067647', backgroundColor: '#ecfdf5' }} role="status">
+                <span className="pt-0.5"><svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
+                <div className="min-w-0 flex-1 text-right">
+                  <p className="leading-7">تم العثور على <strong>{list.length}</strong> {list.length === 1 ? 'نتيجة' : 'نتائج'} مطابقة</p>
+                </div>
+              </div>
+            )}
+
+            {list.length === 0 && !loading && (
+              <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+                <svg width="160" height="140" viewBox="0 0 160 140" fill="none" aria-hidden>
+                  <circle cx="80" cy="80" r="55" fill="#A7A7A3" fillOpacity=".08" />
+                  <circle cx="70" cy="65" r="28" stroke="#A7A7A3" strokeWidth="5" fill="white" />
+                  <line x1="60" y1="58" x2="80" y2="58" stroke="#A7A7A3" strokeWidth="3" strokeLinecap="round" strokeOpacity=".5" />
+                  <line x1="60" y1="65" x2="80" y2="65" stroke="#A7A7A3" strokeWidth="3" strokeLinecap="round" strokeOpacity=".5" />
+                  <line x1="60" y1="72" x2="72" y2="72" stroke="#A7A7A3" strokeWidth="3" strokeLinecap="round" strokeOpacity=".5" />
+                  <path d="M92 88 L112 108" stroke="#A7A7A3" strokeWidth="6" strokeLinecap="round" />
+                </svg>
+                <h3 className="mb-2 text-xl font-bold text-[#1f2a37]">لا توجد فرص مطابقة</h3>
+                <p className="max-w-sm text-sm leading-7 text-[#5e5e59]">جربي تقليل خيارات التصفية للحصول على نتائج أكثر.</p>
+              </div>
+            )}
+
+            {list.length > 0 && (
+              <ul className="results-grid list-none p-0">
+                {list.map(item => (
+                  <li key={item.id} className="m-0">
+                    <OpportunityCard
+                      item={item}
+                      favorite={favs.has(item.id)}
+                      onToggleFav={() => togFav(item.id)}
+                      onDetail={(item) => window.goToDetail(item)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Filter Drawer */}
+          {drawer && (
+            <div className="fixed inset-0 z-40" role="dialog" aria-modal="true">
+              <button type="button" className="absolute inset-0 z-0 bg-black/40 backdrop-blur-[3px]" onClick={() => setDrawer(false)} aria-label="إغلاق" />
+              <aside className="drawer-panel">
+                <div className="drawer-header flex shrink-0 items-center justify-between px-5 py-4">
+                  <h2 className="text-lg font-bold text-[#35214d]">التخصيص</h2>
+                  <button type="button" onClick={() => setDrawer(false)} className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#5b3d8a] transition hover:bg-white/60">
+                    <span className="text-2xl leading-none">×</span>
+                  </button>
+                </div>
+                <div className="min-h-0 flex-1 space-y-4 overflow-y-auto p-4 pb-6">
+
+                  {/* ── نوع الفرصة ── */}
+                  <FilterGroup title="نوع الفرصة" icon={<IcoOpp />}>
+                    <SearchableDropdown label="اختاري نوع الفرصة" values={draft.opportunityTypes} options={OPP_TYPE_OPTIONS} onToggle={v => tog('opportunityTypes', v)} />
+                  </FilterGroup>
+
+                  {/* ── نوع الرياضة ── */}
+                  <FilterGroup title="نوع الرياضة" icon={<IcoSport />}>
+                    <SearchableDropdown label="اختاري الرياضة" values={draft.sports} options={allSportOptions} onToggle={v => tog('sports', v)} />
+                  </FilterGroup>
+
+                  {/* ── نوع النادي ── */}
+                  <FilterGroup title="نوع النادي" icon={<IcoClub />}>
+                    <SearchableDropdown label="اختاري نوع النادي" values={draft.clubTypes} options={CLUB_TYPE_OPTIONS} onToggle={v => tog('clubTypes', v)} />
+                  </FilterGroup>
+
+                  {/* ── الموقع ── */}
+                  <FilterGroup title="الموقع" icon={<IcoLoc />}>
+                    <SearchableDropdown label="اختاري المدينة" values={draft.cities} options={allCityOptions} onToggle={v => tog('cities', v)} isGrouped={true} />
+                  </FilterGroup>
+
+                  {/* ── التاريخ ── */}
+                  <FilterGroup title="التاريخ" icon={<IcoDate />}>
+                    <SearchableDropdown label="اختاري الفترة الزمنية" values={draft.dateRange ? [draft.dateRange] : []} options={DATE_RANGE_OPTIONS} onToggle={v => togDate(v)} />
+                  </FilterGroup>
+
+                </div>
+                <div className="drawer-footer shrink-0">
+                  <button type="button" className="btn-apply" onClick={applyFilters}>تطبيق الفلترة</button>
+                  <button type="button" className="btn-clear" onClick={clearAll}>حذف الفلترة</button>
+                </div>
+              </aside>
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    ReactDOM.createRoot(document.getElementById('listRoot')).render(<App />)
+  </script>
+  <script>
+    // ══════════════════════════════════════════════════
+    // ✦ Detail Page Logic
+    // ══════════════════════════════════════════════════
+
+    window._liked = false
+    window._applied = false
+    window._appliedSet = new Set()
+    window._currentDetailItem = null
+
+    window.goToDetail = function (item) {
+      window._currentDetailItem = item
+
+      document.getElementById('d-img').src = item.heroImg || item.image
+      document.getElementById('d-maintitle').textContent = item.title
+      document.getElementById('d-clubname').textContent = item.organizer || item.title
+      document.getElementById('d-clubdesc').textContent = item.description
+      document.getElementById('d-loc').textContent = item.city + ' · يبعد ' + item.distanceKm + ' كم'
+      document.getElementById('d-users').textContent = item.organizer || 'غير محدد'
+
+      const pct = Math.round((item.progress || 0) * 100) + '%'
+      document.getElementById('d-prog-pct').textContent = pct
+      document.getElementById('d-prog-bar').style.width = pct
+
+      document.getElementById('d-fulldesc').textContent =
+        'نحن نبحث عن مواهب متميزة في ' + item.sport + '. ' +
+        item.description + ' هذه فرصة استثنائية للانضمام إلى فريق تنافسي وإبراز قدراتك والحصول على تقييم مفصّل من الكادر الفني المتخصص.'
+
+      const email = 'info@' + (item.organizer || 'tajah').replace(/\s/g, '').toLowerCase() + '.com'
+      const el = document.getElementById('d-email')
+      el.textContent = email; el.href = 'mailto:' + email
+
+      document.getElementById('d-tags').innerHTML = [item.sport, item.position, item.city].filter(Boolean).map(t =>
+        `<span class="tag-pill-detail">${t}</span>`
+      ).join('')
+
+      // Populate Publish Date and Contract Duration
+      document.getElementById('d-created').textContent = getSinceText(item.id);
+      document.getElementById('d-duration').textContent = item.duration || 'موسم كامل';
+
+      // Populate dynamic requirements
+      const reqList = document.getElementById('d-req-list');
+      if (reqList) {
+        reqList.innerHTML = `
+          <li class="req-item">
+            <span><strong>التخصص الرياضي:</strong> موهبة متميزة في ${item.sport || 'الرياضة المطلوبة'}</span>
+            <div class="r-ico">🏆</div>
+          </li>
+          <li class="req-item">
+            <span><strong>مكان الإقامة:</strong> السكن في ${item.city || 'المدينة المطلوبة'} أو إمكانية الانتقال</span>
+            <div class="r-ico">📍</div>
+          </li>
+          <li class="req-item">
+            <span><strong>الفئة العمرية:</strong> الفئة العمرية المناسبة (18-25 سنة)</span>
+            <div class="r-ico">🎂</div>
+          </li>
+          <li class="req-item">
+            <span><strong>اللياقة البدنية:</strong> مستوى لياقة بدنية عالي</span>
+            <div class="r-ico">⚡</div>
+          </li>
+          <li class="req-item">
+            <span><strong>تقرير صحي معتمد:</strong> خلو تام من الإصابات المزمنة</span>
+            <div class="r-ico">📋</div>
+          </li>
+        `;
+      }
+
+      // Populate dynamic benefits and salary
+      const benList = document.getElementById('d-ben-list');
+      if (benList) {
+        let benefitsHtml = '';
+        if (item.salary) {
+          benefitsHtml += `
+            <li class="ben-item">
+              <span><strong>الراتب والمكافآت:</strong> ${item.salary}</span>
+              <div class="b-star">★</div>
+            </li>
+          `;
+        }
+        if (item.benefits) {
+          const benefitsArray = item.benefits.split(/[،,]/).map(b => b.trim()).filter(Boolean);
+          benefitsArray.forEach(b => {
+            benefitsHtml += `
+              <li class="ben-item">
+                <span>${b}</span>
+                <div class="b-star">★</div>
+              </li>
+            `;
+          });
+        }
+        if (!benefitsHtml) {
+          benefitsHtml = `
+            <li class="ben-item">
+              <span>تأمين طبي رياضي شامل</span>
+              <div class="b-star">★</div>
+            </li>
+            <li class="ben-item">
+              <span>توفير سكن ومواصلات مؤمنة</span>
+              <div class="b-star">★</div>
+            </li>
+          `;
+        }
+        benList.innerHTML = benefitsHtml;
+      }
+
+      // Similar cards (same sport, same opportunity type)
+      // Rebuild from same data using window.__allCards
+      const allCards = window.__allCards || []
+      const sim = allCards.filter(x => x.sport === item.sport && x.id !== item.id).slice(0, 6)
+      document.getElementById('simScroll').innerHTML = sim.map((s, idx) => {
+        const sp = Math.round((s.progress || 0) * 100)
+        return `
+    <div class="sim-card" style="box-shadow:0 1px 3px rgba(0,0,0,.06);border:1px solid rgba(228,228,224,.8);">
+      <div style="display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.75rem;">
+        <div style="width:48px;height:48px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid #e4e4e0;">
+          <img src="${s.image || CARD_IMGS[idx % 3]}" alt="" style="width:100%;height:100%;object-fit:cover;"/>
+        </div>
+        <div style="flex:1;min-width:0;padding-top:2px;">
+          <div style="font-size:.9rem;font-weight:700;color:#1f2a37;text-align:right;line-height:1.4;">${s.title}</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem;">
+        <span style="display:inline-flex;align-items:center;gap:.25rem;background:#f0e6ff;border:1.5px solid #c89eff;color:#5b3d8a;border-radius:999px;padding:.2rem .6rem;font-size:.72rem;font-weight:700;">${s.sport}</span>
+        ${s.position ? `<span style="display:inline-flex;align-items:center;background:#f5f5f4;color:#44403c;border-radius:999px;padding:.2rem .6rem;font-size:.72rem;font-weight:500;">${s.position}</span>` : ''}
+      </div>
+      <p style="font-size:.8rem;color:#5e5e59;line-height:1.6;text-align:right;margin-bottom:.75rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${s.description}</p>
+      <div style="display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:#5e5e59;margin-bottom:.75rem;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M9 21v-4a3 3 0 0 1 6 0v4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>${s.organizer}</span>
+        <span>·</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 22s7-4.2 7-11a7 7 0 1 0-14 0c0 6.8 7 11 7 11Z" stroke-linejoin="round"/></svg>
+        <span>${s.city}</span>
+      </div>
+      <div style="margin-bottom:.75rem;">
+        <div style="display:flex;justify-content:space-between;font-size:.7rem;margin-bottom:.3rem;">
+          <span style="font-weight:700;color:#067647;">${sp}%</span><span style="color:#5e5e59;">نسبة الامتلاء</span>
+        </div>
+        <div style="height:6px;background:#e4e4e0;border-radius:999px;overflow:hidden;">
+          <div style="height:100%;width:${sp}%;background:#067647;border-radius:999px;"></div>
+        </div>
+      </div>
+      <button class="s-btn" onclick="goToDetailById('${s.id}')" style="border-radius:12px;">عرض التفاصيل</button>
+    </div>`
+      }).join('')
+
+      // Apply button state
+      window._applied = window._appliedSet.has(item.id)
+      const ab = document.getElementById('applyBtn')
+      if (window._applied) {
+        ab.textContent = '✓ تم التقديم — اضغطي للإلغاء'
+        ab.style.background = '#067647'
+        ab.onclick = openCancelPopup
+      } else {
+        ab.textContent = 'قدم الآن'
+        ab.style.background = ''
+        ab.onclick = openPopup
+      }
+
+      window._liked = false
+      document.getElementById('likeBtn').classList.remove('liked')
+      document.getElementById('heartIcon').setAttribute('fill', 'none')
+      document.getElementById('heartIcon').setAttribute('stroke', 'currentColor')
+
+      document.getElementById('listPage').style.display = 'none'
+      document.getElementById('detailPage').style.display = 'block'
+      window.scrollTo(0, 0)
+    }
+
+    window.goToDetailById = function (id) {
+      const item = (window.__allCards || []).find(x => x.id === id)
+      if (item) window.goToDetail(item)
+    }
+
+    window.goBack = function () {
+      document.getElementById('detailPage').style.display = 'none'
+      document.getElementById('listPage').style.display = 'block'
+    }
+
+    function toggleLike() {
+      window._liked = !window._liked
+      document.getElementById('likeBtn').classList.toggle('liked', window._liked)
+      document.getElementById('heartIcon').setAttribute('fill', window._liked ? '#ef4444' : 'none')
+      document.getElementById('heartIcon').setAttribute('stroke', window._liked ? '#ef4444' : 'currentColor')
+    }
+
+    function handleShare() {
+      if (navigator.share) navigator.share({ title: 'فرصة', url: window.location.href })
+      else navigator.clipboard.writeText(window.location.href).then(() => alert('تم نسخ الرابط!'))
+    }
+
+    function openPopup() {
+      document.getElementById('popup').style.display = 'flex'
+      document.body.style.overflow = 'hidden'
+    }
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none'
+      document.body.style.overflow = ''
+    }
+    function confirmApply() {
+      closePopup()
+      window._applied = true
+      if (window._currentDetailItem) window._appliedSet.add(window._currentDetailItem.id)
+      const b = document.getElementById('applyBtn')
+      b.textContent = '✓ تم التقديم — اضغطي للإلغاء'
+      b.style.background = '#067647'
+      b.onclick = openCancelPopup
+    }
+    function openCancelPopup() {
+      document.getElementById('cancelPopup').style.display = 'flex'
+      document.body.style.overflow = 'hidden'
+    }
+    function closeCancelPopup() {
+      document.getElementById('cancelPopup').style.display = 'none'
+      document.body.style.overflow = ''
+    }
+    function doCancelApply() {
+      closeCancelPopup()
+      window._applied = false
+      if (window._currentDetailItem) window._appliedSet.delete(window._currentDetailItem.id)
+      const b = document.getElementById('applyBtn')
+      b.textContent = 'قدم الآن'
+      b.style.background = ''
+      b.onclick = openPopup
+    }
+    function toggleDropdown() {
+      document.getElementById('dropdown').classList.toggle('open');
+    }
+    // ══════════════════════════════════════════════════
+    // ✦ Compatibility Popup
+    // ══════════════════════════════════════════════════
+    let PERSONA = {
+      id: 1,
+      name: 'سارة سعد', age: 21, city: 'مكة المكرمة',
+      sports: ['كرة السلة'],
+      fitnessLevel: 'عالي', hasMedicalReport: true,
+      skills: ['مهاجمة'],
+      hasLocalResidence: true,
+      overallRating: 91
+    }
+
+    // Immediately load the logged in player's details
+    const initPersona = () => {
+      let loggedUser = null;
+      try {
+        loggedUser = JSON.parse(sessionStorage.getItem('tajah_user'));
+      } catch (e) { }
+
+      const userId = loggedUser ? loggedUser.id : 1;
+      fetch(`/api/users/${userId}`)
+        .then(r => r.json())
+        .then(u => {
+          if (u && u.id) {
+            PERSONA.id = u.id;
+            PERSONA.name = u.name || PERSONA.name;
+            PERSONA.age = u.age || PERSONA.age;
+            PERSONA.city = u.city || PERSONA.city;
+            PERSONA.sports = u.sport ? [u.sport] : PERSONA.sports;
+            PERSONA.skills = u.position ? [u.position] : PERSONA.skills;
+            PERSONA.overallRating = u.overall_rating || PERSONA.overallRating;
+          }
+        })
+        .catch(err => console.error('Error fetching dynamic player profile:', err));
+    };
+    initPersona();
+
+    function buildCriteria(item) {
+      return [
+        {
+          label: 'السكن في نفس المدينة',
+          match: PERSONA.city === item.city,
+          note: PERSONA.city === item.city ? item.city + ' تطابق موقع الفرصة' : 'أنتِ في ' + PERSONA.city + ' والفرصة في ' + item.city,
+          tip: PERSONA.city !== item.city ? 'يمكنكِ التقديم وتوفير السكن بالتنسيق مع النادي' : null
+        },
+        {
+          label: 'الفئة العمرية المناسبة (18-25)',
+          match: PERSONA.age >= 18 && PERSONA.age <= 25,
+          note: 'عمركِ ' + PERSONA.age + ' سنة — مناسب للمشاركة',
+          tip: (PERSONA.age < 18 || PERSONA.age > 25) ? 'تتطلب الفرصة فئة عمرية محددة، تأكدي من موافقة النادي الاستثنائية' : null
+        },
+        {
+          label: 'اللياقة البدنية والجاهزية',
+          match: PERSONA.fitnessLevel === 'عالي',
+          note: PERSONA.fitnessLevel === 'عالي' ? 'مستوى لياقتكِ عالٍ وجاهز للعب الفوري' : 'اللياقة غير كافية',
+          tip: PERSONA.fitnessLevel !== 'عالي' ? 'سجّلي في برنامج الإعداد البدني لتاجة لرفع جاهزيتكِ' : null
+        },
+        {
+          label: 'تقرير صحي رياضي معتمد',
+          match: PERSONA.hasMedicalReport,
+          note: PERSONA.hasMedicalReport ? 'لديكِ تقرير صحي سارٍ وخالٍ من الإصابات' : 'التقرير الصحي غير متوفر',
+          tip: !PERSONA.hasMedicalReport ? 'احصلي على تقرير معتمد وخلو من الإصابات من شريكنا الطبي' : null
+        },
+        {
+          label: 'التخصص الرياضي المطلوب',
+          match: PERSONA.sports.includes(item.sport),
+          note: PERSONA.sports.includes(item.sport) ? item.sport + ' من صميم تخصصاتكِ' : 'تخصصكِ ' + PERSONA.sports[0] + ' — والفرصة تتطلب ' + item.sport,
+          tip: !PERSONA.sports.includes(item.sport) ? 'ابحثي عن فرص مخصصة لرياضتكِ المفضلة في قائمة التصفية' : null
+        },
+      ]
+    }
+
+    function openCompatibility() {
+      const item = window._currentDetailItem; if (!item) return
+      const pop = document.getElementById('compatPopup')
+      pop.style.display = 'flex'; document.body.style.overflow = 'hidden'
+
+      document.getElementById('compat-icon').textContent = '🔍'
+      document.getElementById('compat-title').textContent = 'جارٍ تحليل التوافق الرياضي...'
+      document.getElementById('compat-subtitle').textContent = 'نقارن ملفك الرياضي الحالي مع متطلبات النادي والمتقدمين للفرصة'
+      document.getElementById('compat-rows').innerHTML = ''
+      document.getElementById('compat-result').style.display = 'none'
+      document.getElementById('compat-actions').style.display = 'none'
+
+      const criteria = buildCriteria(item)
+      const abrarScore = Math.round(criteria.filter(c => c.match).length / criteria.length * 100)
+
+      // Fetch real competitor players from backend
+      fetch('/api/users?role=player')
+        .then(r => r.json())
+        .then(allPlayers => {
+          // Keep other players playing the same sport
+          let competitors = allPlayers.filter(p => p.id !== PERSONA.id && p.sport === item.sport);
+
+          // Fallback pool of realistic competitors if database is sparsely populated
+          if (competitors.length < 3) {
+            const fallbackCompetitors = [
+              { name: 'علياء فارس', city: 'جدة', age: 20, overall_rating: 78, position: 'حارسة مرمى', sport: 'كرة السلة' },
+              { name: 'نورة الحربي', city: 'الرياض', age: 23, overall_rating: 74, position: 'وسط', sport: 'كرة السلة' },
+              { name: 'ريم العتيبي', city: 'الرياض', age: 20, overall_rating: 68, position: 'حارسة مرمى', sport: 'كرة السلة' },
+              { name: 'هند المطيري', city: 'الرياض', age: 22, overall_rating: 85, position: 'مهاجمة', sport: 'كرة السلة' },
+              { name: 'لينا الزهراني', city: 'المدينة المنورة', age: 19, overall_rating: 65, position: 'وسط', sport: 'كرة السلة' }
+            ];
+            competitors = fallbackCompetitors.filter(c => c.name !== PERSONA.name && c.sport === item.sport);
+          }
+
+          document.getElementById('compat-applicants').style.display = 'block'
+          const dotsEl = document.getElementById('rank-dots'); dotsEl.innerHTML = ''
+
+          let totalRating = 0;
+          const competitorScores = [];
+
+          competitors.forEach((c, i) => {
+            const rating = c.overall_rating || c.overallRating || 75;
+            totalRating += rating;
+
+            // Compute competitor compatibility score using similar logic
+            const cCityMatch = c.city === item.city;
+            const cAgeMatch = c.age >= 18 && c.age <= 25;
+            const cSportMatch = (c.sport || 'كرة السلة') === item.sport;
+            const cScore = Math.min(96, Math.max(10, Math.round(
+              (cCityMatch ? 20 : 0) +
+              (cAgeMatch ? 20 : 0) +
+              40 +
+              (cSportMatch ? 20 : 0) +
+              (rating % 15)
+            )));
+            competitorScores.push(cScore);
+
+            // Render a high-fidelity visual initial bubble for the competitor
+            const dot = document.createElement('div')
+            dot.className = 'competitor-bubble';
+            dot.style.cssText = `
+              position: absolute;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              background: #f3f0fa;
+              border: 1.8px solid #d1d5db;
+              color: #35214d;
+              font-size: .65rem;
+              font-weight: 700;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: left .8s cubic-bezier(0.22, 1, 0.36, 1);
+              left: 0%;
+              cursor: pointer;
+              box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            `;
+            dot.textContent = c.name ? c.name.charAt(0) : 'م';
+            dot.title = `${c.name} (التقييم الفني: ${rating}%)`;
+            dotsEl.appendChild(dot)
+
+            // Animate competitor bubbles to their final locations
+            setTimeout(() => {
+              dot.style.left = cScore + '%';
+            }, 120 + i * 20);
+          });
+
+          // Calculate beaten percentage and accept status
+          const beaten = competitorScores.filter(s => abrarScore > s).length
+          const rankPct = competitorScores.length ? Math.round((beaten / competitorScores.length) * 100) : 100;
+
+          const abrarEl = document.getElementById('rank-abrar'), fillEl = document.getElementById('rank-fill')
+          abrarEl.style.left = '0%'; fillEl.style.width = '0%'
+          setTimeout(() => { abrarEl.style.left = abrarScore + '%'; fillEl.style.width = abrarScore + '%' }, 120)
+
+          let badgeText, badgeColor, subText
+          if (rankPct >= 75) {
+            badgeText = 'في أعلى ' + (100 - rankPct || 10) + '%';
+            badgeColor = '#065f46';
+            subText = 'تتفوقين على ' + beaten + ' من ' + competitorScores.length + ' مقدمات للفرصة'
+          } else if (rankPct >= 40) {
+            badgeText = 'متوسط القبول';
+            badgeColor = '#92400e';
+            subText = 'فرصتكِ منافسة وقوية'
+          } else {
+            badgeText = 'منافسة قوية جداً';
+            badgeColor = '#991b1b';
+            subText = 'حسّني نقاط التوافق أولاً للتميز'
+          }
+
+          const badge = document.getElementById('rank-badge')
+          badge.textContent = badgeText; badge.style.color = badgeColor
+          badge.style.background = badgeColor === '#065f46' ? '#f0fdf4' : badgeColor === '#92400e' ? '#fffbeb' : '#fff1f2'
+          document.getElementById('rank-sub').textContent = subText
+
+          // Update Comparison Dashboard values
+          const avgRating = Math.round(totalRating / competitors.length);
+          document.getElementById('comp-avg-rating').textContent = avgRating + '%';
+          document.getElementById('player-rating').textContent = PERSONA.overallRating + '%';
+
+          runAnimation(criteria, item)
+        })
+        .catch(err => {
+          console.error('Error fetching competitors:', err);
+          // Fallback statistical comparison if API fails
+          document.getElementById('compat-applicants').style.display = 'block';
+          runAnimation(criteria, item);
+        });
+    }
+
+    function closeCompatibility() {
+      document.getElementById('compatPopup').style.display = 'none'
+      document.getElementById('compat-applicants').style.display = 'none'
+      document.getElementById('rank-abrar').style.left = '0%'
+      document.getElementById('rank-fill').style.width = '0%'
+      document.body.style.overflow = ''
+      stopConfetti()
+    }
+
+    function runAnimation(criteria, item) {
+      const container = document.getElementById('compat-rows'); let i = 0
+      function showNext() {
+        if (i >= criteria.length) { setTimeout(() => showResult(criteria, item), 380); return }
+        const c = criteria[i]
+        const bg = c.match ? '#f0fdf4' : '#fff5f5', bdr = c.match ? '#bbf7d0' : '#fecdd3'
+        const icBg = c.match ? '#067647' : '#ef4444'
+        const icSvg = c.match
+          ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round"/></svg>'
+          : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>'
+        const tipHtml = c.tip ? `<div style="margin-top:.35rem;font-size:.73rem;color:#7c3aed;font-weight:600;text-align:right;">💡 ${c.tip}</div>` : ''
+        const row = document.createElement('div')
+        row.setAttribute('dir', 'rtl')
+        row.style.cssText = `display:flex;align-items:flex-start;gap:.75rem;background:${bg};border:1px solid ${bdr};border-radius:1rem;padding:.75rem 1rem;opacity:0;transform:translateX(10px);transition:opacity .3s,transform .3s;`
+        row.innerHTML = `<div style="flex:1;min-width:0;"><div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;"><div style="font-size:.78rem;color:#5e5e59;text-align:right;">${c.note}</div><div style="font-size:.84rem;font-weight:700;color:#35214d;text-align:right;white-space:nowrap;">${c.label}</div></div>${tipHtml}</div><div style="width:26px;height:26px;border-radius:50%;background:${icBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.05rem;">${icSvg}</div>`
+        container.appendChild(row)
+        requestAnimationFrame(() => requestAnimationFrame(() => { row.style.opacity = '1'; row.style.transform = 'translateX(0)' }))
+        i++; setTimeout(showNext, 400)
+      }
+      setTimeout(showNext, 250)
+    }
+
+    function showResult(criteria, item) {
+      const matchCount = criteria.filter(c => c.match).length, total = criteria.length
+      const pct = Math.round(matchCount / total * 100), isGood = matchCount >= 4
+      document.getElementById('compat-icon').textContent = isGood ? '🏆' : '🤔'
+      document.getElementById('compat-title').textContent = isGood ? pct + '% توافق ممتاز!' : pct + '% توافق جزئي'
+      document.getElementById('compat-subtitle').textContent = isGood ? 'الفرصة مناسبة جداً لمؤهلاتكِ الحالية' : 'بعض النقاط الرياضية تحتاج مراجعة'
+
+      const res = document.getElementById('compat-result')
+      res.setAttribute('dir', 'rtl'); res.style.display = 'block'
+      if (isGood) {
+        res.style.background = '#f0fdf4'; res.style.border = '1.5px solid #bbf7d0'
+        res.innerHTML = `<div style="font-weight:700;font-size:.95rem;color:#065f46;text-align:right;">🎉 مبروك يا ${PERSONA.name}! هذي الفرصة مناسبة جداً لكِ</div><div style="font-size:.82rem;margin-top:.35rem;line-height:1.8;color:#047857;text-align:right;">استوفيتِ ${matchCount} من ${total} متطلبات التوافق. ننصح بالتقديم فوراً!</div>`
+        setTimeout(() => launchConfetti(), 200)
+      } else {
+        const tips = criteria.filter(c => !c.match && c.tip).map(c => c.tip)
+        const tipsHtml = tips.length ? '<div style="margin-top:.55rem;display:flex;flex-direction:column;gap:.3rem;">' + tips.map(t => `<div style="font-size:.76rem;color:#9a3412;text-align:right;">• ${t}</div>`).join('') + '</div>' : ''
+        res.style.background = '#fff7ed'; res.style.border = '1.5px solid #fed7aa'
+        res.innerHTML = `<div style="font-weight:700;font-size:.95rem;color:#9a3412;text-align:right;">⚠️ الفرصة تتطلب بعض الجاهزية الإضافية</div><div style="font-size:.82rem;margin-top:.35rem;line-height:1.8;color:#c2410c;text-align:right;">استوفيتِ ${matchCount} من ${total} متطلبات التوافق.</div>${tipsHtml}`
+      }
+      const actions = document.getElementById('compat-actions')
+      actions.style.display = 'flex'
+      document.getElementById('compat-apply-btn').style.display = isGood ? '' : 'none'
+    }
+
+    let _confettiAnim = null
+    function launchConfetti() {
+      const canvas = document.getElementById('confettiCanvas')
+      canvas.style.display = 'block'; canvas.width = window.innerWidth; canvas.height = window.innerHeight
+      const ctx = canvas.getContext('2d')
+      const colors = ['#b670ff', '#fffd70', '#067647', '#f472b6', '#60a5fa', '#fb923c']
+      const particles = Array.from({ length: 90 }, () => ({
+        x: Math.random() * canvas.width, y: -10 - Math.random() * 100, r: 4 + Math.random() * 6,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - .5) * 3, vy: 2 + Math.random() * 4,
+        rot: Math.random() * 360, rotV: (Math.random() - .5) * 6,
+        shape: Math.random() > .5 ? 'rect' : 'circle'
+      }))
+      let frame = 0
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy; p.rot += p.rotV; p.vy += .07
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot * Math.PI / 180); ctx.fillStyle = p.color
+          if (p.shape === 'rect') { ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 1.6) } else { ctx.beginPath(); ctx.arc(0, 0, p.r / 2, 0, Math.PI * 2); ctx.fill() }
+          ctx.restore()
+        })
+        frame++
+        if (frame < 120) _confettiAnim = requestAnimationFrame(draw); else stopConfetti()
+      }
+      _confettiAnim = requestAnimationFrame(draw)
+    }
+    function stopConfetti() {
+      if (_confettiAnim) { cancelAnimationFrame(_confettiAnim); _confettiAnim = null }
+      const c = document.getElementById('confettiCanvas')
+      if (c) { c.style.display = 'none'; c.getContext('2d').clearRect(0, 0, c.width, c.height) }
+    }
+
+    // Using the real database opportunities populated by React on mount instead of mock catalog
+  </script>
+  <footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <!-- Top: Logo text + Tagline -->
+      <div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100">
+                  <stop offset="0%" stop-color="#f2de00"></stop>
+                  <stop offset="50%" stop-color="#cca6ff"></stop>
+                  <stop offset="100%" stop-color="#b670ff"></stop>
+                </lineargradient>
+              </defs>
+              <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="4.5"></path>
+              <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+              <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+            </svg>
+            <p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+          </div>
+          <p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+        </div>
+        <p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+      </div>
+      <!-- 3 Columns Grid — equal width -->
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <!-- Column 1: Quick Links -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            روابط مهمة
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="about.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                عن تاجة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="index.html#faq">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                الأسئلة الشائعة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="contact.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                المساعدة والدعم
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 2: Contact Info (email + phone only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <!-- Phone icon — flipped to face left -->
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              style="transform: scaleX(-1)" viewbox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            تواصل معنا
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="mailto:Tajah2026@gmail.com">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                    <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">
+                    Tajah2026@gmail.com</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="tel:+966501234567">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <!-- Phone icon in icon box — flipped left -->
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    style="transform: scaleX(-1)" viewbox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr"
+                    style="unicode-bidi: embed;">+966 50 123 4567</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            النشرة البريدية
+          </h3>
+          <p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+          <!-- Newsletter form -->
+          <form class="space-y-2" id="newsletter-form">
+            <div class="relative">
+              <input
+                class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface"
+                id="newsletter-email" placeholder="layal@gmail.com" required="" type="email" />
+              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </div>
+            <button
+              class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed"
+              type="submit">
+              <span>اشتراك</span>
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </form>
+          <!-- Success message -->
+          <div
+            class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success"
+            id="newsletter-success">
+            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>تم الاشتراك بنجاح! 🎉</span>
+          </div>
+          <!-- Social Icons: WhatsApp, X, TikTok only -->
+          <div class="mt-6">
+            <p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+            <div class="flex items-center gap-2">
+              <!-- WhatsApp -->
+              <a aria-label="واتساب"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z">
+                  </path>
+                </svg>
+              </a>
+              <!-- Twitter / X -->
+              <a aria-label="تويتر"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                  </path>
+                </svg>
+              </a>
+              <!-- TikTok -->
+              <a aria-label="تيك توك"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z">
+                  </path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom: Copyright + Legal -->
+      <div class="mt-12 pt-8 border-t border-tj-border">
+        <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق
+            محفوظة.
+          </p>
+          <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+            <li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/auth.js?v=1.0.3"></script>
+</body>
+
+</html>

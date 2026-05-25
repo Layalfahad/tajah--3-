@@ -1,0 +1,309 @@
+/* ════════════════════════════════════════════════════════════
+   TAJAH DESIGN SYSTEM v1.0 — CSS Variables Reference
+   Source: Figma → export.json
+   Usage: استورد هذا الملف قبل أي CSS آخر
+   @import url('tokens.css');
+════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════
+   LIGHT MODE (default)
+══════════════════════════════════════ */
+:root {
+
+  /* ─────────────────────────────────
+     Surface
+  ───────────────────────────────── */
+  --tj-surface-base:   #fcfcf6;   /* خلفية الصفحة الرئيسية */
+  --tj-surface-card:   #fcfcfa;   /* خلفية الكاردات */
+
+  /* ─────────────────────────────────
+     Primary (اللون البنفسجي)
+  ───────────────────────────────── */
+  --tj-primary:          #b670ff;  /* الحالة الافتراضية */
+  --tj-primary-hover:    #a312ff;  /* عند التمرير */
+  --tj-primary-pressed:  #6200a3;  /* عند الضغط */
+  --tj-primary-text:     #250140;  /* النص فوق الخلفية البنفسجية */
+  --tj-primary-surface:  #f6ebff;  /* خلفية فاتحة للعناصر البنفسجية */
+
+  /* ─────────────────────────────────
+     Text
+  ───────────────────────────────── */
+  --tj-text-primary:    #141412;  /* العناوين والنصوص الرئيسية */
+  --tj-text-secondary:  #5e5e59;  /* النصوص الثانوية */
+  --tj-text-tertiary:   #8c8c85;  /* النصوص الخافتة / placeholder */
+  --tj-text-disabled:   #c7c7c0;  /* العناصر المعطّلة */
+
+  /* ─────────────────────────────────
+     Border
+  ───────────────────────────────── */
+  --tj-border:         #e6e6dc;  /* الحدود الافتراضية */
+  --tj-border-active:  #8c8c85;  /* الحدود عند التفاعل/التركيز */
+
+  /* ─────────────────────────────────
+     Status
+  ───────────────────────────────── */
+  --tj-error:       #eb3333;
+  --tj-error-bg:    #fff0f0;
+  --tj-success:     #00a637;
+  --tj-success-bg:  #e3f5e1;
+  --tj-info:        #0094e3;
+  --tj-info-bg:     #c4ddff;
+
+  /* ─────────────────────────────────
+     Interactive
+  ───────────────────────────────── */
+  --tj-disabled-bg:       #e6e6dc;
+  --tj-neutral-hover:     #e6e6dc;
+  --tj-neutral-pressed:   #d2d2ca;
+
+  /* ─────────────────────────────────
+     Accent
+  ───────────────────────────────── */
+  --tj-yellow:     #dbdb09;
+  --tj-yellow-bg:  #ffffe0;
+
+  /* ─────────────────────────────────
+     Visual / Gradient
+  ───────────────────────────────── */
+  --tj-gradient-start:   #f2de00;
+  --tj-gradient-middle:  #cca6ff;
+  --tj-gradient-end:     #59aeff;
+  --tj-gradient: linear-gradient(
+    135deg,
+    var(--tj-gradient-start),
+    var(--tj-gradient-middle),
+    var(--tj-gradient-end)
+  );
+
+  /* ─────────────────────────────────
+     Spacing (8pt grid)
+  ───────────────────────────────── */
+  --tj-space-1:   4px;
+  --tj-space-2:   8px;
+  --tj-space-3:   12px;
+  --tj-space-4:   16px;
+  --tj-space-5:   20px;
+  --tj-space-6:   24px;
+  --tj-space-8:   32px;
+  --tj-space-10:  40px;
+  --tj-space-12:  48px;
+  --tj-space-16:  64px;
+
+  /* ─────────────────────────────────
+     Radius
+  ───────────────────────────────── */
+  --tj-radius-xs:   4px;
+  --tj-radius-sm:   8px;
+  --tj-radius-md:   12px;
+  --tj-radius-lg:   16px;
+  --tj-radius-xl:   24px;
+  --tj-radius-full: 9999px;
+
+  /* ─────────────────────────────────
+     Typography
+  ───────────────────────────────── */
+  --tj-font:              'IBM Plex Sans Arabic', 'Tajawal', system-ui, sans-serif;
+  --tj-font-size-xs:      11px;
+  --tj-font-size-sm:      13px;
+  --tj-font-size-base:    15px;
+  --tj-font-size-md:      17px;
+  --tj-font-size-lg:      20px;
+  --tj-font-size-xl:      24px;
+  --tj-font-size-2xl:     30px;
+  --tj-font-size-3xl:     36px;
+  --tj-font-weight-light:    300;
+  --tj-font-weight-regular:  400;
+  --tj-font-weight-medium:   500;
+  --tj-font-weight-semibold: 600;
+  --tj-font-weight-bold:     700;
+  --tj-line-height-tight:    1.3;
+  --tj-line-height-base:     1.6;
+  --tj-line-height-loose:    1.8;
+
+  /* ─────────────────────────────────
+     Shadow
+  ───────────────────────────────── */
+  --tj-shadow-xs:  0 1px 2px rgba(20,20,18,.06);
+  --tj-shadow-sm:  0 2px 8px rgba(20,20,18,.08), 0 1px 2px rgba(20,20,18,.04);
+  --tj-shadow-md:  0 4px 20px rgba(182,112,255,.14), 0 2px 6px rgba(20,20,18,.06);
+  --tj-shadow-lg:  0 8px 32px rgba(182,112,255,.18);
+  --tj-shadow-xl:  0 16px 48px rgba(182,112,255,.22);
+
+  /* ─────────────────────────────────
+     Transition
+  ───────────────────────────────── */
+  --tj-transition-fast:    0.15s ease;
+  --tj-transition-base:    0.22s ease;
+  --tj-transition-slow:    0.35s ease;
+
+  /* ─────────────────────────────────
+     Z-index layers
+  ───────────────────────────────── */
+  --tj-z-base:     0;
+  --tj-z-raised:   10;
+  --tj-z-dropdown: 100;
+  --tj-z-modal:    200;
+  --tj-z-toast:    300;
+}
+
+/* ══════════════════════════════════════
+   DARK MODE
+   يُفعَّل تلقائياً حسب إعداد الجهاز
+   أو يدوياً: <html class="dark"> أو <body data-theme="dark">
+══════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  :root { --tj-theme: dark; }
+}
+
+:root[data-theme="dark"],
+[data-theme="dark"],
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tj-surface-base:   #141412;
+    --tj-surface-card:   #242421;
+
+    --tj-primary:          #cda7ff;
+    --tj-primary-hover:    #e0c9ff;
+    --tj-primary-pressed:  #b580ff;
+    --tj-primary-text:     #1f0036;
+    --tj-primary-surface:  #2e004d;
+
+    --tj-text-primary:    #fcfcf6;
+    --tj-text-secondary:  #5e5e59;
+    --tj-text-tertiary:   #6b6b66;
+    --tj-text-disabled:   #4a4a45;
+
+    --tj-border:         #383834;
+    --tj-border-active:  #858580;
+
+    --tj-error:       #ff8080;
+    --tj-error-bg:    #3d0000;
+    --tj-success:     #70e095;
+    --tj-success-bg:  #00290d;
+    --tj-info:        #70b9ff;
+    --tj-info-bg:     #003355;
+
+    --tj-disabled-bg:      #383834;
+    --tj-neutral-hover:    #383834;
+    --tj-neutral-pressed:  #52524a;
+
+    --tj-yellow:     #fffd70;
+    --tj-yellow-bg:  #333300;
+
+    --tj-gradient-start:   #fffd70;
+    --tj-gradient-middle:  #e8daff;
+    --tj-gradient-end:     #c4ddff;
+
+    --tj-shadow-xs:  0 1px 2px rgba(0,0,0,.2);
+    --tj-shadow-sm:  0 2px 8px rgba(0,0,0,.3);
+    --tj-shadow-md:  0 4px 20px rgba(205,167,255,.12), 0 2px 6px rgba(0,0,0,.2);
+    --tj-shadow-lg:  0 8px 32px rgba(205,167,255,.15);
+    --tj-shadow-xl:  0 16px 48px rgba(205,167,255,.18);
+  }
+}
+
+/* ══════════════════════════════════════
+   UTILITY CLASSES — استخدام مباشر
+══════════════════════════════════════ */
+
+/* Backgrounds */
+.tj-bg-base          { background: var(--tj-surface-base); }
+.tj-bg-card          { background: var(--tj-surface-card); }
+.tj-bg-primary       { background: var(--tj-primary); }
+.tj-bg-primary-soft  { background: var(--tj-primary-surface); }
+.tj-bg-success       { background: var(--tj-success-bg); }
+.tj-bg-error         { background: var(--tj-error-bg); }
+.tj-bg-info          { background: var(--tj-info-bg); }
+.tj-bg-yellow        { background: var(--tj-yellow-bg); }
+
+/* Text colors */
+.tj-text             { color: var(--tj-text-primary); }
+.tj-text-secondary   { color: var(--tj-text-secondary); }
+.tj-text-muted       { color: var(--tj-text-tertiary); }
+.tj-text-disabled    { color: var(--tj-text-disabled); }
+.tj-text-primary-c   { color: var(--tj-primary); }
+.tj-text-success     { color: var(--tj-success); }
+.tj-text-error       { color: var(--tj-error); }
+
+/* Borders */
+.tj-border           { border: 1px solid var(--tj-border); }
+.tj-border-active    { border: 1px solid var(--tj-border-active); }
+.tj-border-primary   { border: 1px solid var(--tj-primary); }
+
+/* Radius */
+.tj-rounded-sm   { border-radius: var(--tj-radius-sm); }
+.tj-rounded-md   { border-radius: var(--tj-radius-md); }
+.tj-rounded-lg   { border-radius: var(--tj-radius-lg); }
+.tj-rounded-xl   { border-radius: var(--tj-radius-xl); }
+.tj-rounded-full { border-radius: var(--tj-radius-full); }
+
+/* Shadows */
+.tj-shadow-sm  { box-shadow: var(--tj-shadow-sm); }
+.tj-shadow-md  { box-shadow: var(--tj-shadow-md); }
+.tj-shadow-lg  { box-shadow: var(--tj-shadow-lg); }
+
+/* ══════════════════════════════════════
+   COMPONENT TOKENS — للمكوّنات الشائعة
+══════════════════════════════════════ */
+
+/* Button — Primary */
+.tj-btn-primary {
+  background:    var(--tj-primary);
+  color:         var(--tj-primary-text);
+  border-radius: var(--tj-radius-full);
+  font-family:   var(--tj-font);
+  font-weight:   var(--tj-font-weight-semibold);
+  font-size:     var(--tj-font-size-base);
+  padding:       var(--tj-space-3) var(--tj-space-6);
+  border:        none;
+  cursor:        pointer;
+  transition:    background var(--tj-transition-fast), box-shadow var(--tj-transition-fast);
+}
+.tj-btn-primary:hover   { background: var(--tj-primary-hover); }
+.tj-btn-primary:active  { background: var(--tj-primary-pressed); }
+.tj-btn-primary:disabled {
+  background: var(--tj-disabled-bg);
+  color:      var(--tj-text-disabled);
+  cursor:     not-allowed;
+}
+
+/* Badge */
+.tj-badge {
+  display:       inline-flex;
+  align-items:   center;
+  gap:           var(--tj-space-1);
+  background:    var(--tj-primary-surface);
+  color:         var(--tj-primary);
+  border-radius: var(--tj-radius-full);
+  font-size:     var(--tj-font-size-xs);
+  font-weight:   var(--tj-font-weight-medium);
+  padding:       var(--tj-space-1) var(--tj-space-3);
+}
+
+/* Card */
+.tj-card {
+  background:    var(--tj-surface-card);
+  border:        1px solid var(--tj-border);
+  border-radius: var(--tj-radius-lg);
+  box-shadow:    var(--tj-shadow-sm);
+  padding:       var(--tj-space-6);
+}
+
+/* Input */
+.tj-input {
+  background:    var(--tj-surface-card);
+  border:        1px solid var(--tj-border);
+  border-radius: var(--tj-radius-md);
+  color:         var(--tj-text-primary);
+  font-family:   var(--tj-font);
+  font-size:     var(--tj-font-size-base);
+  padding:       var(--tj-space-3) var(--tj-space-4);
+  width:         100%;
+  transition:    border-color var(--tj-transition-fast), box-shadow var(--tj-transition-fast);
+  outline:       none;
+}
+.tj-input:focus {
+  border-color: var(--tj-primary);
+  box-shadow:   0 0 0 3px rgba(182,112,255,.15);
+}
+.tj-input::placeholder { color: var(--tj-text-tertiary); }

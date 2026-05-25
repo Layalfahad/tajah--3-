@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 430" role="img" aria-label="Football player in blue kit">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111a25"/>
+      <stop offset=".58" stop-color="#162c32"/>
+      <stop offset="1" stop-color="#1f4a35"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".36"/>
+    </filter>
+  </defs>
+  <rect width="680" height="430" fill="url(#bg)"/>
+  <circle cx="610" cy="124" r="9" fill="#ffab2e"/>
+  <circle cx="67" cy="332" r="7" fill="#ffd079" opacity=".75"/>
+  <path d="M0 326c92-22 192-27 302-15 118 12 232 6 378-17v136H0z" fill="#173b2e"/>
+  <g filter="url(#shadow)" transform="translate(195 25)">
+    <path d="M164 70c34-18 76-7 94 27-16 21-52 35-104 39-25-20-22-47 10-66z" fill="#312116"/>
+    <path d="M151 136c-31 14-63 47-93 99l38 19c27-42 51-67 72-75z" fill="#c68d6b"/>
+    <path d="M286 146c46 38 80 82 101 133l-42 17c-25-44-53-78-85-102z" fill="#c68d6b"/>
+    <circle cx="206" cy="106" r="46" fill="#c68d6b"/>
+    <path d="M161 101c17-52 75-62 109-23-25 10-61 18-109 23z" fill="#23160f"/>
+    <path d="M135 169c46-32 99-36 154-5l39 118-56 17-14 93H126l18-96-50-20z" fill="#0067d7"/>
+    <path d="M174 162l38 66 39-70" fill="none" stroke="#f1f5ff" stroke-width="10" stroke-linecap="round"/>
+    <path d="M146 212c50 20 96 18 139-6" fill="none" stroke="#4ba3ff" stroke-width="9"/>
+    <path d="M130 392h56l22-126-56-9z" fill="#c68d6b"/>
+    <path d="M242 392h58l-16-126-57 10z" fill="#c68d6b"/>
+    <path d="M112 300h193l-13 67H122z" fill="#0057c0"/>
+    <path d="M64 246l-18 48 38 14 20-54z" fill="#c68d6b"/>
+    <path d="M349 281l12 52 43-11-17-51z" fill="#c68d6b"/>
+    <text x="213" y="238" text-anchor="middle" fill="#eaf4ff" font-family="Arial, sans-serif" font-size="28" font-weight="700">55</text>
+  </g>
+</svg>

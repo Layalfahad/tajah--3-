@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Al Ahli logo">
+  <rect width="120" height="120" rx="18" fill="#fff"/>
+  <path d="M60 10 103 27v35c0 26-18 43-43 51-25-8-43-25-43-51V27z" fill="#168044" stroke="#168044" stroke-width="4"/>
+  <path d="M25 35h70v24H25z" fill="#fff"/>
+  <path d="M35 42h50v10H35zM37 68h46v9H37zM44 82h32v8H44z" fill="#fff"/>
+  <path d="M53 20h14v23H53zM43 29h34v9H43z" fill="#fff"/>
+  <text x="60" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#168044">AL AHLI</text>
+</svg>

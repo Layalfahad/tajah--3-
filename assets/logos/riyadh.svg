@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Al Riyadh logo">
+  <rect width="120" height="120" rx="18" fill="#f6f6f6"/>
+  <path d="M60 8 98 22v40c0 26-17 42-38 50C39 104 22 88 22 62V22z" fill="#111" stroke="#ddd" stroke-width="4"/>
+  <path d="M36 35h14v48H36zM54 35h14v48H54zM72 35h14v48H72z" fill="#d6202a"/>
+  <path d="M32 25h56l-8-9H40z" fill="#b5a268"/>
+  <text x="60" y="28" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#fff">RIYADH</text>
+</svg>

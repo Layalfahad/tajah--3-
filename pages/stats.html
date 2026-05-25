@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>إحصائيات | تاجه</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" rel="stylesheet" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* ════════════════════════════════════════════════════════
+       TAJAH — GLOBAL DESIGN TOKENS
+       ════════════════════════════════════════════════════════ */
+    :root {
+      --purple-50: #f5f0ff;
+      --purple-100: #ede5ff;
+      --purple-200: #d4baff;
+      --purple-300: #b670ff;
+      --purple-400: #aa31ff;
+      --purple-500: #8b00f5;
+      --yellow-100: #fffd70;
+      --yellow-200: #d7d500;
+      --blue-100: #dbeafe;
+      --blue-200: #93c5fd;
+      --blue-300: #70b9ff;
+      --blue-400: #3b82f6;
+      --blue-500: #1d4ed8;
+      --blue-info: #2563eb;
+      --teal-400: #2dd4bf;
+      --green-400: #4ade80;
+      --green-500: #22c55e;
+
+      --grey-50: #fafafa;
+      --grey-100: #f5f5f5;
+      --grey-150: #f0f0f0;
+      --grey-200: #e8e8e8;
+      --grey-300: #d4d4d4;
+      --grey-400: #a3a3a3;
+      --grey-500: #737373;
+      --grey-700: #404040;
+      --grey-900: #171717;
+
+      --page-bg: #f7f7f2;
+      --card-bg: #ffffff;
+      --border: #e8e8e8;
+      --text-dark: #1a1a1a;
+      --text-mid: #444444;
+      --text-soft: #888888;
+      --text-hint: #b0b0b0;
+      --text-white: #ffffff;
+
+      --font: "IBM Plex Sans Arabic", sans-serif;
+
+      --text-xs: 11px;
+      --text-sm: 13px;
+      --text-base: 15px;
+      --text-md: 16px;
+      --text-lg: 18px;
+      --text-xl: 20px;
+      --text-2xl: 24px;
+      --text-3xl: 30px;
+      --text-4xl: 36px;
+
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 20px;
+      --sp-6: 24px;
+      --sp-8: 32px;
+      --sp-10: 40px;
+      --sp-12: 48px;
+      --sp-16: 64px;
+      --sp-20: 80px;
+
+      --r-sm: 6px;
+      --r-md: 10px;
+      --r-lg: 14px;
+      --r-xl: 18px;
+      --r-2xl: 24px;
+      --r-full: 9999px;
+
+      --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.05);
+      --shadow-btn: 0 4px 16px rgba(139, 0, 245, 0.25);
+
+      --ease: 150ms cubic-bezier(.4, 0, .2, 1);
+      --spring: 220ms cubic-bezier(.34, 1.56, .64, 1);
+
+      /* Grid — 1280px / 12 cols / 32px gutters */
+      --grid-max: 1280px;
+      --grid-inner: 1216px;
+      --grid-margin: 32px;
+      --grid-gutter: 32px;
+      --grid-cols: 12;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .dev-section {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: var(--card-bg);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .dev-section-toggle {
+      width: 100%;
+      max-width: 100%;
+      border: 0;
+      background: none;
+      padding: var(--sp-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-3);
+      direction: rtl;
+      text-align: right;
+      cursor: pointer;
+    }
+
+    .dev-section-toggle:hover {
+      background: var(--grey-50);
+    }
+
+    .dev-section-title-inner {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      min-width: 0;
+      flex: 1 1 auto;
+      overflow-wrap: anywhere;
+    }
+
+    .dev-section-title-inner i {
+      flex: 0 0 auto;
+      color: var(--purple-400);
+      font-size: var(--text-md);
+    }
+
+    .dev-toggle-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    .dev-toggle-count {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--purple-400);
+      background: var(--purple-50);
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+    }
+
+    .dev-toggle-chevron {
+      flex: 0 0 auto;
+      font-size: 13px;
+      color: var(--text-soft);
+      transition: transform 0.25s ease;
+    }
+
+    .dev-section-toggle[aria-expanded="true"] .dev-toggle-chevron {
+      transform: rotate(180deg);
+    }
+
+    .dev-cards-panel {
+      padding: 0 var(--sp-5) var(--sp-5);
+      border-top: 1px solid var(--border);
+    }
+
+    .dev-cards-panel[hidden] {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .dev-section-toggle {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .dev-toggle-meta {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--page-bg);
+      color: var(--text-dark);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font-family: var(--font);
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       GRID SYSTEM (reusable across all pages)
+       ════════════════════════════════════════════════════════ */
+    .container {
+      width: 100%;
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding-inline: var(--grid-margin);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+      gap: var(--grid-gutter);
+    }
+
+    .col-6 {
+      grid-column: span 6;
+    }
+
+    .col-8 {
+      grid-column: span 8;
+    }
+
+    .col-10 {
+      grid-column: span 10;
+    }
+
+    .col-12 {
+      grid-column: span 12;
+    }
+
+    /* Stats content: cols 4-9 (6 wide, centred) same as upload */
+    .stats-col {
+      grid-column: 1 / -1;
+      /* full width always */
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-5);
+    }
+
+    .dashboard-grid .card-full {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+
+    /* ════════════════════════════════════════════════════════
+       NAVBAR PLACEHOLDER
+       ════════════════════════════════════════════════════════ */
+    .navbar-placeholder {
+      height: 72px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       PAGE HEADER
+       ════════════════════════════════════════════════════════ */
+    .page-header-wrap {
+      padding-block: var(--sp-8) var(--sp-3);
+    }
+
+    .page-top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: var(--sp-3);
+    }
+
+    .nav-back {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--r-sm);
+      color: var(--text-dark);
+      font-size: 18px;
+      transition: background var(--ease);
+    }
+
+    .nav-back:hover {
+      background: var(--grey-200);
+    }
+
+    .page-title {
+      margin: 0 0 var(--sp-2);
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.5px;
+      text-align: right;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: var(--text-sm);
+      color: var(--text-soft);
+      direction: rtl;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: var(--text-soft);
+      transition: color var(--ease);
+    }
+
+    .breadcrumb a:hover {
+      color: var(--purple-500);
+    }
+
+    .breadcrumb-sep {
+      color: var(--text-hint);
+      font-size: 9px;
+    }
+
+    .breadcrumb-current {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    /* Hero sub-title */
+    .hero-subtitle {
+      margin: var(--sp-5) 0 var(--sp-6);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: right;
+      line-height: 1.45;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       CARD  (shared)
+       ════════════════════════════════════════════════════════ */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--r-2xl);
+      padding: var(--sp-6);
+      box-shadow: var(--shadow-card);
+    }
+
+    .stats-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-5);
+      padding-bottom: var(--sp-8);
+    }
+
+    /* ── Card header row ── */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--sp-4);
+      direction: rtl;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: var(--text-md);
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .card-title-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--r-full);
+      font-size: 13px;
+    }
+
+    .card-title-icon.purple {
+      background: var(--purple-50);
+      color: var(--purple-500);
+    }
+
+    .card-title-icon.green {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+
+    .card-title-icon.blue {
+      background: var(--blue-100);
+      color: var(--blue-400);
+    }
+
+    .card-title-icon.yellow {
+      background: #fefce8;
+      color: #ca8a04;
+    }
+
+    .card-title-icon.teal {
+      background: #f0fdfa;
+      color: #0d9488;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       1. BAR CHART — Club profile visits
+       ════════════════════════════════════════════════════════ */
+    .visit-tabs {
+      display: flex;
+      gap: var(--sp-2);
+      direction: rtl;
+    }
+
+    .visit-tab {
+      border: none;
+      border-radius: var(--r-full);
+      padding: 6px 20px;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--ease), color var(--ease);
+      background: var(--grey-100);
+      color: var(--text-soft);
+    }
+
+    .visit-tab.active {
+      background: var(--purple-400);
+      color: #fff;
+    }
+
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    /* Custom tooltip shared style */
+    .chart-tooltip {
+      position: fixed;
+      background: var(--grey-900);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: var(--r-md);
+      font-size: var(--text-xs);
+      font-family: var(--font);
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 100ms;
+      direction: rtl;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       2. PIE CHART — Club types
+       ════════════════════════════════════════════════════════ */
+    .pie-layout {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-6);
+      direction: rtl;
+    }
+
+    .pie-canvas-wrap {
+      flex-shrink: 0;
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .pie-legend {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      flex: 1;
+    }
+
+    .pie-legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: var(--text-sm);
+      color: var(--text-mid);
+      direction: rtl;
+    }
+
+    .pie-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       3. PERFORMANCE LEVEL — big number + sparkline
+       ════════════════════════════════════════════════════════ */
+    .perf-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-4);
+      direction: rtl;
+    }
+
+    .perf-left {
+      flex: 1;
+    }
+
+    .perf-big-number {
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1;
+      margin-bottom: var(--sp-2);
+    }
+
+    .perf-delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: #16a34a;
+    }
+
+    .perf-delta-label {
+      font-size: var(--text-xs);
+      color: var(--text-soft);
+      margin-top: var(--sp-1);
+    }
+
+    .perf-sparkline-wrap {
+      width: 160px;
+      height: 72px;
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       4. GROUPED BAR CHART — Skill distribution
+       ════════════════════════════════════════════════════════ */
+    /* (canvas handles itself, tooltip via chart.js) */
+
+    /* ════════════════════════════════════════════════════════
+       5. STABILITY SLIDER  (70 / 30 split)
+       ════════════════════════════════════════════════════════ */
+    .stability-bar-wrap {
+      margin: var(--sp-4) 0;
+      position: relative;
+    }
+
+    .stability-bar {
+      display: flex;
+      height: 36px;
+      border-radius: var(--r-full);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .stability-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: #fff;
+      transition: filter var(--ease);
+      position: relative;
+    }
+
+    .stability-segment:hover {
+      filter: brightness(1.12);
+    }
+
+    .seg-positive {
+      background: var(--purple-400);
+      flex: 70;
+      border-radius: var(--r-full) 0 0 var(--r-full);
+    }
+
+    .seg-negative {
+      background: #e0d7f5;
+      color: var(--purple-600);
+      flex: 30;
+      border-radius: 0 var(--r-full) var(--r-full) 0;
+    }
+
+    .stability-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: var(--sp-2);
+      font-size: var(--text-sm);
+      color: var(--text-soft);
+      direction: rtl;
+      padding-inline: var(--sp-1);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       6. INFO BOX (blue background)
+       ════════════════════════════════════════════════════════ */
+    .info-box {
+      background: #dbeafe;
+      border-radius: var(--r-xl);
+      padding: var(--sp-5);
+      direction: rtl;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+
+    .info-box-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--r-full);
+      background: rgba(37, 99, 235, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue-info);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .info-box-body {
+      flex: 1;
+    }
+
+    .info-box-title {
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--blue-info);
+      margin: 0 0 var(--sp-2);
+    }
+
+    .info-box-list {
+      margin: 0;
+      padding: 0 var(--sp-4) 0 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-1);
+    }
+
+    .info-box-list li {
+      font-size: var(--text-sm);
+      color: #1e3a8a;
+      line-height: 1.65;
+      padding-right: var(--sp-4);
+      position: relative;
+    }
+
+    .info-box-list li::before {
+      content: "•";
+      position: absolute;
+      right: 0;
+      color: var(--blue-info);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       7. DEVELOPMENT OPPORTUNITIES CARDS
+       ════════════════════════════════════════════════════════ */
+    .dev-section-title {
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: right;
+      margin: 0 0 var(--sp-4);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      direction: rtl;
+    }
+
+    .dev-section-title i {
+      color: var(--purple-400);
+      font-size: var(--text-md);
+    }
+
+    .dev-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+    }
+
+    .dev-card {
+      background: var(--card-bg);
+      border-radius: var(--r-xl);
+      padding: var(--sp-5);
+      box-shadow: var(--shadow-xs);
+      border: 1px solid var(--border);
+      direction: rtl;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-4);
+      transition: box-shadow var(--ease), transform var(--ease);
+    }
+
+    .dev-card:hover {
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+
+    .dev-card-icon-wrap {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .dev-card-icon-wrap.purple {
+      background: var(--purple-50);
+      color: var(--purple-400);
+    }
+
+    .dev-card-icon-wrap.blue {
+      background: var(--blue-100);
+      color: var(--blue-400);
+    }
+
+    .dev-card-icon-wrap.green {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+
+    .dev-card-icon-wrap.teal {
+      background: #f0fdfa;
+      color: #0d9488;
+    }
+
+    .dev-card-body {
+      flex: 1;
+    }
+
+    .dev-card-title {
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0 0 var(--sp-1);
+    }
+
+    .dev-card-desc {
+      font-size: var(--text-sm);
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       8. DATA CREDIBILITY (bottom card)
+       ════════════════════════════════════════════════════════ */
+    .cred-card {
+      background: var(--grey-50);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--sp-5);
+      direction: rtl;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+
+    .cred-icon {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: var(--r-full);
+      background: var(--purple-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple-400);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .cred-text {
+      font-size: var(--text-sm);
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       FOOTER PLACEHOLDER
+       ════════════════════════════════════════════════════════ */
+    .footer-placeholder {
+      height: 80px;
+      background: #141b34;
+      margin-top: var(--sp-10);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       RESPONSIVE
+       ════════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .stats-col {
+        grid-column: 1 / -1;
+        /* already full, no change needed */
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      :root {
+        --grid-cols: 4;
+        --grid-margin: 20px;
+        --grid-gutter: 20px;
+      }
+
+      .row {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .stats-col {
+        grid-column: 1 / -1;
+      }
+
+      .pie-layout {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .perf-sparkline-wrap {
+        width: 120px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --grid-cols: 1;
+        --grid-margin: 16px;
+        --grid-gutter: 16px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-col {
+        grid-column: 1;
+      }
+
+      .card {
+        padding: var(--sp-4);
+      }
+
+      .page-title {
+        font-size: var(--text-3xl);
+      }
+
+      .perf-big-number {
+        font-size: 40px;
+      }
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary': '#b670ff',
+            'tj-primary-hover': '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text': '#250140',
+            'tj-surface-base': '#fdfcfb',
+            'tj-surface-card': '#ffffff',
+            'tj-surface-muted': '#f7f5f2',
+            'tj-text': '#0f0f10',
+            'tj-text-secondary': '#5e5e59',
+            'tj-text-tertiary': '#8c8c85',
+            'tj-text-disabled': '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border': '#ece9e3',
+            'tj-border-active': '#8c8c85',
+            'tj-success': '#00a637',
+            'tj-success-bg': '#e3f5e1',
+            'tj-error': '#eb3333',
+            'tj-error-bg': '#fff0f0',
+            'tj-info': '#0094e3',
+            'tj-info-bg': '#e3f1ff',
+            'tj-accent-yellow': '#caa913',
+            'tj-accent-yellow-bg': '#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn': '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card': '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta': '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft': '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float': '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee': { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev': { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow': { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring': { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up': { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee': 'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow': 'float-slow 8s ease-in-out infinite',
+            'pulse-ring': 'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up': 'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+
+<body>
+  <header
+    class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+      <div class="flex items-center h-16">
+        <!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+        <div class="flex flex-1 items-center justify-start gap-2">
+          <!-- Profile Dropdown Trigger (desktop) -->
+          <div class="relative hidden lg:block">
+            <button
+              class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group"
+              id="profileBtn" onclick="toggleDropdown()">
+              <div
+                class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">
+                م</div>
+              <div class="text-right">
+                <p
+                  class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">
+                  مرحباً، مرام!</p>
+              </div>
+              <svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron"
+                stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <!-- Dropdown Menu -->
+            <div
+              class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50"
+              id="dropdown">
+              <div class="px-4 py-3 border-b border-tj-border">
+                <p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+                <p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+              </div>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="stats.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                الملف الشخصي
+              </a>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="settings.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewbox="0 0 24 24">
+                  <path
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                الإعدادات
+              </a>
+              <div class="border-t border-tj-border mt-1 pt-1">
+                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group"
+                  href="../index.html">
+                  <svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewbox="0 0 24 24">
+                    <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  تسجيل الخروج
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Notification Bell -->
+          <button aria-label="الإشعارات"
+            class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group"
+            onclick="window.location.href='notifications.html'">
+            <span
+              class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+            <svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors"
+              fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <!-- Hamburger (mobile) -->
+          <button
+            class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors"
+            id="hamBtn" onclick="toggleDrawer()">
+            <svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+        <!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap"
+            href="PlayerHomepage.html">الرئيسية</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="../Communities/index.html">المجتمعات</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="Tajah-search.html">البحث</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="opportunities.html">الفرص</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="applications.html">طلباتي</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="contact.html">تواصل معنا</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="about.html">عن تاجة</a>
+        </nav>
+        <!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+        <div class="flex flex-1 items-center justify-end">
+          <a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+            <div class="w-9 h-9 flex items-center justify-center">
+              <svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+                    <stop offset="0%" stop-color="#f2de00"></stop>
+                    <stop offset="50%" stop-color="#cca6ff"></stop>
+                    <stop offset="100%" stop-color="#b670ff"></stop>
+                  </lineargradient>
+                </defs>
+                <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+                <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+                <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              </svg>
+            </div>
+            <span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ░░ NAVBAR PLACEHOLDER ░░ -->
+  <!-- ══ Page Header ══════════════════════════════════════════ -->
+
+  <div class="container">
+    <div class="page-header-wrap">
+      <div class="page-top-nav">
+        <button aria-label="رجوع" class="nav-back" onclick="window.history.back()">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+      </div>
+      <div class="row">
+        <div class="stats-col">
+          <h1 class="page-title">إحصائيات</h1>
+          <!-- Hero subtitle -->
+          <p class="hero-subtitle">
+            أداء استثنائي يا سارة ! شاهد كيف تطورت<br />وكيف يمكنك الانطلاق نحو القمة
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ══ Main content ════════════════════════════════════════ -->
+  <main>
+    <div class="container">
+      <div class="cred-card">
+        <div class="cred-icon"><svg fill="none" height="40" viewBox="0 0 120 100" width="40"
+            xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient gradientUnits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100">
+                <stop offset="0%" stop-color="#f2de00"></stop>
+                <stop offset="50%" stop-color="#cca6ff"></stop>
+                <stop offset="100%" stop-color="#b670ff"></stop>
+              </linearGradient>
+            </defs>
+            <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+              stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+            <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+              stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+            <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+              fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="4.5"></path>
+            <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+            <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+            <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+          </svg></i></div>
+        <p class="cred-text">
+          <strong>دقة البيانات ومصداقيتها</strong><br />
+          يتم توليد هذه الإحصائيات بالرجوع إلى شبكة الذكاء الاصطناعي (AI) من خلال تحليل مقاطع الأداء...
+        </p>
+      </div>
+      <!-- ⑥ DEVELOPMENT OPPORTUNITIES — Dropdown Accordion -->
+      <div class="dev-section" id="devSection">
+        <button aria-expanded="false" aria-controls="devCardsPanel" class="dev-section-toggle" id="devToggle"
+          type="button">
+          <span class="dev-section-title-inner">
+            <i class="fa-solid fa-seedling"></i>
+            فرص التطوير
+          </span>
+          <span class="dev-toggle-meta">
+            <span class="dev-toggle-count">4 فرص</span>
+            <i class="fa-solid fa-chevron-down dev-toggle-chevron" id="devChevron"></i>
+          </span>
+        </button>
+
+        <div class="dev-cards-panel" id="devCardsPanel" hidden>
+          <div class="dev-cards">
+            <div class="dev-card">
+              <div class="dev-card-icon-wrap purple"><i class="fa-solid fa-futbol"></i></div>
+              <div class="dev-card-body">
+                <p class="dev-card-title">دقة التسديدات</p>
+                <p class="dev-card-desc">تسديقات قوية وواضحة، وتقليل من التركيز قبل التسديد دقيقاً أكثر</p>
+              </div>
+            </div>
+            <div class="dev-card">
+              <div class="dev-card-icon-wrap blue"><i class="fa-solid fa-person-running"></i></div>
+              <div class="dev-card-body">
+                <p class="dev-card-title">سرعة ردة الفعل</p>
+                <p class="dev-card-desc">تستجيبين بسرعة، وزيادة التمارين السريعة تعطيك ردة فعل أسرع في المواقف المفاجئة
+                </p>
+              </div>
+            </div>
+            <div class="dev-card">
+              <div class="dev-card-icon-wrap green"><i class="fa-solid fa-stopwatch"></i></div>
+              <div class="dev-card-body">
+                <p class="dev-card-title">التوقيت</p>
+                <p class="dev-card-desc">أغلب حركاتك صحيحة، وتكرار التمرين يساعدك لحظة التنفيذ بشكل أدق</p>
+              </div>
+            </div>
+            <div class="dev-card">
+              <div class="dev-card-icon-wrap teal"><i class="fa-solid fa-eye"></i></div>
+              <div class="dev-card-body">
+                <p class="dev-card-title">الرؤية المكانية</p>
+                <p class="dev-card-desc">تستطيعين الملعب بوضوح، وتقديرين منها لاتخاذ القرار بسرعة في اللحظات الحرجة</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="stats-col">
+          <div class="stats-stack">
+
+            <!-- Dashboard Grid: 2 columns -->
+            <div class="dashboard-grid">
+
+              <!-- ① BAR CHART -->
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">
+                    <span class="card-title-icon purple"><i class="fa-solid fa-eye"></i></span>
+                    عدد زيارات الأندية لملف اللاعبة
+                  </div>
+                  <div aria-label="فترة الزيارات" class="visit-tabs" role="group">
+                    <button class="visit-tab active" data-period="week">أسبوع</button>
+                    <button class="visit-tab" data-period="month">شهر</button>
+                    <button class="visit-tab" data-period="year">سنة</button>
+                  </div>
+                </div>
+                <div class="chart-wrap" style="height:200px;">
+                  <canvas aria-label="مخطط زيارات الأندية" id="visitsChart" role="img"></canvas>
+                </div>
+              </div>
+
+              <!-- ② PIE CHART -->
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">
+                    <span class="card-title-icon purple"><i class="fa-solid fa-eye"></i></span>
+                    أنواع الأندية التي زارت الملف الشخصي
+                  </div>
+                </div>
+                <div class="pie-layout">
+                  <div class="pie-canvas-wrap">
+                    <canvas aria-label="مخطط أنواع الأندية" id="pieChart" role="img"></canvas>
+                  </div>
+                  <div class="pie-legend" id="pieLegend"></div>
+                </div>
+              </div>
+
+              <!-- ③ PERFORMANCE LEVEL -->
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">
+                    <span class="card-title-icon green"><i class="fa-solid fa-arrow-trend-up"></i></span>
+                    ارتقاء المستوى الرياضي
+                  </div>
+                </div>
+                <div class="perf-row">
+                  <div class="perf-left">
+                    <div class="perf-big-number">77%</div>
+                    <div class="perf-delta">
+                      <i class="fa-solid fa-arrow-up" style="font-size:11px;"></i>
+                      14%+
+                    </div>
+                    <div class="perf-delta-label">مقارنة الأسبوع السابق</div>
+                  </div>
+                  <div class="perf-sparkline-wrap">
+                    <canvas aria-label="منحنى الأداء" id="sparklineChart" role="img"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ④ GROUPED BAR — Skill distribution -->
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">
+                    <span class="card-title-icon blue"><i class="fa-solid fa-chart-bar"></i></span>
+                    توزيع الدرجة الكلية على المهارات الأساسية
+                  </div>
+                </div>
+                <div class="chart-wrap" style="height:240px;">
+                  <canvas aria-label="مخطط توزيع المهارات" id="skillsChart" role="img"></canvas>
+                </div>
+              </div>
+
+              <!-- ⑤ STABILITY — full width -->
+              <div class="card card-full">
+                <div class="card-header">
+                  <div class="card-title">
+                    <span class="card-title-icon teal"><i class="fa-solid fa-scale-balanced"></i></span>
+                    اتزان مستوى اللعب
+                  </div>
+                </div>
+                <div class="stability-bar-wrap" id="stabilityWrap">
+                  <div class="stability-bar" id="stabilityBar">
+                    <div class="stability-segment seg-positive"
+                      data-tooltip="إيجابي: 70% من المباريات بأداء فوق المتوسط" id="segPos">70%</div>
+                    <div class="stability-segment seg-negative" data-tooltip="سلبي: 30% من المباريات بأداء دون المتوسط"
+                      id="segNeg">30%</div>
+                  </div>
+                  <div class="stability-labels">
+                    <span>إيجابي</span>
+                    <span>سلبي</span>
+                  </div>
+                </div>
+                <div class="info-box" style="margin-top:var(--sp-4);">
+                  <div class="info-box-icon"><i class="fa-solid fa-info"></i></div>
+                  <div class="info-box-body">
+                    <p class="info-box-title">!تراجعنا باستمرار لتطورا</p>
+                    <p style="font-size:var(--text-sm);color:#1e3a8a;margin:0 0 var(--sp-2);">
+                      أدلك الأسبوع بأكثر التطور ملاحظةً بالتغذي.
+                    </p>
+                    <ul class="info-box-list">
+                      <li>إضافة تمرين الثالث: زيادة التدسيمات قبل التسديد مع الذقة.</li>
+                      <li>استحضار لحظة الفرصة قبل التسديد من الجانب الدفاعي.</li>
+                      <li>استحضار تمارين ركة الفطر السريعة بنشاط الاستفادة والتوقيت.</li>
+                      <li>تكرار الحركة أكثر من مرة يضبط إيقاع التوقيت.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /dashboard-grid -->
+
+            <!-- ⑥ DEVELOPMENT OPPORTUNITIES — kept below grid (see change 2) -->
+            <!-- ... -->
+
+            <!-- ⑦ DATA CREDIBILITY -->
+
+
+          </div><!-- /stats-stack -->
+        </div><!-- /stats-col -->
+      </div><!-- /row -->
+    </div><!-- /container -->
+  </main>
+  <!-- ── Global tooltip ────────────────────────────────────── -->
+  <div class="chart-tooltip" id="globalTooltip"></div>
+  <script>
+    /* ══════════════════════════════════════════════════════════
+       STATS PAGE  —  All chart logic
+    ══════════════════════════════════════════════════════════ */
+    (function () {
+      'use strict';
+
+      /* ── Shared settings ── */
+      const FONT = '"IBM Plex Sans Arabic", sans-serif';
+      Chart.defaults.font.family = FONT;
+      Chart.defaults.color = '#888888';
+
+      const tooltip = document.getElementById('globalTooltip');
+
+      function showTooltip(e, html) {
+        tooltip.innerHTML = html;
+        tooltip.style.opacity = '1';
+        posTooltip(e);
+      }
+
+      function hideTooltip() {
+        tooltip.style.opacity = '0';
+      }
+
+      function posTooltip(e) {
+        const x = e.clientX, y = e.clientY;
+        tooltip.style.left = (x + 14) + 'px';
+        tooltip.style.top = (y - 32) + 'px';
+      }
+
+      document.addEventListener('mousemove', posTooltip);
+
+      /* ══════════════════════════════════════════════════════
+         1.  BAR CHART  —  Club profile visits
+      ══════════════════════════════════════════════════════ */
+      const visitsData = {
+        week: {
+          labels: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+          data: [3, 5, 8, 15, 10, 7, 12],
+          colors: ['#d4baff', '#d4baff', '#d4baff', '#fffd70', '#d4baff', '#d4baff', '#4ade80']
+        },
+        month: {
+          labels: ['أسبوع 1', 'أسبوع 2', 'أسبوع 3', 'أسبوع 4'],
+          data: [42, 58, 37, 65],
+          colors: ['#d4baff', '#fffd70', '#d4baff', '#4ade80']
+        },
+        year: {
+          labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+          data: [30, 45, 38, 60, 55, 70, 48, 80, 67, 90, 75, 100],
+          colors: Array(12).fill('#d4baff').map((c, i) => i === 11 ? '#fffd70' : c)
+        }
+      };
+
+      let currentPeriod = 'week';
+
+      const visitsCtx = document.getElementById('visitsChart').getContext('2d');
+      const visitsChart = new Chart(visitsCtx, {
+        type: 'bar',
+        data: buildVisitsData('week'),
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 400 },
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: false }   /* we use custom tooltip */
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { family: FONT, size: 11 } }
+            },
+            y: {
+              beginAtZero: true,
+              max: 20,
+              ticks: {
+                stepSize: 5,
+                font: { family: FONT, size: 11 }
+              },
+              grid: { color: '#f0f0f0' }
+            }
+          },
+          onHover: (evt, elements) => {
+            visitsCtx.canvas.style.cursor = elements.length ? 'pointer' : 'default';
+          }
+        }
+      });
+
+      function buildVisitsData(period) {
+        const d = visitsData[period];
+        return {
+          labels: d.labels,
+          datasets: [{
+            data: d.data,
+            backgroundColor: d.colors,
+            borderRadius: 6,
+            borderSkipped: false,
+            barPercentage: 0.55
+          }]
+        };
+      }
+
+      /* Custom hover tooltip for visits bar chart */
+      visitsCtx.canvas.addEventListener('mousemove', (e) => {
+        const pts = visitsChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+        if (pts.length) {
+          const idx = pts[0].index;
+          const d = visitsData[currentPeriod];
+          showTooltip(e, `${d.labels[idx]}: <strong>${d.data[idx]}</strong> زيارة`);
+        } else {
+          hideTooltip();
+        }
+      });
+
+      visitsCtx.canvas.addEventListener('mouseleave', hideTooltip);
+
+      /* Period tabs */
+      document.querySelectorAll('.visit-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.visit-tab').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentPeriod = btn.dataset.period;
+          const d = visitsData[currentPeriod];
+          visitsChart.data = buildVisitsData(currentPeriod);
+          visitsChart.options.scales.y.max = Math.ceil(Math.max(...d.data) / 5) * 5 + 5;
+          visitsChart.update();
+        });
+      });
+
+      /* ══════════════════════════════════════════════════════
+         2.  PIE CHART  —  Club types
+      ══════════════════════════════════════════════════════ */
+      const pieSegments = [
+        { label: 'نادي رسمي', value: 45, color: '#b670ff' },
+        { label: 'جامعة', value: 30, color: '#1a1a1a' },
+        { label: 'مركز', value: 10, color: '#fffd70' },
+        { label: 'أكاديمية', value: 15, color: '#70b9ff' }
+      ];
+
+      const pieCtx = document.getElementById('pieChart').getContext('2d');
+      const pieChart = new Chart(pieCtx, {
+        type: 'doughnut',
+        data: {
+          labels: pieSegments.map(s => s.label),
+          datasets: [{
+            data: pieSegments.map(s => s.value),
+            backgroundColor: pieSegments.map(s => s.color),
+            borderWidth: 0,
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '0%',    /* solid pie (no hole) matching design */
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: false }
+          },
+          onHover: (e, elements) => {
+            pieCtx.canvas.style.cursor = elements.length ? 'pointer' : 'default';
+          }
+        }
+      });
+
+      /* Pie segment labels rendered on the canvas by Chart.js via a plugin */
+      Chart.register({
+        id: 'pieLabels',
+        afterDraw(chart) {
+          if (chart !== pieChart) return;
+          const ctx2 = chart.ctx;
+          const meta = chart.getDatasetMeta(0);
+          meta.data.forEach((arc, i) => {
+            const seg = pieSegments[i];
+            const { x, y } = arc.getCenterPoint();
+            ctx2.save();
+            ctx2.fillStyle = (seg.color === '#fffd70' || seg.color === '#70b9ff') ? '#333' : '#fff';
+            ctx2.font = `700 12px ${FONT}`;
+            ctx2.textAlign = 'center';
+            ctx2.textBaseline = 'middle';
+            ctx2.fillText(`${seg.value}%`, x, y);
+            ctx2.restore();
+          });
+        }
+      });
+
+      /* Build legend */
+      const legend = document.getElementById('pieLegend');
+      pieSegments.forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'pie-legend-item';
+        item.innerHTML = `<span class="pie-dot" style="background:${s.color}"></span>${s.label}`;
+        legend.appendChild(item);
+      });
+
+      /* Pie hover tooltip */
+      pieCtx.canvas.addEventListener('mousemove', (e) => {
+        const pts = pieChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+        if (pts.length) {
+          const i = pts[0].index;
+          const s = pieSegments[i];
+          showTooltip(e, `${s.label}: <strong>${s.value}%</strong>`);
+        } else {
+          hideTooltip();
+        }
+      });
+      pieCtx.canvas.addEventListener('mouseleave', hideTooltip);
+
+      /* ══════════════════════════════════════════════════════
+         3.  SPARKLINE  —  Performance trend
+      ══════════════════════════════════════════════════════ */
+      const sparkCtx = document.getElementById('sparklineChart').getContext('2d');
+      new Chart(sparkCtx, {
+        type: 'line',
+        data: {
+          labels: ['', '', '', '', '', '', ''],
+          datasets: [{
+            data: [55, 50, 62, 58, 70, 68, 77],
+            borderColor: '#22c55e',
+            backgroundColor: 'rgba(34,197,94,0.08)',
+            fill: true,
+            tension: 0.45,
+            borderWidth: 2.5,
+            pointRadius: 0,
+            pointHitRadius: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 600 },
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+          scales: {
+            x: { display: false },
+            y: { display: false, beginAtZero: false }
+          }
+        }
+      });
+
+      /* ══════════════════════════════════════════════════════
+         4.  GROUPED BAR CHART  —  Skill distribution
+      ══════════════════════════════════════════════════════ */
+      const skillGroups = [
+        {
+          label: 'المهارات التقنية\nالحركية',
+          scores: { timing: 75, speed: 60, vision: 50, kick: 30 }
+        },
+        {
+          label: 'المهارات التكتيكية\nوالحركية',
+          scores: { timing: 80, speed: 55, vision: 65, kick: 40 }
+        },
+        {
+          label: 'المهارات الميكانيكية\nالحركية',
+          scores: { timing: 65, speed: 70, vision: 45, kick: 55 }
+        },
+        {
+          label: 'الحركة',
+          scores: { timing: 90, speed: 45, vision: 70, kick: 35 }
+        }
+      ];
+
+      const skillColors = {
+        timing: '#b670ff',   /* التوقيت  — purple   */
+        speed: '#1a1a1a',   /* سرعة ردة الفعل — dark */
+        vision: '#70b9ff',   /* الرؤية المكانية — blue */
+        kick: '#22c55e'    /* الذقة — green         */
+      };
+
+      const skillLabels = {
+        timing: 'التوقيت',
+        speed: 'سرعة ردة الفعل',
+        vision: 'الرؤية المكانية',
+        kick: 'الذقة'
+      };
+
+      const skillCtx = document.getElementById('skillsChart').getContext('2d');
+      const skillsChart = new Chart(skillCtx, {
+        type: 'bar',
+        data: {
+          labels: skillGroups.map(g => g.label.replace('\n', ' ')),
+          datasets: Object.keys(skillColors).map(key => ({
+            label: skillLabels[key],
+            data: skillGroups.map(g => g.scores[key]),
+            backgroundColor: skillColors[key],
+            borderRadius: 3,
+            borderSkipped: false
+          }))
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 500 },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              align: 'end',
+              rtl: true,
+              labels: {
+                boxWidth: 10,
+                boxHeight: 10,
+                borderRadius: 5,
+                usePointStyle: true,
+                pointStyle: 'circle',
+                font: { family: FONT, size: 11 },
+                padding: 12
+              }
+            },
+            tooltip: { enabled: false }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { family: FONT, size: 10 }, maxRotation: 0 }
+            },
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: { stepSize: 10, font: { family: FONT, size: 11 } },
+              grid: { color: '#f0f0f0' }
+            }
+          },
+          onHover: (e, elements) => {
+            skillCtx.canvas.style.cursor = elements.length ? 'pointer' : 'default';
+          }
+        }
+      });
+
+      /* Skills chart hover tooltip */
+      skillCtx.canvas.addEventListener('mousemove', (e) => {
+        const pts = skillsChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+        if (pts.length) {
+          const dIdx = pts[0].datasetIndex;
+          const iIdx = pts[0].index;
+          const ds = skillsChart.data.datasets[dIdx];
+          const grp = skillGroups[iIdx].label.replace('\n', ' ');
+          showTooltip(e, `${grp} — ${ds.label}: <strong>${ds.data[iIdx]}</strong>`);
+        } else {
+          hideTooltip();
+        }
+      });
+      skillCtx.canvas.addEventListener('mouseleave', hideTooltip);
+
+      /* ══════════════════════════════════════════════════════
+         5.  STABILITY BAR  —  hover tooltips
+      ══════════════════════════════════════════════════════ */
+      document.querySelectorAll('.stability-segment').forEach(seg => {
+        seg.addEventListener('mouseenter', (e) => {
+          showTooltip(e, seg.dataset.tooltip);
+        });
+        seg.addEventListener('mousemove', (e) => {
+          showTooltip(e, seg.dataset.tooltip);
+        });
+        seg.addEventListener('mouseleave', hideTooltip);
+      });
+      const devToggle = document.getElementById('devToggle');
+      const devPanel = document.getElementById('devCardsPanel');
+
+      devToggle.addEventListener('click', () => {
+        const isOpen = devToggle.getAttribute('aria-expanded') === 'true';
+        devToggle.setAttribute('aria-expanded', String(!isOpen));
+        devPanel.hidden = isOpen;
+      });
+
+    })();
+  </script>
+  <footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <!-- Top: Logo text + Tagline -->
+      <div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100">
+                  <stop offset="0%" stop-color="#f2de00"></stop>
+                  <stop offset="50%" stop-color="#cca6ff"></stop>
+                  <stop offset="100%" stop-color="#b670ff"></stop>
+                </lineargradient>
+              </defs>
+              <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="4.5"></path>
+              <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+              <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+            </svg>
+            <p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+          </div>
+          <p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+        </div>
+        <p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+      </div>
+      <!-- 3 Columns Grid — equal width -->
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <!-- Column 1: Quick Links -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            روابط مهمة
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="about.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                عن تاجة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="index.html#faq">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                الأسئلة الشائعة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="contact.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                المساعدة والدعم
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 2: Contact Info (email + phone only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <!-- Phone icon — flipped to face left -->
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              style="transform: scaleX(-1)" viewbox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            تواصل معنا
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="mailto:Tajah2026@gmail.com">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                    <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">
+                    Tajah2026@gmail.com</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="tel:+966501234567">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <!-- Phone icon in icon box — flipped left -->
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    style="transform: scaleX(-1)" viewbox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr"
+                    style="unicode-bidi: embed;">+966 50 123 4567</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            النشرة البريدية
+          </h3>
+          <p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+          <!-- Newsletter form -->
+          <form class="space-y-2" id="newsletter-form">
+            <div class="relative">
+              <input
+                class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface"
+                id="newsletter-email" placeholder="layal@gmail.com" required="" type="email" />
+              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </div>
+            <button
+              class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed"
+              type="submit">
+              <span>اشتراك</span>
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </form>
+          <!-- Success message -->
+          <div
+            class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success"
+            id="newsletter-success">
+            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>تم الاشتراك بنجاح! 🎉</span>
+          </div>
+          <!-- Social Icons: WhatsApp, X, TikTok only -->
+          <div class="mt-6">
+            <p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+            <div class="flex items-center gap-2">
+              <!-- WhatsApp -->
+              <a aria-label="واتساب"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z">
+                  </path>
+                </svg>
+              </a>
+              <!-- Twitter / X -->
+              <a aria-label="تويتر"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                  </path>
+                </svg>
+              </a>
+              <!-- TikTok -->
+              <a aria-label="تيك توك"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z">
+                  </path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom: Copyright + Legal -->
+      <div class="mt-12 pt-8 border-t border-tj-border">
+        <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق
+            محفوظة.
+          </p>
+          <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+            <li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/auth.js?v=1.0.3"></script>
+</body>
+
+</html>

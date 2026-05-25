@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>تاجة - مقارنة اللاعبات</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <script src="../js/mockData.js"></script>
+  <script src="../js/store.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary': '#b670ff',
+            'tj-primary-hover': '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text': '#250140',
+            'tj-surface-base': '#fdfcfb',
+            'tj-surface-card': '#ffffff',
+            'tj-surface-muted': '#f7f5f2',
+            'tj-text': '#0f0f10',
+            'tj-text-secondary': '#5e5e59',
+            'tj-text-tertiary': '#8c8c85',
+            'tj-text-disabled': '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border': '#ece9e3',
+            'tj-border-active': '#8c8c85',
+            'tj-success': '#00a637',
+            'tj-success-bg': '#e3f5e1',
+            'tj-error': '#eb3333',
+            'tj-error-bg': '#fff0f0',
+            'tj-info': '#0094e3',
+            'tj-info-bg': '#e3f1ff',
+            'tj-accent-yellow': '#caa913',
+            'tj-accent-yellow-bg': '#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn': '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card': '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta': '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft': '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float': '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee': { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev': { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow': { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring': { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up': { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee': 'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow': 'float-slow 8s ease-in-out infinite',
+            'pulse-ring': 'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up': 'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    * {
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+    }
+
+    body {
+      background: #F7F7F1;
+      min-height: 100vh;
+    }
+
+    /* ── Stat bar animations ─────────────────────────────────────────────── */
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      width: 0%;
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stat-value {
+      animation: countUp 0.4s ease forwards;
+    }
+
+    /* ── Comparison column ───────────────────────────────────────────────── */
+    .compare-col {
+      flex: 1;
+      min-width: 0;
+      background: white;
+      border: 2px solid #e6e6dc;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .compare-col:hover {
+      border-color: #d4b3ff;
+      box-shadow: 0 4px 20px rgba(174, 82, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .compare-col.selected {
+      border-color: #AE52FF;
+      box-shadow: 0 6px 28px rgba(174, 82, 255, 0.22);
+    }
+
+    .compare-col.winner {
+      border-color: #AE52FF;
+      background: linear-gradient(180deg, #faf5ff 0%, white 60%);
+    }
+
+    .compare-col.empty-slot {
+      background: #f7f7f1;
+      border: 2px dashed #e6e6dc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      cursor: default;
+    }
+
+    .compare-col.empty-slot:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: #e6e6dc;
+    }
+
+    /* ── Winner badge ────────────────────────────────────────────────────── */
+    .winner-badge {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      background: linear-gradient(135deg, #AE52FF, #7c3aed);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 0 18px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── Avatar ──────────────────────────────────────────────────────────── */
+    .athlete-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+
+    /* ── Stat row ────────────────────────────────────────────────────────── */
+    .stat-row {
+      padding: 7px 12px;
+      border-top: 1px solid #f0f0ea;
+    }
+
+    .stat-row:first-child {
+      border-top: none;
+    }
+
+    /* ── Stat bar container ──────────────────────────────────────────────── */
+    .stat-bar-track {
+      height: 8px;
+      border-radius: 4px;
+      background: #f0f0ea;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    /* ── Best value highlight ────────────────────────────────────────────── */
+    .best-value {
+      color: #AE52FF;
+      font-weight: 700;
+    }
+
+    .best-bar {
+      background: linear-gradient(90deg, #AE52FF, #c97dff);
+    }
+
+    .avg-bar {
+      background: linear-gradient(90deg, #93c5fd, #3b82f6);
+    }
+
+    .low-bar {
+      background: #d1d5db;
+    }
+
+    /* ── Selector panel ──────────────────────────────────────────────────── */
+    .selector-chip {
+      padding: 8px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1.5px solid #e6e6dc;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .selector-chip:hover {
+      border-color: #AE52FF;
+      color: #AE52FF;
+      background: #faf5ff;
+    }
+
+    .selector-chip.active {
+      border-color: #AE52FF;
+      background: #AE52FF;
+      color: white;
+    }
+
+    .selector-chip.in-compare {
+      border-color: #d4b3ff;
+      background: #faf5ff;
+      color: #7c3aed;
+    }
+
+    /* ── CTA button ──────────────────────────────────────────────────────── */
+    #btn-negotiate {
+      background: #AE52FF;
+      color: white;
+      border-radius: 16px;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(174, 82, 255, 0.35);
+    }
+
+    #btn-negotiate:hover {
+      background: #9d3ef0;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(174, 82, 255, 0.45);
+    }
+
+    #btn-negotiate:active {
+      transform: scale(0.98);
+    }
+
+    #btn-negotiate:disabled {
+      background: #e6e6dc;
+      color: #9ca3af;
+      box-shadow: none;
+      transform: none;
+      cursor: not-allowed;
+    }
+
+    /* ── Overall rating ring ─────────────────────────────────────────────── */
+    .rating-ring {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 auto;
+    }
+
+    /* ── Toast ───────────────────────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1E1E1D;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 9999;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Slot swap animation ─────────────────────────────────────────────── */
+    @keyframes slotAppear {
+      0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(8px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .slot-appear {
+      animation: slotAppear 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* ── Selected border pulse ───────────────────────────────────────────── */
+    @keyframes borderPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 6px 28px rgba(174, 82, 255, 0.22);
+      }
+
+      50% {
+        box-shadow: 0 6px 28px rgba(174, 82, 255, 0.4), 0 0 0 4px rgba(174, 82, 255, 0.12);
+      }
+    }
+
+    .compare-col.selected {
+      animation: borderPulse 2s ease infinite;
+    }
+
+    /* ── Skeleton ────────────────────────────────────────────────────────── */
+    @keyframes shimmer {
+      0% {
+        background-position: -400px 0;
+      }
+
+      100% {
+        background-position: 400px 0;
+      }
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg, #e6e6dc 25%, #f0f0e8 50%, #e6e6dc 75%);
+      background-size: 400px 100%;
+      animation: shimmer 1.2s infinite;
+      border-radius: 6px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+    }
+
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: 12px;
+      left: 12px;
+      height: 2px;
+      background: #b670ff;
+      border-radius: 2px 2px 0 0;
+    }
+
+    .dropdown {
+      transform-origin: top right;
+    }
+
+    .dropdown.open {
+      animation: dropIn 0.18s ease both;
+    }
+
+    @keyframes dropIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .drawer {
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .nav-link {
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .hover-purple:hover {
+      color: #b670ff !important;
+      background: #f6ebff !important;
+    }
+
+
+    /* Navbar styles */
+    .nav-link {
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: 12px;
+      left: 12px;
+      height: 2px;
+      background: #b670ff;
+      border-radius: 2px 2px 0 0;
+    }
+
+    .hover-purple:hover {
+      color: #b670ff !important;
+      background: #f6ebff !important;
+    }
+
+    .dropdown {
+      transform-origin: top right;
+    }
+
+    .dropdown.open {
+      animation: dropIn 0.18s ease both;
+    }
+
+    @keyframes dropIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .drawer {
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    /* Hide duplicate layout placeholders */
+    .navbar-placeholder,
+    .footer-placeholder {
+      display: none !important;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       GLOBAL DARK MODE OVERRIDES
+       ════════════════════════════════════════════════════════ */
+    [data-theme="dark"],
+    [data-theme="dark"] body,
+    [data-theme="dark"] .bg-tj-surface-base {
+      background-color: #111118 !important;
+      color: #f0f0f5 !important;
+    }
+
+    [data-theme="dark"] .bg-tj-surface-card,
+    [data-theme="dark"] .bg-white,
+    [data-theme="dark"] header,
+    [data-theme="dark"] footer,
+    [data-theme="dark"] #drawer,
+    [data-theme="dark"] #mobile-drawer {
+      background-color: #1e1e2a !important;
+      border-color: #2e2e3e !important;
+    }
+
+    [data-theme="dark"] .bg-tj-surface-muted,
+    [data-theme="dark"] .bg-gray-50,
+    [data-theme="dark"] .bg-gray-100 {
+      background-color: #1a1a26 !important;
+    }
+
+    [data-theme="dark"] .text-tj-text,
+    [data-theme="dark"] .text-black,
+    [data-theme="dark"] .text-gray-900,
+    [data-theme="dark"] .text-gray-800,
+    [data-theme="dark"] .text-gray-700 {
+      color: #f0f0f5 !important;
+    }
+
+    [data-theme="dark"] .text-tj-text-secondary,
+    [data-theme="dark"] .text-gray-600,
+    [data-theme="dark"] .text-gray-500 {
+      color: #a8a8be !important;
+    }
+
+    [data-theme="dark"] .text-tj-text-tertiary,
+    [data-theme="dark"] .text-gray-400 {
+      color: #6e6e88 !important;
+    }
+
+    [data-theme="dark"] .border-tj-border,
+    [data-theme="dark"] .border-gray-100,
+    [data-theme="dark"] .border-gray-200 {
+      border-color: #2e2e3e !important;
+    }
+
+    [data-theme="dark"] input,
+    [data-theme="dark"] textarea,
+    [data-theme="dark"] select {
+      background-color: #181822 !important;
+      color: #f0f0f5 !important;
+      border-color: #2e2e3e !important;
+    }
+
+    /* Active states & navigation hovers */
+    [data-theme="dark"] .hover-purple:hover,
+    [data-theme="dark"] .nav-link:hover {
+      color: #b670ff !important;
+      background-color: #2a1b40 !important;
+    }
+
+    [data-theme="dark"] .nav-link-active {
+      color: #b670ff !important;
+      background-color: #2a1b40 !important;
+    }
+
+    [data-theme="dark"] .shadow-tj-card,
+    [data-theme="dark"] .shadow-sm {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    }
+  </style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+
+<body>
+  <div class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden lg:hidden" id="overlay" onclick="closeAll()"></div>
+  <!-- ==================== NAVBAR ==================== -->
+  <header
+    class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+      <div class="flex items-center h-16">
+        <!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+        <div class="flex flex-1 items-center justify-start gap-2">
+          <!-- Profile Dropdown Trigger (desktop) -->
+          <div class="relative hidden lg:block">
+            <button
+              class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group"
+              id="profileBtn" onclick="toggleDropdown()">
+              <div
+                class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">
+                م</div>
+              <div class="text-right">
+                <p
+                  class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">
+                  مرحباً، مرام!</p>
+              </div>
+              <svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron"
+                stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <!-- Dropdown Menu -->
+            <div
+              class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50"
+              id="dropdown">
+              <div class="px-4 py-3 border-b border-tj-border">
+                <p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+                <p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+              </div>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="stats.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                الملف الشخصي
+              </a>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="settings.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewbox="0 0 24 24">
+                  <path
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                الإعدادات
+              </a>
+              <div class="border-t border-tj-border mt-1 pt-1">
+                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group"
+                  href="../index.html">
+                  <svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewbox="0 0 24 24">
+                    <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  تسجيل الخروج
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Notification Bell -->
+          <button aria-label="الإشعارات"
+            class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group"
+            onclick="window.location.href='notifications.html'">
+            <span
+              class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+            <svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors"
+              fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <!-- Hamburger (mobile) -->
+          <button
+            class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors"
+            id="hamBtn" onclick="toggleDrawer()">
+            <svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+        <!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap"
+            href="PlayerHomepage.html">الرئيسية</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="../Communities/index.html">المجتمعات</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="Tajah-search.html">البحث</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="opportunities.html">الفرص</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="applications.html">طلباتي</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="contact.html">تواصل معنا</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="about.html">عن تاجة</a>
+        </nav>
+        <!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+        <div class="flex flex-1 items-center justify-end">
+          <a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+            <div class="w-9 h-9 flex items-center justify-center">
+              <svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+                    <stop offset="0%" stop-color="#f2de00"></stop>
+                    <stop offset="50%" stop-color="#cca6ff"></stop>
+                    <stop offset="100%" stop-color="#b670ff"></stop>
+                  </lineargradient>
+                </defs>
+                <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+                <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+                <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              </svg>
+            </div>
+            <span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ==================== MOBILE DRAWER ==================== -->
+  <aside
+    class="drawer fixed inset-y-0 right-0 z-50 w-[min(100%,22rem)] bg-tj-surface-card shadow-tj-card lg:hidden flex flex-col"
+    id="drawer">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-tj-border">
+      <div class="flex items-center gap-3">
+        <div class="relative w-10 h-10 rounded-full flex-shrink-0">
+          <img alt="نادي الهلال" class="w-10 h-10 rounded-full object-cover"
+            src="data:image/jpeg;base64,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PHPPPPPPPPPPPvLutuKGAvPPPPPPPPPPPPPPEgADDvPPPPPPPPPPPPPPPPPPPPHPCABPPPPPPPPPPPPPPPAhivPPPPPPPPPPPKBgBLkPPPPPPPHDhvPPPPPPPPPPOPPPPPPPPPPPPPKfnPPKMjjY6/PLOOevPPDKFPPDPPPPPPPPPPPPPPPPONEm7HPPPKHvPu9PPPPCsmwsvPOPPPPPPPPPPPPPPPPPPPLnP3xHvPPKMAjinvPPKEp/78PPPPPPPPPPPPPPPPPPPPPPKEf/APD7zzyoT/77rzzzyN79sfTzzzxzzzzzzJzzzzzzzzyy1X7sBbzzyoBf77Pzzzy336tJTzzzx7DCLzzzjzzzzzzzTz3XpYtbzzz6pf7pfzzzybra4NTjzxzyIADzzzzzzzzzzhzz3Jbz57zzzxb/AO+wy160DWs2J8s0888eOOc888s88888088sC++6U888+e++e8fd+d8++qF884888888888888888Y8884J2+u2889mc+/26+++6o2+uj888k888888888888888888t4e+He8+tJrG+U2w+++++++k8888888888888888808888tA++u88Ove8888896/+++++V8888488888888888o88888p9++yX88888888888vz4+++E88888U8888888888888888ru++U+888888888888+N+++A8888888888888888c8888893++I+42Q/wAzJNtPPPPJP/vgPPPPPLPPPPPPPPPPPPPPPPKf/vqu5Hvvvnvvc3PPPMP/AL4Dzzzzzzzzzzzzzzzzzzzzzynf77ri/r7Lzb59UJHzxD/66rzzzzzzzzzzzzzzhzzzzzzz0n7777bi4Vb769vxzzwT/wC+s888888s0888888888888888e8++2UKF8X++7v8APPPFP/uPvPPPPPPPPPPPPPAPPPPPPPPOf9vvYn/PF/vr3/PPPAv3rl/PPPPPPAPPPPPPPPPPPPPPPLKvvkX/ADzwP778fzzzwD/Snzzzzzzzzzzzzzzzzzzzzzzzzw7R5FzzzyP779Pzzzwj9r3zzzzzzzzzzzzzzzzzzzzzzzzzzR//AM888e++/d8888rl+8888888888888888888888888888ed888+X++//APPPPHNPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPvPPPk/vv7/ADzzy7zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzw/77/3zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz77/79Xzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzv77zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzyv/tkXzzzzzzzzzzzzzzzzzzzzzzzDzzzzzzzzzzzzzzzzzywzzzzzzzzzzzzzzzzzzzDzzzzzwzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzwzzzzzzzjzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzTzzzzzzxzzzzzzz377z3TzhPz/njnrzzz3XXz/wB888888s888888888888888fa67J38qnw5ZNcu888vf68HV88888888888888888888808LTn3d86Awpm7LC88sjxr86V8888888888888888c8888Ai6cRpb87Dc1BznK5yFbJjayRw2888s888888888848888JP8qKHCXYK8uplA5KFmctGe2f0X88808888888888s0888888+8+899+8q+88++c582888+/8APPOHPPPPPPPPPPPPPPPPPPPPPPKXq19RdpPf/X8T3PPPPPPPPPPPPPPPPPPPPPOPPPPPPPIPQbr1XW1w24ff9zv/ADzzzzzTzzzzzzzzzzzzzxzTzzzzznJ0HZuFaiKkr/TLb7/zzzzzizzzzzzzzzzzzzzzzjzzzzzzSFBF/fh+B3X9/k9P/wA8888088888888888888888U88888cTwTsM+uNuf8AzvHn3PPPPKPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPLPPPPPPPPPPPPPPPPPPPPPPPPHPPPPPPPPPPPPPPPPPPPPPPGPPPPPPM8dPq/dffPPPPPJPPPPPPPPPPPPPPPPPPPPPPPPPDNPPPPOoSq+CVPPPPPODPPPPPPPPPPPPPPPPPPPPPPPPPPPPPNPPKx/wDbWAHzzzjzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxzzw+1z71/wA8s8888888888888888888888888888888888888sMMMMc888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888/8QAJBEBAAICAgIDAAMBAQAAAAAAAQAREDEgIUBBUFFhMGBxcIH/2gAIAQMBAT8Q/wCm9S/h1DfITCH3T9p+0aO+KhvzOmYDSKiz2zVx3wwzV4vommZ70RuaXyL34auO/hq8fTh7eRt4auO/hq8fWGd3yNuLhuauO2OdXj68PbyNuR7mrjtjnV4+uVnt45N+fc1cdsck0s/WGg59fLrmzPuauO/jcFNTTRNQCV5lvzXc1ZqD0iteK+DtuRpmrOptDuM+xDBvqYDU2h/Bt5be5qyE3zQdzsCKd8WK/ILtn3NH8gCmP24HyTZn3NX8u4Dpl8k3Z9zVjaMHFujCe4nsTRPLQh5Ztz7iBX6j6hFbytnQME64aEMPkBEFwJBgZO+DDHcuW4yd7zoQwwb8cgrmeP0YaeWaPHQhk15HpOJjd2oAoxtyzZx0IZqPkXZKprgv4QAKM7cs2cdUMV5AryekZC9cb25Zs46kMd48rqIipx3b6478s2cdCEeiBXl06To8g35Zo8dSK6IQ87Ki+O3LNHitAhdnwm/LNnF738LtyzZ8VtyzZ8UW+ah7fF52/qUx+0EK+MBdh/fkBbP1yj0sG8ALZ0KxsGALIm0sQFsHUPBAtgnuDfZhDpYIlnj2oJSY8nZzT/nHdiOX3ihtOFBSUO50D6w40+MAtjdkMKepVg2zT/md1eFnbjeJqytFuJoqcFtPjVlIexHYYlXOwJthwLB9M2StuE0cGgWs/SN0p0UL2S/7loyjwjkWfpDvxLuStJPwly8QD2mAdki1kuThgYWtibERoYeyWhlkIHcT8p06QtIvpDBCgPLGXlJ7gmnC3BiuGpfmIAoyWlCfXzoC2J6idwRgh2DGtme2hrzhNRWDNU3TURWuVTSVOlEC1FsQ+5tzDR5pNs0zVL2jaR94XTC6zSbm5RrzAFiWG5vjxGjzrhgBUDcTZLSXe5oZ0cVtBaM93cW+1gWmb7YJSDR5wbxd9ONAjPsjLr1mfqn5T8ofViqU/v6CGbIj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" />
+          <span
+            class="absolute -bottom-0.5 -left-0.5 w-4 h-4 rounded-full bg-tj-info flex items-center justify-center ring-1 ring-tj-surface-base">
+            <svg class="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" stroke-width="2.5"
+              viewbox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </div>
+        <p class="text-base font-semibold text-tj-text">مرحباً، أحلام!</p>
+      </div>
+      <button
+        class="w-8 h-8 rounded-tj-btn bg-tj-primary-surface flex items-center justify-center hover:bg-tj-primary-surface/70 transition-colors"
+        onclick="closeAll()">
+        <svg class="w-5 h-5 text-tj-text-secondary" fill="none" stroke="currentColor" stroke-width="1.5"
+          viewbox="0 0 24 24">
+          <path d="M19 5L5 19M5 5l14 14" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="px-4 pt-3 pb-1">
+      <a class="flex items-center gap-2 rounded-tj-btn bg-tj-primary-surface px-3 py-2 w-fit" href="#">
+        <svg class="w-4 h-4 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span class="text-sm font-semibold text-tj-primary">ملف النادي</span>
+        <svg class="w-4 h-4 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+          <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+    <nav class="flex-1 px-4 pt-2 flex flex-col gap-1 overflow-y-auto">
+      <a class="flex items-center justify-between rounded-tj-card border border-tj-border bg-tj-surface-card px-4 py-3.5 text-tj-text font-medium text-sm hover:border-tj-primary/30 hover:bg-tj-primary-surface hover:text-tj-primary transition-all group"
+        href="#">
+        <span>الرئيسية</span>
+        <svg class="w-5 h-5 text-tj-text-disabled group-hover:text-tj-primary" fill="none" stroke="currentColor"
+          stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+      <a class="flex items-center justify-between rounded-tj-card border border-tj-border bg-tj-surface-card px-4 py-3.5 text-tj-text font-medium text-sm hover:border-tj-primary/30 hover:bg-tj-primary-surface hover:text-tj-primary transition-all group"
+        href="#">
+        <span>قائمة المقارنة</span>
+        <svg class="w-5 h-5 text-tj-text-disabled group-hover:text-tj-primary" fill="none" stroke="currentColor"
+          stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+      <a class="flex items-center justify-between rounded-tj-card border border-tj-border bg-tj-surface-card px-4 py-3.5 text-tj-text font-medium text-sm hover:border-tj-primary/30 hover:bg-tj-primary-surface hover:text-tj-primary transition-all group"
+        href="#">
+        <span>البحث</span>
+        <svg class="w-5 h-5 text-tj-text-disabled group-hover:text-tj-primary" fill="none" stroke="currentColor"
+          stroke-width="1.5" viewbox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+      <a class="flex items-center justify-between rounded-tj-card border border-tj-border bg-tj-surface-card px-4 py-3.5 text-tj-text font-medium text-sm hover:border-tj-primary/30 hover:bg-tj-primary-surface hover:text-tj-primary transition-all group"
+        href="#">
+        <span>تواصل معنا</span>
+        <svg class="w-5 h-5 text-tj-text-disabled group-hover:text-tj-primary" fill="none" stroke="currentColor"
+          stroke-width="1.5" viewbox="0 0 24 24">
+          <path
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </nav>
+    <div class="px-4 py-4 border-t border-tj-border">
+      <a class="flex items-center justify-between rounded-tj-card border border-tj-border bg-tj-surface-card px-4 py-3.5 text-tj-text font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-all group mb-4"
+        href="#">
+        <span>عن تاجة</span>
+        <svg class="opacity-40 group-hover:opacity-100 transition-opacity" fill="none" height="22" viewbox="0 0 120 100"
+          width="22">
+          <defs>
+            <lineargradient gradientunits="userSpaceOnUse" id="lgBot" x1="0" x2="120" y1="0" y2="100">
+              <stop offset="0%" stop-color="#f2de00"></stop>
+              <stop offset="50%" stop-color="#cca6ff"></stop>
+              <stop offset="100%" stop-color="#b670ff"></stop>
+            </lineargradient>
+          </defs>
+          <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+            stroke="url(#lgBot)" stroke-linecap="round" stroke-width="5"></path>
+          <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+            stroke="url(#lgBot)" stroke-linecap="round" stroke-width="5"></path>
+          <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none"
+            stroke="url(#lgBot)" stroke-linecap="round" stroke-width="5"></path>
+          <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+          <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+          <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+        </svg>
+      </a>
+      <div class="flex justify-center">
+        <svg class="opacity-25" fill="none" height="48" viewbox="0 0 120 100" width="48">
+          <defs>
+            <lineargradient gradientunits="userSpaceOnUse" id="lgFoot" x1="0" x2="120" y1="0" y2="100">
+              <stop offset="0%" stop-color="#f2de00"></stop>
+              <stop offset="50%" stop-color="#cca6ff"></stop>
+              <stop offset="100%" stop-color="#b670ff"></stop>
+            </lineargradient>
+          </defs>
+          <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+            stroke="url(#lgFoot)" stroke-linecap="round" stroke-width="5"></path>
+          <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+            stroke="url(#lgFoot)" stroke-linecap="round" stroke-width="5"></path>
+          <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none"
+            stroke="url(#lgFoot)" stroke-linecap="round" stroke-width="5"></path>
+          <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+          <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+          <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+        </svg>
+      </div>
+    </div>
+  </aside>
+  <div id="toast"></div>
+  <!-- ── HEADER ──────────────────────────────────────────────────────────── -->
+  <header style="background:white; border-bottom:1px solid #e6e6dc; position:sticky; top:0; z-index:50;">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a class="flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-xl transition-all"
+          href="javascript:window.history.back();" onmouseout="this.style.background='#faf5ff'"
+          onmouseover="this.style.background='#f3e8ff'" style="color:#AE52FF; background:#faf5ff;">
+          <svg fill="none" height="16" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="16">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+        <span style="color:#e6e6dc;">|</span>
+        <div>
+          <h1 class="font-bold text-tajah-dark text-lg leading-none">مقارنة اللاعبات</h1>
+          <p class="text-xs mt-0.5" style="color:#9ca3af;">اختر حتى ٣ لاعبات للمقارنة</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ── MAIN ───────────────────────────────────────────────────────────── -->
+  <main class="max-w-5xl mx-auto px-4 py-3 space-y-3">
+    <!-- ── Opportunity Dropdown ────────────────────────────────────────── -->
+    <div style="background:white; border:1.5px solid #e6e6dc; border-radius:20px; padding:10px 16px;">
+      <p class="text-sm font-semibold text-tajah-dark mb-2">الفرصة المستهدفة</p>
+      <select id="opportunity-select" onchange="onOpportunityChange(this.value)"
+        class="w-full bg-tj-surface-muted border border-tj-border rounded-tj-btn px-3 py-2 text-sm font-medium text-tj-text outline-none focus:border-tj-primary transition">
+        <option value="">اختر الفرصة...</option>
+        <option value="حارسة مرمى">حارسة مرمى - كرة قدم</option>
+        <option value="مهاجمة">مهاجمة - كرة سلة</option>
+        <option value="وسط">وسط - كرة قدم</option>
+      </select>
+    </div>
+    <!-- ── Comparison grid ───────────────────────────────────────────────── -->
+    <div class="flex gap-3 items-stretch" id="compare-grid"></div>
+    <!-- ── Negotiate CTA ─────────────────────────────────────────────────── -->
+    <div class="space-y-2" style="background:white; border:1.5px solid #e6e6dc; border-radius:20px; padding:12px 20px;">
+      <div class="text-sm" id="selected-summary" style="color:#6b7280;">
+        اختر اللاعبة التي تريد الترشيح معها من الأعمدة أعلاه
+      </div>
+      <button disabled="" id="btn-negotiate" onclick="startNegotiation()">
+        ترشيح <span id="btn-name">—</span>
+      </button>
+    </div>
+    <!-- ── Modals ────────────────────────────────────────────────────────── -->
+    <div id="confirm-remove-modal"
+      class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex items-center justify-center">
+      <div
+        class="bg-white rounded-tj-card p-6 w-[90%] max-w-sm mx-auto shadow-tj-float transform transition-all scale-95 opacity-0"
+        id="confirm-remove-content">
+        <h3 class="text-lg font-bold text-tj-text mb-2">تأكيد الإزالة</h3>
+        <p class="text-sm text-tj-text-secondary mb-6" id="confirm-remove-msg">هل أنت متأكد من إزالة اللاعبة من قائمة
+          المقارنة؟</p>
+        <div class="flex gap-3">
+          <button onclick="executeRemove()"
+            class="flex-1 bg-tj-error text-white font-semibold py-2 rounded-tj-btn hover:bg-red-600 transition">تأكيد</button>
+          <button onclick="closeModal('confirm-remove-modal')"
+            class="flex-1 bg-tj-surface-muted text-tj-text font-semibold py-2 rounded-tj-btn hover:bg-gray-200 transition">إلغاء</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="move-opportunity-modal"
+      class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex items-center justify-center">
+      <div
+        class="bg-white rounded-tj-card p-6 w-[90%] max-w-sm mx-auto shadow-tj-float transform transition-all scale-95 opacity-0"
+        id="move-opportunity-content">
+        <h3 class="text-lg font-bold text-tj-text mb-2">نقل إلى فرصة أخرى</h3>
+        <p class="text-sm text-tj-text-secondary mb-4" id="move-opportunity-msg">نقل اللاعبة إلى فرصة أخرى</p>
+        <select id="new-opportunity-select"
+          class="w-full bg-tj-surface-muted border border-tj-border rounded-tj-btn px-3 py-2 text-sm font-medium text-tj-text outline-none focus:border-tj-primary transition mb-6">
+          <option value="حارسة مرمى">حارسة مرمى - كرة قدم</option>
+          <option value="مهاجمة">مهاجمة - كرة سلة</option>
+          <option value="وسط">وسط - كرة قدم</option>
+        </select>
+        <div class="flex gap-3">
+          <button onclick="confirmMoveOpportunity()"
+            class="flex-1 bg-tj-primary text-white font-semibold py-2 rounded-tj-btn hover:bg-tj-primary-hover transition">تأكيد</button>
+          <button onclick="closeModal('move-opportunity-modal')"
+            class="flex-1 bg-tj-surface-muted text-tj-text font-semibold py-2 rounded-tj-btn hover:bg-gray-200 transition">إلغاء</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="confirm-move-modal"
+      class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex items-center justify-center">
+      <div
+        class="bg-white rounded-tj-card p-6 w-[90%] max-w-sm mx-auto shadow-tj-float transform transition-all scale-95 opacity-0"
+        id="confirm-move-content">
+        <h3 class="text-lg font-bold text-tj-text mb-2">تأكيد النقل</h3>
+        <p class="text-sm text-tj-text-secondary mb-6" id="confirm-move-msg"></p>
+        <div class="flex gap-3">
+          <button onclick="executeMove()"
+            class="flex-1 bg-tj-primary text-white font-semibold py-2 rounded-tj-btn hover:bg-tj-primary-hover transition">تأكيد</button>
+          <button onclick="closeModal('confirm-move-modal')"
+            class="flex-1 bg-tj-surface-muted text-tj-text font-semibold py-2 rounded-tj-btn hover:bg-gray-200 transition">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- ── SCRIPTS ────────────────────────────────────────────────────────── -->
+  <script>
+    TajahStore.init();
+
+    /* ── Data ────────────────────────────────────────────────────────────── */
+    const candidates = TajahStore.get('candidates') || [];
+    let compareIds = [];   // up to 3 candidate IDs in compare slots
+    let selectedId = null; // which one the user wants to negotiate with
+
+    // Augment candidates with new fields
+    candidates.forEach(c => {
+      if (!c.stats.weight) c.stats.weight = 55 + (c.id * 2);
+      if (!c.stats.fitnessLevel) c.stats.fitnessLevel = Math.max(5, Math.floor(c.stats.speed || 8));
+      if (!c.stats.activityRate) c.stats.activityRate = (c.id % 2 === 0) ? 'نشطة جداً' : 'متوسطة النشاط';
+      if (!c.stats.topAchievement) c.stats.topAchievement = (c.id % 2 === 0) ? 'بطولة الجامعات 2025' : 'أفضل لاعبة في الموسم';
+      if (!c.opportunity) c.opportunity = c.position;
+    });
+
+    let currentOpportunity = '';
+    compareIds = [];
+
+    /* ── Stat definitions ────────────────────────────────────────────────── */
+    const STATS = [
+      { key: 'heightWeight', label: 'الطول (سم) - الوزن (كجم)', type: 'text' },
+      { key: 'overallRating', label: 'التقييم العام', max: 100, unit: '/100', isMain: true },
+      { key: 'fitnessLevel', label: 'مستوى اللياقة', max: 10, unit: '/10' },
+      { key: 'activityRate', label: 'معدل النشاط', type: 'text' },
+      { key: 'topAchievement', label: 'أبرز الإنجازات', type: 'text' },
+    ];
+
+    /* ── Avatar colours ──────────────────────────────────────────────────── */
+    const AVATAR_COLORS = ['#AE52FF', '#3b82f6', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6'];
+
+    /* ── Render ──────────────────────────────────────────────────────────── */
+    function render() {
+      renderGrid();
+    }
+
+    function onOpportunityChange(val) {
+      currentOpportunity = val;
+      if (!val) {
+        compareIds = [];
+      } else {
+        compareIds = candidates.filter(c => c.opportunity === val).map(c => c.id).slice(0, 3);
+      }
+      selectedId = null;
+      updateNegotiateBtn();
+      renderGrid();
+    }
+
+    /* ── Modals Logic ────────────────────────────────────────────────────── */
+    let pendingActionCandidateId = null;
+    let pendingMoveOpportunity = null;
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById(id.replace('modal', 'content')).classList.remove('scale-95', 'opacity-0');
+      }, 10);
+    }
+
+    function closeModal(id) {
+      document.getElementById(id.replace('modal', 'content')).classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        document.getElementById(id).classList.add('hidden');
+      }, 200);
+    }
+
+    function promptRemove(id) {
+      pendingActionCandidateId = id;
+      const c = candidates.find(x => x.id === id);
+      document.getElementById('confirm-remove-msg').textContent = `هل أنت متأكد من إزالة ${c.name} من قائمة المقارنة؟`;
+      openModal('confirm-remove-modal');
+    }
+
+    function executeRemove() {
+      compareIds = compareIds.filter(i => i !== pendingActionCandidateId);
+      if (selectedId === pendingActionCandidateId) {
+        selectedId = null;
+        updateNegotiateBtn();
+      }
+      renderGrid();
+      closeModal('confirm-remove-modal');
+      showToast('تمت إزالة اللاعبة من المقارنة');
+    }
+
+    function promptMove(id) {
+      pendingActionCandidateId = id;
+      openModal('move-opportunity-modal');
+    }
+
+    function confirmMoveOpportunity() {
+      const select = document.getElementById('new-opportunity-select');
+      pendingMoveOpportunity = select.value;
+      if (pendingMoveOpportunity === currentOpportunity) {
+        showToast('اللاعبة موجودة في هذه الفرصة بالفعل');
+        return;
+      }
+      closeModal('move-opportunity-modal');
+      const c = candidates.find(x => x.id === pendingActionCandidateId);
+      document.getElementById('confirm-move-msg').textContent = `هل أنت متأكد من نقل ${c.name} من ${currentOpportunity} إلى ${pendingMoveOpportunity}؟`;
+      setTimeout(() => openModal('confirm-move-modal'), 250);
+    }
+
+    function executeMove() {
+      const c = candidates.find(x => x.id === pendingActionCandidateId);
+      if (c) {
+        c.opportunity = pendingMoveOpportunity;
+        // Remove from current view
+        compareIds = compareIds.filter(i => i !== pendingActionCandidateId);
+        if (selectedId === pendingActionCandidateId) {
+          selectedId = null;
+          updateNegotiateBtn();
+        }
+        renderGrid();
+      }
+      closeModal('confirm-move-modal');
+      showToast('تم نقل اللاعبة بنجاح');
+    }
+
+    /* ── Click outside menu to close ─────────────────────────────────────── */
+    document.addEventListener('click', (e) => {
+      document.querySelectorAll('.kebab-menu').forEach(menu => {
+        if (!menu.contains(e.target) && !menu.previousElementSibling.contains(e.target)) {
+          menu.classList.add('hidden');
+        }
+      });
+    });
+
+    /* ── Find best value across compared athletes for each stat ─────────── */
+    function getBestMap() {
+      const map = {};
+      STATS.forEach(s => {
+        const values = compareIds.map(id => {
+          const c = candidates.find(x => x.id === id);
+          return c ? c.stats[s.key] : 0;
+        });
+        map[s.key] = Math.max(...values);
+      });
+      return map;
+    }
+
+    /* ── Determine winner (highest overall rating) ───────────────────────── */
+    function getWinnerId() {
+      if (compareIds.length === 0) return null;
+      let best = null, bestRating = -1;
+      compareIds.forEach(id => {
+        const c = candidates.find(x => x.id === id);
+        if (c && c.stats.overallRating > bestRating) {
+          bestRating = c.stats.overallRating;
+          best = id;
+        }
+      });
+      return best;
+    }
+
+    /* ── Render grid ─────────────────────────────────────────────────────── */
+    function renderGrid() {
+      const grid = document.getElementById('compare-grid');
+      grid.innerHTML = '';
+
+      const bestMap = getBestMap();
+      const winnerId = getWinnerId();
+
+      // Render compare slots (always show 3 columns for balance)
+      const slots = [...compareIds];
+      while (slots.length < 3) slots.push(null);
+
+      slots.forEach((id, idx) => {
+        const col = document.createElement('div');
+
+        if (!id) {
+          // Empty slot
+          col.className = 'compare-col empty-slot';
+          col.innerHTML = `
+            <div class="text-center p-6">
+              <div style="width:40px;height:40px;border-radius:50%;background:#f0f0ea;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </div>
+              <p class="text-xs" style="color:#9ca3af;">اختر لاعبة من الأعلى</p>
+            </div>`;
+          grid.appendChild(col);
+          return;
+        }
+
+        const c = candidates.find(x => x.id === id);
+        const isWinner = (id === winnerId);
+        const isSelected = (id === selectedId);
+        const color = AVATAR_COLORS[id % AVATAR_COLORS.length];
+
+        col.className = 'compare-col slot-appear' +
+          (isWinner ? ' winner' : '') +
+          (isSelected ? ' selected' : '');
+
+        // Handle AI Glowing effect
+        if (isWinner) {
+          col.style.boxShadow = '0 0 15px rgba(174, 82, 255, 0.6)';
+          col.style.borderColor = '#AE52FF';
+        }
+
+        // Header section with Kebab menu
+        let headerHTML = `
+          ${isWinner ? `<div class="winner-badge">✨ الأكثر تطابقاً</div>` : ''}
+          <div style="padding:10px 14px 8px; text-align:center; border-bottom:1px solid #f0f0ea; position:relative;">
+            <button onclick="this.nextElementSibling.classList.toggle('hidden'); event.stopPropagation();" class="absolute top-2 left-2 text-gray-500 hover:text-tj-primary transition w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-100">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/>
+              </svg>
+            </button>
+            <div class="kebab-menu hidden absolute top-8 left-2 bg-white border border-tj-border shadow-tj-card rounded-tj-btn w-40 z-10 text-right overflow-hidden">
+              <button onclick="promptRemove(${id}); event.stopPropagation();" class="w-full text-xs font-medium text-tj-error hover:bg-red-50 px-3 py-2 text-right transition">إزالة من قائمة المقارنة</button>
+              <button onclick="promptMove(${id}); event.stopPropagation();" class="w-full text-xs font-medium text-tj-text hover:bg-gray-50 px-3 py-2 text-right transition border-t border-tj-border">نقل إلى فرصة أخرى</button>
+            </div>
+            <div class="athlete-avatar" style="background:${color};">${c.name[0]}</div>
+            <p class="font-bold text-tajah-dark mt-2 text-sm leading-tight">${c.name}</p>
+            <p class="text-xs mt-0.5" style="color:#6b7280;">${c.position} · ${c.age} سنة</p>
+            <p class="text-xs" style="color:#9ca3af;">${c.university}</p>
+          </div>`;
+
+        // Stats
+        let statsHTML = STATS.map(s => {
+          let val = c.stats[s.key];
+          if (s.key === 'heightWeight') {
+            val = `${c.stats.height} سم - ${c.stats.weight} كجم`;
+          }
+
+          if (s.type === 'text') {
+            return `
+            <div class="stat-row">
+              <div class="flex items-center justify-between">
+                <span class="text-xs" style="color:#6b7280;">${s.label}</span>
+                <span class="text-sm font-bold text-tajah-dark stat-value text-left max-w-[60%] truncate" title="${val}">
+                  ${val}
+                </span>
+              </div>
+            </div>`;
+          }
+
+          const isBest = val === bestMap[s.key] && compareIds.length > 1;
+          const pct = Math.min((val / s.max) * 100, 100);
+          const barClass = isBest ? 'best-bar' : (pct > 50 ? 'avg-bar' : 'low-bar');
+          const valClass = isBest ? 'best-value' : 'text-tajah-dark';
+
+          return `
+            <div class="stat-row">
+              <div class="flex items-center justify-between">
+                <span class="text-xs" style="color:#6b7280;">${s.label}</span>
+                <span class="text-sm font-bold ${valClass} stat-value">
+                  ${val}${s.unit ? '<span class="text-xs font-normal ml-0.5" style="color:#9ca3af;">' + s.unit + '</span>' : ''}
+                </span>
+              </div>
+              ${!s.isMain ? `
+              <div class="stat-bar-track">
+                <div class="stat-bar-fill ${barClass}" data-pct="${pct}"></div>
+              </div>` : `
+              <div class="flex items-center gap-2 mt-1">
+                <div class="stat-bar-track flex-1">
+                  <div class="stat-bar-fill ${barClass}" data-pct="${pct}"></div>
+                </div>
+                <div class="rating-ring" style="background:${isBest ? 'linear-gradient(135deg,#AE52FF,#7c3aed)' : '#f0f0ea'}; color:${isBest ? 'white' : '#374151'}; width:36px;height:36px;font-size:13px;">
+                  ${val}
+                </div>
+              </div>`}
+            </div>`;
+        }).join('');
+
+        // Select button
+        const selectBtnStyle = isSelected
+          ? 'background:#AE52FF; color:white; border-color:#AE52FF;'
+          : 'background:white; color:#374151; border-color:#e6e6dc;';
+        const selectBtnText = isSelected ? '✓ مختارة للترشيح' : 'تحديد للترشيح';
+
+        let footerHTML = `
+          <div style="padding:8px 12px; border-top:1px solid #f0f0ea;">
+            <button
+              onclick="selectForNegotiation(${id}, event)"
+              style="${selectBtnStyle} border:1.5px solid; border-radius:12px; padding:8px; font-size:13px; font-weight:600; width:100%; cursor:pointer; transition:all 0.2s ease;"
+              onmouseover="this.style.borderColor='#AE52FF'"
+              onmouseout="this.style.borderColor='${isSelected ? '#AE52FF' : '#e6e6dc'}'"
+            >${selectBtnText}</button>
+          </div>`;
+
+        col.innerHTML = headerHTML + `<div class="stat-sections">${statsHTML}</div>` + footerHTML;
+        col.addEventListener('click', (e) => {
+          if (!e.target.closest('button')) selectForNegotiation(id, e);
+        });
+        grid.appendChild(col);
+      });
+
+      // Animate bars after render
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          document.querySelectorAll('.stat-bar-fill[data-pct]').forEach(bar => {
+            bar.style.width = bar.getAttribute('data-pct') + '%';
+          });
+        }, 80);
+      });
+    }
+
+    /* ── Select for negotiation ──────────────────────────────────────────── */
+    function selectForNegotiation(id, event) {
+      if (event) event.stopPropagation();
+      selectedId = (selectedId === id) ? null : id;
+      updateNegotiateBtn();
+      renderGrid(); // re-render to update selected state
+    }
+
+    /* ── Update negotiate button ─────────────────────────────────────────── */
+    function updateNegotiateBtn() {
+      const btn = document.getElementById('btn-negotiate');
+      const nameEl = document.getElementById('btn-name');
+      const summary = document.getElementById('selected-summary');
+
+      if (selectedId) {
+        const c = candidates.find(x => x.id === selectedId);
+        btn.disabled = false;
+        nameEl.textContent = c ? c.name : '—';
+        summary.innerHTML = `
+          <div class="flex items-center gap-2">
+            <div style="background:${AVATAR_COLORS[selectedId % AVATAR_COLORS.length]}; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:12px; flex-shrink:0;">
+              ${c ? c.name[0] : '?'}
+            </div>
+            <div>
+              <p class="font-semibold text-tajah-dark text-sm">${c ? c.name : ''}</p>
+              <p style="color:#9ca3af; font-size:11px;">${c ? c.position + ' · تقييم ' + c.stats.overallRating + '/١٠٠' : ''}</p>
+            </div>
+          </div>`;
+      } else {
+        btn.disabled = true;
+        nameEl.textContent = '—';
+        summary.textContent = 'اختر اللاعبة التي تريد الترشيح معها من الأعمدة أعلاه';
+      }
+    }
+
+    /* ── Start negotiation ───────────────────────────────────────────────── */
+    function startNegotiation() {
+      if (!selectedId) return;
+
+      const c = candidates.find(x => x.id === selectedId);
+      if (!c) return;
+
+      // Save to store
+      TajahStore.set('selectedCandidateId', selectedId);
+      TajahStore.update('currentOffer', offer => ({
+        ...offer,
+        athleteId: c.id,
+        athleteName: c.name,
+        fromAthlete: false,
+        status: 'pending',
+      }));
+
+      // Button loading state
+      const btn = document.getElementById('btn-negotiate');
+      btn.innerHTML = `
+        <svg style="animation:spin 0.8s linear infinite; display:inline-block; vertical-align:middle; margin-left:6px;" width="18" height="18" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="20" stroke="rgba(255,255,255,0.3)" stroke-width="4"/>
+          <path d="M44 24A20 20 0 0 0 24 4" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        جارٍ التحضير…`;
+      btn.disabled = true;
+
+      showToast(`🤝 انتقال للتفاوض مع ${c.name}`);
+      setTimeout(() => { window.location.href = 'negotiations.html'; }, 1000);
+    }
+
+    /* ── Toast ───────────────────────────────────────────────────────────── */
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    /* ── Init ────────────────────────────────────────────────────────────── */
+    // Select first option by default
+    const selectEl = document.getElementById('opportunity-select');
+    if (selectEl.options.length > 1) {
+      selectEl.value = selectEl.options[1].value;
+      onOpportunityChange(selectEl.value);
+    } else {
+      render();
+    }
+
+    // Pre-select the top-rated candidate so the CTA is immediately usable
+    if (compareIds.length > 0) {
+      const winnerId = getWinnerId();
+      if (winnerId) {
+        selectedId = winnerId;
+        updateNegotiateBtn();
+        renderGrid();
+      }
+    }
+  </script>
+  <style>
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <script>
+    function toggleDropdown() {
+      const dd = document.getElementById('dropdown');
+      const ch = document.getElementById('chevron');
+      const isOpen = !dd.classList.contains('hidden');
+      if (isOpen) { dd.classList.add('hidden'); ch.style.transform = 'rotate(0deg)'; }
+      else { dd.classList.remove('hidden'); dd.classList.add('open'); ch.style.transform = 'rotate(180deg)'; }
+    }
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('hidden');
+      document.body.classList.toggle('overflow-hidden');
+    }
+    function closeAll() {
+      document.getElementById('drawer').classList.remove('open');
+      document.getElementById('overlay').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      document.getElementById('dropdown').classList.add('hidden');
+      document.getElementById('chevron').style.transform = 'rotate(0deg)';
+    }
+    document.addEventListener('click', function (e) {
+      const btn = document.getElementById('profileBtn');
+      const dd = document.getElementById('dropdown');
+      if (btn && !btn.contains(e.target) && !dd.contains(e.target)) {
+        dd.classList.add('hidden');
+        document.getElementById('chevron').style.transform = 'rotate(0deg)';
+      }
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.remove('nav-link-active', 'text-tj-primary', 'bg-tj-primary-surface', 'font-semibold');
+          l.classList.add('text-tj-text-secondary', 'font-medium');
+        });
+        this.classList.add('nav-link-active', 'text-tj-primary', 'bg-tj-primary-surface', 'font-semibold');
+        this.classList.remove('text-tj-text-secondary', 'font-medium');
+      });
+    });
+  </script>
+  <footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <!-- Top: Logo text + Tagline -->
+      <div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100">
+                  <stop offset="0%" stop-color="#f2de00"></stop>
+                  <stop offset="50%" stop-color="#cca6ff"></stop>
+                  <stop offset="100%" stop-color="#b670ff"></stop>
+                </lineargradient>
+              </defs>
+              <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="4.5"></path>
+              <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+              <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+            </svg>
+            <p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+          </div>
+          <p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+        </div>
+        <p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+      </div>
+      <!-- 3 Columns Grid — equal width -->
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <!-- Column 1: Quick Links -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            روابط مهمة
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="about.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                عن تاجة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="index.html#faq">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                الأسئلة الشائعة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="contact.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                المساعدة والدعم
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 2: Contact Info (email + phone only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <!-- Phone icon — flipped to face left -->
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              style="transform: scaleX(-1)" viewbox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            تواصل معنا
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="mailto:Tajah2026@gmail.com">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                    <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">
+                    Tajah2026@gmail.com</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="tel:+966501234567">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <!-- Phone icon in icon box — flipped left -->
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    style="transform: scaleX(-1)" viewbox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr"
+                    style="unicode-bidi: embed;">+966 50 123 4567</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            النشرة البريدية
+          </h3>
+          <p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+          <!-- Newsletter form -->
+          <form class="space-y-2" id="newsletter-form">
+            <div class="relative">
+              <input
+                class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface"
+                id="newsletter-email" placeholder="layal@gmail.com" required="" type="email" />
+              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </div>
+            <button
+              class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed"
+              type="submit">
+              <span>اشتراك</span>
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </form>
+          <!-- Success message -->
+          <div
+            class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success"
+            id="newsletter-success">
+            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>تم الاشتراك بنجاح! 🎉</span>
+          </div>
+          <!-- Social Icons: WhatsApp, X, TikTok only -->
+          <div class="mt-6">
+            <p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+            <div class="flex items-center gap-2">
+              <!-- WhatsApp -->
+              <a aria-label="واتساب"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z">
+                  </path>
+                </svg>
+              </a>
+              <!-- Twitter / X -->
+              <a aria-label="تويتر"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                  </path>
+                </svg>
+              </a>
+              <!-- TikTok -->
+              <a aria-label="تيك توك"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z">
+                  </path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom: Copyright + Legal -->
+      <div class="mt-12 pt-8 border-t border-tj-border">
+        <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق
+            محفوظة.
+          </p>
+          <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+            <li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/auth.js?v=1.0.3"></script>
+</body>
+
+</html>

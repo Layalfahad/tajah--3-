@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تجاه — البحث</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary':         '#b670ff',
+            'tj-primary-hover':   '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text':    '#250140',
+            'tj-surface-base':    '#fdfcfb',
+            'tj-surface-card':    '#ffffff',
+            'tj-surface-muted':   '#f7f5f2',
+            'tj-text':            '#0f0f10',
+            'tj-text-secondary':  '#5e5e59',
+            'tj-text-tertiary':   '#8c8c85',
+            'tj-text-disabled':   '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border':          '#ece9e3',
+            'tj-border-active':   '#8c8c85',
+            'tj-success':         '#00a637',
+            'tj-success-bg':      '#e3f5e1',
+            'tj-error':           '#eb3333',
+            'tj-error-bg':        '#fff0f0',
+            'tj-info':            '#0094e3',
+            'tj-info-bg':         '#e3f1ff',
+            'tj-accent-yellow':   '#caa913',
+            'tj-accent-yellow-bg':'#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn':  '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card':   '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta':    '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft':   '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float':  '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee':       { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev':   { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow':    { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring':    { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up':       { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee':     'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow':  'float-slow 8s ease-in-out infinite',
+            'pulse-ring':  'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up':     'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+<style>
+      :root {
+        --tajah-bg: #fcfcf6;
+        --tajah-ink: #1f2a37;
+        --tajah-muted: #5e5e59;
+        --tajah-primary: #b670ff;
+        --tajah-success: #067647;
+        --tajah-tag: #fffd70;
+        --tajah-drawer-desktop: min(50vw, 560px);
+        --tajah-page-max: 1280px;
+      }
+
+      html { font-family: "IBM Plex Sans Arabic", system-ui, sans-serif; }
+      body { margin: 0; background-color: var(--tajah-bg); color: var(--tajah-ink); }
+
+      .tajah-page {
+        max-width: var(--tajah-page-max);
+        margin-left: auto; margin-right: auto;
+        padding: 2rem 1.5rem 4rem;
+      }
+      @media (min-width: 1024px) { .tajah-page { padding: 2.5rem 2.5rem 5rem; } }
+
+      .tajah-results-grid {
+        display: grid; gap: 1.5rem; grid-template-columns: 1fr;
+      }
+      @media (min-width: 900px) { .tajah-results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (min-width: 1200px) { .tajah-results-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+      .tajah-drawer-panel {
+        position: absolute; top: 0; right: 0; height: 100%;
+        width: min(100%, var(--tajah-drawer-desktop)); min-width: 280px;
+        display: flex; flex-direction: column;
+        background: linear-gradient(165deg, #efe6ff 0%, #f9f5ff 28%, #f3f0fa 55%, #faf8fc 100%);
+        border-inline-start: 1px solid rgba(182,112,255,0.28);
+        box-shadow: -16px 0 48px rgba(76,29,120,0.14);
+        z-index: 10; animation: tajah-drawer-in 0.22s ease-out;
+      }
+      .tajah-drawer-header {
+        background: linear-gradient(120deg,rgba(182,112,255,0.22) 0%,rgba(182,112,255,0.06) 55%,transparent 100%);
+        border-bottom: 1px solid rgba(182,112,255,0.22);
+      }
+      .tajah-filter-card {
+        border-radius: 1rem; border: 1px solid rgba(182,112,255,0.26);
+        background: rgba(255,255,255,0.78); box-shadow: 0 6px 22px rgba(99,42,156,0.07);
+        backdrop-filter: blur(8px);
+      }
+      .tajah-filter-card h3 { color: #35214d; }
+      .tajah-drawer-scroll { background: linear-gradient(180deg,transparent,rgba(182,112,255,0.04)); }
+      .tajah-drawer-footer {
+        display: flex; flex-direction: row; gap: 0.75rem;
+        padding: 1rem 1.1rem 1.25rem;
+        border-top: 1px solid rgba(182,112,255,0.22);
+        background: linear-gradient(0deg,rgba(237,224,255,0.85) 0%,rgba(250,248,252,0.4) 100%);
+      }
+
+      .btn-primary {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 48px; border-radius: 16px; padding: 0 20px;
+        font-size: 0.875rem; font-weight: 700; font-family: inherit;
+        color: #fff; background: #b670ff; border: none; cursor: pointer;
+        transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+        box-shadow: 0 2px 8px rgba(182,112,255,0.30);
+      }
+      .btn-primary:hover { background: #a055f5; box-shadow: 0 4px 16px rgba(182,112,255,0.40); }
+      .btn-primary:active { background: #8e3fe0; transform: scale(0.97); }
+      .btn-primary:focus-visible { outline: 2px solid #b670ff; outline-offset: 2px; }
+
+      .btn-secondary {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 48px; border-radius: 16px; padding: 0 20px;
+        font-size: 0.875rem; font-weight: 700; font-family: inherit;
+        color: #b670ff; background: #fff; border: 2px solid #b670ff; cursor: pointer;
+        transition: background 0.15s ease, transform 0.1s ease;
+      }
+      .btn-secondary:hover { background: #f5edff; }
+      .btn-secondary:active { background: #ede0ff; transform: scale(0.97); }
+      .btn-secondary:focus-visible { outline: 2px solid #b670ff; outline-offset: 2px; }
+
+      .tajah-btn-apply-filter {
+        flex: 1; min-height: 48px; border-radius: 1rem; border: 0;
+        font-weight: 700; font-size: 0.9rem; font-family: inherit; cursor: pointer;
+        color: #fff;
+        background: #b670ff;
+        box-shadow: 0 4px 16px rgba(182,112,255,0.35);
+        transition: background 0.15s ease, transform 0.1s ease;
+      }
+      .tajah-btn-apply-filter:hover { background: #a055f5; }
+      .tajah-btn-apply-filter:active { transform: scale(0.98); background: #8e3fe0; }
+
+      .tajah-btn-clear-filter {
+        flex: 1; min-height: 48px; border-radius: 1rem;
+        border: 2px solid rgba(182,112,255,0.45); font-weight: 700;
+        font-size: 0.9rem; font-family: inherit; cursor: pointer;
+        color: #5b3d8a; background: rgba(255,255,255,0.75);
+        transition: background 0.12s ease, border-color 0.12s ease;
+      }
+      .tajah-btn-clear-filter:hover { background: rgba(255,255,255,0.95); border-color: rgba(182,112,255,0.75); }
+
+      .tajah-drawer-overlay { backdrop-filter: blur(3px); }
+
+      @media (max-width: 640px) { .tajah-drawer-panel { width: 100%; max-width: 100%; min-width: 0; } }
+
+      @keyframes tajah-drawer-in {
+        from { transform: translateX(12px); opacity: 0.92; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+
+      .tajah-suggest-list {
+        position: absolute; top: calc(100% + 6px); right: 0; left: 0; z-index: 30;
+        max-height: 220px; overflow: auto; border-radius: 1rem;
+        border: 1px solid #e4e4e7; background: #fff;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      }
+      .tajah-suggest-item {
+        width: 100%; text-align: right; padding: 0.65rem 1rem;
+        font-size: 0.9rem; color: var(--tajah-ink); background: transparent;
+        border: 0; cursor: pointer; transition: background 0.12s ease; font-family: inherit;
+      }
+      .tajah-suggest-item:hover, .tajah-suggest-item:focus { background: #f4f4f5; outline: none; }
+      .tajah-suggest-item mark {
+        background: #ede9fe; color: var(--tajah-primary);
+        font-weight: 700; padding: 0 0.15em; border-radius: 4px;
+      }
+
+      .tajah-filter-chip-off {
+        border: 2px solid #b670ff !important;
+        background: #ffffff !important;
+        color: #35214d !important;
+        font-weight: 600 !important;
+      }
+      .tajah-filter-chip-off:hover {
+        background: #f5edff !important;
+        border-color: #a055f5 !important;
+      }
+
+      .tajah-filter-chip-on {
+        border: 2px solid #b670ff !important;
+        background: #b670ff !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        box-shadow: 0 2px 8px rgba(182,112,255,0.35) !important;
+      }
+      .tajah-filter-chip-on:hover {
+        background: #a055f5 !important;
+        border-color: #a055f5 !important;
+      }
+
+      @keyframes float-up { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+      .empty-float { /* animation removed */ }
+    
+    /* Navbar styles */
+    .nav-link { transition: color 0.15s, background 0.15s; }
+    .nav-link-active::after {
+      content: ''; position: absolute; bottom: -1px; right: 12px; left: 12px;
+      height: 2px; background: #b670ff; border-radius: 2px 2px 0 0;
+    }
+    .hover-purple:hover { color: #b670ff !important; background: #f6ebff !important; }
+    .dropdown { transform-origin: top right; }
+    .dropdown.open { animation: dropIn 0.18s ease both; }
+    @keyframes dropIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .drawer { transform: translateX(100%); transition: transform 0.3s ease; }
+    .drawer.open { transform: translateX(0); }
+    
+    /* Hide duplicate layout placeholders */
+    .navbar-placeholder, .footer-placeholder { display: none !important; }
+
+    /* ════════════════════════════════════════════════════════
+       GLOBAL DARK MODE OVERRIDES
+       ════════════════════════════════════════════════════════ */
+    [data-theme="dark"],
+    [data-theme="dark"] body,
+    [data-theme="dark"] .bg-tj-surface-base {
+      background-color: #111118 !important;
+      color: #f0f0f5 !important;
+    }
+    [data-theme="dark"] .bg-tj-surface-card,
+    [data-theme="dark"] .bg-white,
+    [data-theme="dark"] header,
+    [data-theme="dark"] footer,
+    [data-theme="dark"] #drawer,
+    [data-theme="dark"] #mobile-drawer {
+      background-color: #1e1e2a !important;
+      border-color: #2e2e3e !important;
+    }
+    [data-theme="dark"] .bg-tj-surface-muted,
+    [data-theme="dark"] .bg-gray-50,
+    [data-theme="dark"] .bg-gray-100 {
+      background-color: #1a1a26 !important;
+    }
+    [data-theme="dark"] .text-tj-text,
+    [data-theme="dark"] .text-black,
+    [data-theme="dark"] .text-gray-900,
+    [data-theme="dark"] .text-gray-800,
+    [data-theme="dark"] .text-gray-700 {
+      color: #f0f0f5 !important;
+    }
+    [data-theme="dark"] .text-tj-text-secondary,
+    [data-theme="dark"] .text-gray-600,
+    [data-theme="dark"] .text-gray-500 {
+      color: #a8a8be !important;
+    }
+    [data-theme="dark"] .text-tj-text-tertiary,
+    [data-theme="dark"] .text-gray-400 {
+      color: #6e6e88 !important;
+    }
+    [data-theme="dark"] .border-tj-border,
+    [data-theme="dark"] .border-gray-100,
+    [data-theme="dark"] .border-gray-200 {
+      border-color: #2e2e3e !important;
+    }
+    [data-theme="dark"] input,
+    [data-theme="dark"] textarea,
+    [data-theme="dark"] select {
+      background-color: #181822 !important;
+      color: #f0f0f5 !important;
+      border-color: #2e2e3e !important;
+    }
+    /* Active states & navigation hovers */
+    [data-theme="dark"] .hover-purple:hover,
+    [data-theme="dark"] .nav-link:hover {
+      color: #b670ff !important;
+      background-color: #2a1b40 !important;
+    }
+    [data-theme="dark"] .nav-link-active {
+      color: #b670ff !important;
+      background-color: #2a1b40 !important;
+    }
+    [data-theme="dark"] .shadow-tj-card, 
+    [data-theme="dark"] .shadow-sm {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+    }
+</style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body><header class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+<div class="flex items-center h-16">
+<!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+<div class="flex flex-1 items-center justify-start gap-2">
+<!-- Profile Dropdown Trigger (desktop) -->
+<div class="relative hidden lg:block">
+<button class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group" id="profileBtn" onclick="toggleDropdown()">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">م</div>
+<div class="text-right">
+<p class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">مرحباً، مرام!</p>
+</div>
+<svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Dropdown Menu -->
+<div class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50" id="dropdown">
+<div class="px-4 py-3 border-b border-tj-border">
+<p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+<p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="stats.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              الملف الشخصي
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="settings.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              الإعدادات
+            </a>
+<div class="border-t border-tj-border mt-1 pt-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group" href="../index.html">
+<svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                تسجيل الخروج
+              </a>
+</div>
+</div>
+</div>
+<!-- Notification Bell -->
+<button aria-label="الإشعارات" class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group" onclick="window.location.href='notifications.html'">
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+<svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Hamburger (mobile) -->
+<button class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors" id="hamBtn" onclick="toggleDrawer()">
+<svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+<nav class="hidden lg:flex items-center gap-1">
+<a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap" href="PlayerHomepage.html">الرئيسية</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="../Communities/index.html">المجتمعات</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="Tajah-search.html">البحث</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="opportunities.html">الفرص</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="applications.html">طلباتي</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="contact.html">تواصل معنا</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="about.html">عن تاجة</a>
+</nav>
+<!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+<div class="flex flex-1 items-center justify-end">
+<a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+<div class="w-9 h-9 flex items-center justify-center">
+<svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+<stop offset="0%" stop-color="#f2de00"></stop>
+<stop offset="50%" stop-color="#cca6ff"></stop>
+<stop offset="100%" stop-color="#b670ff"></stop>
+</lineargradient>
+</defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+</div>
+<span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<div id="root"></div>
+<script crossorigin="" src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin="" src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+      const { useState, useMemo, useRef, useEffect } = React
+
+      const BASKETBALL_KEYWORD = 'كرة سلة'
+
+      const initialFilters = {
+        contentTypes: [],
+        opportunityTypes: [],
+        sports: [],
+        cities: [],
+        clubTypes: [],
+        dates: [],
+      }
+
+      const filterOptions = {
+        contentTypes: ['فرص', 'نوادي', 'مجتمعات'],
+        opportunityType: ['تجارب أداء', 'مسابقة', 'بطولة', 'تحدي'],
+        sport: ['كرة قدم', 'كرة سلة', 'سباحة', 'ألعاب قوى', 'تنس', 'الريشة الطائرة'],
+        city: ['جدة', 'مكة', 'الرياض', 'الجموم', 'أبها', 'تبوك', 'الطائف', 'المدينة المنورة'],
+        clubType: ['هواة', 'احترافي', 'أكاديمية', 'ناشئين'],
+        date: ['هذا الأسبوع', 'الشهر الحالي', 'لاحقاً', 'مفتوح'],
+      }
+
+      // ── عناوين وأوصاف بشرية ──
+      const OPP_TITLES = {
+        'كرة قدم':        { 'تجارب أداء':['نبحث عن جناح أيسر موهوبة','مكان شاغر في خط الدفاع','نبحث عن حارسة مرمى متمرسة','انضمي كلاعبة وسط مبدعة','تجربة للمهاجمات الموهوبات'], 'مسابقة':['تحدي مهارات الجناح','سباق التسديد من بعيد','تحدي اللمسة الأولى','تحدي الأجنحة السريعة','مسابقة ضربات الجزاء'], 'بطولة':['بطولة نجمات المنطقة','كأس الصاعدات الشابات','بطولة الربيع للسيدات','دوري نجمات الغرب','كأس الأمل للناشئات'], 'تحدي':['تحدي اللياقة والمهارة','تحدي صانعة الألعاب','تحدي الدقة في التمرير','تحدي الأسرع في الملعب','تحدي القيادة الميدانية'] },
+        'كرة سلة':        { 'تجارب أداء':['نبحث عن بوينت جارد محترفة','مكان للبطلة تحت الطوق','نبحث عن بلاي ميكر موهوبة','تجربة أداء لجناح صغير','نبحث عن حارسة الطوق'], 'مسابقة':['مسابقة رمية الثلاث نقاط','تحدي كرة 3×3','سباق التمرير السريع','تحدي ملكة الملعب','مسابقة أسرع لاعبة'], 'بطولة':['بطولة كأس الأميرات','دوري السلة النسائي','كأس نجمات الملعب','بطولة الشباب والأمل','بطولة الصاعدات'], 'تحدي':['تحدي الطوق الواحد','تحدي مهارات الدريبل','تحدي الملكة في الميدان','تحدي اللاعبة الشاملة','تحدي أسرع ردة فعل'] },
+        'سباحة':          { 'تجارب أداء':['نبحث عن سباحة الفراشة','تجربة أداء تخصص الزحف','مكان شاغر في السباحة الحرة','نبحث عن بطلة التتابع','تجربة تخصص سباحة الظهر'], 'مسابقة':['سباق الخمسين متر حرة','تحدي التتابع المختلط','مسابقة أسرع سباحة','سباق أسلوب الفراشة','تحدي الغطس والسرعة'], 'بطولة':['بطولة الماء الزرقاء','كأس الموجة النسائية','بطولة الشاطئ الغربي','دوري بطلات المسبح','كأس نجمات المياه'], 'تحدي':['تحدي اللياقة المائية','تحدي التنفس والسرعة','تحدي الغطس العميق','تحدي الدوران المثالي','تحدي أسرع إقلاع'] },
+        'ألعاب قوى':      { 'تجارب أداء':['نبحث عن عداءة مسافات','مكان لرامية الرمح','تجربة أداء العدو السريع','نبحث عن قافزة طول','تجربة أداء رمي القرص'], 'مسابقة':['سباق المئة متر','تحدي رمي الكرة الحديدية','مسابقة القفز بالزانة','تحدي العدو التعاوني','سباق الحواجز النسائي'], 'بطولة':['بطولة الميدان والمضمار','كأس القوى النسائية','بطولة الأرقام القياسية','دوري نجمات المضمار','كأس الريح والسرعة'], 'تحدي':['تحدي أسرع عداءة','تحدي القوة والرشاقة','تحدي أبطال المضمار','تحدي العدو المتقطع','تحدي الرشاقة الكاملة'] },
+        'تنس':            { 'تجارب أداء':['نبحث عن لاعبة خط الخلف','تجربة أداء للإرسال القوي','مكان شاغر في الزوجي','نبحث عن متخصصة الشبكة','تجربة التحكم بالملعب'], 'مسابقة':['مسابقة الإرسال الأقوى','تحدي ضربة اليمين','سباق التنس التعاوني','تحدي دقة الضربات','مسابقة الزوجي المختلط'], 'بطولة':['بطولة كأس التنس النسائي','دوري نجمات الملعب','بطولة الربيع للتنس','كأس الجدارة والمهارة','بطولة تنس المنطقة'], 'تحدي':['تحدي الارتداد السريع','تحدي الإرسال والاستقبال','تحدي البطلة الشاملة','تحدي الدقة والتحكم','تحدي ملكة الملعب'] },
+        'الريشة الطائرة': { 'تجارب أداء':['نبحث عن لاعبة الشبكة','تجربة أداء التسديد القوي','مكان لمتخصصة الخدمة','نبحث عن لاعبة زوجي','تجربة التحكم بالريشة'], 'مسابقة':['مسابقة التسديد المتقن','تحدي الريشة الذهبية','سباق ردود الفعل السريعة','تحدي دقة الإرسال','مسابقة زوجي النساء'], 'بطولة':['بطولة الريشة الطائرة النسائية','كأس الخفة والدقة','بطولة الزوجي المختلط','دوري نجمات البادمنتون','كأس الريشة الفضية'], 'تحدي':['تحدي أسرع ريشة','تحدي الاستمرارية والدقة','تحدي ملكة الشبكة','تحدي الحركة السريعة','تحدي البطلة الخفية'] },
+      }
+      const OPP_DESCS = {
+        'كرة قدم':        { 'تجارب أداء':['نبحث عن لاعبة في مركز الجناح الأيسر، تتميز بالسرعة والدريبل.','فرصة للمدافعات الموهوبات للانضمام إلى الفريق الأول.','نبحث عن حارسة مرمى ذات خبرة لا تقل عن موسمين.','فرصة للاعبات الوسط الموهوبات اللواتي يتقن التمرير والرؤية.','نبحث عن مهاجمة تتميز بالتسديد الدقيق وسرعة الحركة.'], 'مسابقة':['تحدي مهاري للأجنحة، سيتم تقييم السرعة والمراوغة والتسديد.','سباق تسديد من خارج منطقة الجزاء، الأدق تفوز.','مسابقة ضربات الجزاء بين الفرق المشاركة.','يتم تقييم اللمسة الأولى والتحكم بالكرة في ثوانٍ.','سباق سرعة بين لاعبات الجناح مع الكرة.'], 'بطولة':['بطولة سنوية تجمع أفضل فرق المنطقة في كرة القدم النسائية.','كأس الشابات للفرق المشاركة في أول موسم لها.','بطولة ربيعية لأندية كرة القدم النسائية في المنطقة الغربية.','دوري موسمي يضم نخبة فرق كرة القدم النسائية.','كأس موجه للفئات العمرية الشابة بين 14 و19 سنة.'], 'تحدي':['تحدي شامل يقيس لياقتك ومهاراتك الكروية في يوم واحد.','تحدي يقيس من هي أسرع لاعبة في الملعب بالكرة وبدونها.','تحدي خاص بصانعات الألعاب — من تخترق خط الدفاع؟','تحدي دقة التمرير على مسافات متعددة.','تحدي القيادة الميدانية وتوزيع اللعب تحت ضغط.'] },
+        'كرة سلة':        { 'تجارب أداء':['نبحث عن بوينت جارد تتحكم بإيقاع اللعب وتوزع الكرات بذكاء.','فرصة لمركز قوية تتقن الدفاع تحت الطوق والارتداد.','نبحث عن بلاي ميكر مبدعة تفهم اللعبة وتبني الهجمات.','تجربة أداء لجناح صغير سريع ومتوازن هجوماً ودفاعاً.','نبحث عن حارسة طوق متمرسة بردود فعل سريعة.'], 'مسابقة':['مسابقة رمية الثلاث نقاط — من تسجل أكثر في دقيقة؟','تحدي كرة 3×3 بين فرق المدينة.','سباق تمرير سريع بين الفرق — دقة وسرعة.','تحدي ملكة الملعب — تقييم شامل لكل مهارات اللعبة.','مسابقة السرعة — من تكمل التمرينات أولاً؟'], 'بطولة':['بطولة كأس الأميرات السنوية لكرة السلة النسائية.','دوري السلة النسائي في المنطقة الغربية.','كأس يجمع أفضل نجمات ملاعب السلة.','بطولة للشباب والأمل — فئة 16 إلى 22 سنة.','بطولة الصاعدات — للأندية المشاركة لأول مرة.'], 'تحدي':['تحدي التسديد من تحت الطوق مئة مرة متواصلة.','تحدي الدريبل بين الأقماع — سرعة ودقة.','تحدي من تثبت أنها ملكة الملعب اليوم؟','تحدي شامل يقيس كل جوانب لعبتك.','تحدي ردود الفعل والرشاقة الدفاعية.'] },
+        'سباحة':          { 'تجارب أداء':['نبحث عن سباحة تتقن أسلوب الفراشة بدرجة عالية.','تجربة أداء لتخصص الزحف الأمامي — سرعة ولياقة.','مكان شاغر لسباحة الحرة ذات اللياقة العالية.','نبحث عن عنصر قوي في سباق التتابع.','تجربة أداء لتخصص سباحة الظهر.'], 'مسابقة':['سباق الخمسين متر حرة — الأسرع تفوز.','سباق التتابع المختلط بين الفرق.','مسابقة تحديد أسرع سباحة في المدينة.','سباق أسلوب الفراشة — تقنية وسرعة.','تحدي الغطس والإقلاع السريع.'], 'بطولة':['بطولة سباحة نسائية على مستوى المنطقة.','كأس الموجة — بطولة السباحة النسائية السنوية.','بطولة على مستوى الساحل الغربي.','دوري موسمي لأندية السباحة النسائية.','كأس يجمع أفضل سباحات المنطقة.'], 'تحدي':['تحدي اللياقة المائية الكاملة.','تحدي التنفس المنتظم والسرعة معاً.','تحدي الغطس إلى الأعماق ثم الصعود.','تحدي دوران الجدار المثالي.','تحدي الإقلاع الأسرع من الحافة.'] },
+        'ألعاب قوى':      { 'تجارب أداء':['نبحث عن عداءة مسافات طويلة ذات تحمل عالٍ.','مكان لرامية رمح ذات أسلوب تقني متمكن.','تجربة أداء للعدو السريع — 100 و200 متر.','نبحث عن قافزة طول بأسلوب حديث.','تجربة أداء لرمي القرص للمستوى المتقدم.'], 'مسابقة':['سباق المئة متر للبطل الفردي.','تحدي رمي الكرة الحديدية بين المشاركات.','مسابقة القفز بالزانة في الهواء الطلق.','تحدي العدو التعاوني — تتابع رباعي.','سباق الحواجز للنساء.'], 'بطولة':['بطولة الميدان والمضمار النسائية.','كأس القوى لأفضل رياضيات المنطقة.','بطولة الأرقام القياسية الموسمية.','دوري نجمات مضمار المنطقة الغربية.','كأس السرعة والقوة النسائي.'], 'تحدي':['تحدي من هي أسرع عداءة اليوم؟','تحدي القوة والرشاقة في وقت واحد.','تحدي المتسابقة الشاملة في المضمار.','تحدي العدو المتقطع HIIT.','تحدي الرشاقة الكاملة لرياضيات الميدان.'] },
+        'تنس':            { 'تجارب أداء':['نبحث عن لاعبة تتقن لعبة خط الخلف بثبات.','تجربة أداء للإرسال القوي والمتحكم.','مكان شاغر في فريق الزوجي النسائي.','نبحث عن متخصصة لعب الشبكة السريع.','تجربة أداء للتحكم بالملعب ومراقبة المنافسة.'], 'مسابقة':['مسابقة الإرسال الأقوى — من تسجل أعلى سرعة؟','تحدي ضربة اليمين الأدق.','سباق التنس التعاوني بين الثنائيات.','تحدي دقة الضربات في نقاط محددة.','مسابقة الزوجي المختلط.'], 'بطولة':['بطولة كأس التنس النسائي بالمنطقة.','دوري نجمات ملاعب التنس.','بطولة الربيع للتنس النسائي.','كأس الجدارة والمهارة للتنس.','بطولة تنس المنطقة الغربية.'], 'تحدي':['تحدي الارتداد السريع بعد كل ضربة.','تحدي الإرسال والاستقبال المتبادل.','تحدي البطلة الشاملة في الملعب.','تحدي الدقة والتحكم في الضربات.','تحدي ملكة الملعب.'] },
+        'الريشة الطائرة': { 'تجارب أداء':['نبحث عن لاعبة شبكة ذكية وسريعة الحركة.','تجربة أداء للتسديد القوي من الخلف.','مكان لمتخصصة الخدمة الدقيقة.','نبحث عن لاعبة زوجي تتقن التنسيق.','تجربة في التحكم بالريشة والتوقع.'], 'مسابقة':['مسابقة التسديد المتقن من خط الخلف.','تحدي الريشة الذهبية.','سباق ردود الفعل السريعة.','تحدي دقة الإرسال إلى مناطق محددة.','مسابقة زوجي النساء.'], 'بطولة':['بطولة الريشة الطائرة النسائية بالمنطقة.','كأس الخفة والدقة السنوي.','بطولة الزوجي المختلط.','دوري نجمات البادمنتون.','كأس الريشة الفضية.'], 'تحدي':['تحدي أسرع ريشة في الميدان.','تحدي الاستمرارية والدقة لأطول وقت.','تحدي ملكة الشبكة.','تحدي الحركة السريعة بين المواقع.','تحدي البطلة الخفية.'] },
+      }
+      const CLUB_NAMES = {
+        'كرة قدم':        ['نادي الهلال النسائي','نادي الاتحاد للبنات','أكاديمية الشباب للكرة','نادي الأهلي النسائي'],
+        'كرة سلة':        ['نادي النصر النسائي','أكاديمية السلة الغربية','نادي الاتحاد للسلة','نادي الفيصلي النسائي'],
+        'سباحة':          ['نادي الموج للسباحة','أكاديمية الماء الزرقاء','نادي البحر النسائي','نادي السرعة للسباحة'],
+        'ألعاب قوى':      ['نادي العدائيات','أكاديمية المضمار','نادي القوة والرشاقة','نادي الريح النسائي'],
+        'تنس':            ['نادي المضرب الذهبي','أكاديمية كورت نسائي','نادي التنس الغربي','نادي الإرسال الملكي'],
+        'الريشة الطائرة': ['نادي الريشة النسائي','أكاديمية البادمنتون','نادي الخفة والدقة','نادي الريشة الذهبية'],
+      }
+      const COMM_TITLES = {
+        'كرة قدم':        'مجتمع عاشقات الكرة',
+        'كرة سلة':        'مجتمع محبات السلة',
+        'سباحة':          'مجتمع بنات الماء',
+        'ألعاب قوى':      'مجتمع عداءات المضمار',
+        'تنس':            'مجتمع لاعبات التنس',
+        'الريشة الطائرة': 'مجتمع الريشة الطائرة',
+      }
+      const COMM_DESCS = {
+        'كرة قدم':        'شاركي أهدافك، لحظاتك، ونصائحك مع بنات يعشقن الكرة مثلك.',
+        'كرة سلة':        'مساحة لطرح التجارب وتبادل النصائح بين محبات كرة السلة.',
+        'سباحة':          'نقاشات حول التقنيات، اللياقة، وتجارب السباحة اليومية.',
+        'ألعاب قوى':      'مجتمع العداءات والرامعيات — شاركي إنجازاتك وتدريباتك.',
+        'تنس':            'حوارات بين لاعبات التنس حول المهارات والبطولات والتدريب.',
+        'الريشة الطائرة': 'مساحة للاعبات الريشة الطائرة لتبادل الخبرات والمباريات.',
+      }
+
+      const SEARCH_SUGGESTION_POOL = Array.from(new Set(
+        [].concat(filterOptions.sport).concat(filterOptions.city)
+          .concat(['نادي','مجتمع','فرصة','تجاه',BASKETBALL_KEYWORD,'كرة','هجوم','دفاع','مهاجمة','حارسة','جناح','وسط','تسديد','تمرير','إرسال','بوينت','سباحة','عداءة'])
+      ))
+
+      function matchSuggestions(query, pool, limit) {
+        const q = (query || '').trim(); if (!q) return []
+        const starts = [], contains = []
+        for (let i = 0; i < pool.length; i++) {
+          const p = pool[i]
+          if (p.indexOf(q) === 0) starts.push(p)
+          else if (p.indexOf(q) !== -1) contains.push(p)
+        }
+        return starts.concat(contains).slice(0, limit || 10)
+      }
+
+      function highlightMatch(text, q) {
+        if (!q) return text
+        const idx = text.indexOf(q); if (idx === -1) return text
+        return <>{text.slice(0,idx)}<mark>{text.slice(idx,idx+q.length)}</mark>{text.slice(idx+q.length)}</>
+      }
+
+      const IMG_BB  = 'https://images.unsplash.com/photo-1521412644181-c49fa5e7d567?w=120&h=120&fit=crop'
+      const IMG_FB  = 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=120&h=120&fit=crop'
+      const IMG_RUN = 'https://images.unsplash.com/photo-1576678927134-899ea544faca?w=120&h=120&fit=crop'
+
+      function buildAllCatalog() {
+        const cities = filterOptions.city.filter(c => c !== 'الجموم')
+        const canonical = [
+          { id:'h-ladies', cardType:'club', tag:{label:'نادي'}, title:'نادي الهلال النسائي',
+            description:'المستقبل يبدأ هنا، في قلب المنافسة', image:IMG_BB,
+            sport:'كرة سلة', city:'الرياض', opportunityType:null, clubType:'احترافي', dateBucket:'مفتوح', searchTags:['كرة سلة','الرياض','نادي','احترافي'],
+            stats:[{key:'users',text:'+55 لاعبة منضمة'},{key:'pin',text:'الرياض يبعد 5.1 كم'},{key:'briefcase',text:'4 فرص متاحة حالياً'}],
+            primaryCta:'عرض الملف', showHeart:true },
+          { id:'basketball-community', cardType:'community', tag:{label:'مجتمع'}, title:'مجتمع كرة سلة',
+            description:'مساحة لطرح التجارب، تبادل النصائح، ومشاركة أفضل الممارسات في كرة السلة',
+            image:'https://images.unsplash.com/photo-1519861531473-9200262188bf?w=120&h=120&fit=crop',
+            sport:'كرة سلة', city:'الرياض', opportunityType:null, clubType:null, dateBucket:'لاحقاً', searchTags:['كرة سلة','مجتمع','سلة','طوق'],
+            stats:[{key:'users',text:'243+ عضو نشط'},{key:'chat',text:'50+ منشور/تفاعل يوميًا'}],
+            primaryCta:'انضم للمجتمع الآن', showHeart:true, showShare:true },
+          { id:'competition-rijal', cardType:'opportunity', tag:{label:'مسابقة'}, title:'نادي النصر للسيدات',
+            description:'نبحث عن اللاعبة الأنسب لتمثيل فريق الرياض 3x3. قدّمي سريعاً.',
+            image:IMG_BB, sport:'كرة سلة', city:'جدة', opportunityType:'مسابقة', clubType:'أكاديمية', searchTags:['كرة سلة','جدة','مسابقة','3x3','هجوم'],
+            dateBucket:'هذا الأسبوع', progress:0.62,
+            stats:[{key:'users',text:'50/31'},{key:'pin',text:'جدة يبعد 4.6 كم'},{key:'calendar',text:'22/06'}],
+            primaryCta:'قدم الآن', secondaryCta:'عرض التفاصيل', showHeart:true },
+          { id:'nassr-ladies', cardType:'club', tag:{label:'نادي'}, title:'نادي النصر النسائي',
+            description:'وجهة النخبة لتطوير مهارات كرة السلة',
+            image:'https://images.unsplash.com/photo-1517649763962-0c62306601b7?w=120&h=120&fit=crop',
+            sport:'كرة سلة', city:'جدة', opportunityType:null, clubType:'أكاديمية', dateBucket:'الشهر الحالي', searchTags:['كرة سلة','جدة','نادي','أكاديمية'],
+            stats:[{key:'users',text:'41+ لاعبة منضمة'},{key:'pin',text:'جدة'}],
+            primaryCta:'عرض الملف', showHeart:true },
+          { id:'tryout-riyadh', cardType:'opportunity', tag:{label:'تجارب أداء'}, title:'تجارب أداء — أكاديمية الرياض',
+            description:'فرصة لاختبار المستوى وتحديث التصنيف ضمن فئات 14–18 سنة.',
+            image:'https://images.unsplash.com/photo-1517649763962-0c62306601b7?w=120&h=120&fit=crop',
+            sport:'كرة سلة', city:'الرياض', opportunityType:'تجارب أداء', clubType:'أكاديمية', dateBucket:'لاحقاً', searchTags:['كرة سلة','الرياض','تجارب أداء','أكاديمية','14','18'],
+            progress:0.35,
+            stats:[{key:'users',text:'40/12'},{key:'pin',text:'الرياض يبعد 8 كم'},{key:'calendar',text:'15/08'}],
+            primaryCta:'قدم الآن', secondaryCta:'عرض التفاصيل', showHeart:true },
+        ]
+
+        const intentionalOppGaps = {
+          'تنس|تبوك|تحدي':true,'سباحة|المدينة المنورة|بطولة':true,
+          'الريشة الطائرة|مكة|تجارب أداء':true,'ألعاب قوى|الطائف|مسابقة':true,
+        }
+        const seenOppCell = {}
+        canonical.forEach(c => { if (c.cardType==='opportunity'&&c.opportunityType&&c.sport&&c.city) seenOppCell[c.sport+'|'+c.city+'|'+c.opportunityType]=true })
+
+        const gen = []; let n = 0
+        filterOptions.sport.forEach(sport => {
+          filterOptions.city.forEach(city => {
+            if (city==='الجموم') return
+            filterOptions.opportunityType.forEach(ot => {
+              const cell = sport+'|'+city+'|'+ot
+              if (intentionalOppGaps[cell]||seenOppCell[cell]) return
+              seenOppCell[cell]=true; n++
+              const cardStats = sport==='سباحة'&&city==='جدة'&&ot==='تجارب أداء'
+                ? [{key:'users',text:'47/23'},{key:'pin',text:'جدة يبعد 4.6 كم'},{key:'calendar',text:'28/8'}]
+                : [{key:'users',text:(22+(n%30))+'/'+(8+(n%20))},{key:'pin',text:city+' يبعد '+(1.1+(n%12)/2).toFixed(1)+' كم'},{key:'calendar',text:(1+(n%28))+'/'+(1+(n%12))}]
+              const cardDesc = sport==='سباحة'&&city==='جدة'&&ot==='تجارب أداء'
+                ? 'استقطاب في جدة لرياضة سباحة ضمن برنامج تجارب أداء.'
+                : 'استقطاب في '+city+' لرياضة '+sport+' ضمن برنامج '+ot+'.'
+              const oppTitlePool = (OPP_TITLES[sport]&&OPP_TITLES[sport][ot]) ? OPP_TITLES[sport][ot] : [ot+' — '+city]
+              const oppDescPool  = (OPP_DESCS[sport]&&OPP_DESCS[sport][ot])   ? OPP_DESCS[sport][ot]  : [cardDesc]
+              const oppIdx = n % oppTitlePool.length
+              gen.push({ id:'opp-cell-'+n, cardType:'opportunity', tag:{label:ot},
+                title: oppTitlePool[oppIdx],
+                description: oppDescPool[oppIdx],
+                searchTags: [ot, sport, city, 'فرصة'],
+                image:[IMG_BB,IMG_FB,IMG_RUN][n%3], sport, city, opportunityType:ot,
+                clubType:filterOptions.clubType[n%filterOptions.clubType.length],
+                dateBucket:filterOptions.date[n%4], progress:0.15+((n*19)%65)/100,
+                stats:cardStats, primaryCta:'قدم الآن', secondaryCta:'عرض التفاصيل', showHeart:true })
+            })
+          })
+        })
+
+        let ci = 0
+        filterOptions.sport.forEach(sport => {
+          filterOptions.clubType.forEach(ct => {
+            const city = cities[ci%cities.length]; ci++
+            const clubNamePool = CLUB_NAMES[sport] || ['نادي '+sport]
+              const clubTitle = clubNamePool[ci % clubNamePool.length]
+              gen.push({ id:'club-'+sport.replace(/\s+/g,'')+'-'+ct.replace(/\s+/g,''),
+              cardType:'club', tag:{label:'نادي'}, title: clubTitle,
+              description:'يرحب '+clubTitle+' بالموهوبات في '+sport+'. تواصلي معنا لمعرفة الفرص المتاحة.',
+              searchTags: [sport, city, 'نادي', ct],
+              image:IMG_FB, sport, city, opportunityType:null, clubType:ct, dateBucket:'مفتوح',
+              stats:[{key:'users',text:(30+(ci%35))+'+ لاعب/لاعبة'},{key:'pin',text:city},{key:'briefcase',text:(1+(ci%5))+' فرص قريبة'}],
+              primaryCta:'عرض الملف', showHeart:true })
+          })
+        })
+
+        filterOptions.sport.forEach((sport, si) => {
+          gen.push({ id:'comm-'+sport.replace(/\s+/g,''), cardType:'community', tag:{label:'مجتمع'},
+            title: COMM_TITLES[sport] || 'مجتمع '+sport,
+            description: COMM_DESCS[sport] || 'مساحة للنقاش والتجارب في '+sport+'.',
+            searchTags: [sport, 'مجتمع'],
+            image:IMG_BB, sport, city:cities[(si+3)%cities.length],
+            opportunityType:null, clubType:null, dateBucket:'لاحقاً',
+            stats:[{key:'users',text:(110+(si%170))+'+ عضو نشط'},{key:'chat',text:(22+(si%55))+'+ تفاعل يوميًا'}],
+            primaryCta:'انضم للمجتمع الآن', showHeart:true, showShare:true })
+        })
+
+        return canonical.concat(gen)
+      }
+
+      const ALL_CARDS = buildAllCatalog()
+
+      function getBaseListAfterSearch(catalog, q) {
+        const t = (q||'').trim()
+        if (t==='الجموم') return []
+        if (t===BASKETBALL_KEYWORD) {
+          const order = ['h-ladies','basketball-community','competition-rijal','nassr-ladies','tryout-riyadh']
+          return order.map(id=>catalog.find(c=>c.id===id)).filter(Boolean)
+        }
+        if (!t) return catalog.slice()
+        return catalog.filter(item => {
+          if (item.title&&item.title.indexOf(t)!==-1) return true
+          if (item.description&&item.description.indexOf(t)!==-1) return true
+          if (item.sport&&item.sport.indexOf(t)!==-1) return true
+          if (item.city&&item.city.indexOf(t)!==-1) return true
+          if (item.tag&&item.tag.label&&item.tag.label.indexOf(t)!==-1) return true
+          if (item.searchTags&&item.searchTags.some(tag=>tag.indexOf(t)!==-1)) return true
+          return false
+        })
+      }
+
+      function applyFilters(items, f) {
+        const contentTypeMap = { 'فرص':'opportunity', 'نوادي':'club', 'مجتمعات':'community' }
+        return items.filter(item => {
+          if (f.contentTypes && f.contentTypes.length > 0) {
+            const allowed = f.contentTypes.map(t => contentTypeMap[t]).filter(Boolean)
+            if (allowed.length > 0 && !allowed.includes(item.cardType)) return false
+          }
+          if (f.sports && f.sports.length > 0) {
+            if (!f.sports.includes(item.sport)) return false
+          }
+          if (f.cities && f.cities.length > 0) {
+            if (!f.cities.includes(item.city)) return false
+          }
+          if (f.clubTypes && f.clubTypes.length > 0) {
+            if (!item.clubType || !f.clubTypes.includes(item.clubType)) return false
+          }
+          if (f.opportunityTypes && f.opportunityTypes.length > 0) {
+            if (item.cardType !== 'opportunity' || !f.opportunityTypes.includes(item.opportunityType)) return false
+          }
+          if (f.dates && f.dates.length > 0) {
+            if (!item.dateBucket || !f.dates.includes(item.dateBucket)) return false
+          }
+          return true
+        })
+      }
+
+      const COLORS = { bg:'#FCFCF6', success:'#067647' }
+
+      function cn() { return [].slice.call(arguments).filter(Boolean).join(' ') }
+
+      function StatIcon({ name }) {
+        const common = { className:'h-4 w-4 shrink-0 text-[#5E5E59]', 'aria-hidden':true }
+        switch(name) {
+          case 'users': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" {...common}><path d="M16 11a3 3 0 1 0-3-3m-7 0a3 3 0 1 0 3-3M3 20a6 6 0 0 1 12 0" strokeLinecap="round"/><path d="M9 9a3 3 0 0 0 0 4M21 20a5 5 0 0 0-7-1" strokeLinecap="round"/></svg>
+          case 'pin': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" {...common}><path d="M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 22s7-4.2 7-11a7 7 0 1 0-14 0c0 6.8 7 11 7 11Z" strokeLinejoin="round"/></svg>
+          case 'briefcase': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" {...common}><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          case 'chat': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" {...common}><path d="M7 8h10M7 12h6" strokeLinecap="round"/><path d="M4 18l2-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3Z" strokeLinejoin="round"/></svg>
+          case 'calendar': return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" {...common}><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v3M16 3v3" strokeLinecap="round"/></svg>
+          default: return null
+        }
+      }
+
+      function HeartIcon({ filled, className }) {
+        if (filled) return <svg viewBox="0 0 24 24" className={cn('h-6 w-6 text-red-500',className)} aria-hidden><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        return <svg viewBox="0 0 24 24" className={cn('h-6 w-6 text-[#1F2A37]',className)} fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden><path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L12 20.364l7.682-7.682a4.5 4.5 0 0 0-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 0 0-6.364 0Z"/></svg>
+      }
+
+      function EmptyState({ type, jumumContentType }) {
+        const configs = {
+          idle: {
+            title: 'ابدئي بالبحث',
+            subtitle: 'ابحثي عن النوادي، المدربات، الفرص، والمجتمعات... ثم اضغطي «ابحث» أو Enter.',
+            color: '#A7A7A3',
+          },
+          'no-results': {
+            title: 'لا توجد نتائج',
+            subtitle: 'لم نتمكن من إيجاد ما تبحثين عنه. جربي كلمات مختلفة أو قللي من خيارات الفلترة.',
+            color: '#A7A7A3',
+          },
+          'no-area': {
+            title: 'لا يوجد استقطاب في الجموم',
+            subtitle: 'عذراً، لا تتوفر حالياً فرص استقطاب في منطقة الجموم. جربي مدناً مجاورة مثل جدة أو مكة.',
+            color: '#A7A7A3',
+          },
+          'no-area-opps': {
+            title: 'لا توجد فرص في الجموم',
+            subtitle: 'لا تتوفر فرص استقطاب حالياً في منطقة الجموم. جربي مدناً أخرى قريبة.',
+            color: '#A7A7A3',
+          },
+          'no-area-clubs': {
+            title: 'لا توجد أندية قريبة في الجموم',
+            subtitle: 'لا توجد أندية مسجّلة حالياً في منطقة الجموم. يمكنك البحث في جدة أو مكة.',
+            color: '#A7A7A3',
+          },
+          'no-community-area': {
+            title: 'المجتمعات غير مرتبطة بمنطقة محددة',
+            subtitle: 'المجتمعات الرياضية متاحة للجميع بغض النظر عن موقعك. ابحثي باسم الرياضة مثل «كرة سلة» أو «سباحة».',
+            color: '#A7A7A3',
+          },
+        }
+
+        let resolvedType = type
+        if (type === 'no-area' && jumumContentType) {
+          if (jumumContentType === 'فرص') resolvedType = 'no-area-opps'
+          else if (jumumContentType === 'نوادي') resolvedType = 'no-area-clubs'
+          else if (jumumContentType === 'مجتمعات') resolvedType = 'no-community-area'
+        }
+
+        const cfg = configs[resolvedType] || configs['idle']
+
+        return (
+          <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+            <div className="empty-float mb-6">
+              <svg width="160" height="140" viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <circle cx="80" cy="80" r="55" fill={cfg.color} fillOpacity="0.08"/>
+                <circle cx="70" cy="65" r="28" stroke={cfg.color} strokeWidth="5" fill="white"/>
+                <line x1="60" y1="58" x2="80" y2="58" stroke={cfg.color} strokeWidth="3" strokeLinecap="round" strokeOpacity="0.5"/>
+                <line x1="60" y1="65" x2="80" y2="65" stroke={cfg.color} strokeWidth="3" strokeLinecap="round" strokeOpacity="0.5"/>
+                <line x1="60" y1="72" x2="72" y2="72" stroke={cfg.color} strokeWidth="3" strokeLinecap="round" strokeOpacity="0.5"/>
+                <path d="M92 88 L112 108" stroke={cfg.color} strokeWidth="6" strokeLinecap="round"/>
+                {resolvedType === 'no-results' || resolvedType.startsWith('no-area') ? (
+                  <>
+                    <circle cx="112" cy="42" r="3" fill={cfg.color} fillOpacity="0.4"/>
+                    <circle cx="42" cy="100" r="2.5" fill={cfg.color} fillOpacity="0.3"/>
+                    <path d="M130 60 L133 55 L136 60 L133 65Z" fill={cfg.color} fillOpacity="0.25"/>
+                    <circle cx="70" cy="65" r="10" fill={cfg.color} fillOpacity="0.12"/>
+                    <path d="M64 59 L76 71 M76 59 L64 71" stroke={cfg.color} strokeWidth="2.5" strokeLinecap="round"/>
+                  </>
+                ) : (
+                  <>
+                    <path d="M120 35 L122 30 L124 35 L129 37 L124 39 L122 44 L120 39 L115 37Z" fill={cfg.color} fillOpacity="0.35"/>
+                    <path d="M35 50 L36.5 46 L38 50 L42 51.5 L38 53 L36.5 57 L35 53 L31 51.5Z" fill={cfg.color} fillOpacity="0.25"/>
+                    <circle cx="125" cy="95" r="3" fill={cfg.color} fillOpacity="0.3"/>
+                    <circle cx="40" cy="88" r="2" fill={cfg.color} fillOpacity="0.2"/>
+                  </>
+                )}
+              </svg>
+            </div>
+            <h3 className="mb-2 text-xl font-bold" style={{color:'#1f2a37'}}>{cfg.title}</h3>
+            <p className="max-w-sm text-balance text-sm leading-7" style={{color:'#5e5e59'}}>{cfg.subtitle}</p>
+          </div>
+        )
+      }
+
+      function FilterGroup({ title, icon, children }) {
+        return (
+          <section className="tajah-filter-card p-3.5">
+            <h3 className="mb-2.5 flex items-center gap-2 text-sm font-bold">
+              <span className="shrink-0 text-[#5b3d8a]">{icon}</span>
+              {title}
+            </h3>
+            {children}
+          </section>
+        )
+      }
+
+      function OptionGrid({ values, onToggle, options }) {
+        if (!options.length) return <p className="py-2 text-center text-xs text-[#6b5a7d]">لا توجد خيارات</p>
+        return (
+          <div className="grid grid-cols-2 gap-2">
+            {options.map(opt => {
+              const active = Array.isArray(values) ? values.includes(opt) : values === opt
+              return (
+                <button key={opt} type="button" onClick={() => onToggle(opt)}
+                  className={cn(
+                    'min-h-10 rounded-xl px-2 text-xs transition-all font-[inherit]',
+                    active ? 'tajah-filter-chip-on' : 'tajah-filter-chip-off'
+                  )}>
+                  {opt}
+                </button>
+              )
+            })}
+          </div>
+        )
+      }
+
+      function ClubCommunityCard({ item, favorite, onToggleFav, onShare }) {
+        return (
+          <article className={cn('rounded-2xl bg-white p-5 shadow-sm ring-1 ring-zinc-100/80','transition duration-200 ease-out hover:-translate-y-1 hover:shadow-lg')}>
+            <div className="mb-3 flex items-center justify-between gap-2">
+              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full ring-1 ring-zinc-200">
+                <img src={item.image} alt="" className="h-full w-full object-cover" loading="lazy"/>
+              </div>
+              <h2 className="min-w-0 flex-1 text-balance text-right text-lg font-bold text-[#1F2A37]">{item.title}</h2>
+              <span className="inline-flex max-w-[40%] shrink-0 items-center gap-1 rounded-full bg-[#FFFD70] px-2 py-0.5 text-xs font-bold text-[#1F2A37]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#1F2A37]"/>{item.tag.label}
+              </span>
+            </div>
+            <p className="mb-3 text-right text-sm leading-7 text-[#5E5E59]">{item.description}</p>
+            <ul className="mb-4 space-y-2 text-right text-sm text-[#5E5E59]">
+              {item.stats.map(s => <li key={s.text} className="flex items-center justify-start gap-2"><StatIcon name={s.key}/><span className="text-balance leading-snug">{s.text}</span></li>)}
+            </ul>
+            <div className="flex w-full items-center gap-2">
+              <div className="flex shrink-0 items-center gap-1">
+                {item.showShare && (
+                  <button type="button" className="p-1 text-[#1F2A37] transition hover:opacity-70" aria-label="مشاركة" onClick={onShare}>
+                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden><path d="M4 12v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" strokeLinecap="round"/><path d="M12 3v10M7 7l5-4 5 4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </button>
+                )}
+                {item.showHeart && (
+                  <button type="button" onClick={onToggleFav} className="p-1 transition hover:opacity-80" aria-label="مفضلة" aria-pressed={favorite}>
+                    <HeartIcon filled={favorite}/>
+                  </button>
+                )}
+              </div>
+              <button type="button" className="btn-primary min-w-0 flex-1">{item.primaryCta}</button>
+            </div>
+          </article>
+        )
+      }
+
+      function OpportunityCard({ item, favorite, onToggleFav }) {
+        const p = item.progress ?? 0
+        return (
+          <article className={cn('rounded-2xl bg-white p-5 shadow-sm ring-1 ring-zinc-100/80','transition duration-200 ease-out hover:-translate-y-1 hover:shadow-lg')}>
+            <div className="mb-3 flex items-center justify-between gap-2">
+              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full ring-1 ring-zinc-200">
+                <img src={item.image} alt="" className="h-full w-full object-cover" loading="lazy"/>
+              </div>
+              <h2 className="min-w-0 flex-1 text-balance text-right text-lg font-bold text-[#1F2A37]">{item.title}</h2>
+              <span className="inline-flex max-w-[40%] shrink-0 items-center gap-1 rounded-full bg-[#FFFD70] px-2 py-0.5 text-xs font-bold text-[#1F2A37]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#1F2A37]"/>{item.tag.label}
+              </span>
+            </div>
+            <p className="mb-3 text-right text-sm leading-7 text-[#5E5E59]">{item.description}</p>
+            <ul className="mb-3 space-y-2 text-right text-sm text-[#5E5E59]">
+              {item.stats.map(s => <li key={s.text} className="flex items-center justify-start gap-2"><StatIcon name={s.key}/><span className="text-balance leading-snug">{s.text}</span></li>)}
+            </ul>
+            {item.progress != null && (
+              <div className="mb-4" aria-hidden>
+                <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-200">
+                  <div className="h-full rounded-full bg-[#067647] transition-all" style={{width:`${Math.round(p*100)}%`}}/>
+                </div>
+              </div>
+            )}
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                {item.showHeart && (
+                  <button type="button" onClick={onToggleFav} className="p-1" aria-label="مفضلة" aria-pressed={favorite}>
+                    <HeartIcon filled={favorite}/>
+                  </button>
+                )}
+              </div>
+              <div className="flex min-w-0 flex-1 flex-wrap justify-end gap-2">
+                {item.secondaryCta && <button type="button" className="btn-secondary min-w-[120px] flex-1">{item.secondaryCta}</button>}
+                <button type="button" className="btn-primary min-w-[120px] flex-1">{item.primaryCta}</button>
+              </div>
+            </div>
+          </article>
+        )
+      }
+
+      function ResultCardSwitch(props) {
+        const { item } = props
+        if (item.cardType==='opportunity') return <OpportunityCard {...props}/>
+        return <ClubCommunityCard {...props}/>
+      }
+
+      const FilterIcons = {
+        ContentType: () => (
+          <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+          </svg>
+        ),
+        OpportunityType: () => (
+          <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+            <path d="M12 3v5" strokeLinecap="round"/><circle cx="12" cy="12" r="4"/>
+            <path d="M9 15v5l3-2 3 2v-5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        Sport: () => (
+          <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+            <circle cx="12" cy="12" r="8"/>
+            <path d="M12 5v14M5 12h14" strokeLinecap="round"/>
+          </svg>
+        ),
+        Location: () => (
+          <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+            <path d="M12 21s6-4.1 6-10a6 6 0 1 0-12 0c0 5.9 6 10 6 10Z" strokeLinejoin="round"/>
+            <circle cx="12" cy="11" r="2"/>
+          </svg>
+        ),
+        ClubType: () => (
+          <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+            <path d="M12 3 5 6v5c0 5 3.4 8.5 7 10 3.6-1.5 7-5 7-10V6l-7-3Z" strokeLinejoin="round"/>
+          </svg>
+        ),
+        Date: () => (
+          <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+            <rect x="3" y="5" width="18" height="16" rx="2"/>
+            <path d="M3 9h18M8 3v4M16 3v4" strokeLinecap="round"/>
+          </svg>
+        ),
+      }
+
+      function App() {
+        const [searchInput, setSearchInput] = useState('')
+        const [searchViewActive, setSearchViewActive] = useState(false)
+        const [submittedQuery, setSubmittedQuery] = useState('')
+        const [drawerOpen, setDrawerOpen] = useState(false)
+        const [appliedFilters, setAppliedFilters] = useState(() => ({...initialFilters}))
+        const [draftFilters, setDraftFilters] = useState(() => ({...initialFilters}))
+        const [favorites, setFavorites] = useState(() => new Set())
+        const [suggestionsOpen, setSuggestionsOpen] = useState(false)
+        const searchWrapRef = useRef(null)
+
+        const searchSuggestions = useMemo(() => matchSuggestions(searchInput, SEARCH_SUGGESTION_POOL, 10), [searchInput])
+
+        useEffect(() => {
+          function onDocDown(e) {
+            if (!suggestionsOpen) return
+            if (searchWrapRef.current && !searchWrapRef.current.contains(e.target)) setSuggestionsOpen(false)
+          }
+          document.addEventListener('mousedown', onDocDown)
+          return () => document.removeEventListener('mousedown', onDocDown)
+        }, [suggestionsOpen])
+
+        useEffect(() => {
+          if (drawerOpen) setDraftFilters({...appliedFilters})
+        }, [drawerOpen])
+
+        const baseList = useMemo(() => {
+          if (!searchViewActive) return []
+          return getBaseListAfterSearch(ALL_CARDS, submittedQuery)
+        }, [searchViewActive, submittedQuery])
+
+        const displayResults = useMemo(() => applyFilters(baseList, appliedFilters), [baseList, appliedFilters])
+
+        const isJumumCity = appliedFilters.cities && appliedFilters.cities.includes('الجموم') && appliedFilters.cities.length === 1
+        const isJumumQuery = searchViewActive && String(submittedQuery).trim() === 'الجموم'
+        const isJumumContext = isJumumCity || isJumumQuery
+
+        const jumumContentType = useMemo(() => {
+          if (!isJumumContext) return null
+          if (appliedFilters.contentTypes && appliedFilters.contentTypes.length === 1) {
+            return appliedFilters.contentTypes[0]
+          }
+          return null
+        }, [isJumumContext, appliedFilters.contentTypes])
+
+        const isCommunityOnlyJumum = isJumumContext && jumumContentType === 'مجتمعات'
+
+        const showJumumSorry = searchViewActive && isJumumContext && displayResults.length === 0
+
+        const hasActiveFilters = useMemo(() =>
+          Object.keys(appliedFilters).some(k => Array.isArray(appliedFilters[k]) ? appliedFilters[k].length > 0 : !!appliedFilters[k])
+        , [appliedFilters])
+
+        function toggleDraft(key, val) {
+          setDraftFilters(prev => {
+            const arr = Array.isArray(prev[key]) ? [...prev[key]] : []
+            const idx = arr.indexOf(val)
+            if (idx === -1) arr.push(val)
+            else arr.splice(idx, 1)
+            return {...prev, [key]: arr}
+          })
+        }
+
+        function applyDrawerFilters() {
+          setAppliedFilters({...draftFilters})
+          setSearchViewActive(true)
+          setSubmittedQuery(prev => {
+            const p = prev != null ? String(prev).trim() : ''
+            if (p) return p
+            return String(searchInput || '').trim()
+          })
+          setDrawerOpen(false)
+        }
+
+        function clearAllFilters() {
+          const empty = {...initialFilters}
+          setDraftFilters(empty)
+          setAppliedFilters(empty)
+        }
+
+        function toggleFav(id) {
+          setFavorites(prev => { const n = new Set(prev); n.has(id)?n.delete(id):n.add(id); return n })
+        }
+
+        function runSearch() {
+          const q = searchInput.trim()
+          setSubmittedQuery(q)
+          setSearchViewActive(true)
+          setSuggestionsOpen(false)
+        }
+
+        function onSearchKeyDown(e) {
+          if (e.key==='Enter') { e.preventDefault(); runSearch() }
+          if (e.key==='Escape') setSuggestionsOpen(false)
+        }
+
+        const showNoResults = searchViewActive && displayResults.length===0 && !showJumumSorry
+
+        return (
+          <div className="min-h-screen w-full" style={{backgroundColor:COLORS.bg, color:'#1F2A37'}}>
+            <div className="tajah-page text-right" dir="rtl" lang="ar">
+
+              <header className="mb-8 flex items-center justify-between gap-4">
+                <div className="text-right">
+                  <p className="text-sm text-[#5E5E59]">الصفحة الرئيسية &gt; البحث</p>
+                  <h1 className="mt-1 text-3xl font-bold tracking-tight text-[#1F2A37] lg:text-4xl">البحث</h1>
+                </div>
+                <button type="button" className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-white text-[#1F2A37] shadow-sm" aria-label="القائمة">
+                  <span className="space-y-1.5" aria-hidden>
+                    <span className="block h-0.5 w-6 rounded bg-current"/>
+                    <span className="block h-0.5 w-6 rounded bg-current"/>
+                    <span className="block h-0.5 w-6 rounded bg-current"/>
+                  </span>
+                </button>
+              </header>
+
+              <div className="mb-2 flex max-w-3xl flex-col gap-3 lg:max-w-none lg:flex-row lg:items-stretch">
+                <div ref={searchWrapRef} className="relative min-w-0 flex-1">
+                  <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#5E5E59]">
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2" strokeLinecap="round"/></svg>
+                  </div>
+                  <input
+                    value={searchInput}
+                    onChange={e => { setSearchInput(e.target.value); setSuggestionsOpen(true) }}
+                    onFocus={() => setSuggestionsOpen(true)}
+                    onKeyDown={onSearchKeyDown}
+                    className="h-14 w-full rounded-2xl border border-zinc-200 bg-white pr-12 pl-4 text-right text-base text-[#1F2A37] shadow-sm placeholder:text-zinc-400 focus:border-[#B670FF] focus:outline-none focus:ring-2 focus:ring-[#B670FF]/30"
+                    placeholder="مثال: كرة سلة، جدة، نادي..."
+                    autoComplete="off" aria-label="حقل البحث" aria-autocomplete="list" aria-expanded={suggestionsOpen}
+                  />
+                  {suggestionsOpen && searchInput.trim() && searchSuggestions.length > 0 && (
+                    <ul className="tajah-suggest-list" role="listbox" aria-label="اقتراحات">
+                      {searchSuggestions.map(s => (
+                        <li key={s} role="none">
+                          <button type="button" role="option" className="tajah-suggest-item"
+                            onMouseDown={e => { e.preventDefault(); setSearchInput(s); setSuggestionsOpen(false) }}>
+                            {highlightMatch(s, searchInput.trim())}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <button type="button" onClick={runSearch} className="btn-primary h-14 shrink-0 px-8 text-base lg:self-auto">ابحث</button>
+                <button type="button" onClick={() => setDrawerOpen(true)}
+                  className="inline-flex h-14 w-14 shrink-0 items-center justify-center self-end rounded-2xl border border-zinc-200 bg-white text-[#1F2A37] shadow-sm transition hover:bg-zinc-50 lg:self-auto"
+                  aria-label="تخصيص وفرز" aria-expanded={drawerOpen}>
+                  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden><path d="M4 4h16l-6.4 7.2V20l-3.2-2.4V11.2L4 4Z" strokeLinejoin="round"/></svg>
+                </button>
+              </div>
+
+              <p className="mb-6 flex items-start justify-end gap-2 text-sm text-[#5E5E59]">
+                <span className="leading-7">مثل : نادي ، مجتمع ، فرصة ...</span>
+                <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-zinc-300 text-xs font-bold text-[#5E5E59]" aria-hidden>؟</span>
+              </p>
+
+              {searchViewActive && displayResults.length > 0 && !showJumumSorry && (
+                <div className="mb-6 flex items-start justify-end gap-3 rounded-2xl border-2 p-4 text-right text-base font-semibold"
+                  style={{borderColor:COLORS.success, color:COLORS.success, backgroundColor:'#ecfdf5'}} role="status">
+                  <span className="pt-0.5" aria-hidden>
+                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden><path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </span>
+                  <div className="min-w-0 flex-1 text-right">
+                    {displayResults.length===5 && !hasActiveFilters && String(submittedQuery).trim()===BASKETBALL_KEYWORD
+                      ? <p className="text-balance leading-7">تم العثور على 5 نتائج هي الأقرب لاهتماماتك</p>
+                      : <p className="text-balance leading-7">تم العثور على {displayResults.length} {displayResults.length===1?'نتيجة':'نتائج'}{hasActiveFilters?' بعد تطبيق التصفية':' مطابقة لبحثك'}</p>
+                    }
+                  </div>
+                </div>
+              )}
+
+              {showJumumSorry && (
+                <EmptyState
+                  type="no-area"
+                  jumumContentType={jumumContentType}
+                />
+              )}
+              {showNoResults && <EmptyState type="no-results"/>}
+              {!searchViewActive && <EmptyState type="idle"/>}
+
+              {searchViewActive && displayResults.length > 0 && !showJumumSorry && (
+                <ul className="tajah-results-grid list-none p-0">
+                  {displayResults.map(item => (
+                    <li key={item.id} className="m-0">
+                      <ResultCardSwitch item={item} favorite={favorites.has(item.id)}
+                        onToggleFav={() => toggleFav(item.id)} onShare={() => {}}/>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            {drawerOpen && (
+              <div className="fixed inset-0 z-40" role="dialog" aria-modal="true" aria-label="تخصيص البحث">
+                <button type="button"
+                  className="tajah-drawer-overlay absolute inset-0 z-0 bg-black/40"
+                  onClick={() => setDrawerOpen(false)} aria-label="إغلاق"/>
+                <aside className="tajah-drawer-panel">
+                  <div className="tajah-drawer-header flex shrink-0 items-center justify-between px-5 py-4">
+                    <h2 className="text-lg font-bold text-[#35214d]">التخصيص</h2>
+                    <button type="button" onClick={() => setDrawerOpen(false)}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-[#5b3d8a] transition hover:bg-white/60" aria-label="إغلاق">
+                      <span className="text-2xl leading-none">×</span>
+                    </button>
+                  </div>
+
+                  <div className="tajah-drawer-scroll min-h-0 flex-1 space-y-4 overflow-y-auto p-4 pb-6">
+
+                    <FilterGroup title="نوع المحتوى" icon={<FilterIcons.ContentType/>}>
+                      <OptionGrid values={draftFilters.contentTypes} onToggle={v => toggleDraft('contentTypes', v)} options={filterOptions.contentTypes}/>
+                    </FilterGroup>
+
+                    <FilterGroup title="نوع الفرصة" icon={<FilterIcons.OpportunityType/>}>
+                      <OptionGrid values={draftFilters.opportunityTypes} onToggle={v => toggleDraft('opportunityTypes', v)} options={filterOptions.opportunityType}/>
+                    </FilterGroup>
+
+                    <FilterGroup title="نوع الرياضة" icon={<FilterIcons.Sport/>}>
+                      <OptionGrid values={draftFilters.sports} onToggle={v => toggleDraft('sports', v)} options={filterOptions.sport}/>
+                    </FilterGroup>
+
+                    <FilterGroup title="الموقع" icon={<FilterIcons.Location/>}>
+                      <OptionGrid values={draftFilters.cities} onToggle={v => toggleDraft('cities', v)} options={filterOptions.city}/>
+                    </FilterGroup>
+
+                    <FilterGroup title="نوع النادي" icon={<FilterIcons.ClubType/>}>
+                      <OptionGrid values={draftFilters.clubTypes} onToggle={v => toggleDraft('clubTypes', v)} options={filterOptions.clubType}/>
+                    </FilterGroup>
+
+                    <FilterGroup title="التاريخ" icon={<FilterIcons.Date/>}>
+                      <OptionGrid values={draftFilters.dates} onToggle={v => toggleDraft('dates', v)} options={filterOptions.date}/>
+                    </FilterGroup>
+                  </div>
+
+                  <div className="tajah-drawer-footer shrink-0">
+                    <button type="button" className="tajah-btn-apply-filter" onClick={applyDrawerFilters}>تطبيق الفلترة</button>
+                    <button type="button" className="tajah-btn-clear-filter" onClick={clearAllFilters}>حذف الفلترة</button>
+                  </div>
+                </aside>
+              </div>
+            )}
+          </div>
+        )
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+    </script>
+<footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+<!-- Top: Logo text + Tagline -->
+<div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+<div>
+<div class="flex items-center gap-3">
+<svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+<defs><lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100"><stop offset="0%" stop-color="#f2de00"></stop><stop offset="50%" stop-color="#cca6ff"></stop><stop offset="100%" stop-color="#b670ff"></stop></lineargradient></defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+<p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+</div>
+<p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+</div>
+<p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+</div>
+<!-- 3 Columns Grid — equal width -->
+<div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+<!-- Column 1: Quick Links -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            روابط مهمة
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="about.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                عن تاجة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="index.html#faq">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                الأسئلة الشائعة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="contact.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                المساعدة والدعم
+              </a>
+</li>
+</ul>
+</div>
+<!-- Column 2: Contact Info (email + phone only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<!-- Phone icon — flipped to face left -->
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            تواصل معنا
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="mailto:Tajah2026@gmail.com">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">Tajah2026@gmail.com</p>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="tel:+966501234567">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<!-- Phone icon in icon box — flipped left -->
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr" style="unicode-bidi: embed;">+966 50 123 4567</p>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            النشرة البريدية
+          </h3>
+<p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+<!-- Newsletter form -->
+<form class="space-y-2" id="newsletter-form">
+<div class="relative">
+<input class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface" id="newsletter-email" placeholder="layal@gmail.com" required="" type="email"/>
+<span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+</div>
+<button class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed" type="submit">
+<span>اشتراك</span>
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</form>
+<!-- Success message -->
+<div class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success" id="newsletter-success">
+<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>تم الاشتراك بنجاح! 🎉</span>
+</div>
+<!-- Social Icons: WhatsApp, X, TikTok only -->
+<div class="mt-6">
+<p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+<div class="flex items-center gap-2">
+<!-- WhatsApp -->
+<a aria-label="واتساب" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path></svg>
+</a>
+<!-- Twitter / X -->
+<a aria-label="تويتر" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- TikTok -->
+<a aria-label="تيك توك" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom: Copyright + Legal -->
+<div class="mt-12 pt-8 border-t border-tj-border">
+<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+<p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق محفوظة.
+          </p>
+<ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+<li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer><script src="../js/auth.js?v=1.0.3"></script>
+</body>
+</html>

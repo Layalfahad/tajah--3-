@@ -1,0 +1,987 @@
+
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تاجة | حيث تلتقي الموهبة بالفرصة</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Tajawal:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary':         '#b670ff',
+            'tj-primary-hover':   '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text':    '#250140',
+            'tj-surface-base':    '#fdfcfb',
+            'tj-surface-card':    '#ffffff',
+            'tj-surface-muted':   '#f7f5f2',
+            'tj-text':            '#0f0f10',
+            'tj-text-secondary':  '#5e5e59',
+            'tj-text-tertiary':   '#8c8c85',
+            'tj-text-disabled':   '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border':          '#ece9e3',
+            'tj-border-active':   '#8c8c85',
+            'tj-success':         '#00a637',
+            'tj-success-bg':      '#e3f5e1',
+            'tj-error':           '#eb3333',
+            'tj-error-bg':        '#fff0f0',
+            'tj-info':            '#0094e3',
+            'tj-info-bg':         '#e3f1ff',
+            'tj-accent-yellow':   '#caa913',
+            'tj-accent-yellow-bg':'#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn':  '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card':   '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta':    '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft':   '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float':  '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee':       { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev':   { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow':    { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring':    { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up':       { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee':     'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow':  'float-slow 8s ease-in-out infinite',
+            'pulse-ring':  'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up':     'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+<!-- Lucide icons via CDN -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+    html { scroll-behavior: smooth; }
+    ::selection { background: #b670ff; color: #fff; }
+
+    body {
+      background:
+        radial-gradient(1200px 600px at 90% -10%,  rgba(182,112,255,0.10), transparent 60%),
+        radial-gradient(900px  500px at -10% 20%,  rgba(255,224,120,0.08), transparent 60%),
+        radial-gradient(800px  500px at 50% 110%,  rgba(0,148,227,0.06),   transparent 60%),
+        #fdfcfb;
+    }
+
+    .display-xl {
+      font-family: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .display-lg {
+      font-family: 'Tajawal', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+    }
+
+    .ink-underline {
+      background-image: linear-gradient(120deg, #b670ff 0%, #a312ff 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 0.35em;
+      background-position: 0 88%;
+      padding: 0 0.1em;
+      border-radius: 2px;
+    }
+
+    .faq-panel-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 380ms cubic-bezier(0.22,1,0.36,1);
+    }
+    .faq-item.faq-open .faq-panel-wrap { grid-template-rows: 1fr; }
+
+    .partner-logo {
+      filter: grayscale(1) contrast(0.9);
+      opacity: 0.6;
+      transition: filter 400ms ease, opacity 400ms ease, transform 400ms ease;
+    }
+    .partner-logo:hover, .partner-track:hover .partner-logo {
+      filter: grayscale(0) contrast(1);
+      opacity: 1;
+    }
+    .partner-track { width: max-content; }
+    .partner-track:hover { animation-play-state: paused; }
+
+    .cta-primary {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .cta-primary::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+      transform: translateX(-120%);
+      transition: transform 700ms cubic-bezier(0.22,1,0.36,1);
+      z-index: -1;
+    }
+    .cta-primary:hover::after { transform: translateX(120%); }
+
+    .blob {
+      filter: blur(60px);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    .glass-chip {
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border: 1px solid rgba(236, 233, 227, 0.9);
+    }
+
+    .dotted-bg {
+      background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* Lucide icon sizing */
+    .lucide { width: 1em; height: 1em; display: inline-block; vertical-align: middle; stroke-width: 2; }
+    .lucide-lg { width: 1.5em; height: 1.5em; }
+    .lucide-xl { width: 2em; height: 2em; }
+    .lucide-2xl { width: 2.5em; height: 2.5em; }
+    .lucide-3xl { width: 3rem; height: 3rem; }
+
+    /* Hidden FAQ items */
+    .faq-extra { display: none; }
+    .faq-extra.faq-visible { display: block; }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .newsletter-success { animation: slideDown 0.3s ease both; }
+
+    /* Navbar - matches post-login navbar style */
+    .nav-link { transition: color 0.15s, background 0.15s; }
+    
+    .nav-link-active::after {
+      content: ''; position: absolute; bottom: -1px; right: 12px; left: 12px;
+      height: 2px; background: #b670ff; border-radius: 2px 2px 0 0;
+    }
+    .hover-purple:hover { color: #b670ff !important; background: #f6ebff !important; }
+    .dropdown { transform-origin: top right; }
+    .dropdown.open { animation: dropIn 0.18s ease both; }
+    @keyframes dropIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .drawer { transform: translateX(100%); transition: transform 0.3s ease; }
+    .drawer.open { transform: translateX(0); }
+  </style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body class="min-h-screen font-sans text-tj-text antialiased">
+<!-- MOBILE NAV DRAWER (Pre-login) -->
+<div aria-hidden="true" class="fixed inset-0 z-40 hidden bg-tj-text/40 backdrop-blur-sm lg:hidden" id="nav-overlay"></div>
+<aside aria-label="القائمة" class="fixed inset-y-0 right-0 z-50 w-[min(100%,20rem)] translate-x-full transform bg-tj-surface-card shadow-tj-float transition-transform duration-300 ease-out lg:hidden" id="mobile-drawer">
+<div class="flex items-center justify-between border-b border-tj-border px-5 py-4">
+<a class="display-lg text-2xl text-tj-primary" href="landingPag.html">تاجة</a>
+<button aria-label="إغلاق القائمة" class="rounded-tj-btn p-2 text-tj-text-secondary hover:bg-tj-surface-muted" id="nav-close" type="button">
+<i class="lucide lucide-lg" data-lucide="x"></i>
+</button>
+</div>
+<nav class="flex flex-col gap-1 p-4 text-tj-text-secondary">
+<a class="rounded-tj-btn px-3 py-3 font-medium hover:bg-tj-primary-surface hover:text-tj-primary-text" href="about.html">عن تاجة</a>
+<a class="rounded-tj-btn px-3 py-3 font-medium hover:bg-tj-primary-surface hover:text-tj-primary-text" href="contact.html">تواصل معنا</a>
+<a class="rounded-tj-btn px-3 py-3 font-medium hover:bg-tj-primary-surface hover:text-tj-primary-text" href="#faq">الأسئلة الشائعة</a>
+<div class="border-t border-tj-border mt-3 pt-3 flex flex-col gap-2">
+<a class="inline-flex h-11 items-center justify-center rounded-tj-btn border border-tj-primary px-4 text-sm font-semibold text-tj-primary transition hover:bg-tj-primary-surface" href="login-select.html">تسجيل الدخول</a>
+<a class="cta-primary inline-flex h-11 items-center justify-center gap-2 rounded-tj-btn bg-tj-primary px-4 text-sm font-semibold text-tj-text-on-primary shadow-tj-cta transition hover:bg-tj-primary-hover active:bg-tj-primary-pressed" href="join.html">انضمي الآن</a>
+</div>
+</nav>
+</aside>
+<!-- HEADER (Pre-login) -->
+<header class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+<div class="flex items-center h-16">
+<!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+<div class="flex flex-1 items-center justify-start gap-2">
+<!-- Profile Dropdown Trigger (desktop) -->
+<div class="relative hidden lg:block">
+<button class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group" id="profileBtn" onclick="toggleDropdown()">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">م</div>
+<div class="text-right">
+<p class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">مرحباً، مرام!</p>
+</div>
+<svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Dropdown Menu -->
+<div class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50" id="dropdown">
+<div class="px-4 py-3 border-b border-tj-border">
+<p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+<p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="stats.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              الملف الشخصي
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="settings.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              الإعدادات
+            </a>
+<div class="border-t border-tj-border mt-1 pt-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group" href="../index.html">
+<svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                تسجيل الخروج
+              </a>
+</div>
+</div>
+</div>
+<!-- Notification Bell -->
+<button aria-label="الإشعارات" class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group" onclick="window.location.href='notifications.html'">
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+<svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Hamburger (mobile) -->
+<button class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors" id="hamBtn" onclick="toggleDrawer()">
+<svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+<nav class="hidden lg:flex items-center gap-1">
+<a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap" href="PlayerHomepage.html">الرئيسية</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="../Communities/index.html">المجتمعات</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="Tajah-search.html">البحث</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="opportunities.html">الفرص</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="applications.html">طلباتي</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="contact.html">تواصل معنا</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="about.html">عن تاجة</a>
+</nav>
+<!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+<div class="flex flex-1 items-center justify-end">
+<a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+<div class="w-9 h-9 flex items-center justify-center">
+<svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+<stop offset="0%" stop-color="#f2de00"></stop>
+<stop offset="50%" stop-color="#cca6ff"></stop>
+<stop offset="100%" stop-color="#b670ff"></stop>
+</lineargradient>
+</defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+</div>
+<span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<main>
+<!-- HERO -->
+<section class="relative isolate overflow-hidden">
+<div class="absolute inset-0 -z-10">
+<img alt="فريق كرة قدم نسائي" class="h-full w-full object-cover" height="1200" loading="eager" src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=2000&amp;q=80" width="2000"/>
+<div class="absolute inset-0 bg-gradient-to-b from-tj-text/85 via-tj-text/55 to-tj-text/85"></div>
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.0)_0%,_rgba(15,15,16,0.45)_70%,_rgba(15,15,16,0.85)_100%)]"></div>
+<div class="absolute inset-0 bg-gradient-to-tr from-tj-primary-pressed/30 via-transparent to-tj-primary/15"></div>
+</div>
+<!-- Floating stat chip -->
+<div class="glass-chip animate-float-slow pointer-events-none absolute right-6 top-28 hidden max-w-[18rem] rounded-tj-card p-4 shadow-tj-float lg:flex">
+<div class="flex items-start gap-3">
+<span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary text-tj-text-on-primary">
+<i class="lucide lucide-lg" data-lucide="trophy"></i>
+</span>
+<div class="min-w-0 text-right">
+<p class="text-sm font-bold text-tj-text">تم التوقيع مع نادي الاتحاد النسائي</p>
+<p class="mt-1 text-xs font-medium text-tj-text-tertiary">منذ أسبوع · ساره المطيري</p>
+</div>
+</div>
+</div>
+<!-- Content -->
+<div class="relative mx-auto flex min-h-[640px] max-w-5xl flex-col items-center justify-center px-4 py-20 text-center sm:min-h-[720px] sm:px-6 sm:py-24 lg:min-h-[780px] lg:px-8 lg:py-32">
+<h1 class="display-xl text-3xl text-white drop-shadow-lg sm:text-5xl lg:text-[4rem] xl:text-[4.75rem]">
+<span class="block mb-3 sm:mb-4 lg:mb-5">انضمي لمئات اللاعبات اللواتي</span>
+<span class="block">حققن أحلامهن من خلال <span class="ink-underline whitespace-nowrap text-white">تاجة</span></span>
+</h1>
+<p class="mt-8 text-xl font-bold text-white drop-shadow sm:text-2xl">فرصتك تنتظرك الآن!</p>
+<p class="mt-4 max-w-2xl text-base font-medium leading-relaxed text-white/85 sm:text-lg">
+          ملف رياضي احترافي، تواصل مباشر مع أكثر من 40 ناديًا مرخصًا، ومتابعة عقودك في مكان واحد.
+        </p>
+<!-- CTA group -->
+<div class="mt-10 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
+<a class="cta-primary inline-flex h-14 items-center justify-center gap-2 rounded-tj-btn bg-tj-primary px-7 text-base font-bold text-tj-text-on-primary shadow-tj-cta transition hover:-translate-y-0.5 hover:bg-tj-primary-hover active:translate-y-0 active:bg-tj-primary-pressed sm:flex-1" href="join.html">
+<span>انضمي الآن</span>
+<i class="lucide lucide-lg" data-lucide="arrow-left"></i>
+</a>
+</div>
+</div>
+</section>
+<!-- STATS -->
+<section class="relative px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+<div class="mx-auto max-w-7xl">
+<div class="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+<article class="reveal group flex flex-col items-start rounded-tj-card border border-tj-border bg-tj-surface-card p-5 shadow-tj-soft transition duration-300 hover:-translate-y-1 hover:border-tj-primary/40 hover:shadow-tj-card sm:p-7">
+<div class="mb-5 flex h-12 w-12 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition group-hover:scale-110 sm:h-14 sm:w-14">
+<i class="lucide lucide-2xl sm:lucide-3xl" data-lucide="users"></i>
+</div>
+<p class="display-lg text-3xl text-tj-text sm:text-5xl">+500</p>
+<p class="mt-2 text-sm font-semibold text-tj-text-secondary sm:text-base">لاعبة موهوبة</p>
+</article>
+<article class="reveal group flex flex-col items-start rounded-tj-card border border-tj-border bg-tj-surface-card p-5 shadow-tj-soft transition duration-300 hover:-translate-y-1 hover:border-tj-info/50 hover:shadow-tj-card sm:p-7">
+<div class="mb-5 flex h-12 w-12 items-center justify-center rounded-tj-btn bg-tj-info-bg text-tj-info transition group-hover:scale-110 sm:h-14 sm:w-14">
+<i class="lucide lucide-2xl sm:lucide-3xl" data-lucide="target"></i>
+</div>
+<p class="display-lg text-3xl text-tj-text sm:text-5xl">+40</p>
+<p class="mt-2 text-sm font-semibold text-tj-text-secondary sm:text-base">نادي رياضي</p>
+</article>
+<article class="reveal group flex flex-col items-start rounded-tj-card border border-tj-border bg-tj-surface-card p-5 shadow-tj-soft transition duration-300 hover:-translate-y-1 hover:border-tj-accent-yellow/60 hover:shadow-tj-card sm:p-7">
+<div class="mb-5 flex h-12 w-12 items-center justify-center rounded-tj-btn bg-tj-accent-yellow-bg text-tj-accent-yellow transition group-hover:scale-110 sm:h-14 sm:w-14">
+<i class="lucide lucide-2xl sm:lucide-3xl" data-lucide="file-signature"></i>
+</div>
+<p class="display-lg text-3xl text-tj-text sm:text-5xl">+240</p>
+<p class="mt-2 text-sm font-semibold text-tj-text-secondary sm:text-base">عقد موقع</p>
+</article>
+<article class="reveal group flex flex-col items-start rounded-tj-card border border-tj-border bg-tj-surface-card p-5 shadow-tj-soft transition duration-300 hover:-translate-y-1 hover:border-tj-success/50 hover:shadow-tj-card sm:p-7">
+<div class="mb-5 flex h-12 w-12 items-center justify-center rounded-tj-btn bg-tj-success-bg text-tj-success transition group-hover:scale-110 sm:h-14 sm:w-14">
+<i class="lucide lucide-2xl sm:lucide-3xl" data-lucide="medal"></i>
+</div>
+<p class="display-lg text-3xl text-tj-text sm:text-5xl">50</p>
+<p class="mt-2 text-sm font-semibold text-tj-text-secondary sm:text-base">ميدالية</p>
+</article>
+</div>
+</div>
+</section>
+<!-- PARTNERS -->
+<section class="relative px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20" id="partners">
+<div class="mx-auto max-w-7xl">
+<div class="text-center">
+<h2 class="display-lg mt-3 text-3xl text-tj-text sm:text-4xl lg:text-5xl">
+            نعمل بثقة مع أكثر من <span class="text-tj-primary">40</span> ناديًا وجهة داعمة
+          </h2>
+<p class="mx-auto mt-4 max-w-2xl text-base font-medium text-tj-text-secondary sm:text-lg">
+            تكامل وتعاون مع أبرز الأندية والاتحادات والمنصات الرياضية في المملكة.
+          </p>
+</div>
+<!-- Marquee row 1 -->
+<div class="relative mt-12 overflow-hidden">
+<div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-tj-surface-base to-transparent"></div>
+<div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-tj-surface-base to-transparent"></div>
+<div class="partner-track flex animate-marquee items-center gap-4">
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-2xl tracking-tight text-tj-text">الاتحاد</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-info" data-lucide="shield"></i><span class="display-lg text-xl text-tj-text">الهلال</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><span class="h-7 w-7 rounded-full bg-tj-success"></span><span class="display-lg text-xl text-tj-text">الأهلي</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">النصر</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-error" data-lucide="flame"></i><span class="display-lg text-xl text-tj-text">الشباب</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">الفيحاء</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-accent-yellow" data-lucide="crown"></i><span class="display-lg text-xl text-tj-text">القادسية</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">الفتح</span></div>
+<!-- Duplicate -->
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-2xl tracking-tight text-tj-text">الاتحاد</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-info" data-lucide="shield"></i><span class="display-lg text-xl text-tj-text">الهلال</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><span class="h-7 w-7 rounded-full bg-tj-success"></span><span class="display-lg text-xl text-tj-text">الأهلي</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">النصر</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-error" data-lucide="flame"></i><span class="display-lg text-xl text-tj-text">الشباب</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">الفيحاء</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-accent-yellow" data-lucide="crown"></i><span class="display-lg text-xl text-tj-text">القادسية</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">الفتح</span></div>
+</div>
+</div>
+<!-- Marquee row 2 -->
+<div class="relative mt-4 overflow-hidden">
+<div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-tj-surface-base to-transparent"></div>
+<div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-tj-surface-base to-transparent"></div>
+<div class="partner-track flex animate-marquee-rev items-center gap-4">
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-primary" data-lucide="trophy"></i><span class="display-lg text-xl text-tj-text">الهيئة العامة</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">الاتحاد السعودي</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-info" data-lucide="graduation-cap"></i><span class="display-lg text-xl text-tj-text">أكاديمية الموهبة</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">دوري المحترفات</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-error" data-lucide="heart-pulse"></i><span class="display-lg text-xl text-tj-text">صحة الرياضي</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">منصة لياقة</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-accent-yellow" data-lucide="sparkles"></i><span class="display-lg text-xl text-tj-text">رؤية 2030</span></span></div>
+<!-- Duplicate -->
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-primary" data-lucide="trophy"></i><span class="display-lg text-xl text-tj-text">الهيئة العامة</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">الاتحاد السعودي</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-info" data-lucide="graduation-cap"></i><span class="display-lg text-xl text-tj-text">أكاديمية الموهبة</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">دوري المحترفات</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-error" data-lucide="heart-pulse"></i><span class="display-lg text-xl text-tj-text">صحة الرياضي</span></span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="display-lg text-xl text-tj-text">منصة لياقة</span></div>
+<div class="partner-logo flex h-20 w-44 shrink-0 items-center justify-center rounded-tj-card border border-tj-border bg-tj-surface-card px-5 shadow-tj-soft"><span class="flex items-center gap-2"><i class="lucide lucide-lg text-tj-accent-yellow" data-lucide="sparkles"></i><span class="display-lg text-xl text-tj-text">رؤية 2030</span></span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- WHY TAJAH -->
+<section class="relative px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24" id="why">
+<div class="mx-auto max-w-7xl">
+<div class="grid items-end gap-6 sm:grid-cols-3">
+<div class="sm:col-span-2 text-right">
+<h2 class="display-lg mt-3 text-3xl text-tj-text sm:text-4xl lg:text-5xl">لماذا تاجة؟</h2>
+</div>
+</div>
+<div class="mt-12 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-7">
+<article class="reveal group flex flex-col rounded-tj-card border border-tj-border bg-tj-surface-card p-6 shadow-tj-soft transition duration-300 hover:-translate-y-1 hover:border-tj-primary/30 hover:shadow-tj-card sm:p-7">
+<div class="flex h-14 w-14 items-center justify-center rounded-tj-card bg-gradient-to-br from-tj-primary-surface to-white text-tj-primary ring-1 ring-tj-primary/15 transition group-hover:scale-110 group-hover:ring-tj-primary/40">
+<i class="lucide lucide-2xl" data-lucide="shield-check"></i>
+</div>
+<h3 class="mt-6 display-lg text-xl text-tj-text">أندية مرخصة</h3>
+<p class="mt-3 text-sm font-medium leading-relaxed text-tj-text-secondary">جميع الأندية في تاجة مرخصة رسميا من الهيئة العامة للرياضة</p>
+</article>
+<article class="reveal group flex flex-col rounded-tj-card border border-tj-border bg-tj-surface-card p-6 shadow-tj-soft transition duration-300 hover:-translate-y-1 hover:border-tj-primary/30 hover:shadow-tj-card sm:p-7">
+<div class="flex h-14 w-14 items-center justify-center rounded-tj-card bg-gradient-to-br from-tj-primary-surface to-white text-tj-primary ring-1 ring-tj-primary/15 transition group-hover:scale-110 group-hover:ring-tj-primary/40">
+<i class="lucide lucide-2xl" data-lucide="target"></i>
+</div>
+<h3 class="mt-6 display-lg text-xl text-tj-text">فرص حقيقية</h3>
+<p class="mt-3 text-sm font-medium leading-relaxed text-tj-text-secondary">أكثر من 40 نادي رياضي يبحث عن المواهب</p>
+</article>
+<article class="reveal group flex flex-col rounded-tj-card border border-tj-border bg-tj-surface-card p-6 shadow-tj-soft transition duration-300 hover:-translate-y-1 hover:border-tj-primary/30 hover:shadow-tj-card sm:p-7">
+<div class="flex h-14 w-14 items-center justify-center rounded-tj-card bg-gradient-to-br from-tj-primary-surface to-white text-tj-primary ring-1 ring-tj-primary/15 transition group-hover:scale-110 group-hover:ring-tj-primary/40">
+<i class="lucide lucide-2xl" data-lucide="users-round"></i>
+</div>
+<h3 class="mt-6 display-lg text-xl text-tj-text">مجتمع دائم</h3>
+<p class="mt-3 text-sm font-medium leading-relaxed text-tj-text-secondary">انضمي لمجتمع من اللاعبات الطموحات وشاركي تجربتك</p>
+</article>
+<article class="reveal group flex flex-col rounded-tj-card border border-tj-border bg-tj-surface-card p-6 shadow-tj-soft transition duration-300 hover:-translate-y-1 hover:border-tj-primary/30 hover:shadow-tj-card sm:p-7">
+<div class="flex h-14 w-14 items-center justify-center rounded-tj-card bg-gradient-to-br from-tj-primary-surface to-white text-tj-primary ring-1 ring-tj-primary/15 transition group-hover:scale-110 group-hover:ring-tj-primary/40">
+<i class="lucide lucide-2xl" data-lucide="zap"></i>
+</div>
+<h3 class="mt-6 display-lg text-xl text-tj-text">استجابة سريعة</h3>
+<p class="mt-3 text-sm font-medium leading-relaxed text-tj-text-secondary">ردود فعل سريعة من الأندية والمدربين المهتمين بموهبتك</p>
+</article>
+</div>
+</div>
+</section>
+<!-- SUCCESS STORIES -->
+<section class="relative px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24" id="stories">
+<div class="mx-auto max-w-7xl">
+<div class="text-center">
+<h2 class="display-lg mt-3 text-3xl text-tj-text sm:text-4xl lg:text-5xl">قصص نجاح ملهمة</h2>
+<p class="mx-auto mt-4 max-w-2xl text-base font-semibold text-tj-text-secondary sm:text-lg">تعرفي على لاعبات حققن أحلامهن من خلال تاجة</p>
+</div>
+<div class="mt-14 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+<article class="reveal group overflow-hidden rounded-tj-card border border-tj-border bg-tj-surface-card shadow-tj-soft transition duration-500 hover:-translate-y-2 hover:shadow-tj-float">
+<div class="relative overflow-hidden">
+<img alt="" class="h-64 w-full object-cover transition duration-700 group-hover:scale-105" height="600" loading="lazy" src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=900&amp;q=80" width="900"/>
+<div class="absolute inset-0 bg-gradient-to-t from-tj-text/85 via-tj-text/30 to-transparent"></div>
+<div class="absolute bottom-0 right-0 left-0 p-5 text-right text-tj-text-on-primary">
+<p class="display-lg text-2xl">ساره المطيري</p>
+<p class="mt-1 text-sm font-semibold text-tj-text-on-primary/85">مهاجمة · نادي الهلال</p>
+</div>
+<span class="absolute right-5 top-5 inline-flex items-center gap-1 rounded-tj-pill bg-tj-surface-card/95 px-3 py-1 text-xs font-bold text-tj-primary shadow-tj-soft">
+<i class="lucide" data-lucide="star"></i> منتخب وطني
+              </span>
+</div>
+<div class="relative p-6">
+<i aria-hidden="true" class="lucide lucide-2xl absolute -top-3 right-6 text-tj-primary/25" data-lucide="quote"></i>
+<p class="text-right text-base font-medium leading-relaxed text-tj-text-secondary">
+                كانت تاجة بداية رحلتي الاحترافية؛ تواصلت مع نادي الهلال خلال أيام وحصلت على فرصة أثبت فيها نفسي أمام الجهاز الفني.
+              </p>
+<div class="my-5 h-px bg-gradient-to-l from-transparent via-tj-primary-surface to-transparent"></div>
+<p class="flex items-center justify-center gap-2 text-sm font-bold text-tj-primary">
+<i class="lucide" data-lucide="trophy"></i>
+                انضمت للمنتخب الوطني
+              </p>
+</div>
+</article>
+<article class="reveal group overflow-hidden rounded-tj-card border border-tj-border bg-tj-surface-card shadow-tj-soft transition duration-500 hover:-translate-y-2 hover:shadow-tj-float">
+<div class="relative overflow-hidden">
+<img alt="" class="h-64 w-full object-cover transition duration-700 group-hover:scale-105" height="600" loading="lazy" src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=900&amp;q=80" width="900"/>
+<div class="absolute inset-0 bg-gradient-to-t from-tj-text/85 via-tj-text/30 to-transparent"></div>
+<div class="absolute bottom-0 right-0 left-0 p-5 text-right text-tj-text-on-primary">
+<p class="display-lg text-2xl">نورة العتيبي</p>
+<p class="mt-1 text-sm font-semibold text-tj-text-on-primary/85">وسط ميدان · نادي الشباب</p>
+</div>
+<span class="absolute right-5 top-5 inline-flex items-center gap-1 rounded-tj-pill bg-tj-surface-card/95 px-3 py-1 text-xs font-bold text-tj-info shadow-tj-soft">
+<i class="lucide" data-lucide="file-signature"></i> عقد محترفات
+              </span>
+</div>
+<div class="relative p-6">
+<i aria-hidden="true" class="lucide lucide-2xl absolute -top-3 right-6 text-tj-primary/25" data-lucide="quote"></i>
+<p class="text-right text-base font-medium leading-relaxed text-tj-text-secondary">
+                من ملف بسيط إلى عقد رسمي؛ المنصة سهّلت عليّ عرض إحصائياتي وتواصل المدربين معي بشكل منظم واحترافي.
+              </p>
+<div class="my-5 h-px bg-gradient-to-l from-transparent via-tj-primary-surface to-transparent"></div>
+<p class="flex items-center justify-center gap-2 text-sm font-bold text-tj-primary">
+<i class="lucide" data-lucide="flame"></i>
+                أول مشاركة في دوري المحترفات
+              </p>
+</div>
+</article>
+<article class="reveal group overflow-hidden rounded-tj-card border border-tj-border bg-tj-surface-card shadow-tj-soft transition duration-500 hover:-translate-y-2 hover:shadow-tj-float">
+<div class="relative overflow-hidden">
+<img alt="" class="h-64 w-full object-cover transition duration-700 group-hover:scale-105" height="600" loading="lazy" src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=900&amp;q=80" width="900"/>
+<div class="absolute inset-0 bg-gradient-to-t from-tj-text/85 via-tj-text/30 to-transparent"></div>
+<div class="absolute bottom-0 right-0 left-0 p-5 text-right text-tj-text-on-primary">
+<p class="display-lg text-2xl">لينا الدوسري</p>
+<p class="mt-1 text-sm font-semibold text-tj-text-on-primary/85">حارسة مرمى · نادي الأهلي</p>
+</div>
+<span class="absolute right-5 top-5 inline-flex items-center gap-1 rounded-tj-pill bg-tj-surface-card/95 px-3 py-1 text-xs font-bold text-tj-success shadow-tj-soft">
+<i class="lucide" data-lucide="shield"></i> معسكر نخبة
+              </span>
+</div>
+<div class="relative p-6">
+<i aria-hidden="true" class="lucide lucide-2xl absolute -top-3 right-6 text-tj-primary/25" data-lucide="quote"></i>
+<p class="text-right text-base font-medium leading-relaxed text-tj-text-secondary">
+                أحببت شفافية التواصل مع الأندية المرخصة؛ شعرت بالأمان وأنا أشارك بياناتي وأتابع الردود لحظة بلحظة.
+              </p>
+<div class="my-5 h-px bg-gradient-to-l from-transparent via-tj-primary-surface to-transparent"></div>
+<p class="flex items-center justify-center gap-2 text-sm font-bold text-tj-primary">
+<i class="lucide" data-lucide="medal"></i>
+                معسكر تدريبي مع نخبة الحراس
+              </p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- FAQ -->
+<section class="relative px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24" id="faq">
+<div class="mx-auto max-w-3xl">
+<div class="text-center">
+<h2 class="display-lg mt-3 text-3xl text-tj-text sm:text-4xl">الأسئلة الشائعة</h2>
+<p class="mx-auto mt-4 max-w-xl text-base font-medium text-tj-text-secondary">
+            كل ما تحتاجين معرفته قبل الانضمام إلى مجتمع تاجة.
+          </p>
+</div>
+<div aria-label="الأسئلة الشائعة" class="mt-10 rounded-tj-card border border-tj-border bg-tj-surface-card p-2 shadow-tj-soft sm:p-3" id="faq-list" role="region">
+<!-- FAQ 1 -->
+<div class="faq-item overflow-hidden rounded-[14px] transition hover:bg-tj-surface-muted">
+<button aria-controls="faq-panel-1" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-4 px-4 py-5 text-right text-base font-bold leading-snug text-tj-text" id="faq-trigger-1" type="button">
+<span class="min-w-0 flex-1 text-right">كيف يمكنني التسجيل في المنصة؟</span>
+<span class="faq-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-tj-primary-surface text-tj-primary transition-transform duration-300">
+<i class="lucide lucide-lg" data-lucide="chevron-down"></i>
+</span>
+</button>
+<div class="faq-panel-wrap">
+<div class="min-h-0 overflow-hidden">
+<div aria-labelledby="faq-trigger-1" class="faq-panel px-4 pb-5 pt-1 text-right text-sm font-medium leading-relaxed text-tj-text-secondary" id="faq-panel-1" role="region">
+                  التسجيل في تاجة سهل وسريع! ما عليكِ سوى الضغط على زر "انضمي الآن"، ثم إنشاء حسابك باستخدام بريدك الإلكتروني أو رقم جوالك. بعد التسجيل ستتمكنين من إنشاء ملفك الرياضي الاحترافي وإضافة إنجازاتك وبياناتك بشكل كامل.
+                </div>
+</div>
+</div>
+</div>
+<!-- FAQ 2 -->
+<div class="faq-item overflow-hidden rounded-[14px] transition hover:bg-tj-surface-muted">
+<button aria-controls="faq-panel-2" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-4 px-4 py-5 text-right text-base font-bold leading-snug text-tj-text" id="faq-trigger-2" type="button">
+<span class="min-w-0 flex-1 text-right">هل المنصة مجانية؟</span>
+<span class="faq-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-tj-primary-surface text-tj-primary transition-transform duration-300">
+<i class="lucide lucide-lg" data-lucide="chevron-down"></i>
+</span>
+</button>
+<div class="faq-panel-wrap">
+<div class="min-h-0 overflow-hidden">
+<div aria-labelledby="faq-trigger-2" class="faq-panel px-4 pb-5 pt-1 text-right text-sm font-medium leading-relaxed text-tj-text-secondary" id="faq-panel-2" role="region">
+                  نعم! يمكنكِ إنشاء ملفك الرياضي والتصفح بين الأندية المتاحة مجاناً. نقدم أيضاً خطة مميزة تتيح لكِ إمكانيات إضافية كإبراز ملفك أمام الأندية وإحصائيات تفصيلية ومتابعة مباشرة لحالة طلباتك.
+                </div>
+</div>
+</div>
+</div>
+<!-- FAQ 3 -->
+<div class="faq-item overflow-hidden rounded-[14px] transition hover:bg-tj-surface-muted">
+<button aria-controls="faq-panel-3" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-4 px-4 py-5 text-right text-base font-bold leading-snug text-tj-text" id="faq-trigger-3" type="button">
+<span class="min-w-0 flex-1 text-right">كم يستغرق الرد على الاستفسارات؟</span>
+<span class="faq-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-tj-primary-surface text-tj-primary transition-transform duration-300">
+<i class="lucide lucide-lg" data-lucide="chevron-down"></i>
+</span>
+</button>
+<div class="faq-panel-wrap">
+<div class="min-h-0 overflow-hidden">
+<div aria-labelledby="faq-trigger-3" class="faq-panel px-4 pb-5 pt-1 text-right text-sm font-medium leading-relaxed text-tj-text-secondary" id="faq-panel-3" role="region">
+                  يلتزم فريق دعم تاجة بالرد على جميع الاستفسارات خلال 24 ساعة في أيام العمل. أما بالنسبة للأندية، فقد صُمّمت المنصة لتسهيل التواصل السريع، وكثير من اللاعبات تلقّين ردوداً خلال 48 ساعة فقط من رفع ملفاتهن.
+                </div>
+</div>
+</div>
+</div>
+<!-- FAQ 4 -->
+<div class="faq-item overflow-hidden rounded-[14px] transition hover:bg-tj-surface-muted">
+<button aria-controls="faq-panel-4" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-4 px-4 py-5 text-right text-base font-bold leading-snug text-tj-text" id="faq-trigger-4" type="button">
+<span class="min-w-0 flex-1 text-right">كيف يمكن للأندية أو الكشافين التواصل معي إذا أبدوا اهتماماً؟</span>
+<span class="faq-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-tj-primary-surface text-tj-primary transition-transform duration-300">
+<i class="lucide lucide-lg" data-lucide="chevron-down"></i>
+</span>
+</button>
+<div class="faq-panel-wrap">
+<div class="min-h-0 overflow-hidden">
+<div aria-labelledby="faq-trigger-4" class="faq-panel px-4 pb-5 pt-1 text-right text-sm font-medium leading-relaxed text-tj-text-secondary" id="faq-panel-4" role="region">
+                  تمتلك كل لاعبة صندوق رسائل خاص داخل المنصة. عند اهتمام نادٍ أو كشّاف بملفك ستصلك إشعار فوري، وسيتمكن من التواصل معك عبر نظام المراسلة الآمن في تاجة دون الكشف عن بياناتك الشخصية إلا بموافقتك.
+                </div>
+</div>
+</div>
+</div>
+<!-- FAQ 5 -->
+<div class="faq-item overflow-hidden rounded-[14px] transition hover:bg-tj-surface-muted">
+<button aria-controls="faq-panel-5" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-4 px-4 py-5 text-right text-base font-bold leading-snug text-tj-text" id="faq-trigger-5" type="button">
+<span class="min-w-0 flex-1 text-right">هل يتم التحقق من المعلومات والإنجازات التي أضيفها في الملف؟</span>
+<span class="faq-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-tj-primary-surface text-tj-primary transition-transform duration-300">
+<i class="lucide lucide-lg" data-lucide="chevron-down"></i>
+</span>
+</button>
+<div class="faq-panel-wrap">
+<div class="min-h-0 overflow-hidden">
+<div aria-labelledby="faq-trigger-5" class="faq-panel px-4 pb-5 pt-1 text-right text-sm font-medium leading-relaxed text-tj-text-secondary" id="faq-panel-5" role="region">
+                  نعم، يمر كل ملف بمرحلة مراجعة من فريق تاجة قبل إتاحته للأندية. يمكنكِ رفع وثائق تثبت إنجازاتك كشهادات التميز وصور المباريات والمقاطع المرئية، مما يمنح ملفك علامة "موثّق" ويزيد ثقة الأندية بكِ.
+                </div>
+</div>
+</div>
+</div>
+<!-- EXTRA FAQ ITEMS -->
+<div class="faq-item faq-extra overflow-hidden rounded-[14px] transition hover:bg-tj-surface-muted">
+<button aria-controls="faq-panel-6" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-4 px-4 py-5 text-right text-base font-bold leading-snug text-tj-text" id="faq-trigger-6" type="button">
+<span class="min-w-0 flex-1 text-right">ما الرياضات التي تدعمها المنصة حالياً؟</span>
+<span class="faq-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-tj-primary-surface text-tj-primary transition-transform duration-300">
+<i class="lucide lucide-lg" data-lucide="chevron-down"></i>
+</span>
+</button>
+<div class="faq-panel-wrap">
+<div class="min-h-0 overflow-hidden">
+<div aria-labelledby="faq-trigger-6" class="faq-panel px-4 pb-5 pt-1 text-right text-sm font-medium leading-relaxed text-tj-text-secondary" id="faq-panel-6" role="region">
+                  تدعم تاجة حالياً كرة القدم النسائية بشكل أساسي، مع خطط للتوسع قريباً لتشمل كرة السلة والطائرة والسباحة وغيرها من الرياضات. تابعي حساباتنا الرسمية للاطلاع على آخر المستجدات.
+                </div>
+</div>
+</div>
+</div>
+<div class="faq-item faq-extra overflow-hidden rounded-[14px] transition hover:bg-tj-surface-muted">
+<button aria-controls="faq-panel-7" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-4 px-4 py-5 text-right text-base font-bold leading-snug text-tj-text" id="faq-trigger-7" type="button">
+<span class="min-w-0 flex-1 text-right">هل يمكنني الانضمام إذا كنت لاعبة ناشئة أو لم أحترفي بعد؟</span>
+<span class="faq-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-tj-primary-surface text-tj-primary transition-transform duration-300">
+<i class="lucide lucide-lg" data-lucide="chevron-down"></i>
+</span>
+</button>
+<div class="faq-panel-wrap">
+<div class="min-h-0 overflow-hidden">
+<div aria-labelledby="faq-trigger-7" class="faq-panel px-4 pb-5 pt-1 text-right text-sm font-medium leading-relaxed text-tj-text-secondary" id="faq-panel-7" role="region">
+                  بالتأكيد! تاجة مصمّمة للاعبات في جميع المراحل، من الناشئات حتى المحترفات. كثير من الأندية تبحث تحديداً عن مواهب شابة لتطويرها ضمن أكاديمياتها، لذا لا تترددي في إنشاء ملفك بغض النظر عن مستواك الحالي.
+                </div>
+</div>
+</div>
+</div>
+<div class="faq-item faq-extra overflow-hidden rounded-[14px] transition hover:bg-tj-surface-muted">
+<button aria-controls="faq-panel-8" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-4 px-4 py-5 text-right text-base font-bold leading-snug text-tj-text" id="faq-trigger-8" type="button">
+<span class="min-w-0 flex-1 text-right">هل تاجة متاحة خارج المملكة العربية السعودية؟</span>
+<span class="faq-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-tj-primary-surface text-tj-primary transition-transform duration-300">
+<i class="lucide lucide-lg" data-lucide="chevron-down"></i>
+</span>
+</button>
+<div class="faq-panel-wrap">
+<div class="min-h-0 overflow-hidden">
+<div aria-labelledby="faq-trigger-8" class="faq-panel px-4 pb-5 pt-1 text-right text-sm font-medium leading-relaxed text-tj-text-secondary" id="faq-panel-8" role="region">
+                  تاجة تركّز حالياً على السوق السعودية بالكامل لضمان أفضل تجربة للاعبات والأندية المحلية. ونحن نعمل على خطة توسع خليجي وعربي مرحلي سيُعلَن عنها قريباً، ابقي على اطلاع!
+                </div>
+</div>
+</div>
+</div>
+</div>
+<p class="mt-10 text-center">
+<button class="inline-flex items-center gap-2 rounded-tj-pill border border-tj-border bg-tj-surface-card px-5 py-3 text-sm font-bold text-tj-primary shadow-tj-soft transition hover:border-tj-primary hover:bg-tj-primary-surface" id="faq-load-more" type="button">
+            تحميل المزيد من الأسئلة الشائعة
+            <i class="lucide" data-lucide="plus"></i>
+</button>
+</p>
+</div>
+</section>
+</main>
+<!-- ==================== FOOTER (الجديد) ==================== -->
+<footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+<!-- Top: Logo text + Tagline -->
+<div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+<div>
+<div class="flex items-center gap-3">
+<svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+<defs><lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100"><stop offset="0%" stop-color="#f2de00"></stop><stop offset="50%" stop-color="#cca6ff"></stop><stop offset="100%" stop-color="#b670ff"></stop></lineargradient></defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+<p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+</div>
+<p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+</div>
+<p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+</div>
+<!-- 3 Columns Grid — equal width -->
+<div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+<!-- Column 1: Quick Links -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            روابط مهمة
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="about.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                عن تاجة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="index.html#faq">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                الأسئلة الشائعة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="contact.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                المساعدة والدعم
+              </a>
+</li>
+</ul>
+</div>
+<!-- Column 2: Contact Info (email + phone only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<!-- Phone icon — flipped to face left -->
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            تواصل معنا
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="mailto:Tajah2026@gmail.com">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">Tajah2026@gmail.com</p>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="tel:+966501234567">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<!-- Phone icon in icon box — flipped left -->
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr" style="unicode-bidi: embed;">+966 50 123 4567</p>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            النشرة البريدية
+          </h3>
+<p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+<!-- Newsletter form -->
+<form class="space-y-2" id="newsletter-form">
+<div class="relative">
+<input class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface" id="newsletter-email" placeholder="layal@gmail.com" required="" type="email"/>
+<span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+</div>
+<button class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed" type="submit">
+<span>اشتراك</span>
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</form>
+<!-- Success message -->
+<div class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success" id="newsletter-success">
+<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>تم الاشتراك بنجاح! 🎉</span>
+</div>
+<!-- Social Icons: WhatsApp, X, TikTok only -->
+<div class="mt-6">
+<p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+<div class="flex items-center gap-2">
+<!-- WhatsApp -->
+<a aria-label="واتساب" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path></svg>
+</a>
+<!-- Twitter / X -->
+<a aria-label="تويتر" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- TikTok -->
+<a aria-label="تيك توك" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom: Copyright + Legal -->
+<div class="mt-12 pt-8 border-t border-tj-border">
+<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+<p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق محفوظة.
+          </p>
+<ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+<li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    (function () {
+      lucide.createIcons();
+
+      var yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Mobile drawer
+      var overlay = document.getElementById('nav-overlay');
+      var drawer  = document.getElementById('mobile-drawer');
+      var openBtn = document.getElementById('nav-open') || document.getElementById('hamBtn');
+      var closeBtn = document.getElementById('nav-close');
+      function openNav() {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+        openBtn.setAttribute('aria-expanded', 'true');
+      }
+      function closeNav() {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        openBtn.setAttribute('aria-expanded', 'false');
+      }
+      openBtn.addEventListener('click', openNav);
+      closeBtn.addEventListener('click', closeNav);
+      overlay.addEventListener('click', closeNav);
+      drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeNav); });
+      window.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+
+      // FAQ accordion
+      (function initFaqAccordion() {
+        var items = document.querySelectorAll('#faq-list .faq-item');
+        items.forEach(function (item) {
+          var btn = item.querySelector('.faq-trigger');
+          var icon = item.querySelector('.faq-icon');
+          btn.addEventListener('click', function () {
+            var wasOpen = item.classList.contains('faq-open');
+            items.forEach(function (i) {
+              i.classList.remove('faq-open');
+              var b = i.querySelector('.faq-trigger');
+              var ic = i.querySelector('.faq-icon');
+              if (b) b.setAttribute('aria-expanded', 'false');
+              if (ic) ic.classList.remove('rotate-180');
+            });
+            if (!wasOpen) {
+              item.classList.add('faq-open');
+              btn.setAttribute('aria-expanded', 'true');
+              if (icon) icon.classList.add('rotate-180');
+            }
+          });
+        });
+      })();
+
+      // FAQ Load More
+      var faqMore = document.getElementById('faq-load-more');
+      var extraItems = document.querySelectorAll('.faq-extra');
+      var extraShown = false;
+      if (faqMore) {
+        faqMore.addEventListener('click', function () {
+          if (!extraShown) {
+            extraItems.forEach(function (el) { el.classList.add('faq-visible'); });
+            faqMore.innerHTML = 'عرض أقل <i data-lucide="minus" class="lucide" style="display:inline-block;width:1em;height:1em;vertical-align:middle;stroke-width:2;"></i>';
+            lucide.createIcons();
+            extraShown = true;
+          } else {
+            extraItems.forEach(function (el) {
+              el.classList.remove('faq-visible');
+              el.classList.remove('faq-open');
+              var b = el.querySelector('.faq-trigger');
+              var ic = el.querySelector('.faq-icon');
+              if (b) b.setAttribute('aria-expanded', 'false');
+              if (ic) ic.classList.remove('rotate-180');
+            });
+            faqMore.innerHTML = 'تحميل المزيد من الأسئلة الشائعة <i data-lucide="plus" class="lucide" style="display:inline-block;width:1em;height:1em;vertical-align:middle;stroke-width:2;"></i>';
+            lucide.createIcons();
+            extraShown = false;
+          }
+        });
+      }
+
+      // Newsletter form
+      var newsletterForm = document.getElementById('newsletter-form');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var email = document.getElementById('newsletter-email').value.trim();
+          if (!email) return;
+          var success = document.getElementById('newsletter-success');
+          success.classList.remove('hidden');
+          success.classList.add('flex');
+          document.getElementById('newsletter-email').value = '';
+          setTimeout(function() {
+            success.classList.add('hidden');
+            success.classList.remove('flex');
+          }, 4000);
+        });
+      }
+
+      // Scroll reveal
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    })();
+    
+  </script>
+<script src="../js/auth.js?v=1.0.3"></script>
+</body>
+</html>

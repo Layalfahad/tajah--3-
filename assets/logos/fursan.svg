@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Al Fursan logo">
+  <rect width="120" height="120" rx="18" fill="#fff"/>
+  <path d="M21 31c18-1 34-6 49-16 8 11 18 18 31 21-6 31-21 52-45 67C35 91 24 67 21 31z" fill="#fff" stroke="#19816e" stroke-width="7"/>
+  <path d="M38 44h45v10H49l21 22H56L36 55c-4-4-3-11 2-11z" fill="#19816e"/>
+  <text x="60" y="91" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#19816e">ALFURSAN</text>
+</svg>

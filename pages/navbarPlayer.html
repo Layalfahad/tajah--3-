@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تاجة</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary':         '#b670ff',
+            'tj-primary-hover':   '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text':    '#250140',
+            'tj-surface-base':    '#fdfcfb',
+            'tj-surface-card':    '#ffffff',
+            'tj-surface-muted':   '#f7f5f2',
+            'tj-text':            '#0f0f10',
+            'tj-text-secondary':  '#5e5e59',
+            'tj-text-tertiary':   '#8c8c85',
+            'tj-text-disabled':   '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border':          '#ece9e3',
+            'tj-border-active':   '#8c8c85',
+            'tj-success':         '#00a637',
+            'tj-success-bg':      '#e3f5e1',
+            'tj-error':           '#eb3333',
+            'tj-error-bg':        '#fff0f0',
+            'tj-info':            '#0094e3',
+            'tj-info-bg':         '#e3f1ff',
+            'tj-accent-yellow':   '#caa913',
+            'tj-accent-yellow-bg':'#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn':  '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card':   '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta':    '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft':   '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float':  '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee':       { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev':   { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow':    { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring':    { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up':       { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee':     'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow':  'float-slow 8s ease-in-out infinite',
+            'pulse-ring':  'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up':     'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    * { box-sizing: border-box; }
+    body { font-family: 'IBM Plex Sans Arabic', sans-serif; }
+
+    .nav-link-active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: 12px;
+      left: 12px;
+      height: 2px;
+      background: #b670ff;
+      border-radius: 2px 2px 0 0;
+    }
+    .dropdown { transform-origin: top right; }
+    .dropdown.open { animation: dropIn 0.18s ease both; }
+    @keyframes dropIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .drawer { transform: translateX(100%); transition: transform 0.3s ease; }
+    .drawer.open { transform: translateX(0); }
+    .nav-link { transition: color 0.15s, background 0.15s; }
+    .hover-purple:hover { color: #b670ff !important; background: #f6ebff !important; }
+  
+    /* Navbar styles */
+    .nav-link { transition: color 0.15s, background 0.15s; }
+    .nav-link-active::after {
+      content: ''; position: absolute; bottom: -1px; right: 12px; left: 12px;
+      height: 2px; background: #b670ff; border-radius: 2px 2px 0 0;
+    }
+    .hover-purple:hover { color: #b670ff !important; background: #f6ebff !important; }
+    .dropdown { transform-origin: top right; }
+    .dropdown.open { animation: dropIn 0.18s ease both; }
+    @keyframes dropIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .drawer { transform: translateX(100%); transition: transform 0.3s ease; }
+    .drawer.open { transform: translateX(0); }
+    
+    /* Hide duplicate layout placeholders */
+    .navbar-placeholder, .footer-placeholder { display: none !important; }
+
+</style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body class="min-h-screen bg-tj-surface-base">
+<div class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm hidden lg:hidden" id="overlay" onclick="closeAll()"></div>
+<!-- ==================== NAVBAR ==================== -->
+<!-- ==================== NAVBAR ==================== -->
+<header class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+<div class="flex items-center h-16">
+<!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+<div class="flex flex-1 items-center justify-start gap-2">
+<!-- Profile Dropdown Trigger (desktop) -->
+<div class="relative hidden lg:block">
+<button class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group" id="profileBtn" onclick="toggleDropdown()">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">م</div>
+<div class="text-right">
+<p class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">مرحباً، مرام!</p>
+</div>
+<svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Dropdown Menu -->
+<div class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50" id="dropdown">
+<div class="px-4 py-3 border-b border-tj-border">
+<p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+<p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="stats.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              الملف الشخصي
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="settings.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              الإعدادات
+            </a>
+<div class="border-t border-tj-border mt-1 pt-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group" href="../index.html">
+<svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                تسجيل الخروج
+              </a>
+</div>
+</div>
+</div>
+<!-- Notification Bell -->
+<button aria-label="الإشعارات" class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group" onclick="window.location.href='notifications.html'">
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+<svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Hamburger (mobile) -->
+<button class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors" id="hamBtn" onclick="toggleDrawer()">
+<svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+<nav class="hidden lg:flex items-center gap-1">
+<a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap" href="PlayerHomepage.html">الرئيسية</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="../Communities/index.html">المجتمعات</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="Tajah-search.html">البحث</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="opportunities.html">الفرص</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="applications.html">طلباتي</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="contact.html">تواصل معنا</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="about.html">عن تاجة</a>
+</nav>
+<!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+<div class="flex flex-1 items-center justify-end">
+<a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+<div class="w-9 h-9 flex items-center justify-center">
+<svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+<stop offset="0%" stop-color="#f2de00"></stop>
+<stop offset="50%" stop-color="#cca6ff"></stop>
+<stop offset="100%" stop-color="#b670ff"></stop>
+</lineargradient>
+</defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+</div>
+<span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- ==================== MOBILE DRAWER ==================== -->
+<aside class="drawer fixed inset-y-0 right-0 z-50 w-[min(100%,22rem)] bg-tj-surface-card shadow-tj-card lg:hidden flex flex-col" id="drawer">
+<div class="flex items-center justify-between px-5 py-4 border-b border-tj-border">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm">م</div>
+<div>
+<p class="text-sm font-semibold text-tj-text">مرحباً، مرام!</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-tj-btn bg-tj-primary-surface flex items-center justify-center hover:bg-tj-primary-surface/70 transition-colors" onclick="closeAll()">
+<svg class="w-5 h-5 text-tj-text-secondary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M19 5L5 19M5 5l14 14" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<div class="px-4 pt-3 pb-1">
+<a class="flex items-center gap-3 rounded-tj-btn bg-tj-primary-surface px-3 py-2.5" href="stats.html">
+<svg class="w-4 h-4 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span class="text-sm font-semibold text-tj-primary">الملف الشخصي</span>
+</a>
+</div>
+<nav class="flex-1 px-4 pt-2 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 bg-tj-primary-surface text-tj-primary font-semibold text-sm" href="PlayerHomepage.html">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        الرئيسية
+      </a>
+<a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors" href="../Communities/index.html">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM2 19c0-2.76 2.91-5 6.5-5s6.5 2.24 6.5 5M19 8.5A3.5 3.5 0 0 0 15.5 5M22 19c0-2.76-2.91-5-6.5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        المجتمعات
+      </a>
+<a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors" href="Tajah-search.html">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        البحث
+      </a>
+<a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors" href="opportunities.html">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        الفرص
+      </a>
+<a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors" href="applications.html">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        طلباتي
+      </a>
+<a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors" href="contact.html">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        تواصل معنا
+      </a>
+</nav>
+<div class="px-4 py-4 border-t border-tj-border flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-tj-btn px-3 py-2.5 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors" href="settings.html">
+<svg class="w-5 h-5 text-tj-text-tertiary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        الإعدادات
+      </a>
+<a class="flex items-center gap-3 rounded-tj-btn px-3 py-2.5 text-tj-error font-medium text-sm hover:bg-tj-error-bg transition-colors" href="../index.html">
+<svg class="w-5 h-5 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        تسجيل الخروج
+      </a>
+</div>
+<div class="px-4 pb-5 flex justify-center">
+<svg fill="none" height="44" viewbox="0 0 120 100" width="44">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="lgBottom" x1="0" x2="120" y1="0" y2="100">
+<stop offset="0%" stop-color="#f2de00"></stop>
+<stop offset="50%" stop-color="#cca6ff"></stop>
+<stop offset="100%" stop-color="#b670ff"></stop>
+</lineargradient>
+</defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#lgBottom)" stroke-linecap="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#lgBottom)" stroke-linecap="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#lgBottom)" stroke-linecap="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+</div>
+</aside>
+<!-- ==================== PAGE CONTENT ==================== -->
+<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 flex flex-col items-center justify-center gap-4 min-h-[80vh]">
+<svg class="opacity-20" fill="none" height="72" viewbox="0 0 120 100" width="72">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="lgMain" x1="0" x2="120" y1="0" y2="100">
+<stop offset="0%" stop-color="#f2de00"></stop>
+<stop offset="50%" stop-color="#cca6ff"></stop>
+<stop offset="100%" stop-color="#b670ff"></stop>
+</lineargradient>
+</defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#lgMain)" stroke-linecap="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#lgMain)" stroke-linecap="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#lgMain)" stroke-linecap="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+</main>
+<script>
+    function toggleDropdown() {
+      const dd = document.getElementById('dropdown');
+      const ch = document.getElementById('chevron');
+      const isOpen = !dd.classList.contains('hidden');
+      if (isOpen) {
+        dd.classList.add('hidden');
+        ch.style.transform = 'rotate(0deg)';
+      } else {
+        dd.classList.remove('hidden');
+        dd.classList.add('open');
+        ch.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('hidden');
+      document.body.classList.toggle('overflow-hidden');
+    }
+
+    function closeAll() {
+      document.getElementById('drawer').classList.remove('open');
+      document.getElementById('overlay').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      document.getElementById('dropdown').classList.add('hidden');
+      document.getElementById('chevron').style.transform = 'rotate(0deg)';
+    }
+
+    document.addEventListener('click', function(e) {
+      const btn = document.getElementById('profileBtn');
+      const dd  = document.getElementById('dropdown');
+      if (!btn.contains(e.target) && !dd.contains(e.target)) {
+        dd.classList.add('hidden');
+        document.getElementById('chevron').style.transform = 'rotate(0deg)';
+      }
+    });
+
+    // Highlight active nav link based on current page
+    var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (href && href.indexOf(currentPage) !== -1) {
+        link.classList.add('nav-link-active', 'text-tj-primary', 'bg-tj-primary-surface', 'font-semibold');
+        link.classList.remove('text-tj-text-secondary', 'font-medium');
+      }
+    });
+  </script>
+<footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+<!-- Top: Logo text + Tagline -->
+<div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+<div>
+<div class="flex items-center gap-3">
+<svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+<defs><lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100"><stop offset="0%" stop-color="#f2de00"></stop><stop offset="50%" stop-color="#cca6ff"></stop><stop offset="100%" stop-color="#b670ff"></stop></lineargradient></defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+<p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+</div>
+<p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+</div>
+<p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+</div>
+<!-- 3 Columns Grid — equal width -->
+<div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+<!-- Column 1: Quick Links -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            روابط مهمة
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="about.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                عن تاجة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="index.html#faq">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                الأسئلة الشائعة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="contact.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                المساعدة والدعم
+              </a>
+</li>
+</ul>
+</div>
+<!-- Column 2: Contact Info (email + phone only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<!-- Phone icon — flipped to face left -->
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            تواصل معنا
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="mailto:Tajah2026@gmail.com">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">Tajah2026@gmail.com</p>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="tel:+966501234567">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<!-- Phone icon in icon box — flipped left -->
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr" style="unicode-bidi: embed;">+966 50 123 4567</p>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            النشرة البريدية
+          </h3>
+<p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+<!-- Newsletter form -->
+<form class="space-y-2" id="newsletter-form">
+<div class="relative">
+<input class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface" id="newsletter-email" placeholder="layal@gmail.com" required="" type="email"/>
+<span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+</div>
+<button class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed" type="submit">
+<span>اشتراك</span>
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</form>
+<!-- Success message -->
+<div class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success" id="newsletter-success">
+<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>تم الاشتراك بنجاح! 🎉</span>
+</div>
+<!-- Social Icons: WhatsApp, X, TikTok only -->
+<div class="mt-6">
+<p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+<div class="flex items-center gap-2">
+<!-- WhatsApp -->
+<a aria-label="واتساب" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path></svg>
+</a>
+<!-- Twitter / X -->
+<a aria-label="تويتر" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- TikTok -->
+<a aria-label="تيك توك" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom: Copyright + Legal -->
+<div class="mt-12 pt-8 border-t border-tj-border">
+<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+<p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق محفوظة.
+          </p>
+<ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+<li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer><script src="../js/auth.js?v=1.0.3"></script>
+</body>
+</html>

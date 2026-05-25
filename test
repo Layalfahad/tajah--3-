@@ -1,0 +1,11 @@
+
+1. Player Account (for testing Player flow)
+
+Email: test@example.com
+Password: test1234 (Use this on the player-login.html page)
+2. Club Account (for testing Club flow)
+
+Email: club@example.com
+Password: test1234 (Use this on the club-login.html page)
+You can now use these credentials to log in and verify that the backend authentication flows are working as expected! Let me know if you need any further adjustments.
+

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تجاه | طلباتي وعروضي</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary':         '#b670ff',
+            'tj-primary-hover':   '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text':    '#250140',
+            'tj-surface-base':    '#fdfcfb',
+            'tj-surface-card':    '#ffffff',
+            'tj-surface-muted':   '#f7f5f2',
+            'tj-text':            '#0f0f10',
+            'tj-text-secondary':  '#5e5e59',
+            'tj-text-tertiary':   '#8c8c85',
+            'tj-text-disabled':   '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border':          '#ece9e3',
+            'tj-border-active':   '#8c8c85',
+            'tj-success':         '#00a637',
+            'tj-success-bg':      '#e3f5e1',
+            'tj-error':           '#eb3333',
+            'tj-error-bg':        '#fff0f0',
+            'tj-info':            '#0094e3',
+            'tj-info-bg':         '#e3f1ff',
+            'tj-accent-yellow':   '#caa913',
+            'tj-accent-yellow-bg':'#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn':  '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card':   '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta':    '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft':   '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float':  '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee':       { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev':   { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow':    { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring':    { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up':       { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee':     'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow':  'float-slow 8s ease-in-out infinite',
+            'pulse-ring':  'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up':     'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    :root {
+      --bg: #fdfcfb;
+      --ink: #0f0f10;
+      --primary: #b670ff;
+    }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .nav-link { transition: color 0.15s, background 0.15s; }
+    .nav-link-active::after {
+      content: ''; position: absolute; bottom: -1px; right: 12px; left: 12px;
+      height: 2px; background: #b670ff; border-radius: 2px 2px 0 0;
+    }
+  </style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body class="font-sans antialiased text-tj-text bg-tj-surface-base min-h-screen flex flex-col"><header class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+<div class="flex items-center h-16">
+<!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+<div class="flex flex-1 items-center justify-start gap-2">
+<!-- Profile Dropdown Trigger (desktop) -->
+<div class="relative hidden lg:block">
+<button class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group" id="profileBtn" onclick="toggleDropdown()">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">م</div>
+<div class="text-right">
+<p class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">مرحباً، مرام!</p>
+</div>
+<svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Dropdown Menu -->
+<div class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50" id="dropdown">
+<div class="px-4 py-3 border-b border-tj-border">
+<p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+<p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="stats.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              الملف الشخصي
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group" href="settings.html">
+<svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              الإعدادات
+            </a>
+<div class="border-t border-tj-border mt-1 pt-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group" href="../index.html">
+<svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                تسجيل الخروج
+              </a>
+</div>
+</div>
+</div>
+<!-- Notification Bell -->
+<button aria-label="الإشعارات" class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group" onclick="window.location.href='notifications.html'">
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+<svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Hamburger (mobile) -->
+<button class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors" id="hamBtn" onclick="toggleDrawer()">
+<svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+<nav class="hidden lg:flex items-center gap-1">
+<a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap" href="PlayerHomepage.html">الرئيسية</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="../Communities/index.html">المجتمعات</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="Tajah-search.html">البحث</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="opportunities.html">الفرص</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="applications.html">طلباتي</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="contact.html">تواصل معنا</a>
+<a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap" href="about.html">عن تاجة</a>
+</nav>
+<!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+<div class="flex flex-1 items-center justify-end">
+<a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+<div class="w-9 h-9 flex items-center justify-center">
+<svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+<stop offset="0%" stop-color="#f2de00"></stop>
+<stop offset="50%" stop-color="#cca6ff"></stop>
+<stop offset="100%" stop-color="#b670ff"></stop>
+</lineargradient>
+</defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+</div>
+<span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- Dynamic Header Hydrated by auth.js -->
+
+<!-- keep your existing HTML up to the negotiation modal -->
+<div aria-label="الشريط العلوي للتنقل" class="navbar-placeholder" role="banner"></div>
+
+<!-- Main Content Container -->
+<main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 text-right">
+
+  <!-- Title Page -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-tj-text mb-2">طلبات الانضمام والعروض</h1>
+    <p class="text-tj-text-secondary text-sm">
+      تابعي حالة طلبات التقديم المرسلة للأندية ومراجعة عروض العقود الرسمية الواردة وبدء المفاوضات.
+    </p>
+  </div>
+
+  <!-- Stats summary count widgets -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white p-4 rounded-2xl border border-tj-border shadow-tj-soft">
+      <span class="text-xs text-tj-text-tertiary block mb-1">الطلبات الكلية</span>
+      <span class="text-2xl font-bold text-tj-text" id="totalCount">0</span>
+    </div>
+
+    <div class="bg-white p-4 rounded-2xl border border-tj-border shadow-tj-soft">
+      <span class="text-xs text-tj-text-tertiary block mb-1">قيد المراجعة</span>
+      <span class="text-2xl font-bold text-tj-primary" id="pendingCount">0</span>
+    </div>
+
+    <div class="bg-[#f0fcf4] p-4 rounded-2xl border border-tj-success/20 shadow-tj-soft">
+      <span class="text-xs text-tj-success block mb-1 font-bold">العروض النشطة</span>
+      <span class="text-2xl font-bold text-tj-success" id="offersCount">0</span>
+    </div>
+
+    <div class="bg-white p-4 rounded-2xl border border-tj-border shadow-tj-soft">
+      <span class="text-xs text-tj-text-tertiary block mb-1">الطلبات المرفوضة</span>
+      <span class="text-2xl font-bold text-tj-error" id="rejectedCount">0</span>
+    </div>
+  </div>
+
+  <!-- Filter Tab Buttons -->
+  <div class="mb-6 flex border-b border-tj-border">
+    <button class="tab-btn px-6 py-3 text-sm font-bold border-b-2 border-tj-primary text-tj-primary" data-tab="all">
+      الكل
+    </button>
+    <button class="tab-btn px-6 py-3 text-sm font-semibold border-b-2 border-transparent text-tj-text-secondary hover:text-tj-primary transition-all" data-tab="pending">
+      قيد المراجعة
+    </button>
+    <button class="tab-btn px-6 py-3 text-sm font-semibold border-b-2 border-transparent text-tj-text-secondary hover:text-tj-primary transition-all" data-tab="offers">
+      العقود الواردة
+    </button>
+    <button class="tab-btn px-6 py-3 text-sm font-semibold border-b-2 border-transparent text-tj-text-secondary hover:text-tj-primary transition-all" data-tab="accepted">
+      المقبولة
+    </button>
+  </div>
+
+  <!-- Applications List Wrapper -->
+  <div class="space-y-6" id="applicationsList">
+    <div class="py-16 text-center text-tj-text-tertiary bg-white border border-tj-border rounded-tj-card shadow-tj-soft">
+      <i class="fa-solid fa-spinner fa-spin text-3xl mb-3 text-tj-primary"></i>
+      <p class="text-sm">جاري تحميل طلباتك وعروضك الحالية...</p>
+    </div>
+  </div>
+</main>
+
+<!-- Dynamic Footer Hydrated by auth.js -->
+<div aria-label="التذييل الرئيسي" class="footer-placeholder" role="contentinfo"></div>
+
+<!-- Negotiation Modal -->
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4" id="negotiationModal">
+  <div class="bg-white rounded-tj-card border border-tj-border w-full max-w-md p-6 shadow-2xl relative text-right">
+    <button class="absolute top-4 left-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-tj-text-secondary hover:bg-gray-100 transition-colors" id="closeModalBtn" type="button">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <h3 class="text-lg font-bold text-tj-text mb-2 flex items-center gap-2">
+      <i class="fa-solid fa-comments-dollar text-tj-primary"></i>
+      بدء المفاوضة / تقديم عرض بديل
+    </h3>
+
+    <p class="text-xs text-tj-text-tertiary mb-6 leading-relaxed">
+      أدخلي تفاصيل العرض البديل الذي ترغبين بتقديمه للنادي لإتمام التوقيع الرسمي للعقد.
+    </p>
+
+    <form class="space-y-4" id="negotiationForm">
+      <div>
+        <span class="text-xs text-tj-text-tertiary block mb-1">تقديم العرض لـ</span>
+        <span class="font-bold text-sm text-tj-text bg-gray-50 px-3 py-1.5 rounded-lg border border-tj-border block" id="modalClubName">
+          نادي الأهلي
+        </span>
+      </div>
+
+      <div>
+        <label class="text-xs font-bold text-tj-text-secondary block mb-1" for="counterSalary">
+          الراتب المطلوب شهرياً (بالريال السعودي) <span class="text-tj-error">*</span>
+        </label>
+        <input
+          class="w-full h-11 px-4 border border-tj-border rounded-tj-btn text-sm outline-none focus:border-tj-primary focus:ring-2 focus:ring-tj-primary/10 transition-all text-right font-semibold text-tj-success"
+          id="counterSalary"
+          placeholder="مثل: 6,000 ريال سعودي"
+          required
+          type="text"
+        />
+      </div>
+
+      <div>
+        <label class="text-xs font-bold text-tj-text-secondary block mb-1" for="counterNote">
+          رسالة أو ملاحظات إضافية للنادي
+        </label>
+        <textarea
+          class="w-full p-4 border border-tj-border rounded-tj-btn text-sm outline-none focus:border-tj-primary focus:ring-2 focus:ring-tj-primary/10 transition-all text-right resize-none"
+          id="counterNote"
+          placeholder="اكتبي تفاصيل إضافية مثل السكن أو الحوافز البديلة المطلوبة..."
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button class="flex-grow h-11 bg-tj-primary hover:bg-tj-primary-hover text-white font-bold rounded-tj-btn transition shadow-md" type="submit">
+          إرسال العرض البديل
+        </button>
+        <button class="px-5 h-11 border border-tj-border rounded-tj-btn hover:bg-gray-50 text-tj-text font-bold text-sm transition" id="cancelModalBtn" type="button">
+          إلغاء
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Offer Confirmation Modal -->
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4" id="offerActionModal">
+  <div class="bg-white rounded-tj-card border border-tj-border w-full max-w-md p-6 shadow-2xl relative text-right">
+    <button class="absolute top-4 left-4 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-tj-text-secondary hover:bg-gray-100 transition-colors" id="closeOfferActionModalBtn" type="button">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <h3 class="text-lg font-bold text-tj-text mb-2 flex items-center gap-2" id="offerActionModalTitle">
+      <i class="fa-solid fa-file-signature text-tj-primary"></i>
+      تأكيد الإجراء
+    </h3>
+
+    <p class="text-xs text-tj-text-tertiary mb-4 leading-relaxed" id="offerActionModalMessage">
+      هل أنتِ متأكدة من تنفيذ هذا الإجراء؟
+    </p>
+
+    <div class="bg-gray-50 border border-tj-border rounded-xl p-3 mb-5">
+      <span class="text-xs text-tj-text-tertiary block mb-1">النادي</span>
+      <span class="font-bold text-sm text-tj-text block" id="offerActionClubName">-</span>
+    </div>
+
+    <div class="flex gap-2 pt-2">
+      <button class="flex-grow h-11 bg-tj-success hover:bg-[#009030] text-white font-bold rounded-tj-btn transition shadow-md" id="confirmOfferActionBtn" type="button">
+        تأكيد
+      </button>
+
+      <button class="px-5 h-11 border border-tj-border rounded-tj-btn hover:bg-gray-50 text-tj-text font-bold text-sm transition" id="cancelOfferActionBtn" type="button">
+        إلغاء
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- keep your existing script imports -->
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js?v=1.0.3"></script>
+<script>
+  // State Manager
+  let allApplications = [];
+  let currentActiveTab = 'all';
+  let selectedApplicationForNeg = null;
+  let selectedApplicationForOfferAction = null;
+  let selectedOfferActionStatus = null;
+
+  // Session
+  const loggedUser = JSON.parse(sessionStorage.getItem('tajah_user') || '{}');
+  const playerId = loggedUser.id || 1;
+
+  // DOM Elements
+  let applicationsList = null;
+  let tabButtons = [];
+  let totalCount = null;
+  let pendingCount = null;
+  let offersCount = null;
+  let rejectedCount = null;
+
+  // Negotiation modal elements
+  let negotiationModal = null;
+  let closeModalBtn = null;
+  let cancelModalBtn = null;
+  let modalClubName = null;
+  let negotiationForm = null;
+  let counterSalary = null;
+  let counterNote = null;
+
+  // Offer action modal elements
+  let offerActionModal = null;
+  let closeOfferActionModalBtn = null;
+  let cancelOfferActionBtn = null;
+  let confirmOfferActionBtn = null;
+  let offerActionModalTitle = null;
+  let offerActionModalMessage = null;
+  let offerActionClubName = null;
+
+  function cacheDom() {
+    applicationsList = document.getElementById('applicationsList');
+    tabButtons = document.querySelectorAll('.tab-btn');
+
+    totalCount = document.getElementById('totalCount');
+    pendingCount = document.getElementById('pendingCount');
+    offersCount = document.getElementById('offersCount');
+    rejectedCount = document.getElementById('rejectedCount');
+
+    negotiationModal = document.getElementById('negotiationModal');
+    closeModalBtn = document.getElementById('closeModalBtn');
+    cancelModalBtn = document.getElementById('cancelModalBtn');
+    modalClubName = document.getElementById('modalClubName');
+    negotiationForm = document.getElementById('negotiationForm');
+    counterSalary = document.getElementById('counterSalary');
+    counterNote = document.getElementById('counterNote');
+
+    offerActionModal = document.getElementById('offerActionModal');
+    closeOfferActionModalBtn = document.getElementById('closeOfferActionModalBtn');
+    cancelOfferActionBtn = document.getElementById('cancelOfferActionBtn');
+    confirmOfferActionBtn = document.getElementById('confirmOfferActionBtn');
+    offerActionModalTitle = document.getElementById('offerActionModalTitle');
+    offerActionModalMessage = document.getElementById('offerActionModalMessage');
+    offerActionClubName = document.getElementById('offerActionClubName');
+  }
+
+  function hasRequiredElements() {
+    return (
+      applicationsList &&
+      totalCount &&
+      pendingCount &&
+      offersCount &&
+      rejectedCount &&
+      negotiationModal &&
+      modalClubName &&
+      negotiationForm &&
+      counterSalary &&
+      counterNote &&
+      offerActionModal &&
+      confirmOfferActionBtn &&
+      offerActionModalTitle &&
+      offerActionModalMessage &&
+      offerActionClubName
+    );
+  }
+
+  function updateStats() {
+    if (!totalCount || !pendingCount || !offersCount || !rejectedCount) {
+      console.error('Stats elements are missing from DOM');
+      return;
+    }
+
+    totalCount.textContent = allApplications.length;
+    pendingCount.textContent = allApplications.filter(a => a.status === 'pending').length;
+    offersCount.textContent = allApplications.filter(a => a.has_offer === 1 && a.status === 'pending').length;
+    rejectedCount.textContent = allApplications.filter(a => a.status === 'rejected').length;
+  }
+
+  async function loadApplications() {
+    if (!applicationsList) {
+      console.error('applicationsList element not found');
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/applications?player_id=${playerId}`);
+      if (!res.ok) throw new Error('Failed to fetch');
+
+      allApplications = await res.json();
+
+      updateStats();
+      renderApplications();
+    } catch (err) {
+      console.error('Fetch player applications failed:', err);
+
+      if (applicationsList) {
+        applicationsList.innerHTML = `
+          <div class="py-16 text-center text-tj-error bg-white border border-tj-border rounded-tj-card">
+            <i class="fa-solid fa-circle-exclamation text-3xl mb-3"></i>
+            <p class="text-sm font-bold">فشل جلب طلبات الانضمام. يرجى التحقق من اتصالك بالإنترنت.</p>
+          </div>
+        `;
+      }
+    }
+  }
+
+  function renderApplications() {
+    if (!applicationsList) return;
+
+    const filtered = allApplications.filter(app => {
+      if (currentActiveTab === 'pending') return app.status === 'pending';
+      if (currentActiveTab === 'offers') return app.has_offer === 1 && app.status === 'pending';
+      if (currentActiveTab === 'accepted') return app.status === 'accepted';
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      applicationsList.innerHTML = `
+        <div class="py-16 text-center text-tj-text-tertiary bg-white border border-tj-border rounded-tj-card">
+          <i class="fa-solid fa-folder-open text-3xl mb-3 text-tj-text-disabled"></i>
+          <p class="text-sm">لا توجد طلبات أو عروض ضمن هذا القسم حالياً.</p>
+        </div>
+      `;
+      return;
+    }
+
+    applicationsList.innerHTML = filtered.map(app => {
+      let statusText = 'تحت المراجعة';
+      let statusClass = 'bg-tj-primary-surface text-tj-primary border-tj-primary/20';
+
+      if (app.status === 'accepted') {
+        statusText = 'مقبول';
+        statusClass = 'bg-tj-success-bg text-tj-success border-tj-success/20';
+      } else if (app.status === 'rejected') {
+        statusText = 'مرفوض';
+        statusClass = 'bg-tj-error-bg text-tj-error border-tj-error/20';
+      }
+
+      let offerCardHtml = '';
+
+      if (app.has_offer === 2 && app.status === 'pending') {
+        offerCardHtml = `
+          <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl flex items-center gap-3 text-blue-800 text-xs font-semibold">
+            <i class="fa-solid fa-clock text-base text-tj-info"></i>
+            <span>سيتم إشعارك عند رد النادي على طلبك (عرض بديل قيد الانتظار).</span>
+          </div>
+        `;
+      } else if (app.has_offer === 1 && app.status === 'pending') {
+        const safeClubName = String(app.club_name || '').replace(/'/g, "\\'");
+
+        offerCardHtml = `
+          <div class="mt-5 p-5 bg-[#fffdf0] border-2 border-amber-300 rounded-xl space-y-4 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 left-0 bg-amber-400 text-white font-bold px-3 py-1 text-[10px] rounded-br-lg shadow-sm">
+              عرض انضمام رسمي وارد! 🏆
+            </div>
+
+            <div class="border-b border-amber-200 pb-3">
+              <h4 class="font-bold text-amber-900 text-sm">مراجعة عرض العقد المقدم من النادي:</h4>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+              <div>
+                <span class="text-tj-text-tertiary block mb-0.5">المركز المعروض</span>
+                <span class="font-bold text-[#250140] text-sm">${app.offer_position || app.position}</span>
+              </div>
+              <div>
+                <span class="text-tj-text-tertiary block mb-0.5">الراتب المعروض</span>
+                <span class="font-bold text-tj-success text-sm">${app.offer_salary || '-'}</span>
+              </div>
+              <div>
+                <span class="text-tj-text-tertiary block mb-0.5">تاريخ بدء العقد</span>
+                <span class="font-bold text-[#250140] text-sm">${app.offer_start_date || 'فوراً'}</span>
+              </div>
+              <div>
+                <span class="text-tj-text-tertiary block mb-0.5">المدة المقترحة</span>
+                <span class="font-bold text-[#250140] text-sm">${app.offer_duration || 'موسم كامل'}</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-white rounded-lg border border-amber-200 text-xs">
+              <span class="text-tj-text-tertiary block mb-1 font-bold">المزايا والحوافز الإضافية المقدمة:</span>
+              <p class="text-tj-text-secondary leading-relaxed">${app.offer_benefits || 'تأمين صحي، مكافآت أداء وسكن بديل.'}</p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 pt-2">
+              <button class="px-6 h-10 bg-tj-success hover:bg-[#009030] text-white font-bold rounded-tj-btn text-xs transition active:scale-97 shadow-sm flex items-center gap-1.5" onclick="respondToOffer(${app.id}, 'accepted')">
+                <i class="fa-solid fa-file-signature"></i> قبول وتوقيع العقد
+              </button>
+              <button class="px-5 h-10 border border-tj-primary text-tj-primary hover:bg-tj-primary-surface font-bold rounded-tj-btn text-xs transition flex items-center gap-1.5" onclick="openNegotiationModal(${app.id}, '${safeClubName}')">
+                <i class="fa-solid fa-comments-dollar"></i> مفاوضة / تقديم عرض بديل
+              </button>
+              <button class="px-4 h-10 border border-tj-error text-tj-error hover:bg-tj-error-bg rounded-tj-btn text-xs font-bold transition flex items-center gap-1" onclick="respondToOffer(${app.id}, 'rejected')">
+                <i class="fa-solid fa-ban"></i> رفض العرض
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (app.status === 'accepted') {
+        offerCardHtml = `
+          <div class="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3 text-emerald-800 text-xs font-semibold">
+            <i class="fa-solid fa-party-horn text-base text-tj-success"></i>
+            <span>مبروك! لقد قبلتي عرض النادي وتم التوقيع بنجاح. تمنياتنا لكِ بموسم رياضي حافل بالبطولات! ⚽🏀</span>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="bg-white p-5 sm:p-6 rounded-tj-card border border-tj-border shadow-tj-soft text-right">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-bold text-tj-text text-base mb-1">${app.club_name || '-'}</h3>
+              <div class="flex flex-wrap gap-3 text-xs text-tj-text-tertiary">
+                <span class="flex items-center gap-1"><i class="fa-solid fa-tag"></i> ${app.sport || '-'}</span>
+                <span class="flex items-center gap-1"><i class="fa-solid fa-shirt"></i> ${app.position || '-'}</span>
+                <span class="flex items-center gap-1"><i class="fa-solid fa-calendar"></i> تاريخ التقديم: ${app.applied_date || '-'}</span>
+              </div>
+            </div>
+            <span class="px-3 py-1 text-xs font-bold rounded-full border ${statusClass}">
+              ${statusText}
+            </span>
+          </div>
+
+          ${offerCardHtml}
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.respondToOffer = function(appId, newStatus) {
+    const app = allApplications.find(a => a.id === appId);
+    if (!app || !offerActionModal || !offerActionClubName || !offerActionModalTitle || !offerActionModalMessage || !confirmOfferActionBtn) return;
+
+    selectedApplicationForOfferAction = app;
+    selectedOfferActionStatus = newStatus;
+
+    offerActionClubName.textContent = app.club_name || '-';
+
+    if (newStatus === 'accepted') {
+      offerActionModalTitle.innerHTML = `
+        <i class="fa-solid fa-file-signature text-tj-success"></i>
+        تأكيد قبول وتوقيع العقد
+      `;
+      offerActionModalMessage.textContent = 'هل أنتِ متأكدة من قبول وتوقيع العقد الرسمي؟ سيعتبر هذا اتفاقاً نهائياً مع النادي.';
+      confirmOfferActionBtn.textContent = 'قبول وتوقيع العقد';
+      confirmOfferActionBtn.className = 'flex-grow h-11 bg-tj-success hover:bg-[#009030] text-white font-bold rounded-tj-btn transition shadow-md';
+    } else {
+      offerActionModalTitle.innerHTML = `
+        <i class="fa-solid fa-ban text-tj-error"></i>
+        تأكيد رفض العرض
+      `;
+      offerActionModalMessage.textContent = 'هل أنتِ متأكدة من رفض هذا العرض؟ سيتم إغلاق طلب التقديم بشكل نهائي.';
+      confirmOfferActionBtn.textContent = 'رفض العرض';
+      confirmOfferActionBtn.className = 'flex-grow h-11 bg-tj-error hover:opacity-90 text-white font-bold rounded-tj-btn transition shadow-md';
+    }
+
+    offerActionModal.classList.remove('hidden');
+  };
+
+  window.openNegotiationModal = function(appId, clubName) {
+    selectedApplicationForNeg = allApplications.find(a => a.id === appId);
+    if (!selectedApplicationForNeg || !negotiationModal || !modalClubName || !counterSalary || !counterNote) return;
+
+    modalClubName.textContent = clubName || '-';
+    counterSalary.value = '';
+    counterNote.value = '';
+
+    negotiationModal.classList.remove('hidden');
+    counterSalary.focus();
+  };
+
+  function closeModal() {
+    if (!negotiationModal) return;
+    negotiationModal.classList.add('hidden');
+    selectedApplicationForNeg = null;
+  }
+
+  function closeOfferActionModal() {
+    if (!offerActionModal) return;
+    offerActionModal.classList.add('hidden');
+    selectedApplicationForOfferAction = null;
+    selectedOfferActionStatus = null;
+  }
+
+  function bindEvents() {
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
+
+    if (closeOfferActionModalBtn) closeOfferActionModalBtn.addEventListener('click', closeOfferActionModal);
+    if (cancelOfferActionBtn) cancelOfferActionBtn.addEventListener('click', closeOfferActionModal);
+
+    if (negotiationForm) {
+      negotiationForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!selectedApplicationForNeg) return;
+
+        const app = selectedApplicationForNeg;
+        const salaryInput = counterSalary ? counterSalary.value.trim() : '';
+        const noteInput = counterNote ? counterNote.value.trim() : '';
+
+        if (!salaryInput) {
+          toast('الرجاء تعبئة حقل الراتب المطلوب', 'e');
+          return;
+        }
+
+        try {
+          let clubId = 7;
+          if (app.opportunity_id) {
+            const oppRes = await fetch(`/api/opportunities/${app.opportunity_id}`);
+            if (oppRes.ok) {
+              const opp = await oppRes.json();
+              if (opp && opp.club_id) clubId = opp.club_id;
+            }
+          }
+
+          const negRes = await fetch('/api/negotiations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              application_id: app.id,
+              player_id: playerId,
+              club_id: clubId,
+              offer_salary: salaryInput + ' (عرض بديل من اللاعبة: ' + noteInput + ')',
+              from_athlete: true
+            })
+          });
+
+          if (negRes.ok) {
+            await fetch('/api/applications/' + app.id, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status: 'pending', has_offer: 2 })
+            });
+            toast('تم إرسال عرضك البديل بنجاح! سيقوم كشاف النادي بمراجعة طلبك والرد بأقرب وقت. 💬', 's');
+            closeModal();
+            loadApplications();
+          } else {
+            toast('فشل إرسال عرض المفاوضة. يرجى المحاولة لاحقاً.', 'e');
+          }
+        } catch (err) {
+          console.error('Submit negotiation failed:', err);
+          toast('خطأ في الاتصال بالخادم.', 'e');
+        }
+      });
+    }
+
+    if (confirmOfferActionBtn) {
+      confirmOfferActionBtn.addEventListener('click', async () => {
+        if (!selectedApplicationForOfferAction || !selectedOfferActionStatus) return;
+
+        const appId = selectedApplicationForOfferAction.id;
+        const newStatus = selectedOfferActionStatus;
+
+        try {
+          const res = await fetch(`/api/applications/${appId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+          });
+
+          if (res.ok) {
+            closeOfferActionModal();
+            toast(
+              newStatus === 'accepted'
+                ? 'تهانينا الحارة! تم توقيع العقد بنجاح! 🏆'
+                : 'تم رفض العقد وإغلاق الطلب.',
+              's'
+            );
+            loadApplications();
+          } else {
+            toast('فشل إتمام العملية. يرجى المحاولة لاحقاً.', 'e');
+          }
+        } catch (err) {
+          console.error('Respond to offer failed:', err);
+          toast('حدث خطأ في الاتصال بالخادم.', 'e');
+        }
+      });
+    }
+
+    if (tabButtons && tabButtons.length) {
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabButtons.forEach(b => {
+            b.classList.remove('border-tj-primary', 'text-tj-primary');
+            b.classList.add('border-transparent', 'text-tj-text-secondary');
+          });
+
+          btn.classList.add('border-tj-primary', 'text-tj-primary');
+          btn.classList.remove('border-transparent', 'text-tj-text-secondary');
+
+          currentActiveTab = btn.getAttribute('data-tab');
+          renderApplications();
+        });
+      });
+    }
+
+    if (negotiationModal) {
+      negotiationModal.addEventListener('click', (e) => {
+        if (e.target === negotiationModal) closeModal();
+      });
+    }
+
+    if (offerActionModal) {
+      offerActionModal.addEventListener('click', (e) => {
+        if (e.target === offerActionModal) closeOfferActionModal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (negotiationModal && !negotiationModal.classList.contains('hidden')) closeModal();
+        if (offerActionModal && !offerActionModal.classList.contains('hidden')) closeOfferActionModal();
+      }
+    });
+  }
+
+  function initApplicationsPage() {
+    cacheDom();
+
+    console.log({
+      applicationsList,
+      totalCount,
+      pendingCount,
+      offersCount,
+      rejectedCount,
+      negotiationModal,
+      negotiationForm,
+      offerActionModal
+    });
+
+    if (!hasRequiredElements()) {
+      console.error('Required DOM elements are missing. Check your HTML IDs carefully.');
+      return;
+    }
+
+    bindEvents();
+    loadApplications();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApplicationsPage);
+  } else {
+    initApplicationsPage();
+  }
+</script><footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+<!-- Top: Logo text + Tagline -->
+<div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+<div>
+<div class="flex items-center gap-3">
+<svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+<defs><lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100"><stop offset="0%" stop-color="#f2de00"></stop><stop offset="50%" stop-color="#cca6ff"></stop><stop offset="100%" stop-color="#b670ff"></stop></lineargradient></defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+<p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+</div>
+<p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+</div>
+<p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+</div>
+<!-- 3 Columns Grid — equal width -->
+<div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+<!-- Column 1: Quick Links -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            روابط مهمة
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="about.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                عن تاجة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="index.html#faq">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                الأسئلة الشائعة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="contact.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                المساعدة والدعم
+              </a>
+</li>
+</ul>
+</div>
+<!-- Column 2: Contact Info (email + phone only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<!-- Phone icon — flipped to face left -->
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            تواصل معنا
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="mailto:Tajah2026@gmail.com">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">Tajah2026@gmail.com</p>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="tel:+966501234567">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<!-- Phone icon in icon box — flipped left -->
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr" style="unicode-bidi: embed;">+966 50 123 4567</p>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            النشرة البريدية
+          </h3>
+<p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+<!-- Newsletter form -->
+<form class="space-y-2" id="newsletter-form">
+<div class="relative">
+<input class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface" id="newsletter-email" placeholder="layal@gmail.com" required="" type="email"/>
+<span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+</div>
+<button class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed" type="submit">
+<span>اشتراك</span>
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</form>
+<!-- Success message -->
+<div class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success" id="newsletter-success">
+<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>تم الاشتراك بنجاح! 🎉</span>
+</div>
+<!-- Social Icons: WhatsApp, X, TikTok only -->
+<div class="mt-6">
+<p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+<div class="flex items-center gap-2">
+<!-- WhatsApp -->
+<a aria-label="واتساب" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path></svg>
+</a>
+<!-- Twitter / X -->
+<a aria-label="تويتر" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- TikTok -->
+<a aria-label="تيك توك" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom: Copyright + Legal -->
+<div class="mt-12 pt-8 border-t border-tj-border">
+<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+<p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق محفوظة.
+          </p>
+<ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+<li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer></body>
+</html>

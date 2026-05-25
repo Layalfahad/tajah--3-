@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Al Nassr logo">
+  <rect width="120" height="120" rx="18" fill="#111"/>
+  <circle cx="60" cy="60" r="44" fill="#f5c400" stroke="#1b5aa6" stroke-width="8"/>
+  <circle cx="60" cy="60" r="29" fill="#1b5aa6"/>
+  <path d="M43 74c13-22 20-28 36-37-4 13-6 25-4 42-11-8-20-9-32-5z" fill="#f5c400"/>
+  <text x="60" y="26" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#f5c400">NASSR</text>
+</svg>

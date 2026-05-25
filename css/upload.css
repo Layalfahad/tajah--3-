@@ -1,0 +1,721 @@
+         /* ════════════════════════════════════════════════════════
+       TAJAH — GLOBAL DESIGN TOKENS
+       Copy this :root block to every page for consistency.
+       ════════════════════════════════════════════════════════ */
+            :root {
+                /* Brand: Purple */
+                --purple-50: #f5f0ff;
+                --purple-100: #ede5ff;
+                --purple-200: #d4baff;
+                --purple-300: #b670ff;
+                --purple-400: #aa31ff;
+                --purple-500: #8b00f5;
+                --purple-600: #7300f7;
+
+                /* Accent: Yellow */
+                --yellow-100: #fffd70;
+                --yellow-200: #d7d500;
+
+                /* Neutrals */
+                --grey-50: #fafafa;
+                --grey-100: #f5f5f5;
+                --grey-150: #f0f0f0;
+                --grey-200: #e8e8e8;
+                --grey-300: #d4d4d4;
+                --grey-400: #a3a3a3;
+                --grey-500: #737373;
+                --grey-700: #404040;
+                --grey-900: #171717;
+
+                /* Surfaces */
+                --page-bg: #f7f7f2;
+                --card-bg: #ffffff;
+                --border: #e8e8e8;
+
+                /* Text */
+                --text-dark: #1a1a1a;
+                --text-mid: #444444;
+                --text-soft: #888888;
+                --text-hint: #b0b0b0;
+                --text-white: #ffffff;
+
+                /* Typography */
+                --font: "IBM Plex Sans Arabic", sans-serif;
+
+                /* Type scale */
+                --text-xs: 12px;
+                --text-sm: 13px;
+                --text-base: 15px;
+                --text-md: 16px;
+                --text-lg: 18px;
+                --text-xl: 20px;
+                --text-2xl: 24px;
+                --text-3xl: 30px;
+                --text-4xl: 36px;
+
+                /* Spacing */
+                --sp-1: 4px;
+                --sp-2: 8px;
+                --sp-3: 12px;
+                --sp-4: 16px;
+                --sp-5: 20px;
+                --sp-6: 24px;
+                --sp-8: 32px;
+                --sp-10: 40px;
+                --sp-12: 48px;
+                --sp-16: 64px;
+                --sp-20: 80px;
+
+                /* Radii */
+                --r-sm: 6px;
+                --r-md: 10px;
+                --r-lg: 14px;
+                --r-xl: 18px;
+                --r-2xl: 24px;
+                --r-full: 9999px;
+
+                /* Shadows */
+                --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.06);
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.07);
+                --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.06);
+                --shadow-btn: 0 4px 16px rgba(139, 0, 245, 0.28);
+
+                /* Motion */
+                --ease: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+                --spring: 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+                /* ════════════════════════════════════════════════════
+         GRID SYSTEM  —  Desktop 1280px
+         ┌─────────────────────────────────────────────────┐
+         │  32px │ col col col col col col col col col col col col │ 32px │
+         │       │←──────────── 1,216 px ────────────────→│       │
+         │←────────────────── 1,280 px ───────────────────────────│
+         └─────────────────────────────────────────────────┘
+         12 columns, 32px gutters, 32px side margins
+         Column width = (1216 − 11×32) ÷ 12 = 72px
+         ════════════════════════════════════════════════════ */
+                --grid-max: 1280px; /* outer container boundary        */
+                --grid-inner: 1216px; /* 12-col content width            */
+                --grid-margin: 32px; /* side padding: (1280−1216) ÷ 2   */
+                --grid-gutter: 32px; /* gap between every column        */
+                --grid-cols: 12;
+            }
+
+            /* ── Reset ─────────────────────────────────────────────── */
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: var(--font);
+                background: var(--page-bg);
+                color: var(--text-dark);
+                font-size: var(--text-base);
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+                min-height: 100vh;
+            }
+
+            img {
+                max-width: 100%;
+                display: block;
+            }
+            button {
+                font-family: var(--font);
+                cursor: pointer;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            /* ════════════════════════════════════════════════════════
+       REUSABLE GRID CLASSES
+       Use .container + .row + .col-{n} on every page.
+       ════════════════════════════════════════════════════════ */
+
+            /* .container — sets the 1280px outer boundary with 32px side margins */
+            .container {
+                width: 100%;
+                max-width: var(--grid-max); /* 1280px cap                 */
+                margin-inline: auto; /* horizontally center         */
+                padding-inline: var(
+                    --grid-margin
+                ); /* 32px padding each side   */
+            }
+
+            /* .row — 12 equal columns with 32px gutters */
+            .row {
+                display: grid;
+                grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+                gap: var(--grid-gutter);
+            }
+
+            /* Column span helpers */
+            .col-1 {
+                grid-column: span 1;
+            }
+            .col-2 {
+                grid-column: span 2;
+            }
+            .col-3 {
+                grid-column: span 3;
+            }
+            .col-4 {
+                grid-column: span 4;
+            }
+            .col-5 {
+                grid-column: span 5;
+            }
+            .col-6 {
+                grid-column: span 6;
+            }
+            .col-7 {
+                grid-column: span 7;
+            }
+            .col-8 {
+                grid-column: span 8;
+            }
+            .col-9 {
+                grid-column: span 9;
+            }
+            .col-10 {
+                grid-column: span 10;
+            }
+            .col-11 {
+                grid-column: span 11;
+            }
+            .col-12 {
+                grid-column: span 12;
+            }
+
+            /* Column start helpers (offset) */
+            .offset-1 {
+                grid-column-start: 2;
+            }
+            .offset-2 {
+                grid-column-start: 3;
+            }
+            .offset-3 {
+                grid-column-start: 4;
+            }
+            .offset-4 {
+                grid-column-start: 5;
+            }
+
+            /* ════════════════════════════════════════════════════════
+       NAVBAR PLACEHOLDER  (72px, no content yet)
+       ════════════════════════════════════════════════════════ */
+            .navbar-placeholder {
+                height: 72px;
+                background: var(--card-bg);
+                border-bottom: 1px solid var(--border);
+                position: sticky;
+                top: 0;
+                z-index: 200;
+            }
+
+            /* ════════════════════════════════════════════════════════
+       PAGE HEADER
+       ════════════════════════════════════════════════════════ */
+            .page-header-wrap {
+                padding-block: var(--sp-8) var(--sp-6);
+            }
+
+            .page-top-nav {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                margin-bottom: var(--sp-4);
+            }
+
+            .nav-back {
+                width: 36px;
+                height: 36px;
+                border: none;
+                background: transparent;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: var(--r-sm);
+                color: var(--text-dark);
+                font-size: 18px;
+                transition: background var(--ease);
+            }
+            .nav-back:hover {
+                background: var(--grey-200);
+            }
+
+            .page-title {
+                margin: 0 0 var(--sp-2);
+                font-size: var(--text-4xl);
+                font-weight: 700;
+                color: var(--text-dark);
+                letter-spacing: -0.5px;
+                text-align: right;
+            }
+
+            .breadcrumb {
+                display: flex;
+                align-items: center;
+                gap: var(--sp-2);
+                font-size: var(--text-sm);
+                color: var(--text-soft);
+                direction: rtl;
+                flex-wrap: wrap;
+            }
+            .breadcrumb a {
+                color: var(--text-soft);
+                transition: color var(--ease);
+            }
+            .breadcrumb a:hover {
+                color: var(--purple-500);
+            }
+            .breadcrumb-sep {
+                color: var(--text-hint);
+                font-size: 9px;
+            }
+            .breadcrumb-current {
+                color: var(--text-dark);
+                font-weight: 600;
+            }
+
+            /* ════════════════════════════════════════════════════════
+       CARD
+       ════════════════════════════════════════════════════════ */
+            .card {
+                background: var(--card-bg);
+                border-radius: var(--r-2xl);
+                padding: var(--sp-8);
+                box-shadow: var(--shadow-card);
+            }
+
+            .section-title {
+                margin: 0 0 var(--sp-5);
+                font-size: var(--text-lg);
+                font-weight: 700;
+                color: var(--text-dark);
+                text-align: right;
+            }
+
+            /* ════════════════════════════════════════════════════════
+       UPLOAD PAGE LAYOUT
+       Content sits in cols 4–9 (6 of 12) = centred on desktop.
+       ════════════════════════════════════════════════════════ */
+
+            /*
+      grid-column: 4 / span 6
+        starts at column line 4 (after 3 blank cols = 3×72 + 3×32 = 216+96 = 312px)
+        spans 6 columns  (6×72 + 5×32 = 432+160 = 592px)
+        leaves 3 blank cols on the right mirror
+    */
+            .upload-col {
+                grid-column: 4 / span 6;
+            }
+
+            .upload-stack {
+                display: flex;
+                flex-direction: column;
+                gap: var(--sp-5);
+                padding-bottom: var(--sp-20); /* space for sticky footer */
+            }
+
+            /* ── Info card ── */
+            .info-card {
+                display: flex;
+                align-items: flex-start;
+                gap: var(--sp-4);
+                direction: rtl;
+            }
+
+            .info-card-text {
+                flex: 1;
+                margin: 0;
+                font-size: var(--text-sm);
+                line-height: 1.8;
+                color: var(--text-mid);
+                text-align: right;
+            }
+
+            .info-badge {
+                flex-shrink: 0;
+                margin-top: 2px;
+                width: 28px;
+                height: 28px;
+                border-radius: var(--r-full);
+                border: 1.5px solid var(--purple-300);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--purple-500);
+                font-size: 12px;
+            }
+
+            /* ── Dropzone ── */
+            .dropzone {
+                border: 2px dashed var(--purple-300);
+                border-radius: var(--r-lg);
+                background: var(--purple-50);
+                padding: var(--sp-12) var(--sp-6);
+                text-align: center;
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+                transition:
+                    background var(--ease),
+                    border-color var(--ease);
+            }
+
+            .dropzone:hover,
+            .dropzone.drag-over {
+                background: var(--purple-100);
+                border-color: var(--purple-500);
+            }
+
+            .dropzone.has-file {
+                background: var(--purple-100);
+                border-color: var(--purple-500);
+            }
+
+            .dropzone.has-file .dropzone-main-text {
+                color: var(--purple-600);
+            }
+
+            .dropzone input[type="file"] {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            .dropzone-icon {
+                margin: 0 auto var(--sp-4);
+                width: 56px;
+                height: 56px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+            }
+
+            .dropzone-icon svg {
+                width: 52px;
+                height: 52px;
+            }
+
+            .dropzone-main-text {
+                margin: 0 0 var(--sp-2);
+                font-size: var(--text-xl);
+                font-weight: 700;
+                color: var(--text-dark);
+                line-height: 1.35;
+                pointer-events: none;
+            }
+
+            .dropzone-sub-text {
+                margin: 0;
+                font-size: var(--text-sm);
+                color: var(--text-soft);
+                pointer-events: none;
+            }
+
+            .dropzone-sub-text span {
+                font-weight: 600;
+                color: var(--text-mid);
+            }
+
+            /* ── Form fields ── */
+            .field-group {
+                margin-bottom: var(--sp-5);
+            }
+            .field-group:last-child {
+                margin-bottom: 0;
+            }
+
+            .field-label {
+                display: block;
+                font-size: var(--text-base);
+                font-weight: 700;
+                color: var(--text-dark);
+                margin-bottom: var(--sp-2);
+                text-align: right;
+            }
+
+            .field-input,
+            .field-textarea {
+                width: 100%;
+                font-family: var(--font);
+                font-size: var(--text-base);
+                color: var(--text-dark);
+                background: var(--grey-50);
+                border: 1.5px solid var(--grey-200);
+                border-radius: var(--r-md);
+                padding: 11px 14px;
+                outline: none;
+                box-shadow: var(--shadow-xs);
+                transition:
+                    border-color var(--ease),
+                    box-shadow var(--ease),
+                    background var(--ease);
+                text-align: right;
+                direction: rtl;
+                -webkit-appearance: none;
+            }
+
+            .field-input::placeholder,
+            .field-textarea::placeholder {
+                color: var(--text-hint);
+            }
+
+            .field-input:focus,
+            .field-textarea:focus {
+                border-color: var(--purple-400);
+                box-shadow: 0 0 0 3px rgba(170, 49, 255, 0.13);
+                background: #fff;
+            }
+
+            .field-textarea {
+                resize: vertical;
+                min-height: 108px;
+                line-height: 1.65;
+            }
+
+            .field-hint {
+                display: flex;
+                align-items: center;
+                gap: var(--sp-1);
+                margin-top: var(--sp-2);
+                font-size: var(--text-xs);
+                color: var(--text-soft);
+                direction: rtl;
+            }
+
+            .field-hint i {
+                color: var(--purple-400);
+                font-size: 11px;
+                flex-shrink: 0;
+            }
+
+            /* ── Privacy card ── */
+            .privacy-card {
+                text-align: center;
+                direction: rtl;
+            }
+
+            .privacy-icon-wrap {
+                width: 56px;
+                height: 56px;
+                border-radius: var(--r-full);
+                border: 2px solid var(--purple-200);
+                background: var(--purple-50);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto var(--sp-4);
+                color: var(--purple-400);
+                font-size: 22px;
+            }
+
+            .privacy-title {
+                margin: 0 0 var(--sp-3);
+                font-size: var(--text-xl);
+                font-weight: 700;
+                color: var(--text-dark);
+            }
+
+            .privacy-desc {
+                margin: 0 0 var(--sp-5);
+                font-size: var(--text-sm);
+                line-height: 1.8;
+                color: var(--text-mid);
+            }
+
+            .btn-privacy {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: var(--sp-2);
+                background: var(--purple-500);
+                color: var(--text-white);
+                border: none;
+                border-radius: var(--r-full);
+                padding: 11px 32px;
+                font-size: var(--text-base);
+                font-weight: 600;
+                box-shadow: var(--shadow-btn);
+                text-decoration: none;
+                transition:
+                    background var(--ease),
+                    transform var(--spring),
+                    box-shadow var(--ease);
+            }
+
+            .btn-privacy:hover {
+                background: var(--purple-400);
+                transform: translateY(-1px);
+                box-shadow: 0 6px 20px rgba(139, 0, 245, 0.35);
+            }
+
+            .btn-privacy:active {
+                transform: translateY(0);
+            }
+
+            /* ════════════════════════════════════════════════════════
+       STICKY FOOTER — "رفع الفيديو" button
+       The inner wrapper re-creates the 12-col grid so the
+       button aligns exactly with the content column (cols 4–9).
+       ════════════════════════════════════════════════════════ */
+            .sticky-footer {
+                position: relative;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 150;
+                background: linear-gradient(
+                    to top,
+                    var(--page-bg) 72%,
+                    transparent
+                );
+                padding: var(--sp-4) 0 var(--sp-6);
+            }
+
+            /* Mirror the outer container + row exactly */
+            .sticky-footer-inner {
+                width: 100%;
+                max-width: var(--grid-max);
+                margin-inline: auto;
+                padding-inline: var(--grid-margin);
+                display: grid;
+                grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+                gap: var(--grid-gutter);
+            }
+
+            .btn-upload {
+                grid-column: 4 / span 6; /* same slot as .upload-col */
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: var(--sp-3);
+                background: var(--purple-500);
+                color: var(--text-white);
+                border: none;
+                border-radius: var(--r-full);
+                padding: 16px 32px;
+                font-size: var(--text-lg);
+                font-weight: 700;
+                letter-spacing: 0.2px;
+                box-shadow: var(--shadow-btn);
+                transition:
+                    background var(--ease),
+                    transform var(--spring),
+                    box-shadow var(--ease);
+            }
+
+            .btn-upload:hover {
+                background: var(--purple-400);
+                transform: translateY(-1px);
+                box-shadow: 0 8px 24px rgba(139, 0, 245, 0.38);
+            }
+
+            .btn-upload:active {
+                transform: translateY(0);
+            }
+
+            /* ════════════════════════════════════════════════════════
+       FOOTER PLACEHOLDER  (80px, no content yet)
+       ════════════════════════════════════════════════════════ */
+            .footer-placeholder {
+                height: 80px;
+                background: #141b34;
+            }
+
+            /* ════════════════════════════════════════════════════════
+       RESPONSIVE BREAKPOINTS
+       ════════════════════════════════════════════════════════ */
+
+            /* ── Large tablet: 1024px
+       Content expands from 6-col to 8-col (cols 3–10) ── */
+            @media (max-width: 1024px) {
+                .upload-col {
+                    grid-column: 3 / span 8;
+                }
+                .btn-upload {
+                    grid-column: 3 / span 8;
+                }
+            }
+
+            /* ── Tablet: 768px
+       Switch to a 4-column layout, collapse grid tokens ── */
+            @media (max-width: 768px) {
+                :root {
+                    --grid-cols: 4;
+                    --grid-margin: 20px;
+                    --grid-gutter: 20px;
+                }
+
+                .row {
+                    grid-template-columns: repeat(4, minmax(0, 1fr));
+                }
+
+                .sticky-footer-inner {
+                    grid-template-columns: repeat(4, minmax(0, 1fr));
+                    padding-inline: 20px;
+                }
+
+                .upload-col {
+                    grid-column: 1 / -1;
+                }
+                .btn-upload {
+                    grid-column: 1 / -1;
+                }
+
+                .page-title {
+                    font-size: var(--text-3xl);
+                }
+            }
+
+            /* ── Mobile: 480px
+       Single-column, tighter padding ── */
+            @media (max-width: 480px) {
+                :root {
+                    --grid-cols: 1;
+                    --grid-margin: 16px;
+                    --grid-gutter: 16px;
+                }
+
+                .row {
+                    grid-template-columns: 1fr;
+                }
+
+                .sticky-footer-inner {
+                    display: block;
+                    padding-inline: 16px;
+                }
+
+                .upload-col {
+                    grid-column: 1;
+                }
+                .btn-upload {
+                    width: 100%;
+                }
+
+                .card {
+                    padding: var(--sp-5);
+                }
+                .dropzone {
+                    padding: var(--sp-10) var(--sp-4);
+                }
+                .page-title {
+                    font-size: var(--text-2xl);
+                }
+            }

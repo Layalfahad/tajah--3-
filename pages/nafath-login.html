@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>تاجه - تسجيل الدخول عبر نفاذ</title>
+<link href="../css/style.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary':         '#b670ff',
+            'tj-primary-hover':   '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text':    '#250140',
+            'tj-surface-base':    '#fdfcfb',
+            'tj-surface-card':    '#ffffff',
+            'tj-surface-muted':   '#f7f5f2',
+            'tj-text':            '#0f0f10',
+            'tj-text-secondary':  '#5e5e59',
+            'tj-text-tertiary':   '#8c8c85',
+            'tj-text-disabled':   '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border':          '#ece9e3',
+            'tj-border-active':   '#8c8c85',
+            'tj-success':         '#00a637',
+            'tj-success-bg':      '#e3f5e1',
+            'tj-error':           '#eb3333',
+            'tj-error-bg':        '#fff0f0',
+            'tj-info':            '#0094e3',
+            'tj-info-bg':         '#e3f1ff',
+            'tj-accent-yellow':   '#caa913',
+            'tj-accent-yellow-bg':'#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn':  '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card':   '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta':    '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft':   '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float':  '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee':       { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev':   { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow':    { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring':    { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up':       { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee':     'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow':  'float-slow 8s ease-in-out infinite',
+            'pulse-ring':  'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up':     'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    /* Navbar styles */
+    .nav-link { transition: color 0.15s, background 0.15s; }
+    .nav-link-active::after {
+      content: ''; position: absolute; bottom: -1px; right: 12px; left: 12px;
+      height: 2px; background: #b670ff; border-radius: 2px 2px 0 0;
+    }
+    .hover-purple:hover { color: #b670ff !important; background: #f6ebff !important; }
+    .dropdown { transform-origin: top right; }
+    .dropdown.open { animation: dropIn 0.18s ease both; }
+    @keyframes dropIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-6px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .drawer { transform: translateX(100%); transition: transform 0.3s ease; }
+    .drawer.open { transform: translateX(0); }
+    
+    /* Hide duplicate layout placeholders */
+    .navbar-placeholder, .footer-placeholder { display: none !important; }
+  
+</style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body class="nafath-auth-body">
+<div id="tc"></div>
+<main class="nafath-auth-shell" dir="rtl">
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center h-16">
+        <!-- Right Section: Navigation action items -->
+        <div class="flex flex-1 items-center justify-start gap-2">
+          <div class="hidden lg:flex items-center gap-2">
+            <a class="inline-flex h-9 items-center justify-center rounded-tj-btn border border-tj-primary px-5 text-sm font-semibold text-tj-primary transition hover:bg-tj-primary-surface" href="login-select.html">تسجيل الدخول</a>
+            <a class="inline-flex h-9 items-center justify-center gap-1.5 rounded-tj-btn bg-tj-primary px-5 text-sm font-semibold text-tj-text-on-primary shadow-[0_10px_24px_-6px_rgba(182,112,255,0.55)] transition hover:bg-tj-primary-hover active:bg-tj-primary-pressed" href="join.html">انضمي الآن</a>
+          </div>
+          <button class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors" id="hamBtn" onclick="toggleDrawer()">
+            <svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Center Section: Nav links -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover:bg-[#f6ebff] hover:text-[#b670ff] transition-colors whitespace-nowrap" href="landingPag.html">الرئيسية</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover:bg-[#f6ebff] hover:text-[#b670ff] transition-colors whitespace-nowrap" href="about.html">عن تاجة</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover:bg-[#f6ebff] hover:text-[#b670ff] transition-colors whitespace-nowrap" href="contact.html">تواصل معنا</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover:bg-[#f6ebff] hover:text-[#b670ff] transition-colors whitespace-nowrap" href="landingPag.html#faq">الأسئلة الشائعة</a>
+        </nav>
+        
+        <!-- Left Section: Logo brand -->
+        <div class="flex flex-1 items-center justify-end">
+          <a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+            <div class="w-9 h-9 flex items-center justify-center">
+              <svg fill="none" height="36" viewBox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient gradientUnits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+                    <stop offset="0%" stop-color="#f2de00"></stop>
+                    <stop offset="50%" stop-color="#cca6ff"></stop>
+                    <stop offset="100%" stop-color="#b670ff"></stop>
+                  </linearGradient>
+                </defs>
+                <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+                <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+                <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+                <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+                <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+                <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              </svg>
+            </div>
+            <span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Modern Dual-Layout Authentication Split Section -->
+  <div class="auth-split-wrapper">
+    <!-- Brand Side Panel (Visible on Desktop) -->
+    <aside class="auth-visual-side">
+      <div class="visual-badge-overlay">نظام الدخول الموحد النفاذ الوطني</div>
+      <div class="visual-content-box">
+        <h2>بوابة آمنة وموثوقة لشراكتك الرياضية</h2>
+        <p>سجّلي دخولك مباشرة باستخدام حساب النفاذ الوطني الموحد لمتابعة رحلتك والتحكم بملفك الرياضي المتكامل.</p>
+      </div>
+    </aside>
+
+    <!-- Secure Interactive Input Panel Form Box -->
+    <div class="auth-form-side">
+      <section aria-labelledby="nafath-auth-title" class="nafath-auth-card">
+        <div class="nafath-badge-logo">
+          
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          نفاذ الموحد
+        </div>
+
+        <h1 id="nafath-auth-title">تسجيل الدخول</h1>
+        <p class="nafath-auth-welcome">مرحباً بك عميل <span class="brand-name-highlight">تاجة</span></p>
+
+        <form class="nafath-auth-form" onsubmit="doNafathLogin(event)">
+          <div class="nafath-auth-group">
+            <label for="national-id">رقم الهوية الوطنية / الإقامة <span class="required-star">*</span></label>
+            <div class="input-icon-wrapper">
+              <input autocomplete="on" class="nafath-auth-input" id="national-id" inputmode="numeric" maxlength="10" oninput="syncNafathButton()" placeholder="مثال: 1XXXXXXXXX" type="tel" name="national-id">
+              <span class="field-icon">#</span>
+            </div>
+          </div>
+          
+          <button class="nafath-auth-submit" disabled="" id="nafath-submit" type="submit" onclick="openNafathModal();">متابعة عبر نفاذ</button>
+        </form>
+
+        <div class="nafath-auth-divider"><span>أو خيارات دخول بديلة</span></div>
+        
+        <button class="nafath-auth-method" onclick="location.href='player-login.html'" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-inner-icon">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+          </svg>
+          اسم المستخدم وكلمة المرور
+        </button>
+
+        <div class="nafath-auth-footer">
+          <span>ليس لديك حساب؟</span>
+          <a href="join.html" class="create-account-link">إنشاء حساب جديد</a>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="nf-modal-overlay" id="nafathRedirectModal" hidden>
+  <div class="nf-modal-card" dir="rtl">
+    
+    <!-- Header Title -->
+    <h2 class="nf-modal-title">تأكيد الانتقال</h2>
+    
+    <!-- Subtitle Notice -->
+    <p class="nf-modal-subtitle">أنت على وشك الانتقال إلى</p>
+    
+    <!-- Interactive Flow Nodes Route (Taja to Nafath) -->
+    <div class="nf-route-flow">
+      <div class="nf-node-box">
+        <span class="nf-node-text">تاجة</span>
+      </div>
+      
+      <div class="nf-flow-arrow">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+      
+      <div class="nf-node-box nf-node-active">
+        <span class="nf-node-text font-bold">النفاذ الوطني الموحد</span>
+      </div>
+    </div>
+    
+    <!-- Warning Context Description -->
+    <p class="nf-modal-desc">يرجى الضغط على (انتقال) لاستكمال العملية أو (إلغاء) لإلغائها</p>
+    
+    <!-- Dialog Actions Buttons Layout -->
+    <div class="nf-modal-actions">
+      <button class="nf-btn-primary" onclick="executeNafathRedirect()" type="button">انتقال</button>
+      <button class="nf-btn-secondary" onclick="closeNafathModal()" type="button">إلغاء</button>
+    </div>
+    
+  </div>
+</div>
+
+</main>
+<script src="../js/utils.js"></script>
+<script>
+const nationalIdInput = document.getElementById('national-id');
+const nafathSubmit = document.getElementById('nafath-submit');
+const modal = document.getElementById('nafathRedirectModal');
+
+function syncNafathButton() {
+  // Cleans dynamic character entry bugs natively
+  nationalIdInput.value = nationalIdInput.value.replace(/\D/g, '').slice(0, 10);
+  nafathSubmit.disabled = !/^[12]\d{9}$/.test(nationalIdInput.value);
+}
+
+// 1. INTERCEPT FORM: Triggers the modal first instead of logging straight in
+function doNafathLogin(event) {
+  event.preventDefault();
+  const id = nationalIdInput.value.trim();
+  
+  if (!/^[12]\d{9}$/.test(id)) {
+    toast('\u064a\u0631\u062c\u0649 \u0625\u062f\u062e\u0627\u0644 \u0631\u0642\u0645 \u0647\u0648\u064a\u0629 \u0623\u0648 \u0625\u0642\u0627\u0645\u0629 \u0633\u0639\u0648\u062f\u064a \u0645\u0643\u0648\u0646 \u0645\u0646 10 \u0623\u0631\u0642\u0627\u0645', 'e');
+    return;
+  }
+  
+  // Input validation passed successfully -> Open your white verification modal window
+  openNafathModal();
+}
+
+function openNafathModal() {
+  modal.removeAttribute('hidden');
+  modal.style.display = 'flex'; 
+}
+
+function closeNafathModal() {
+  modal.setAttribute('hidden', '');
+  modal.style.display = 'none';
+}
+
+// 2. EXECUTE REDIRECT: Triggers only when clicking the green "انتقال" action inside the modal
+//function executeNafathRedirect() {
+//  closeNafathModal();
+//  toast('تم إرسال طلب التحقق عبر نفاذ', 's');
+//  
+//  setTimeout(function() {
+//    // Directs the browser pipeline safely into your project index layout route
+//    window.location.href = '../index.html';
+//  }, 1200);
+//}
+
+function executeNafathRedirect() {
+  // Add redirect pipeline coordinates here
+    closeNafathModal();
+  toast('تم إرسال طلب التحقق عبر نفاذ', 's');
+  
+  setTimeout(function() {
+    // Directs the browser pipeline safely into your project index layout route
+  window.location.href = "https://iam.gov.sa"; 
+  }, 1200);
+}
+</script>
+<footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+<!-- Top: Logo text + Tagline -->
+<div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+<div>
+<div class="flex items-center gap-3">
+<svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+<defs><lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100"><stop offset="0%" stop-color="#f2de00"></stop><stop offset="50%" stop-color="#cca6ff"></stop><stop offset="100%" stop-color="#b670ff"></stop></lineargradient></defs>
+<path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z" fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+<circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+<circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+</svg>
+<p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+</div>
+<p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+</div>
+<p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+</div>
+<!-- 3 Columns Grid — equal width -->
+<div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+<!-- Column 1: Quick Links -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            روابط مهمة
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="about.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                عن تاجة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="index.html#faq">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                الأسئلة الشائعة
+              </a>
+</li>
+<li>
+<a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="contact.html">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                المساعدة والدعم
+              </a>
+</li>
+</ul>
+</div>
+<!-- Column 2: Contact Info (email + phone only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<!-- Phone icon — flipped to face left -->
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            تواصل معنا
+          </h3>
+<ul class="space-y-3">
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="mailto:Tajah2026@gmail.com">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">Tajah2026@gmail.com</p>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary" href="tel:+966501234567">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+<!-- Phone icon in icon box — flipped left -->
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" style="transform: scaleX(-1)" viewbox="0 0 24 24">
+<path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+<div class="min-w-0 flex-1 pt-1">
+<p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+<p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr" style="unicode-bidi: embed;">+966 50 123 4567</p>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+<div>
+<h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+<svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+            النشرة البريدية
+          </h3>
+<p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+<!-- Newsletter form -->
+<form class="space-y-2" id="newsletter-form">
+<div class="relative">
+<input class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface" id="newsletter-email" placeholder="layal@gmail.com" required="" type="email"/>
+<span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</span>
+</div>
+<button class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed" type="submit">
+<span>اشتراك</span>
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</form>
+<!-- Success message -->
+<div class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success" id="newsletter-success">
+<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>تم الاشتراك بنجاح! 🎉</span>
+</div>
+<!-- Social Icons: WhatsApp, X, TikTok only -->
+<div class="mt-6">
+<p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+<div class="flex items-center gap-2">
+<!-- WhatsApp -->
+<a aria-label="واتساب" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path></svg>
+</a>
+<!-- Twitter / X -->
+<a aria-label="تويتر" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- TikTok -->
+<a aria-label="تيك توك" class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary" href="#">
+<svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom: Copyright + Legal -->
+<div class="mt-12 pt-8 border-t border-tj-border">
+<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+<p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق محفوظة.
+          </p>
+<ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+<li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+<li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4" id="terms-modal">
+<div class="w-full max-w-2xl rounded-tj-card bg-white p-6 shadow-tj-float relative text-right max-h-[90vh] overflow-y-auto" dir="rtl">
+<button class="absolute top-4 left-4 text-gray-400 hover:text-gray-600" onclick="document.getElementById('terms-modal').classList.add('hidden'); document.getElementById('terms-modal').classList.remove('flex');" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="mb-4">
+<h2 class="text-xl font-bold text-tj-primary mb-2">شروط الاستخدام وسياسة الخصوصية</h2>
+<p class="text-sm text-tj-text-secondary">أهلاً بك في منصة تاجة للتمكين الرياضي. لضمان بيئة رياضية احترافية وآمنة وشفافة تعتمد على تكافؤ الفرص، نرجو قراءة والموافقة على شروط الاستخدام وسياسة الخصوصية قبل استخدام المنصة:</p>
+</div>
+<div class="space-y-4 text-sm text-tj-text-secondary">
+<div>
+<h3 class="font-bold text-tj-text">1. دقة البيانات والمصداقية</h3>
+<ul class="list-disc list-inside mt-1">
+<li>اللاعبات: يُشترط إدخال بيانات رياضية دقيقة، إحصائيات وإنجازات وفيديوهات حقيقية تعكس الأداء الفعلي. أي تلاعب في البيانات يعرض الحساب للإيقاف.</li>
+<li>الأندية والكشافين: يُشترط التمثيل الرسمي والقانوني للجهة الرياضية، وتقديم عروض جدية وحقيقية.</li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-tj-text">2. خصوصية وسرية البيانات</h3>
+<ul class="list-disc list-inside mt-1">
+<li>تلتزم تاجة بحماية بياناتك الشخصية والرياضية وعدم مشاركتها مع أي أطراف ثالثة خارج النطاق الرياضي للمنصة.</li>
+<li>يُمنع على الأندية والكشافين مشاركة أو تسريب بيانات اللاعبات أو تفاصيل المفاوضات والعروض الرسمية خارج المنصة.</li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-tj-text">3. التصويت والقرارات الداخلية (للأندية فقط)</h3>
+<ul class="list-disc list-inside mt-1">
+<li>ميزة التصويت والمقارنة الداخلية للمواهب تُعد سرية ومخصصة فقط لأصحاب القرار في النادي. لا يحق للاعبة الاطلاع عليها لضمان خصوصية التقييم.</li>
+</ul>
+</div>
+<div>
+<h3 class="font-bold text-tj-text">4. المعاملات والعقود الرسمية</h3>
+<ul class="list-disc list-inside mt-1">
+<li>تُعد تاجة منصة رقمية لتسهيل الربط، الوصول، واكتشاف المواهب بناءً على البيانات. تتم كافة التعاقدات الرسمية النهائية وفقاً للوائح والقوانين الرياضية المعتمدة في المملكة العربية السعودية.</li>
+</ul>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-tj-border">
+<button class="w-full rounded-md bg-tj-primary px-4 py-3 text-white font-bold hover:bg-tj-primary-hover transition" onclick="document.getElementById('terms-modal').classList.add('hidden'); document.getElementById('terms-modal').classList.remove('flex');" type="button">أوافق على الشروط</button>
+</div>
+</div>
+</div>
+<script src="../js/auth.js?v=1.0.3"></script>
+</body>
+</html>

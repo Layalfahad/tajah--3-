@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>تاجة - طلباتي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js?v=1.0.3"></script>
+  <link href="../css/app.css" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary': '#b670ff',
+            'tj-primary-hover': '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text': '#250140',
+            'tj-surface-base': '#fdfcfb',
+            'tj-surface-card': '#ffffff',
+            'tj-surface-muted': '#f7f5f2',
+            'tj-text': '#0f0f10',
+            'tj-text-secondary': '#5e5e59',
+            'tj-text-tertiary': '#8c8c85',
+            'tj-text-disabled': '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border': '#ece9e3',
+            'tj-border-active': '#8c8c85',
+            'tj-success': '#00a637',
+            'tj-success-bg': '#e3f5e1',
+            'tj-error': '#eb3333',
+            'tj-error-bg': '#fff0f0',
+            'tj-info': '#0094e3',
+            'tj-info-bg': '#e3f1ff',
+            'tj-accent-yellow': '#caa913',
+            'tj-accent-yellow-bg': '#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn': '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card': '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta': '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft': '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float': '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee': { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev': { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow': { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring': { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up': { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee': 'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow': 'float-slow 8s ease-in-out infinite',
+            'pulse-ring': 'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up': 'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+
+  </style>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+
+<body class="min-h-screen">
+  <!-- Toast container -->
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex flex-col gap-2 pointer-events-none"
+    id="toast-container"></div>
+  <!-- ==================== OFFER MODAL ==================== -->
+  <div class="modal-overlay hidden" id="offer-modal">
+    <div class="modal-box fade-in">
+      <!-- Modal header -->
+<div dir="rtl" class="flex items-center justify-between p-6 border-b border-[#e6e6dc]">
+  <!-- Text is now on the right side -->
+  <div class="text-right">
+    <h3 class="text-[18px] font-bold text-[#1E1E1D]">عرض التعاقد</h3>
+    <p class="text-[12px] text-[#9da4ae]" id="modal-offer-subtitle">من ???? ??????</p>
+  </div>
+
+  <!-- Close button is now on the left side -->
+  <button class="w-8 h-8 rounded-full bg-[#F7F7F1] flex items-center justify-center hover:bg-[#f3e8ff] transition-colors" onclick="closeModal()">
+    <svg fill="none" height="14" viewBox="0 0 14 14" width="14">
+      <path d="M2 2l10 10M12 2L2 12" stroke="#5e5e59" stroke-linecap="round" stroke-width="1.5"></path>
+    </svg>
+  </button>
+</div>
+
+      <!-- Modal body -->
+      <div class="p-6 flex flex-col gap-5">
+        <!-- Club header -->
+<div dir="rtl" class="flex items-center gap-4 justify-start">
+  <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1E3A5F] to-[#2d5490] flex items-center justify-center flex-shrink-0">
+    <span class="text-white text-[22px] font-bold" id="modal-offer-initial">?</span>
+  </div>
+  <div class="text-right">
+    <p class="text-[17px] font-bold text-[#1E1E1D]" id="modal-offer-club-name">???? ??????</p>
+    <p class="text-[13px] text-[#5e5e59]" id="modal-offer-sport">الكرة الطائرة</p>
+  </div>
+</div>
+        <!-- Offer status banner -->
+        <div class="bg-[#ecfdf3] border border-[#abefc6] rounded-2xl p-4 flex items-center gap-3 justify-end">
+          <div class="text-right flex-1">
+            <p class="text-[14px] font-bold text-[#085d3a]">تهانينا! تم قبول طلبك ✨</p>
+            <p class="text-[12px] text-[#16a34a] mt-0.5">النادي مهتم بضمك — راجعي شروط العرض وأخبريهم بقرارك</p>
+          </div>
+          <div class="w-10 h-10 bg-[#00a637] rounded-full flex items-center justify-center flex-shrink-0">
+            <svg fill="none" height="20" viewbox="0 0 20 20" width="20">
+              <path d="M3.5 10.5L8 15L16.5 6" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <button aria-label="إغلاق" onclick="dismissCard(this)" onmouseout="this.style.opacity=0.75"
+            onmouseover="this.style.opacity=1"
+            style="background:none;border:none;cursor:pointer;padding:2px;flex-shrink:0;opacity:0.75;transition:opacity 0.15s"><svg
+              fill="none" height="10" viewbox="0 0 10 10" width="10">
+              <path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="#085d3a" stroke-linecap="round" stroke-width="1.6"></path>
+            </svg></button>
+        </div>
+        <!-- Offer terms -->
+        <div class="bg-[#fafaf7] border border-[#e6e6dc] rounded-2xl overflow-hidden">
+          <div class="px-5 py-3 border-b border-[#e6e6dc]">
+            <p class="text-[13px] font-bold text-[#1E1E1D] text-right">تفاصيل العرض</p>
+          </div>
+          <div class="divide-y divide-[#e6e6dc]">
+            <div class="flex justify-between items-center px-5 py-3">
+              <span class="text-[14px] font-semibold text-[#1E1E1D]" id="modal-offer-position">مهاجمة</span>
+              <span class="text-[13px] text-[#5e5e59]">المنصب</span>
+            </div>
+            <div class="flex justify-between items-center px-5 py-3">
+              <span class="text-[14px] font-semibold text-[#1E1E1D]" id="modal-offer-salary">8,500 ريال/شهر</span>
+              <span class="text-[13px] text-[#5e5e59]">الراتب</span>
+            </div>
+            <div class="flex justify-between items-center px-5 py-3">
+              <span class="text-[14px] font-semibold text-[#1E1E1D]" id="modal-offer-start-date">1 يونيو 2026</span>
+              <span class="text-[13px] text-[#5e5e59]">تاريخ البدء</span>
+            </div>
+            <div class="flex justify-between items-center px-5 py-3">
+              <span class="text-[14px] font-semibold text-[#1E1E1D]" id="modal-offer-duration">سنة واحدة</span>
+              <span class="text-[13px] text-[#5e5e59]">مدة العقد</span>
+            </div>
+            <div class="flex justify-between items-center px-5 py-3">
+              <span class="text-[14px] font-semibold text-[#1E1E1D]" id="modal-offer-benefits">تأمين طبي، بدل
+                تنقل</span>
+              <span class="text-[13px] text-[#5e5e59]">المزايا</span>
+            </div>
+          </div>
+        </div>
+        <!-- AI advisor hint -->
+        <div class="bg-[#faf5ff] border border-[#e9d5ff] rounded-2xl p-4 flex items-start gap-3 justify-end">
+          <div class="text-right flex-1">
+            <p class="text-[11px] font-bold text-[#7c3aed] mb-1">توصية مستشار تاجة ✦</p>
+            <p class="text-[12px] text-[#5e5e59] leading-relaxed">هذا العرض يتوافق مع مستوى أدائك. الراتب المقدم ضمن
+              النطاق المعتاد للمرشحات بمستواك.</p>
+          </div>
+          <div class="w-8 h-8 bg-[#AE52FF] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span class="text-white text-[12px]">✦</span>
+          </div>
+          <button aria-label="إغلاق" onclick="dismissCard(this)" onmouseout="this.style.opacity=0.75"
+            onmouseover="this.style.opacity=1"
+            style="background:none;border:none;cursor:pointer;padding:2px;flex-shrink:0;opacity:0.75;transition:opacity 0.15s;margin-top:2px"><svg
+              fill="none" height="10" viewbox="0 0 10 10" width="10">
+              <path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="#7c3aed" stroke-linecap="round" stroke-width="1.6"></path>
+            </svg></button>
+        </div>
+        <!-- Action buttons -->
+        <div class="flex gap-3 pt-1">
+          <button onclick="rejectOffer()"
+            class="flex-1 h-11 rounded-xl border-2 border-[#fca5a5] bg-[#fff1f2] text-[#b91c1c] font-semibold text-[14px] flex items-center justify-center gap-2 transition-all hover:bg-[#fee2e2] active:scale-97">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 2l10 10M12 2L2 12" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round"></path>
+            </svg>
+            رفض العرض
+          </button>
+          <button onclick="acceptOffer()"
+            class="flex-1 h-11 rounded-xl bg-[#AE52FF] text-white font-bold text-[14px] flex items-center justify-center gap-2 btn-primary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7.5L5.5 11L12 4" stroke="white" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+            قبول العرض
+          </button>
+        </div>
+        <button onclick="openNegotiationModal()"
+          class="w-full h-10 rounded-xl border border-[#fde047] bg-[#fefce8] text-[#854d0e] font-semibold text-[13px] flex items-center justify-center gap-2 transition-all hover:bg-[#fef9c3] active:scale-97">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M7 1v6M4 4l3-3 3 3M2 10h10M4 13h6" stroke="#92400e" stroke-width="1.4" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          إرسال عرض مضاد
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== NEGOTIATION MODAL ==================== -->
+  <div class="modal-overlay hidden" id="negotiation-modal">
+    <div class="modal-box fade-in max-w-sm p-6 text-center">
+      <div
+        class="w-16 h-16 bg-[#fefce8] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#fde047]">
+        <svg class="text-[#854d0e] w-8 h-8" fill="none" height="24" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z">
+          </path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-bold text-[#1E1E1D] mb-2 font-display">تقديم عرض بديل</h3>
+      <p class="text-[13px] text-[#5e5e59] mb-4 leading-relaxed">أدخلي تفاصيل العرض البديل الذي ترغبين بتقديمه لنادي
+        <span id="neg-club-name" class="font-bold"></span>.
+      </p>
+
+      <form id="negotiationForm" class="space-y-4 text-right" onsubmit="event.preventDefault(); submitNegotiation();">
+        <div>
+          <label class="text-[12px] font-bold text-[#5e5e59] block mb-1">الراتب المطلوب (ريال/شهر) *</label>
+          <input type="text" id="counterSalary" required
+            class="w-full h-11 px-3 border border-[#e6e6dc] rounded-xl text-[14px] outline-none focus:border-[#b670ff] focus:ring-1 focus:ring-[#b670ff] transition-all"
+            placeholder="مثال: 10,000 ريال" />
+        </div>
+        <div>
+          <label class="text-[12px] font-bold text-[#5e5e59] block mb-1">ملاحظات إضافية</label>
+          <textarea id="counterNote" rows="2"
+            class="w-full p-3 border border-[#e6e6dc] rounded-xl text-[14px] outline-none focus:border-[#b670ff] focus:ring-1 focus:ring-[#b670ff] transition-all resize-none"
+            placeholder="تأمين، سكن..."></textarea>
+        </div>
+        <div class="flex gap-3 pt-2">
+          <button type="button" onclick="submitNegotiation()"
+            class="flex-1 h-11 rounded-xl bg-[#AE52FF] text-white font-bold text-[14px] transition hover:bg-[#a312ff] active:scale-97">
+            إرسال العرض
+          </button>
+          <button type="button"
+            class="flex-1 h-11 rounded-xl bg-gray-100 hover:bg-gray-200 text-[#5e5e59] font-bold text-[14px] transition active:scale-97"
+            onclick="closeNegotiationModal()">
+            إلغاء
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- ==================== WITHDRAW CONFIRMATION MODAL ==================== -->
+  <div class="modal-overlay hidden" id="withdraw-modal">
+    <div class="modal-box fade-in max-w-sm p-6 text-center">
+      <div class="w-16 h-16 bg-tj-error-bg rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="text-tj-error w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+          <path
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-bold text-tj-text mb-2 font-display">هل أنتِ متأكدة من سحب الطلب؟</h3>
+      <p class="text-sm text-tj-text-secondary mb-6 leading-relaxed">سحب الطلب يعني إلغاء تقديمك لهذا النادي بشكل نهائي
+        ولا يمكن التراجع عن هذا الإجراء.</p>
+      <div class="flex gap-3">
+        <button
+          class="flex-1 h-11 rounded-xl bg-tj-error text-white font-bold text-[14px] transition hover:bg-red-700 active:scale-97"
+          id="confirm-withdraw-btn">
+          نعم، اسحب
+        </button>
+        <button
+          class="flex-1 h-11 rounded-xl bg-gray-100 hover:bg-gray-200 text-tj-text-secondary font-bold text-[14px] transition active:scale-97"
+          onclick="closeWithdrawModal()">
+          تراجع
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== REJECT CONFIRMATION MODAL ==================== -->
+  <div class="modal-overlay hidden" id="reject-modal">
+    <div class="modal-box fade-in max-w-sm p-6 text-center">
+      <div class="w-16 h-16 bg-tj-error-bg rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="text-tj-error w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+          <path
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-bold text-tj-text mb-2 font-display">هل تريدين رفض العرض نهائياً؟</h3>
+      <p class="text-sm text-tj-text-secondary mb-6 leading-relaxed">رفض العرض يعني إلغاء هذه الفرصة نهائياً ولن تتمكني
+        من قبولها أو مراجعتها مجدداً.</p>
+      <div class="flex gap-3">
+        <button
+          class="flex-1 h-11 rounded-xl bg-tj-error text-white font-bold text-[14px] transition hover:bg-red-700 active:scale-97"
+          onclick="confirmRejectOffer()">
+          نعم، ارفض
+        </button>
+        <button
+          class="flex-1 h-11 rounded-xl bg-gray-100 hover:bg-gray-200 text-tj-text-secondary font-bold text-[14px] transition active:scale-97"
+          onclick="closeRejectModal()">
+          تراجع
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== PAGE LAYOUT ==================== -->
+  <div class="flex min-h-screen">
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <!-- Top nav (mobile + desktop) -->
+      <header
+        class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <!-- استخدام grid أو توزيع flex متساوي يضمن التوسط الحقيقي -->
+          <div class="flex items-center h-16">
+            <!-- القسم الأيمن: منطقة المستخدم (نعطيها flex-1 لتأخذ مساحة موازية للطرف الآخر) -->
+            <div class="flex flex-1 items-center justify-start gap-2">
+              <!-- Profile Dropdown Trigger (desktop) -->
+              <div class="relative hidden lg:block">
+                <button
+                  class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group"
+                  id="profileBtn" onclick="toggleDropdown()">
+                  <div
+                    class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">
+                    م</div>
+                  <div class="text-right">
+                    <p
+                      class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">
+                      مرحباً، مرام!</p>
+                  </div>
+                  <svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron"
+                    stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                    <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div
+                  class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50"
+                  id="dropdown">
+                  <div class="px-4 py-3 border-b border-tj-border">
+                    <p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+                    <p class="text-sm font-semibold text-tj-text mt-0.5">مرام العتيبي</p>
+                  </div>
+                  <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                    href="stats.html">
+                    <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none"
+                      stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                      <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    الملف الشخصي
+                  </a>
+                  <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                    href="settings.html">
+                    <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none"
+                      stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                      <path
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                        stroke-linecap="round" stroke-linejoin="round"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    الإعدادات
+                  </a>
+                  <div class="border-t border-tj-border mt-1 pt-1">
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group"
+                      href="../index.html">
+                      <svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewbox="0 0 24 24">
+                        <path
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                          stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                      تسجيل الخروج
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- Notification Bell -->
+              <button aria-label="الإشعارات"
+                class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group"
+                onclick="window.location.href='notifications.html'">
+                <span
+                  class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+                <svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors"
+                  fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round">
+                  </path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+              <!-- Hamburger (mobile) -->
+              <button
+                class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors"
+                id="hamBtn" onclick="toggleDrawer()">
+                <svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5"
+                  viewbox="0 0 24 24">
+                  <path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+            </div>
+            <!-- القسم الأوسط: الروابط (نتركها بدون flex-1 ونستخدم mx-auto للتمركز) -->
+            <nav class="hidden lg:flex items-center gap-1">
+              <a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap"
+                href="PlayerHomepage.html">الرئيسية</a>
+              <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+                href="../Communities/index.html">المجتمعات</a>
+              <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+                href="Tajah-search.html">البحث</a>
+              <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+                href="opportunities.html">الفرص</a>
+              <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+                href="applications.html">طلباتي</a>
+              <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+                href="contact.html">تواصل معنا</a>
+              <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+                href="about.html">عن تاجة</a>
+            </nav>
+            <!-- القسم الأيسر: اللوجو (نعطيه flex-1 ونحاذيه لليسار ليوازن جهة المستخدم) -->
+            <div class="flex flex-1 items-center justify-end">
+              <a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+                <div class="w-9 h-9 flex items-center justify-center">
+                  <svg fill="none" height="36" viewbox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <lineargradient gradientunits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+                        <stop offset="0%" stop-color="#f2de00"></stop>
+                        <stop offset="50%" stop-color="#cca6ff"></stop>
+                        <stop offset="100%" stop-color="#b670ff"></stop>
+                      </lineargradient>
+                    </defs>
+                    <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z"
+                      fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="4.5"></path>
+                    <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z"
+                      fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="4.5"></path>
+                    <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                      fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="4.5"></path>
+                    <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+                    <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+                    <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+                  </svg>
+                </div>
+                <span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="flex min-h-screen w-full">
+        <!-- ===== PAGE BODY ===== -->
+        <aside class="hidden lg:flex flex-col w-[220px] flex-shrink-0 bg-white border-l border-[#e6e6dc] p-5 gap-6">
+          <!-- Logo -->
+          <div class="flex items-center gap-2.5 justify-end pb-2">
+            <span class="text-[16px] font-bold text-[#1E1E1D]">تاجة</span>
+            <div class="w-8 h-8 bg-[#AE52FF] rounded-lg flex items-center justify-center">
+              <span class="text-white text-[14px]">✦</span>
+            </div>
+          </div>
+          <!-- Profile -->
+          <div class="flex flex-col items-center gap-2 py-3 border-y border-[#e6e6dc]">
+            <div
+              class="w-14 h-14 rounded-full bg-gradient-to-br from-[#d4b3ff] to-[#a06cd5] flex items-center justify-center">
+              <span class="text-white text-[22px] font-bold" id="sidebar-initial">س</span>
+            </div>
+            <div class="text-center">
+              <p class="text-[14px] font-bold text-[#1E1E1D]" id="sidebar-name">سارة سعد</p>
+              <p class="text-[11px] text-[#5e5e59]" id="sidebar-sport">مهاجمة · كرة السلة</p>
+            </div>
+          </div>
+          <!-- Nav links -->
+          <nav class="flex flex-col gap-1">
+            <a class="sidebar-link active flex items-center justify-end gap-3" href="#">
+              <span>طلباتي</span>
+              <svg fill="none" height="18" viewbox="0 0 18 18" width="18">
+                <rect height="14" rx="2" stroke="currentColor" stroke-width="1.4" width="12" x="3" y="2"></rect>
+                <path d="M6 6h6M6 9h6M6 12h4" stroke="currentColor" stroke-linecap="round" stroke-width="1.4"></path>
+              </svg>
+            </a>
+            <a class="sidebar-link flex items-center justify-end gap-3" href="#">
+              <span>ملفي الرياضي</span>
+              <svg fill="none" height="18" viewbox="0 0 18 18" width="18">
+                <circle cx="9" cy="6" r="3.5" stroke="currentColor" stroke-width="1.4"></circle>
+                <path d="M2 16c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-linecap="round"
+                  stroke-width="1.4"></path>
+              </svg>
+            </a>
+            <a class="sidebar-link flex items-center justify-end gap-3" href="#">
+              <span>الفرص المتاحة</span>
+              <svg fill="none" height="18" viewbox="0 0 18 18" width="18">
+                <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.4"></circle>
+                <path d="M6 9h6M9 6v6" stroke="currentColor" stroke-linecap="round" stroke-width="1.4"></path>
+              </svg>
+            </a>
+            <a class="sidebar-link flex items-center justify-end gap-3" href="#">
+              <span>الإشعارات</span>
+              <svg fill="none" height="18" viewbox="0 0 18 18" width="18">
+                <path d="M9 2a6 6 0 016 6v3l1.5 2.5H1.5L3 11V8a6 6 0 016-6z" stroke="currentColor" stroke-width="1.4">
+                </path>
+                <path d="M7 14.5a2 2 0 004 0" stroke="currentColor" stroke-linecap="round" stroke-width="1.4"></path>
+              </svg>
+            </a>
+          </nav>
+          <!-- Back to home -->
+        </aside>
+
+        <main class="flex-1 p-4 lg:p-6">
+
+          <!-- Stats row -->
+          <div class="grid grid-cols-3 gap-3 mb-5">
+            <div class="bg-white rounded-2xl p-4 border border-[#e6e6dc] text-right">
+              <p id="stat-total" class="text-[28px] font-bold text-[#1E1E1D]">4</p>
+              <p class="text-[12px] text-[#5e5e59] mt-0.5">إجمالي الطلبات</p>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-[#abefc6] text-right">
+              <p id="stat-accepted" class="text-[28px] font-bold text-[#085d3a]">1</p>
+              <p class="text-[12px] text-[#5e5e59] mt-0.5">مقبول</p>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-[#e6e6dc] text-right">
+              <p id="stat-pending" class="text-[28px] font-bold text-[#9da4ae]">2</p>
+              <p class="text-[12px] text-[#5e5e59] mt-0.5">قيد المراجعة</p>
+            </div>
+          </div>
+
+          <!-- Filter tabs -->
+<div dir="rtl" class="flex gap-2 justify-start overflow-x-auto pb-1 mb-4 w-full">
+  <button class="tab-btn active" onclick="filterCards('all', this)">
+    الكل <span id="tab-count-all" class="bg-white/30 text-inherit rounded-full px-1.5 py-0.5 text-[10px] mr-1">10</span>
+  </button>
+  <button class="tab-btn" onclick="filterCards('pending', this)">
+    قيد المراجعة <span id="tab-count-pending" class="bg-[#fde68a]/30 text-[#92400e] rounded-full px-1.5 py-0.5 text-[10px] mr-1">4</span>
+  </button>
+  <button class="tab-btn" onclick="filterCards('accepted', this)">
+    مقبول <span id="tab-count-accepted" class="bg-[#abefc6]/30 text-[#085d3a] rounded-full px-1.5 py-0.5 text-[10px] mr-1">4</span>
+  </button>
+  <button class="tab-btn" onclick="filterCards('rejected', this)">
+    مرفوض <span id="tab-count-rejected" class="bg-[#fca5a5]/30 text-[#b91c1c] rounded-full px-1.5 py-0.5 text-[10px] mr-1">2</span>
+  </button>
+</div>
+
+          <!-- Application cards grid -->
+          <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
+            <!-- Rendered by JS -->
+          </div>
+
+        </main>
+
+        <!-- ===== SIDEBAR (desktop) ===== -->
+      </div>
+    </div>
+  </div>
+  <script>
+    // ─── Session & API Setup ───────────────────────────────────────────────────
+    const loggedUser = JSON.parse(sessionStorage.getItem('tajah_user') || '{}');
+    const playerId = loggedUser.id || 1;
+
+    let allApplications = [];
+    let activeFilter = 'all';
+
+    let currentOfferAppId = null;
+
+    async function loadApplications() {
+      try {
+        const userRes = await fetch(`/api/users/${playerId}`);
+        if (userRes.ok) {
+          const userProfile = await userRes.json();
+          
+          // Use loggedUser if database value is corrupted (like ????) or missing
+          const isValid = (str) => str && str.trim().length > 0 && !str.includes('????');
+          
+          const finalName = isValid(userProfile.name) ? userProfile.name : (loggedUser.name || 'لاعبة');
+          const finalSport = isValid(userProfile.sport) ? userProfile.sport : (loggedUser.sport || 'رياضة');
+          const finalPosition = isValid(userProfile.position) ? userProfile.position : (loggedUser.position || 'لاعب');
+
+          const elInitial = document.getElementById('sidebar-initial');
+          const elName = document.getElementById('sidebar-name');
+          const elSport = document.getElementById('sidebar-sport');
+          
+          if (elInitial) elInitial.textContent = finalName.charAt(0);
+          if (elName) elName.textContent = finalName;
+          if (elSport) elSport.textContent = finalPosition + ' · ' + finalSport;
+        }
+
+        const res = await fetch(`/api/applications?player_id=${playerId}`);
+        if (!res.ok) throw new Error('Failed to fetch');
+
+        allApplications = await res.json();
+        updateCounters();
+        renderCards(activeFilter);
+      } catch (err) {
+        console.error('Fetch player applications failed:', err);
+        showToast('فشل جلب طلبات الانضمام. يرجى التحقق من اتصالك بالإنترنت.', '#dc2626');
+      }
+    }
+
+    // ─── Update stats cards & tab counts from live data ───────────────────────
+    function updateCounters() {
+      const el = id => document.getElementById(id);
+
+      const counts = {
+        total: allApplications.length,
+        accepted: allApplications.filter(a => a.status === 'accepted').length,
+        pending: allApplications.filter(a => a.status === 'pending').length,
+        rejected: allApplications.filter(a => a.status === 'rejected').length
+      };
+
+      if (el('stat-total')) el('stat-total').textContent = counts.total;
+      if (el('stat-accepted')) el('stat-accepted').textContent = counts.accepted;
+      if (el('stat-pending')) el('stat-pending').textContent = counts.pending;
+      if (el('tab-count-all')) el('tab-count-all').textContent = counts.total;
+      if (el('tab-count-pending')) el('tab-count-pending').textContent = counts.pending;
+      if (el('tab-count-accepted')) el('tab-count-accepted').textContent = counts.accepted;
+      if (el('tab-count-rejected')) el('tab-count-rejected').textContent = counts.rejected;
+    }
+
+    const statusLabels = {
+      accepted: { label: 'تم ترشيحك', cls: 'bg-[#abefc6]/30 text-[#085d3a]' },
+      pending: { label: 'قيد المراجعة', cls: 'bg-[#fde68a]/30 text-[#92400e]' },
+      rejected: { label: 'ملغى', cls: 'bg-[#fca5a5]/30 text-[#b91c1c]' },
+    };
+
+    // ─── Render cards ─────────────────────────────────────────────────────────
+    function renderCards(filter) {
+      const grid = document.getElementById('cards-grid');
+      const filtered = filter === 'all' ? allApplications : allApplications.filter(a => a.status === filter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-2 flex flex-col items-center justify-center py-16 text-center gap-4">
+            <div class="w-16 h-16 bg-[#F7F7F1] rounded-full flex items-center justify-center">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="4" stroke="#d2d6db" stroke-width="1.5"/><path d="M9 14h10M9 10h6" stroke="#d2d6db" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <p class="text-[15px] font-semibold text-[#5e5e59]">لا توجد طلبات في هذه الفئة</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(app => {
+        let status = app.status;
+        if (!statusLabels[status]) status = 'pending';
+        const s = statusLabels[status];
+
+        const clubInitial = app.club_name ? app.club_name.charAt(0) : 'ن';
+        const colorClass = 'from-[#d4b3ff] to-[#a06cd5]'; // Default color
+        const clubName = app.club_name || '-';
+        const city = 'المدينة'; // Might not be available in API
+        const sport = app.sport || '-';
+        const appliedDate = app.applied_date || '-';
+        const position = app.position || '-';
+
+        let actionHtml = '';
+        if (app.status === 'accepted') {
+          actionHtml = `
+            <div class="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3 text-emerald-800 text-xs font-semibold">
+              <span>مبروك! لقد قبلتي عرض النادي وتم التوقيع بنجاح.</span>
+            </div>
+          `;
+        } else if (app.has_offer === 1 && app.status === 'pending') {
+          actionHtml = `
+            <button onclick="openOfferModal(${app.id})" class="w-full h-10 rounded-xl bg-[#AE52FF] text-white font-bold text-[13px] flex items-center justify-center gap-2 btn-primary">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="white" stroke-width="1.3"/><path d="M4 7h6M4 5h4" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+              عرض العرض المقدم
+            </button>
+          `;
+        } else if (app.status === 'rejected') {
+          actionHtml = `
+            <button onclick="showToast('لا يمكن إعادة تقديم الطلب الملغى إلى نفس النادي حالياً.', '#5e5e59')" class="w-full h-10 rounded-xl border border-[#e6e6dc] text-[#9da4ae] font-semibold text-[13px] flex items-center justify-center gap-2 cursor-not-allowed opacity-60">
+              مرفوض
+            </button>
+          `;
+        } else {
+          actionHtml = `
+            <div class="flex gap-2">
+              <button onclick="showToast('سيتم إشعارك عند رد النادي على طلبك.', '#1849a9')" class="flex-1 h-10 rounded-xl border border-[#e6e6dc] text-[#5e5e59] font-semibold text-[13px] flex items-center justify-center btn-outline hover:bg-gray-50">
+                تتبع الطلب
+              </button>
+              <button onclick="withdrawApp(${app.id})" class="flex-1 h-10 rounded-xl border border-[#fca5a5] bg-[#fff1f2] text-[#b91c1c] font-semibold text-[13px] flex items-center justify-center transition-all hover:bg-[#fee2e2] active:scale-97">
+                سحب الطلب
+              </button>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="app-card bg-white border border-[#e6e6dc] rounded-2xl p-5 flex flex-col gap-4 shadow-sm" data-status="${status}">
+            <!-- Card header -->
+            <div class="flex items-center gap-4 justify-end">
+              <div class="text-right min-w-0 flex-1">
+                <div class="flex items-center gap-2 justify-end mb-1">
+                  <h3 class="text-[16px] font-bold text-[#1E1E1D] truncate">${clubName}</h3>
+                </div>
+                <p class="text-[13px] text-[#5e5e59]">${city} · ${sport}</p>
+              </div>
+              <!-- Club logo -->
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${colorClass} flex items-center justify-center flex-shrink-0">
+                <span class="text-white text-[18px] font-bold">${clubInitial}</span>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="h-px bg-[#e6e6dc]"></div>
+
+            <!-- Details row -->
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex gap-2 items-center">
+                <!-- Status badge -->
+                <span class="text-[11px] font-bold px-2.5 py-1 rounded-full ${s.cls}">${s.label}</span>
+              </div>
+              <div class="text-right">
+                <p class="text-[11px] text-[#9da4ae]">تاريخ الطلب</p>
+                <p class="text-[12px] font-medium text-[#5e5e59]">${appliedDate}</p>
+              </div>
+            </div>
+
+            <!-- Position -->
+            <div class="bg-[#F7F7F1] rounded-xl px-4 py-2.5 flex items-center justify-between">
+              <span class="text-[13px] font-semibold text-[#1E1E1D]">${position}</span>
+              <span class="text-[12px] text-[#9da4ae]">المنصب المطلوب</span>
+            </div>
+
+            <!-- Action -->
+            ${actionHtml}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ─── Filter ───────────────────────────────────────────────────────────────
+    function filterCards(filter, btn) {
+      activeFilter = filter;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCards(filter);
+    }
+
+    // ─── Withdraw ─────────────────────────────────────────────────────────────
+    let appToWithdraw = null;
+
+    function withdrawApp(id) {
+      appToWithdraw = id;
+      document.getElementById('withdraw-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      // Wire confirm click handler
+      document.getElementById('confirm-withdraw-btn').onclick = function () {
+        confirmWithdraw();
+      };
+    }
+
+    function closeWithdrawModal() {
+      document.getElementById('withdraw-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+      appToWithdraw = null;
+    }
+
+    async function confirmWithdraw() {
+      if (appToWithdraw === null) return;
+      const id = appToWithdraw;
+      const app = allApplications.find(a => a.id === id);
+      if (!app) return;
+
+      try {
+        const res = await fetch('/api/applications/' + id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'rejected' })
+        });
+
+        if (res.ok) {
+          closeWithdrawModal();
+          showToast('تم سحب طلبك بنجاح.', '#dc2626');
+          loadApplications();
+        } else {
+          showToast('فشل سحب الطلب.', '#dc2626');
+        }
+      } catch (err) {
+        showToast('خطأ في الاتصال بالخادم.', '#dc2626');
+      }
+    }
+
+    // ─── Offer Modal ────────────────────────────────────────────────────────────────
+    function openOfferModal(appId) {
+      currentOfferAppId = appId;
+      const app = allApplications.find(a => a.id === appId);
+      if (!app) return;
+
+      const el = id => document.getElementById(id);
+      if (el('modal-offer-subtitle')) el('modal-offer-subtitle').textContent = 'من ' + (app.club_name || '-');
+      if (el('modal-offer-club-name')) el('modal-offer-club-name').textContent = app.club_name || '-';
+      if (el('modal-offer-sport')) el('modal-offer-sport').textContent = app.sport || '-';
+      if (el('modal-offer-initial')) el('modal-offer-initial').textContent = app.club_name ? app.club_name.charAt(0) : 'ن';
+
+      if (el('modal-offer-position')) el('modal-offer-position').textContent = app.offer_position || app.position || '-';
+      if (el('modal-offer-salary')) el('modal-offer-salary').textContent = app.offer_salary || '-';
+      if (el('modal-offer-start-date')) el('modal-offer-start-date').textContent = app.offer_start_date || '-';
+      if (el('modal-offer-duration')) el('modal-offer-duration').textContent = app.offer_duration || '-';
+      if (el('modal-offer-benefits')) el('modal-offer-benefits').textContent = app.offer_benefits || '-';
+
+      document.getElementById('offer-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('offer-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+      currentOfferAppId = null;
+    }
+
+    document.getElementById('offer-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+
+    document.getElementById('withdraw-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeWithdrawModal();
+    });
+
+    document.getElementById('reject-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeRejectModal();
+    });
+
+    function acceptOffer() {
+      if (!currentOfferAppId) return;
+      respondToOffer(currentOfferAppId, 'accepted');
+    }
+
+    function rejectOffer() {
+      if (!currentOfferAppId) return;
+      document.getElementById('reject-modal').classList.remove('hidden');
+    }
+
+    function closeRejectModal() {
+      document.getElementById('reject-modal').classList.add('hidden');
+    }
+
+    function confirmRejectOffer() {
+      closeRejectModal();
+      if (!currentOfferAppId) return;
+      respondToOffer(currentOfferAppId, 'rejected');
+    }
+
+    async function respondToOffer(appId, newStatus) {
+      try {
+        const res = await fetch('/api/applications/' + appId, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+
+        if (res.ok) {
+          closeModal();
+          if (newStatus === 'accepted') {
+            showToast('✓ تم قبول العرض بنجاح! 🏆', '#16a34a');
+          } else {
+            showToast('تم رفض العرض وإغلاق الطلب.', '#dc2626');
+          }
+          loadApplications();
+        } else {
+          showToast('فشل إتمام العملية.', '#dc2626');
+        }
+      } catch (err) {
+        showToast('خطأ في الاتصال بالخادم.', '#dc2626');
+      }
+    }
+
+    // ─── Negotiation Modal ────────────────────────────────────────────────────────
+    function openNegotiationModal() {
+      if (!currentOfferAppId) return;
+      const savedId = currentOfferAppId;
+      const app = allApplications.find(a => a.id === savedId);
+      if (!app) return;
+
+      closeModal(); // This accidentally clears currentOfferAppId!
+      currentOfferAppId = savedId; // Restore it
+
+      document.getElementById('neg-club-name').textContent = app.club_name || '-';
+      document.getElementById('counterSalary').value = '';
+      document.getElementById('counterNote').value = '';
+
+      document.getElementById('negotiation-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNegotiationModal() {
+      document.getElementById('negotiation-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+      currentOfferAppId = null;
+    }
+
+    async function submitNegotiation() {
+      if (!currentOfferAppId) return;
+      const app = allApplications.find(a => a.id === currentOfferAppId);
+      if (!app) return;
+
+      const salaryInput = document.getElementById('counterSalary').value.trim();
+      const noteInput = document.getElementById('counterNote').value.trim();
+
+      if (!salaryInput) {
+        showToast('الرجاء تعبئة حقل الراتب المطلوب', '#dc2626');
+        return;
+      }
+
+      const btn = document.querySelector('#negotiationForm button[type="button"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...';
+      btn.disabled = true;
+
+      let clubId = 7; 
+      if (app.opportunity_id) {
+        try {
+          const oppRes = await fetch('/api/opportunities/' + app.opportunity_id);
+          if (oppRes.ok) {
+            const opp = await oppRes.json();
+            if (opp && opp.club_id) clubId = opp.club_id;
+          }
+        } catch (e) { }
+      }
+
+      try {
+        const negRes = await fetch('/api/negotiations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            application_id: app.id,
+            player_id: playerId,
+            club_id: clubId,
+            offer_salary: salaryInput + (noteInput ? ' (ملاحظة: ' + noteInput + ')' : ''),
+            from_athlete: true
+          })
+        });
+
+        if (negRes.ok) {
+          await fetch('/api/applications/' + app.id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: 'pending', has_offer: 2 })
+          });
+          
+          showToast('تم إرسال عرضك البديل بنجاح! سيتم إشعارك عند رد النادي على طلبك.', '#16a34a');
+          closeNegotiationModal();
+          await loadApplications();
+        } else {
+          showToast('فشل إرسال العرض. يرجى المحاولة مرة أخرى.', '#dc2626');
+        }
+      } catch (err) {
+        console.error('Submit negotiation error:', err);
+        showToast('حدث خطأ أثناء الاتصال بالخادم.', '#dc2626');
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    document.getElementById('negotiation-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeNegotiationModal();
+    });
+
+    document.getElementById('negotiationForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!currentOfferAppId) return;
+      const app = allApplications.find(a => a.id === currentOfferAppId);
+      if (!app) return;
+
+      const salaryInput = document.getElementById('counterSalary').value.trim();
+      const noteInput = document.getElementById('counterNote').value.trim();
+
+      if (!salaryInput) {
+        showToast('الرجاء تعبئة حقل الراتب المطلوب', '#dc2626');
+        return;
+      }
+
+      let clubId = 7; // Default or fallback
+      if (app.opportunity_id) {
+        try {
+          const oppRes = await fetch('/api/opportunities/' + app.opportunity_id);
+          if (oppRes.ok) {
+            const opp = await oppRes.json();
+            if (opp && opp.club_id) clubId = opp.club_id;
+          }
+        } catch (e) { }
+      }
+
+      try {
+        const negRes = await fetch('/api/negotiations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            application_id: app.id,
+            player_id: playerId,
+            club_id: clubId,
+            offer_salary: salaryInput + ' (عرض بديل من اللاعبة: ' + noteInput + ')',
+            from_athlete: true
+          })
+        });
+
+        if (negRes.ok) {
+          await fetch('/api/applications/' + app.id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: 'pending', has_offer: 2 })
+          });
+          showToast('تم إرسال عرضك البديل بنجاح! 💬', '#16a34a');
+          closeNegotiationModal();
+          loadApplications();
+        } else {
+          showToast('فشل إرسال عرض المفاوضة.', '#dc2626');
+        }
+      } catch (err) {
+        showToast('خطأ في الاتصال بالخادم.', '#dc2626');
+      }
+    });
+
+    // ─── Toast ────────────────────────────────────────────────────────────────
+    function dismissCard(btn) {
+      const card = btn.parentElement;
+      card.style.overflow = 'hidden';
+      card.style.transition = 'opacity 0.2s ease, max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease';
+      card.style.maxHeight = card.scrollHeight + 'px';
+      card.style.opacity = '0';
+      requestAnimationFrame(() => {
+        card.style.maxHeight = '0';
+        card.style.padding = '0';
+        card.style.marginTop = '0';
+        card.style.marginBottom = '0';
+      });
+      setTimeout(() => card.remove(), 320);
+    }
+
+    function showToast(message, color = '#161616') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast-enter pointer-events-auto';
+      toast.innerHTML = `
+        <div class="bg-white rounded-xl shadow-lg border border-[#e6e6dc] px-5 py-3 flex items-center gap-3 min-w-[280px]">
+          <p class="text-[13px] font-medium text-right flex-1" style="color:${color}">${message}</p>
+          <button onclick="this.parentElement.parentElement.remove()" class="text-[#8c8c85] hover:text-[#1f2a37] text-lg leading-none">&times;</button>
+        </div>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.remove('toast-enter');
+        toast.classList.add('toast-exit');
+        setTimeout(() => toast.remove(), 350);
+      }, 4000);
+    }
+
+    // ─── Init ─────────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      loadApplications();
+    });
+  </script>
+  <footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <!-- Top: Logo text + Tagline -->
+      <div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100">
+                  <stop offset="0%" stop-color="#f2de00"></stop>
+                  <stop offset="50%" stop-color="#cca6ff"></stop>
+                  <stop offset="100%" stop-color="#b670ff"></stop>
+                </lineargradient>
+              </defs>
+              <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="4.5"></path>
+              <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+              <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+            </svg>
+            <p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+          </div>
+          <p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+        </div>
+        <p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+      </div>
+      <!-- 3 Columns Grid — equal width -->
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <!-- Column 1: Quick Links -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            روابط مهمة
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="about.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                عن تاجة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="index.html#faq">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                الأسئلة الشائعة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="contact.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                المساعدة والدعم
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 2: Contact Info (email + phone only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <!-- Phone icon — flipped to face left -->
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              style="transform: scaleX(-1)" viewbox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            تواصل معنا
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="mailto:Tajah2026@gmail.com">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                    <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">
+                    Tajah2026@gmail.com</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="tel:+966501234567">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <!-- Phone icon in icon box — flipped left -->
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    style="transform: scaleX(-1)" viewbox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr"
+                    style="unicode-bidi: embed;">+966 50 123 4567</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            النشرة البريدية
+          </h3>
+          <p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+          <!-- Newsletter form -->
+          <form class="space-y-2" id="newsletter-form">
+            <div class="relative">
+              <input
+                class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface"
+                id="newsletter-email" placeholder="layal@gmail.com" required="" type="email" />
+              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </div>
+            <button
+              class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed"
+              type="submit">
+              <span>اشتراك</span>
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </form>
+          <!-- Success message -->
+          <div
+            class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success"
+            id="newsletter-success">
+            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>تم الاشتراك بنجاح! 🎉</span>
+          </div>
+          <!-- Social Icons: WhatsApp, X, TikTok only -->
+          <div class="mt-6">
+            <p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+            <div class="flex items-center gap-2">
+              <!-- WhatsApp -->
+              <a aria-label="واتساب"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z">
+                  </path>
+                </svg>
+              </a>
+              <!-- Twitter / X -->
+              <a aria-label="تويتر"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                  </path>
+                </svg>
+              </a>
+              <!-- TikTok -->
+              <a aria-label="تيك توك"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z">
+                  </path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom: Copyright + Legal -->
+      <div class="mt-12 pt-8 border-t border-tj-border">
+        <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق
+            محفوظة.
+          </p>
+          <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+            <li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/auth.js?v=1.0.3"></script>
+</body>
+
+</html>

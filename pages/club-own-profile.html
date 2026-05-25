@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>ملف النادي | تاجه</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <!-- Icons -->
+  <link href="../css/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"IBM Plex Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['"Tajawal"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'tj-primary': '#b670ff',
+            'tj-primary-hover': '#a312ff',
+            'tj-primary-pressed': '#6200a3',
+            'tj-primary-surface': '#f6ebff',
+            'tj-primary-text': '#250140',
+            'tj-surface-base': '#fdfcfb',
+            'tj-surface-card': '#ffffff',
+            'tj-surface-muted': '#f7f5f2',
+            'tj-text': '#0f0f10',
+            'tj-text-secondary': '#5e5e59',
+            'tj-text-tertiary': '#8c8c85',
+            'tj-text-disabled': '#c7c7c0',
+            'tj-text-on-primary': '#fcfcf6',
+            'tj-border': '#ece9e3',
+            'tj-border-active': '#8c8c85',
+            'tj-success': '#00a637',
+            'tj-success-bg': '#e3f5e1',
+            'tj-error': '#eb3333',
+            'tj-error-bg': '#fff0f0',
+            'tj-info': '#0094e3',
+            'tj-info-bg': '#e3f1ff',
+            'tj-accent-yellow': '#caa913',
+            'tj-accent-yellow-bg': '#fff8d6',
+          },
+          borderRadius: {
+            'tj-btn': '10px',
+            'tj-card': '20px',
+            'tj-pill': '999px',
+          },
+          boxShadow: {
+            'tj-card': '0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -8px rgba(16,24,40,0.10)',
+            'tj-cta': '0 10px 24px -6px rgba(182,112,255,0.55), 0 4px 8px -2px rgba(98,0,163,0.20)',
+            'tj-soft': '0 1px 2px rgba(16,24,40,0.05), 0 2px 8px -4px rgba(16,24,40,0.08)',
+            'tj-float': '0 24px 48px -16px rgba(16,24,40,0.18)',
+          },
+          keyframes: {
+            'marquee': { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            'marquee-rev': { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+            'float-slow': { '0%,100%': { transform: 'translateY(0) rotate(0deg)' }, '50%': { transform: 'translateY(-14px) rotate(2deg)' } },
+            'pulse-ring': { '0%': { transform: 'scale(0.8)', opacity: '0.7' }, '100%': { transform: 'scale(2.2)', opacity: '0' } },
+            'fade-up': { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+          },
+          animation: {
+            'marquee': 'marquee 40s linear infinite',
+            'marquee-rev': 'marquee-rev 50s linear infinite',
+            'float-slow': 'float-slow 8s ease-in-out infinite',
+            'pulse-ring': 'pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite',
+            'fade-up': 'fade-up 700ms cubic-bezier(0.22,1,0.36,1) both',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+
+<body>
+  <header
+    class="sticky top-0 z-50 bg-tj-surface-base/95 backdrop-blur-md border-b border-tj-border shadow-[0_1px_8px_rgba(0,0,0,0.06)]">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center h-16">
+        <div class="flex flex-1 items-center justify-start gap-2">
+          <div class="relative hidden lg:block">
+            <button
+              class="flex items-center gap-2.5 rounded-tj-btn px-3 py-1.5 hover:bg-tj-primary-surface transition-colors duration-200 group"
+              id="profileBtn" onclick="toggleDropdown()">
+              <div
+                class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm flex-shrink-0">
+                ن
+              </div>
+              <div class="text-right">
+                <p
+                  class="text-sm font-semibold text-tj-text group-hover:text-tj-primary transition-colors leading-tight">
+                  مرحباً، النادي
+                </p>
+              </div>
+              <svg class="w-4 h-4 text-tj-text-tertiary transition-transform duration-200" fill="none" id="chevron"
+                stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+
+            <div
+              class="dropdown hidden absolute right-0 top-[calc(100%+8px)] w-52 bg-tj-surface-card rounded-tj-card shadow-tj-card border border-tj-border overflow-hidden py-1.5 z-50"
+              id="dropdown">
+              <div class="px-4 py-3 border-b border-tj-border">
+                <p class="text-xs text-tj-text-tertiary font-medium">مسجّل كـ</p>
+                <p class="text-sm font-semibold text-tj-text mt-0.5">نادي الهلال النسائي</p>
+              </div>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="stats.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewBox="0 0 24 24">
+                  <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                الملف الشخصي
+              </a>
+              <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-text-secondary hover:bg-tj-primary-surface hover:text-tj-primary transition-colors group"
+                href="settings.html">
+                <svg class="w-4 h-4 text-tj-text-tertiary group-hover:text-tj-primary" fill="none" stroke="currentColor"
+                  stroke-width="1.5" viewBox="0 0 24 24">
+                  <path
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                الإعدادات
+              </a>
+              <div class="border-t border-tj-border mt-1 pt-1">
+                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-tj-error hover:bg-tj-error-bg transition-colors group"
+                  href="../index.html">
+                  <svg class="w-4 h-4 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewBox="0 0 24 24">
+                    <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  تسجيل الخروج
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <button aria-label="الإشعارات"
+            class="relative w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors duration-200 group"
+            onclick="window.location.href='notifications.html'">
+            <span
+              class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-tj-primary ring-2 ring-tj-surface-base"></span>
+            <svg class="w-[18px] h-[18px] text-tj-text-secondary group-hover:text-tj-primary transition-colors"
+              fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+
+          <button
+            class="lg:hidden w-9 h-9 rounded-tj-btn bg-tj-primary-surface hover:bg-tj-primary-surface/70 flex items-center justify-center transition-colors"
+            id="hamBtn" onclick="toggleDrawer()">
+            <svg class="w-5 h-5 text-tj-text" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+
+        <nav class="hidden lg:flex items-center gap-1">
+          <a class="nav-link nav-link-active relative px-3 py-1.5 rounded-tj-btn text-sm font-semibold text-tj-primary bg-tj-primary-surface hover-purple whitespace-nowrap"
+            href="club-profile.html">الملف الشخصي</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="#opportunities">الفرص</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="#members">اللاعبات</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="contact.html">تواصل معنا</a>
+          <a class="nav-link relative px-3 py-1.5 rounded-tj-btn text-sm font-medium text-tj-text-secondary hover-purple whitespace-nowrap"
+            href="about.html">عن تاجة</a>
+        </nav>
+
+        <div class="flex flex-1 items-center justify-end">
+          <a class="flex items-center gap-2.5 flex-shrink-0" href="#">
+            <div class="w-9 h-9 flex items-center justify-center">
+              <svg fill="none" height="36" viewBox="0 0 120 100" width="36" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient gradientUnits="userSpaceOnUse" id="logoGrad" x1="0" x2="120" y1="0" y2="100">
+                    <stop offset="0%" stop-color="#f2de00"></stop>
+                    <stop offset="50%" stop-color="#cca6ff"></stop>
+                    <stop offset="100%" stop-color="#b670ff"></stop>
+                  </linearGradient>
+                </defs>
+                <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                  fill="none" stroke="url(#logoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+                </path>
+                <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+                <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+                <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              </svg>
+            </div>
+            <span class="text-xl font-bold text-tj-primary hidden sm:inline">تاجة</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <aside
+    class="drawer fixed inset-y-0 right-0 z-50 w-[min(100%,22rem)] bg-tj-surface-card shadow-tj-card lg:hidden flex flex-col"
+    id="drawer">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-tj-border">
+      <div class="flex items-center gap-2">
+        <div
+          class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-tj-primary flex items-center justify-center text-tj-text-on-primary font-semibold text-sm">
+          ن
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-tj-text">نادي الهلال النسائي</p>
+        </div>
+      </div>
+      <button
+        class="w-8 h-8 rounded-tj-btn bg-tj-primary-surface flex items-center justify-center hover:bg-tj-primary-surface/70 transition-colors"
+        onclick="closeAll()">
+        <svg class="w-5 h-5 text-tj-text-secondary" fill="none" stroke="currentColor" stroke-width="1.5"
+          viewBox="0 0 24 24">
+          <path d="M19 5L5 19M5 5l14 14" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="flex-1 px-4 pt-2 flex flex-col gap-1 overflow-y-auto">
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 bg-tj-primary-surface text-tj-primary font-semibold text-sm"
+        href="club-profile.html">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        الملف الشخصي
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="#opportunities">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path
+            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        الفرص
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="#members">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path
+            d="M12 8.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM2 19c0-2.76 2.91-5 6.5-5s6.5 2.24 6.5 5M19 8.5A3.5 3.5 0 0 0 15.5 5M22 19c0-2.76-2.91-5-6.5-5"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        اللاعبات
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-3 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="contact.html">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        تواصل معنا
+      </a>
+    </nav>
+
+    <div class="px-4 py-4 border-t border-tj-border flex flex-col gap-1">
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-2.5 text-tj-text-secondary font-medium text-sm hover:bg-tj-primary-surface hover:text-tj-primary transition-colors"
+        href="settings.html">
+        <svg class="w-5 h-5 text-tj-text-tertiary" fill="none" stroke="currentColor" stroke-width="1.5"
+          viewBox="0 0 24 24">
+          <path
+            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        الإعدادات
+      </a>
+      <a class="flex items-center gap-3 rounded-tj-btn px-3 py-2.5 text-tj-error font-medium text-sm hover:bg-tj-error-bg transition-colors"
+        href="../index.html">
+        <svg class="w-5 h-5 text-tj-error" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        تسجيل الخروج
+      </a>
+    </div>
+  </aside>
+
+  <main class="layout">
+    <section aria-label="بطاقة الملف الشخصي للنادي" class="card bio-card">
+      <div class="bio-cover-wrap">
+
+        <img alt="ملعب كرة قدم حديث" class="bio-cover"
+          src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=2200&q=80" />
+      </div>
+
+      <div class="bio-body" dir="rtl">
+        <div class="bio-top-row">
+          <div class="bio-top-actions">
+            <a aria-label="تعديل الملف" class="icon-btn" id="btnEditProfile" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;"><i aria-hidden="true" class="fa-solid fa-pen"></i></a>
+            <a aria-label="الإشعارات" class="icon-btn" href="notifications.html"
+              style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">
+              <i aria-hidden="true" class="fa-regular fa-bell"></i>
+            </a>
+            <a aria-label="الإعدادات" class="icon-btn" href="settings.html"
+              style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">
+              <i aria-hidden="true" class="fa-solid fa-gear"></i>
+            </a>
+          </div>
+
+          <div class="bio-avatar-wrap">
+            <div class="avatar" style="display:flex;align-items:center;justify-content:center;background:#e0d7f5;">
+              <svg fill="none" height="44" viewBox="0 0 36 36" width="44" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="13" fill="#b670ff" opacity=".5" r="8"></circle>
+                <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" fill="#b670ff" opacity=".4"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="bio-identity-block">
+          <div class="bio-name-row">
+            <h2 class="bio-name">نادي الهلال النسائي</h2>
+            <span class="bio-active-badge">نشطة</span>
+          </div>
+
+          <div class="bio-meta-row">
+            <span class="bio-meta-chip">
+              <i aria-hidden="true" class="fa-solid fa-futbol"></i>
+              الرياضة: <strong>كرة قدم</strong>
+            </span>
+            <span class="bio-meta-chip">
+              <i aria-hidden="true" class="fa-solid fa-location-dot"></i>
+              الموقع: <strong>الرياض، المملكة العربية السعودية</strong>
+            </span>
+          </div>
+
+        </div>
+        <!-- Sport tag -->
+        <div class="stats-row" role="list" aria-label="إحصائيات النادي">
+
+          <!-- فرصة نشطة — right in RTL (first in DOM) -->
+          <div class="stat-box" role="listitem">
+            <i class="fa-solid fa-person-running" aria-hidden="true"></i>
+            <span class="stat-label">فرصة نشطة</span>
+            <span class="stat-value">11</span>
+          </div>
+
+          <!-- لاعبة مكتشفة — centre -->
+          <div class="stat-box" role="listitem">
+            <i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i>
+            <span class="stat-label">لاعبة مكتشفة</span>
+            <span class="stat-value">39</span>
+          </div>
+
+          <!-- طلب مستلم — left in RTL (last in DOM) -->
+          <div class="stat-box" role="listitem">
+            <i class="fa-solid fa-inbox" aria-hidden="true"></i>
+            <span class="stat-label">طلب مستلم</span>
+            <span class="stat-value">354</span>
+          </div>
+
+        </div>
+
+        <!-- Judges count -->
+        <p class="judges-row">
+          عدد محكمين النادي: <strong>27</strong> (15 ذكور، 12 إناث)
+        </p>
+        <!-- Description -->
+        <p class="club-desc-box">
+          أحد أعرق الأندية في المملكة، نبحث عن المواهب الرياضية
+          الواعدة لضمها إلى فريقنا الاحترافي. فريق الكشافة لدينا يضم
+          خبراء متمرسين لضمان بيئة احترافية ومتوازنة.
+        </p>
+        <!-- Stats: فرصة نشطة | لاعبة مكتشفة | طلب مستلم -->
+      </div><!-- /club-bio-body -->
+      </div><!-- /bio card -->
+      <!-- ─────────────────────────────────────────────
+               ② PRIMARY ACTION BUTTONS
+                  مقارنة المرشحات | التحكيم بالتصويت
+            ───────────────────────────────────────────── -->
+      <div aria-label="الإجراءات الرئيسية للنادي" class="bio-action-row">
+        <button aria-label="إنشاء فرصة" class="profile-action-btn profile-action-btn--primary" id="btnCreateOpp"
+          type="button">
+          <i aria-hidden="true" class="fa-solid fa-plus-circle"></i>
+          <span>إنشاء فرصة</span>
+        </button>
+      </div>
+      </div>
+    </section>
+    <!-- ─────────────────────────────────────────────
+               ③  AVAILABLE OPPORTUNITIES SECTION
+            ───────────────────────────────────────────── -->
+
+
+    <section id="opportunities" aria-label="فرص تم نشرها" style="margin-top: 24px;">
+      <div class="card" style="padding: 24px;">
+        <h2 class="section-title" style="margin-bottom: 16px;">فرص تم نشرها</h2>
+        <div id="club-opportunities-list"></div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <!-- ══ CREATE OPPORTUNITY MODAL ══ -->
+  <div aria-labelledby="opp-modal-title" aria-modal="true" id="create-opp-modal" role="dialog"
+    style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);overflow-y:auto;padding:40px 16px;">
+    <div dir="rtl"
+      style="max-width:600px;margin:0 auto;background:#fff;border-radius:20px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.18);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+        <h2 id="opp-modal-title" style="margin:0;font-size:20px;font-weight:700;color:#1a1a1a;">إنشاء فرصة جديدة</h2>
+        <button aria-label="إغلاق" id="close-opp-modal"
+          style="background:none;border:none;font-size:20px;cursor:pointer;color:#888;" type="button"><i
+            class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="create-opp-form" style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">عنوان الفرصة
+              *</label>
+            <input id="opp-title" name="title" placeholder="مثال: لاعبة أساسية – كرة السلة" required=""
+              style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;box-sizing:border-box;font-family:inherit;"
+              type="text" />
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">الرياضة *</label>
+            <select id="opp-sport" name="sport" required=""
+              style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;box-sizing:border-box;font-family:inherit;background:#fff;">
+              <option value="">اختاري الرياضة</option>
+              <option>كرة القدم</option>
+              <option>كرة السلة</option>
+              <option>الكرة الطائرة</option>
+              <option>التنس</option>
+              <option>السباحة</option>
+              <option>الجري</option>
+              <option>الجمباز</option>
+              <option>اخرى</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">المركز / الموقع
+              *</label>
+            <input id="opp-position" name="position" placeholder="مثال: مهاجمة، حارسة مرمى" required=""
+              style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;box-sizing:border-box;font-family:inherit;"
+              type="text" />
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">المدينة *</label>
+            <input id="opp-city" name="city" placeholder="الرياض، جدة..." required=""
+              style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;box-sizing:border-box;font-family:inherit;"
+              type="text" />
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">الراتب</label>
+            <input id="opp-salary" name="salary" placeholder="مثال: 5,000 ريال / شهرياً"
+              style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;box-sizing:border-box;font-family:inherit;"
+              type="text" />
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">المدة</label>
+            <input id="opp-duration" name="duration" placeholder="مثال: موسم كامل (10 أشهر)"
+              style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;box-sizing:border-box;font-family:inherit;"
+              type="text" />
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">وصف الفرصة *</label>
+          <textarea id="opp-description" name="description" placeholder="صفي الفرصة ومتطلباتها..." required="" rows="3"
+            style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;box-sizing:border-box;font-family:inherit;resize:vertical;"></textarea>
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">المزايا
+            والمكافآت</label>
+          <input id="opp-benefits" name="benefits" placeholder="تأمين طبي، مواصلات، مكافآت أداء..."
+            style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;box-sizing:border-box;font-family:inherit;"
+            type="text" />
+        </div>
+        <div id="opp-form-error"
+          style="display:none;background:#fff0f0;color:#eb3333;border-radius:8px;padding:10px 14px;font-size:13px;">
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+          <button id="cancel-opp-modal"
+            style="padding:10px 24px;border:1.5px solid #ece9e3;border-radius:10px;background:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;"
+            type="button">إلغاء</button>
+          <button id="submit-opp-btn"
+            style="padding:10px 28px;border:none;border-radius:10px;background:#b670ff;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:8px;"
+            type="submit">
+            <i class="fa-solid fa-plus"></i> نشر الفرصة
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    (function () {
+      'use strict';
+
+      // ── Get club info from session ──
+      var user = null;
+      try { user = JSON.parse(sessionStorage.getItem('tajah_user')); } catch (e) { }
+      var clubId = user && user.id;
+
+      var allOpps = [];
+
+      // ── Load club opportunities ──
+      function loadOpportunities() {
+        var listEl = document.getElementById('club-opportunities-list');
+        var url = '/api/opportunities' + (clubId ? '?club_id=' + clubId : '');
+        fetch(url)
+          .then(function (r) { return r.json(); })
+          .then(function (opps) {
+            allOpps = opps;
+            if (!opps.length) {
+              listEl.innerHTML = '<p style="color:#888;text-align:center;padding:32px 0;">لا توجد فرص منشورة حتى الآن. أنشئي أول فرصة!</p>';
+              return;
+            }
+            listEl.innerHTML = opps.map(function (o) {
+              return '<div class="opportunity-card" aria-label="' + (o.title || '') + '">' +
+                '<div class="opp-club-row">' +
+                '<div class="opp-club-identity">' +
+                '<div class="opp-club-logo" aria-hidden="true" style="background:#b670ff;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;">' + (o.club_initial || 'ن') + '</div>' +
+                '<div><p class="opp-club-name">' + (o.club_name || 'النادي') + '</p><p class="opp-club-sport">' + (o.sport || '') + '</p></div>' +
+                '</div>' +
+                '<div class="opp-status-badge"><span class="opp-status-dot"></span> نشطة</div>' +
+                '</div>' +
+                '<p class="opp-description">' + (o.description || '') + '</p>' +
+                '<div class="opp-details">' +
+                '<div class="opp-detail-row"><div class="opp-detail-icon"><i class="fa-solid fa-location-dot"></i></div><span>' + (o.city || '') + '</span></div>' +
+                '<div class="opp-detail-row"><div class="opp-detail-icon"><i class="fa-solid fa-person-running"></i></div><span>' + (o.position || '') + '</span></div>' +
+                (o.salary ? '<div class="opp-detail-row"><div class="opp-detail-icon"><i class="fa-solid fa-money-bill"></i></div><span>' + o.salary + '</span></div>' : '') +
+                '</div>' +
+                '</div>';
+            }).join('');
+          })
+          .catch(function () {
+            listEl.innerHTML = '<p style="color:#888;text-align:center;padding:32px 0;">تعذّر تحميل الفرص</p>';
+          });
+      }
+      loadOpportunities();
+
+      // ── Fetch Initial Profile Data & Stats ──
+      fetch(`/api/users/${clubId}`)
+        .then(res => res.json())
+        .then(data => {
+          document.querySelector('.bio-name').textContent = data.name || 'النادي';
+          const metaChips = document.querySelectorAll('.bio-meta-row .bio-meta-chip strong');
+          if (metaChips[0]) metaChips[0].textContent = data.sport || 'رياضة';
+          if (metaChips[1]) metaChips[1].textContent = (data.city || 'المدينة') + '، المملكة العربية السعودية';
+          document.querySelector('.club-desc-box').textContent = data.bio || 'لا يوجد وصف متاح';
+        });
+
+      // Calculate stats based on applications and opportunities
+      fetch(`/api/applications`)
+        .then(res => res.json())
+        .then(apps => {
+          const clubApps = apps.filter(a => a.club_name === user?.name || String(a.club_id) === String(clubId));
+          const received = clubApps.length;
+          const accepted = clubApps.filter(a => a.status === 'accepted').length;
+          
+          const statValues = document.querySelectorAll('.stat-value');
+          if (statValues[2]) statValues[2].textContent = received;
+          if (statValues[1]) statValues[1].textContent = accepted;
+        });
+
+      fetch(`/api/opportunities?club_id=${clubId}`)
+        .then(res => res.json())
+        .then(opps => {
+          const active = opps.filter(o => o.status === 'open').length;
+          const statValues = document.querySelectorAll('.stat-value');
+          if (statValues[0]) statValues[0].textContent = active;
+        });
+
+    // Custom Toast Notification helper
+    function showToast(msg) {
+      let toast = document.getElementById("profile-toast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "profile-toast";
+        toast.style.cssText = "position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #250140; color: #fff; padding: 12px 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999; font-size: 14px; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;";
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.style.opacity = "1";
+      setTimeout(() => { toast.style.opacity = "0"; }, 3000);
+    }
+
+      // ── Edit Profile Modal Logic ──
+      document.addEventListener('DOMContentLoaded', () => {
+        const editModal = document.getElementById('edit-profile-modal');
+        const btnEditProfile = document.getElementById('btnEditProfile');
+        const closeEditModal = document.getElementById('close-edit-modal');
+        const cancelEditModal = document.getElementById('cancel-edit-modal');
+        const editForm = document.getElementById('edit-profile-form');
+
+        if (btnEditProfile && editModal) {
+          btnEditProfile.addEventListener('click', (e) => {
+            e.preventDefault();
+            editModal.hidden = false;
+            document.body.style.overflow = 'hidden';
+            
+            document.getElementById('edit-name').value = document.querySelector('.bio-name')?.textContent || '';
+            const metaChips = document.querySelectorAll('.bio-meta-row .bio-meta-chip strong');
+            document.getElementById('edit-sport').value = metaChips[0]?.textContent || '';
+            document.getElementById('edit-city').value = metaChips[1]?.textContent.split('،')[0] || '';
+            document.getElementById('edit-bio').value = document.querySelector('.club-desc-box')?.textContent.trim() || '';
+          });
+        }
+
+        const hideEditModal = () => {
+          if (editModal) editModal.hidden = true;
+          document.body.style.overflow = '';
+        };
+        if (closeEditModal) closeEditModal.addEventListener('click', hideEditModal);
+        if (cancelEditModal) cancelEditModal.addEventListener('click', hideEditModal);
+
+        if (editForm) {
+          editForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('saveProfileEditsBtn');
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+            submitBtn.disabled = true;
+
+            const updatedData = {
+              name: document.getElementById('edit-name').value.trim(),
+              sport: document.getElementById('edit-sport').value.trim(),
+              city: document.getElementById('edit-city').value.trim(),
+              bio: document.getElementById('edit-bio').value.trim()
+            };
+
+            try {
+              const res = await fetch(`/api/users/${clubId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+              });
+
+              if (!res.ok) throw new Error('فشل التحديث');
+              
+              document.querySelector('.bio-name').textContent = updatedData.name;
+              const metaChips = document.querySelectorAll('.bio-meta-row .bio-meta-chip strong');
+              if (metaChips[0]) metaChips[0].textContent = updatedData.sport;
+              if (metaChips[1]) metaChips[1].textContent = updatedData.city + '، المملكة العربية السعودية';
+              document.querySelector('.club-desc-box').textContent = updatedData.bio;
+              
+              if (user) {
+                Object.assign(user, updatedData);
+                sessionStorage.setItem('tajah_user', JSON.stringify(user));
+              }
+              
+              hideEditModal();
+              showToast('✅ تم التحديث بنجاح!');
+            } catch (err) {
+              console.error(err);
+              showToast('❌ حدث خطأ أثناء التحديث.');
+            } finally {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = '<i class="fa-solid fa-save"></i> حفظ التغييرات';
+            }
+          });
+        }
+      });
+
+
+
+
+      // ── Modal open/close ──
+      var modal = document.getElementById('create-opp-modal');
+      var editingOppId = null;
+
+      document.getElementById('btnCreateOpp').addEventListener('click', function () {
+        editingOppId = null;
+        document.getElementById('opp-modal-title').textContent = 'إنشاء فرصة جديدة';
+        document.getElementById('submit-opp-btn').innerHTML = '<i class="fa-solid fa-plus"></i> نشر الفرصة';
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      });
+
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        document.getElementById('create-opp-form').reset();
+        document.getElementById('opp-form-error').style.display = 'none';
+        editingOppId = null;
+      }
+      document.getElementById('close-opp-modal').addEventListener('click', closeModal);
+      document.getElementById('cancel-opp-modal').addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+
+      // ── Form submit → POST/PUT /api/opportunities ──
+      document.getElementById('create-opp-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var errEl = document.getElementById('opp-form-error');
+        var submitBtn = document.getElementById('submit-opp-btn');
+        errEl.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الحفظ...';
+
+        var body = {
+          club_id: clubId,
+          title: document.getElementById('opp-title').value.trim(),
+          description: document.getElementById('opp-description').value.trim(),
+          sport: document.getElementById('opp-sport').value,
+          position: document.getElementById('opp-position').value.trim(),
+          city: document.getElementById('opp-city').value.trim(),
+          salary: document.getElementById('opp-salary').value.trim(),
+          duration: document.getElementById('opp-duration').value.trim(),
+          benefits: document.getElementById('opp-benefits').value.trim(),
+          status: 'open'
+        };
+
+        var url = editingOppId ? '/api/opportunities/' + editingOppId : '/api/opportunities';
+        var method = editingOppId ? 'PUT' : 'POST';
+
+        fetch(url, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.error) throw new Error(data.error);
+            closeModal();
+            loadOpportunities();
+          })
+          .catch(function (err) {
+            errEl.textContent = err.message || 'حدث خطأ أثناء حفظ الفرصة';
+            errEl.style.display = 'block';
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = editingOppId ? '<i class="fa-solid fa-save"></i> حفظ التغييرات' : '<i class="fa-solid fa-plus"></i> نشر الفرصة';
+          });
+      });
+
+    })();
+  </script>
+  <footer class="border-t border-tj-border bg-tj-surface-card mt-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <!-- Top: Logo text + Tagline -->
+      <div class="mb-10 flex flex-col items-start gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <svg fill="none" height="40" viewbox="0 0 120 100" width="40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <lineargradient gradientunits="userSpaceOnUse" id="footerLogoGrad" x1="0" x2="120" y1="0" y2="100">
+                  <stop offset="0%" stop-color="#f2de00"></stop>
+                  <stop offset="50%" stop-color="#cca6ff"></stop>
+                  <stop offset="100%" stop-color="#b670ff"></stop>
+                </lineargradient>
+              </defs>
+              <path d="M60 85 C45 70 38 50 45 30 C50 15 60 10 60 10 C60 10 70 15 75 30 C82 50 75 70 60 85Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C45 55 28 45 20 30 C15 20 18 10 18 10 C18 10 28 12 35 22 C45 35 50 50 60 60Z" fill="none"
+                stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+              <path d="M60 60 C75 55 92 45 100 30 C105 20 102 10 102 10 C102 10 92 12 85 22 C75 35 70 50 60 60Z"
+                fill="none" stroke="url(#footerLogoGrad)" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="4.5"></path>
+              <circle cx="60" cy="8" fill="#b670ff" r="5.5"></circle>
+              <circle cx="16" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+              <circle cx="104" cy="9" fill="#cda7ff" opacity="0.85" r="4.5"></circle>
+            </svg>
+            <p class="text-3xl font-bold text-tj-primary leading-none">تاجة</p>
+          </div>
+          <p class="mt-1 text-sm font-medium text-tj-text-secondary">حيث تلتقي الموهبة بالفرصة</p>
+        </div>
+        <p class="max-w-md text-sm font-medium leading-relaxed text-tj-text-secondary lg:text-right">
+          منصة رياضية نسائية رائدة تربط اللاعبات الموهوبات بالأندية المحترفة المرخصة في المملكة العربية السعودية.
+        </p>
+      </div>
+      <!-- 3 Columns Grid — equal width -->
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <!-- Column 1: Quick Links -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M9 12a4 4 0 0 1 4-4h4a4 4 0 0 1 0 8h-1.5M15 12a4 4 0 0 1-4 4H7a4 4 0 0 1 0-8h1.5"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            روابط مهمة
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="about.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                عن تاجة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="index.html#faq">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                الأسئلة الشائعة
+              </a>
+            </li>
+            <li>
+              <a class="inline-flex items-center gap-2 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="contact.html">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                المساعدة والدعم
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 2: Contact Info (email + phone only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <!-- Phone icon — flipped to face left -->
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              style="transform: scaleX(-1)" viewbox="0 0 24 24">
+              <path
+                d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            تواصل معنا
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="mailto:Tajah2026@gmail.com">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                    <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">البريد الإلكتروني</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary truncate">
+                    Tajah2026@gmail.com</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-start gap-3 text-sm font-medium text-tj-text-secondary transition hover:text-tj-primary"
+                href="tel:+966501234567">
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary">
+                  <!-- Phone icon in icon box — flipped left -->
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5"
+                    style="transform: scaleX(-1)" viewbox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.613 21 3 13.387 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <div class="min-w-0 flex-1 pt-1">
+                  <p class="text-xs font-medium text-tj-text-tertiary">الهاتف</p>
+                  <p class="font-semibold text-tj-text-secondary group-hover:text-tj-primary text-right" dir="ltr"
+                    style="unicode-bidi: embed;">+966 50 123 4567</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Column 3: Newsletter + Social (WhatsApp, X, TikTok only) -->
+        <div>
+          <h3 class="text-base font-semibold text-tj-text mb-4 flex items-center gap-2">
+            <svg class="h-5 w-5 text-tj-primary" fill="none" stroke="currentColor" stroke-width="1.5"
+              viewbox="0 0 24 24">
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            النشرة البريدية
+          </h3>
+          <p class="text-sm font-medium leading-relaxed text-tj-text-secondary mb-4">
+            اشتركي في النشرة البريدية لتصلك أحدث الفرص والأخبار من تاجة.
+          </p>
+          <!-- Newsletter form -->
+          <form class="space-y-2" id="newsletter-form">
+            <div class="relative">
+              <input
+                class="h-11 w-full rounded-tj-btn border border-tj-border bg-tj-surface-base px-3 pr-10 text-sm font-medium text-tj-text outline-none transition placeholder:text-tj-text-tertiary focus:border-tj-primary focus:bg-tj-surface-card focus:ring-2 focus:ring-tj-primary-surface"
+                id="newsletter-email" placeholder="layal@gmail.com" required="" type="email" />
+              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-tj-text-tertiary">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                  <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7z"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </div>
+            <button
+              class="inline-flex h-10 w-full items-center justify-center gap-1 rounded-tj-btn bg-tj-primary px-4 text-base font-medium text-tj-text-on-primary transition duration-300 ease-out hover:bg-tj-primary-hover active:bg-tj-primary-pressed"
+              type="submit">
+              <span>اشتراك</span>
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+                <path d="M14 6L20 12L14 18M20 12H4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </form>
+          <!-- Success message -->
+          <div
+            class="hidden newsletter-success mt-3 flex items-center gap-2 rounded-tj-btn border border-tj-success bg-tj-success-bg px-3 py-2 text-sm font-semibold text-tj-success"
+            id="newsletter-success">
+            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>تم الاشتراك بنجاح! 🎉</span>
+          </div>
+          <!-- Social Icons: WhatsApp, X, TikTok only -->
+          <div class="mt-6">
+            <p class="text-sm font-semibold text-tj-text mb-3">تابعينا على</p>
+            <div class="flex items-center gap-2">
+              <!-- WhatsApp -->
+              <a aria-label="واتساب"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z">
+                  </path>
+                </svg>
+              </a>
+              <!-- Twitter / X -->
+              <a aria-label="تويتر"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                  </path>
+                </svg>
+              </a>
+              <!-- TikTok -->
+              <a aria-label="تيك توك"
+                class="group flex h-10 w-10 items-center justify-center rounded-tj-btn bg-tj-primary-surface text-tj-primary transition duration-300 hover:bg-tj-primary hover:text-tj-text-on-primary"
+                href="#">
+                <svg class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24">
+                  <path
+                    d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743 2.895 2.895 0 0 1 2.305-5.213h.024V8.755a6.341 6.341 0 0 0-7.346 6.249 6.34 6.34 0 0 0 12.681 0V8.687a8.182 8.182 0 0 0 4.752 1.526V6.79a4.831 4.831 0 0 1-.001-.104z">
+                  </path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom: Copyright + Legal -->
+      <div class="mt-12 pt-8 border-t border-tj-border">
+        <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p class="text-sm font-medium text-tj-text-tertiary">
+            © <span id="footer-year"></span> <span class="font-semibold text-tj-primary">تاجة</span>. جميع الحقوق
+            محفوظة.
+          </p>
+          <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-tj-text-tertiary">
+            <li><a class="transition hover:text-tj-primary" href="#">سياسة الخصوصية</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">شروط الاستخدام</a></li>
+            <li><a class="transition hover:text-tj-primary" href="#">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/auth.js?v=1.0.3"></script>
+
+  <!-- ══ EDIT PROFILE MODAL ══ -->
+  <div aria-labelledby="edit-modal-title" aria-modal="true" id="edit-profile-modal" role="dialog" hidden
+    style="position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);overflow-y:auto;padding:40px 16px;">
+    <div dir="rtl"
+      style="max-width:600px;margin:0 auto;background:#fff;border-radius:20px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.18);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+        <h2 id="edit-modal-title" style="margin:0;font-size:20px;font-weight:700;color:#1a1a1a;">تعديل الملف الشخصي</h2>
+        <button aria-label="إغلاق" id="close-edit-modal"
+          style="background:none;border:none;font-size:20px;cursor:pointer;color:#888;" type="button"><i
+            class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="edit-profile-form" style="display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">اسم النادي</label>
+          <input id="edit-name" name="name" required
+            style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;" type="text" />
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">الرياضة الأساسية</label>
+          <input id="edit-sport" name="sport" required
+            style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;" type="text" />
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">المدينة</label>
+          <input id="edit-city" name="city" required
+            style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;" type="text" />
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;font-weight:600;color:#444;margin-bottom:6px;">الوصف / نبذة عن النادي</label>
+          <textarea id="edit-bio" name="bio" rows="3" required
+            style="width:100%;padding:10px 12px;border:1.5px solid #ece9e3;border-radius:10px;font-size:14px;resize:vertical;"></textarea>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+          <button id="cancel-edit-modal"
+            style="padding:10px 24px;border:1.5px solid #ece9e3;border-radius:10px;background:#fff;font-size:14px;font-weight:600;cursor:pointer;"
+            type="button">إلغاء</button>
+          <button id="saveProfileEditsBtn"
+            style="padding:10px 28px;border:none;border-radius:10px;background:#b670ff;color:#fff;font-size:14px;font-weight:700;cursor:pointer;"
+            type="submit">
+            <i class="fa-solid fa-save"></i> حفظ التغييرات
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>
